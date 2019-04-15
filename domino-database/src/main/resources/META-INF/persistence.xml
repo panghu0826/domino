@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
+	
+	<persistence-unit name="game_db" transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>R
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		
+        <properties>
+        	<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+        	<property name="eclipselink.session.customizer" value="com.jule.db.dao.C3p0SessionCustomizer"/>
+
+			<property name="eclipselink.connection-pool.default.initial" value="3" />
+            <property name="eclipselink.connection-pool.default.min" value="5" />
+            <property name="eclipselink.connection-pool.default.max" value="128" />
+            <property name="eclipselink.jdbc.connection_pool.default.wait" value="100" />
+            <property name="eclipselink.jdbc.connections.wait-timeout" value="100" />
+            
+            <property name="eclipselink.cache.shared.default" value="false"/>
+            <!--property name="eclipselink.logging.level.sql" value="FINE"/-->
+			
+            <property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+		</properties>
+	</persistence-unit>
+	
+</persistence>

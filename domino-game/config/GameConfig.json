@@ -1,0 +1,13 @@
+{
+  "tableClassNameMap": {
+    "91001001": "com.jule.domino.game.play.impl.ClassicTable",
+    "91001002": "com.jule.domino.game.play.impl.JokerTable",
+    "91001003": "com.jule.domino.game.play.impl.HukamTable",
+    "91001004": "com.jule.domino.game.play.impl.ChangeCardTable",
+    "91001005": "com.jule.domino.game.play.impl.BlindTable",
+    "91001006": "com.jule.domino.game.play.impl.DealerTable",
+    "86001001": "com.jule.domino.game.play.impl.NiuNiuTable",
+    "71001001": "com.jule.domino.game.play.impl.DominoTable"
+
+  }
+}

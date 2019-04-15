@@ -1,0 +1,758 @@
+﻿syntax = "proto2";
+option java_outer_classname = "JoloGame";
+
+package JoloProtobuf.GameSvr;
+
+//Teen patti poker GameSvr接口协议
+///////////////////////////////// GameSvr逻辑 start //////////////////////////////////
+
+//同步：申请坐下 50001
+message JoloGame_ApplySitDownReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID（不填写的话，系统根据玩家货币余额随机分配一个房间）
+    required string TableId = 3; //桌子ID（不填写的话，系统随机分配一个桌子）
+    optional uint32 SeatNum = 4; //座位号(不填写的话，系统随机选择空座位坐下)
+    optional double BuyInScore = 5; //带入金额（不填写的话，做全额代入）
+}
+message JoloGame_ApplySitDownAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required uint32 SeatNum = 4; //座位号
+    required int32  Result = 5; //结果,成功或失败
+    optional string ResultMsg = 6; //失败信息
+    optional double CurrPlayScore = 7; //坐下成功后，返回当前最新的积分数量（代入积分+原有桌上积分）
+    optional double CurrStoreScore = 8; //当前库存积分数量
+    optional double totalAlreadyBet = 9; //牌桌目前总的下注金额
+    optional uint32 NotInGame = 10; //玩家是否在在游戏中,0在游戏中，1不在游戏
+    optional uint32 Mixed_CardId = 11; //癞子牌ID
+    optional uint32 TableState = 12; //桌子目前的状态值
+    repeated int32 ChangeCards = 13; //change出去的牌
+    repeated JoloGame_TablePlay_PlayerInfo PlayerInfoList = 14; //正在桌子上玩牌的玩家打牌状态信息
+    optional string GameOrderId = 15; //游戏订单号，标识一局游戏（全局唯一）（50016是必填字段，就统一必加吧）
+    optional string PlayType = 16;//选定的玩法
+}
+
+//同步：申请站起 50002
+message JoloGame_ApplyStandUpReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+}
+message JoloGame_ApplyStandUpAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32  Result = 4; //结果,成功或失败
+    optional string ResultMsg = 5; //失败信息
+    optional double CurrStoreScore = 6; //当前库存积分数量
+}
+
+//同步：申请离桌 50003
+message JoloGame_ApplyLeaveReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+}
+message JoloGame_ApplyLeaveAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32  Result = 4; //结果,成功或失败
+    optional double CurrStoreScore = 5; //当前库存积分数量
+    optional string ResultMsg = 6; //失败信息
+    optional double WinLoseScore = 7; //本次牌桌玩牌，累积输赢积分数量
+    optional JoloGame_TablePlay_OtherPlayerInfo OtherPlayerInfo = 8;//查看的玩家信息
+}
+
+//同步：申请买入筹码 50004
+message JoloGame_ApplyBuyInReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    optional double BuyInScore = 4; //带入金额
+}
+message JoloGame_ApplyBuyInAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32  Result = 4; //结果,成功或失败
+    optional string ResultMsg = 5; //失败信息
+    optional double CurrPlayScore = 6; //增加积分成功后，返回当前最新的积分数量
+    optional double CurrStoreScore = 7; //当前库存积分数量
+}
+
+//同步：申请下注 50005 广播51007
+message JoloGame_ApplyBetReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required string GameOrderId = 4; //游戏订单号，标识一局游戏（全局唯一）
+    required uint32 BetScore = 5; //下注倍数
+}
+message JoloGame_ApplyBetAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required string GameOrderId = 4; //游戏订单号，标识一局游戏（全局唯一）
+    required uint32 BetScore = 5; //下注倍数
+    required int32  Result = 7; //结果,成功或失败
+    optional string ResultMsg = 8; //失败信息
+}
+
+
+
+//查看玩家信息 50014
+message JoloGame_OtherPlayerInfoReq{
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32 SeatNum = 4; //座位ID
+}
+
+message JoloGame_OtherPlayerInfoAck{
+    required int32  Result = 1; //结果,成功或失败
+    optional string ResultMsg = 2; //失败信息
+    optional JoloGame_TablePlay_OtherPlayerInfo OtherPlayerInfo = 3;//查看的玩家信息
+}
+
+
+//同步：申请重连 50016
+message JoloGame_ReconnectReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID（不填写的话，系统根据玩家货币余额随机分配一个房间）
+    required string TableId = 3; //桌子ID（不填写的话，系统随机分配一个桌子）
+    optional uint32 SeatNum = 4; //座位号(不填写的话，系统随机选择空座位坐下)
+    optional double BuyInScore = 5; //带入金额（不填写的话，做全额代入）
+}
+message JoloGame_ReconnectAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required uint32 SeatNum = 4; //座位号
+    required int32  Result = 5; //结果,成功或失败
+    optional string ResultMsg = 6; //失败信息
+    optional double CurrPlayScore = 7; //坐下成功后，返回当前最新的积分数量（代入积分+原有桌上积分）
+    optional double CurrStoreScore = 8; //当前库存积分数量
+    optional double totalAlreadyBet = 9; //牌桌目前总的下注金额
+    optional uint32 NotInGame = 10; //玩家不在游戏中（存在并且不在游戏中1）
+    optional uint32 Mixed_CardId = 11; //癞子牌ID
+    optional uint32 TableState = 12; //桌子目前的状态值
+    repeated int32 ChangeCards = 13; //change出去的牌
+    repeated JoloGame_TablePlay_PlayerInfo PlayerInfoList = 14; //正在桌子上玩牌的玩家打牌状态信息
+    required string GameOrderId = 15; //游戏订单号，标识一局游戏（全局唯一）
+    required uint32 BetRoundId = 16; //下注轮次ID
+    optional string PlayType = 17;//选定的玩法
+}
+
+//同步：玩家Ready  50018 (准备的广播	51029)
+message JoloGame_ReadyReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32 SeatNum = 4; //座位ID
+    optional string GameOrderId = 5; //游戏订单号，标识一局游戏（全局唯一）
+}
+message JoloGame_ReadyAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32 SeatNum = 4; //座位ID
+    required int32  Result = 5; //结果,成功或失败
+    optional string ResultMsg = 6; //失败信息
+    repeated JoloGame_ReadyInfo ReadyList = 7; //准备列表
+}
+
+//同步：玩家抢庄  50019 异步广播 51027
+message JoloGame_Rob_DealerReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32 SeatNum = 4; //座位ID
+    optional string GameOrderId = 5; //游戏订单号，标识一局游戏（全局唯一）
+    required int32 Multiple = 6;//倍数0，1，2，3
+}
+message JoloGame_Rob_DealerAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32 SeatNum = 4; //座位ID
+    required int32  Result = 5; //结果,成功或失败
+    optional string ResultMsg = 6; //失败信息
+}
+
+//同步：玩家请求牌型  50020 异步广播 51028
+message JoloGame_Card_TypeReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32 SeatNum = 4; //座位ID
+    optional string GameOrderId = 5; //游戏订单号，标识一局游戏（全局唯一）
+}
+message JoloGame_Card_TypeAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32 SeatNum = 4; //座位ID
+    required int32  Result = 5; //结果,成功或失败
+    optional string ResultMsg = 6; //失败信息
+}
+
+//定庄完成  50021(暂时不用)
+message JoloGame_Fix_Dealer_FinishReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32 SeatNum = 4; //座位ID
+    optional string GameOrderId = 5; //游戏订单号，标识一局游戏（全局唯一）
+}
+
+
+//同步：用户打赏荷官 50050
+message JoloGame_RewardCroupierReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+}
+message JoloGame_RewardCroupierAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32 TipValue = 4;//打赏值
+    required int32  Result = 5; //结果,成功或失败
+    optional string ResultMsg = 6; //失败信息
+    optional uint64 CurrPlayScore = 7; //增加积分成功后，返回当前最新的积分数量
+}
+//同步：用户间交互 50051
+message JoloGame_GiftsListReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+}
+message JoloGame_GiftsListAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    repeated JoloGame_ItemInfo ItemInfoList = 4; //物品列表
+    required int32  Result = 5; //结果,成功或失败
+    optional string ResultMsg = 6; //失败信息
+    repeated JoloGame_ItemInfo LimitItemList = 7; //限时物品列表
+}
+//同步：用户间交互 50052
+message JoloGame_GiveGiftsReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required uint32 IsSendToAll = 4; //是否全桌发送（0：否，1：是）
+    required string ItemId = 5; //物品ID
+    required string targetId = 6; //对方ID
+}
+message JoloGame_GiveGiftsAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required uint32 IsSendToAll = 4; //是否全桌发送（0：否，1：是）
+    required string ItemId = 5; //物品ID
+    required string targetId = 6; //对方ID
+    required int32  Result = 7; //结果,成功或失败(1成功其它失败)
+    optional string ResultMsg = 8; //失败信息
+    optional double CurrPlayScore = 9; //减积分成功后，返回当前最新的积分数量
+}
+//同步：用户改变荷官形象扣钱 50053
+message JoloGame_ChangeCroupierReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required string ItemId = 4; //荷官ID
+}
+message JoloGame_ChangeCroupierAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32  Result = 4; //结果,成功或失败
+    required string ItemId = 5; //荷官ID
+    optional string ResultMsg = 6; //失败信息
+    optional double CurrPlayScore = 7; //扣积分成功后，返回当前最新的积分数量
+}
+//请求礼物、荷官状态50054
+message JoloGame_ItemsStatusReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32  ItemType = 4; //类型(9限时礼物,8限时NPC,7限时头像)
+}
+
+//返回请求礼物、荷官状态
+message JoloGame_ItemsStatusAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    repeated JoloGame_ItemStatusInfo ItemStatusInfoList = 4; //物品列表
+    required int32  Result = 5; //结果,成功或失败
+    optional string ResultMsg = 6; //失败信息
+}
+
+//请求礼物、荷官状态50055
+message JoloGame_UnlockReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required string ItemId = 4; //物品Id
+}
+
+//返回请求礼物、荷官状态
+message JoloGame_UnlockAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required JoloGame_ItemStatusInfo ItemStatusInfoList = 4; //物品状态
+    required int32  Result = 5; //结果,成功或失败
+    optional string ResultMsg = 6; //失败信息
+}
+
+//50060 同步：请求任务
+message JoloGame_TaskListReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+}
+message JoloGame_TaskListAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32  Result = 4; //结果,成功或失败
+    optional string ResultMsg = 6; //失败信息
+    repeated JoloGame_TaskInfo taskList = 7; //任务列表
+}
+//50061 同步 任务进度返回（暂时不用）
+message JoloGame_TaskProgAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32  Result = 4; //结果,成功或失败
+    optional string ResultMsg = 6; //失败信息
+    optional JoloGame_TaskInfo TaskInfo = 7; //任务信息
+}
+
+//50062 同步：领取任务
+message JoloGame_TaskAwardsReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required uint64 TaskId =4;//任务ID
+}
+message JoloGame_TaskAwardsAck {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32  Result = 4; //结果,成功或失败
+    optional double CurrPlayScore = 5;
+    optional string ResultMsg = 6; //失败信息
+    repeated JoloGame_TaskAwardInfo TaskRewards = 7; //任务奖励列表
+    optional JoloGame_TaskInfo TaskInfo = 8; //任务信息
+}
+//50063 最近N条牌局记录
+message JoloGame_PlayRecordsReq {
+	required string UserId = 1; //用户ID
+	required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+}
+message JoloGame_PlayRecordsAck {
+	required string UserId = 1; //用户ID
+	required int32  Result = 2; //结果,成功或失败
+    optional string ResultMsg = 3; //失败信息 
+	repeated JoloGame_GameRecordsInfo Records = 4; //牌局记录
+}
+
+
+
+///////////////////////////////// GameSvr逻辑 end //////////////////////////////////
+
+///////////////////////////////// GameSvr数据对象 start //////////////////////////////////
+
+//牌局记录
+message JoloGame_GameRecordsInfo {
+	required string GameOrderId = 1; //牌局编号
+	required string RoomId = 2;  //房间
+	required string TableId = 3; //桌子
+	required int32 isWin = 4;    //0胜1负
+	required double Wins = 5;     //净胜
+	required string Time = 6;    //时间如2018-9-12 13:46:10
+}
+message JoloGame_BetResultInfo {
+    required string UserId = 1; //用户ID
+    required uint32 SeatNum = 2; //玩家座位号
+    required double  BetScore= 3; //下注值
+}
+message JoloGame_RobDealerResultInfo {
+    required string UserId = 1; //用户ID
+    required uint32 result = 2; //1抢庄0不抢
+}
+
+message JoloGame_HandCardsInfo {
+    required string UserId = 1; //用户ID
+    required uint32 CardType = 2;//牌型0:无牛1至9:牛一到牛九10牛牛11四花12五花13四炸14五小牛
+    repeated uint32 HandCards = 3; //手牌信息
+}
+
+message JoloGame_ReadyInfo {
+    required string UserId = 1; //用户ID
+    required uint32 SeatNum = 2; //玩家座位号
+    required uint32 ReadyStatus = 3; //准备状态0:等待1:OK
+
+}
+//正在座位玩牌的玩家信息
+message JoloGame_TablePlay_PlayerInfo {
+    required string UserId = 1; //用户ID
+    required string NickName = 2; //显示的昵称
+    required double PlayScoreStore = 3; //玩家牌桌上积分的携带量
+    optional uint32 SeatNum = 4; //玩家座位号
+    optional uint32 IsCurrAction = 5; //是否是当前行动者
+    optional int32  CurrActionSurplusTime = 6;//当前行动者剩余操作时间 
+    repeated uint32 HandCards = 7; //牌数组下标
+    optional double AlreadyBetScore = 8; //已经下注的积分量（用于客户端在展现牌桌信息时，将已下注玩家的积分量显示在牌桌上）
+    required uint32 IsDealer = 9; //是否庄家
+    optional string Icon = 10; //玩家
+    required uint32 State = 11; //玩家状态
+    optional uint64 InTableTime = 12; //入桌时间
+    optional uint64 SitDownTime = 13; //坐下时间
+    optional uint64 LastActionTime = 14; //最后一次行动时间
+    required uint32 IsBlind = 15; //是否盲牌
+    optional uint32 NotInGame = 16; //玩家不在游戏中为0在游戏中，1不在游戏
+}
+//正在旁观的玩家信息
+message JoloGame_TablePlay_SpectatorInfo {
+    required string UserId = 1; //用户ID
+    required string NickName = 2; //显示的昵称
+    required uint32 JoinTime = 3; //进入牌桌时间
+    optional uint32 SpectatorMinutes = 4; //已旁观分钟数
+}
+//玩家结算信息
+message JoloGame_TablePlay_PlayerSettleInfo {
+    required string UserId = 1; //用户ID
+    required uint32 SeatNum = 2; //玩家座位号
+    required uint32 WinLose = 3; //0输1赢
+    required double WinLoseScore = 4; //积分数量
+    required double PlayScoreStore = 5; //结算后桌面积分数量
+    repeated uint32 HandCards = 6; //玩家手牌
+    required uint32 CardType = 7; //玩家牌型0:无牛1至9:牛一到牛九10牛牛11四花12五花13四炸14五小牛
+}
+
+//玩家座位信息
+message JoloGame_TablePlay_PlayerSeatInfo{
+    required string UserId = 1; //用户ID
+    required uint32 SeatNum = 2; //玩家座位号
+}
+
+//物品信息
+message JoloGame_ItemInfo {
+    required string ItemId = 1; //物品ID(配置Id)
+    required string ItemName = 2; //物品名称
+    required string ItemIcon = 3; //物品图片
+    required int32 ItemPrice = 4; //物品价格
+    required int32 ItemExtraPrice = 5; //物品额外价格
+    required int32 ItemType = 6; //物品类型(0 normal,1 popular 100荷官)
+    optional string ItemDesc = 7; //物品描述
+    optional int32 BigType = 8; //物品大类(//限时头像 7;//限时NPC 8;//限时礼物 9;//头像 10;//NPC 11;//礼物 12)
+    optional string UnlockPrice = 9;//解锁价格
+    optional string pid = 10;//购买时传的物品ID
+}
+
+//物品状态信息
+message JoloGame_ItemStatusInfo {
+    required string ItemId = 1; //物品ID
+    required uint64 CountDown = 2; //倒计时(毫秒)
+    required int32 Num = 3; //拥有物品数量
+}
+
+message JoloGame_TablePlay_OtherPlayerInfo {
+    required string UserId = 1; //用户ID
+    required string NickName = 2; //显示的昵称
+    required double PlayScoreStore = 3; //玩家牌桌上积分的携带量
+    required sint64 ChipsWon = 4; //上一把输赢值
+    required uint32 HandsWon = 5; //获胜次数
+    optional uint32 HandsTimes = 6; //最近的X场比赛
+    optional string Icon = 7; //玩家头像
+    optional double biggest = 8;//最大赢值
+}
+//任务信息
+message JoloGame_TaskInfo {
+    required uint64 TaskId = 1; //任务ID
+    required string TaskName = 2; //名称
+    required string TaskIcon = 3; //图标
+    required uint32 TaskType = 4; //类型
+    required string TaskDesc = 5; //任务描述
+    required string GameId = 6; //游戏类型
+    required uint32 TargetValue = 7; //达标值
+    optional uint32 Value = 8; //当前值
+    repeated JoloGame_TaskAwardInfo taskAwards = 9;//任务奖励
+}
+
+//任务奖励信息
+message JoloGame_TaskAwardInfo {
+    required string itemId = 1; //奖励ID
+    required uint32 type = 2; //物品类型1金币2是物品
+    required string url = 3; //url
+    required string name = 4; //名称
+    required uint32 num = 5; //数量(限时毫秒)
+    optional uint32 ItemType = 6;//7、8、9限时
+}
+///////////////////////////////// GameSvr数据对象 end //////////////////////////////////
+
+///////////////////////////////// GameSvr -> Client 桌内消息推送 Start //////////////////////////////////
+//异步：通知全部客户端->有新玩家入座 51001
+message JoloGame_Notice2Client_SitDownReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required string NickName = 4; //显示的昵称
+    required double PlayScore = 5; //玩家牌桌上积分的携带量
+    required uint32 SeatNum = 6; //玩家座位号
+    optional string Icon = 7; //头像
+}
+
+//异步：通知全部客户端->有新玩家站起  51002
+message JoloGame_Notice2Client_StandUpReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required string NickName = 4; //显示的昵称
+    required uint32 SeatNum = 5; //玩家座位号
+    required int32 InGamePlayers = 6; //桌面正在游戏中的人数
+}
+
+//异步：通知全部客户端->有新玩家买入筹码 51003
+message JoloGame_Notice2Client_BuyInReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required string NickName = 4; //显示的昵称
+    required uint32 SeatNum = 5; //玩家座位号
+    optional double BuyInScore = 6; //带入金额
+    required double PlayScoreStore = 7; //玩家桌面积分总数量
+}
+
+//异步：通知全部客户端->牌局开始 51004
+message JoloGame_Notice2Client_GameStartReq{
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string GameOrderId = 3; //游戏订单号，标识一局游戏（全局唯一）
+    optional uint32 CountDownSec = 4; //倒计时秒数(点击准备)
+}
+
+//异步：通知全部客户端->发牌轮->开始 51005
+message JoloGame_Notice2Client_GiveCardRound_StartReq {
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string GameOrderId = 3; //游戏订单号，标识一局游戏（全局唯一）
+    repeated JoloGame_TablePlay_PlayerInfo PlayerInfoList = 5;  //玩家列表
+}
+
+//异步：通知全部客户端->玩家实施下注 51007
+message JoloGame_Notice2Client_BetRound_DoBetReq {
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string GameOrderId = 3;     //游戏订单号，标识一局游戏（全局唯一）
+    required string BetUserId = 4;       //下注玩家ID
+    required uint32 BetUserSeatNum = 5;  //下注玩家座位号
+    required double BetScore = 6;        //玩家下注的积分数量
+}
+
+//异步：通知全部客户端->通知结算结果 51013
+message JoloGame_Notice2Client_SettleRound_SettleReq {
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string GameOrderId = 3; //游戏订单号，标识一局游戏（全局唯一）
+    repeated JoloGame_TablePlay_PlayerSettleInfo SettleWinList = 4; //玩家结算信息
+    repeated JoloGame_TablePlay_PlayerSettleInfo SettleLoseList = 5; //玩家结算信息
+}
+
+//结算历史记录   51014
+message JoloGame_Notice2Client_SettleRound_HistoryReq {
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string GameOrderId = 3; //游戏订单号，标识一局游戏（全局唯一）
+    repeated PlayInfo_list History = 4; //玩家结算历史信息
+}
+
+//异步：玩家60秒没有开始游戏，自动离桌 51023(只发给自己)
+message JoloGame_Notice2Client_leaveReq {
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string UserId = 3; //用户ID
+    optional double CurrStoreScore = 5; //当前库存积分数量
+    optional double WinLoseScore = 7; //本次牌桌玩牌，累积输赢积分数量
+    optional JoloGame_TablePlay_OtherPlayerInfo OtherPlayerInfo = 8;//查看的玩家信息
+}
+
+
+
+//异步：抢庄广播	51027
+message JoloGame_Notice2Client_RobDealerReq{
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string UserId = 3; //玩家ID
+    required string GameOrderId = 4; //游戏订单号，标识一局游戏（全局唯一）
+    required int32 Multiple = 5;//抢庄倍数0、1、2、3
+}
+
+//异步：广播版型	51028
+message JoloGame_Notice2Client_CardTypeReq{
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string UserId = 3; //玩家ID
+    required string GameOrderId = 4; //游戏订单号，标识一局游戏（全局唯一）
+    required int32 CardType = 5;//0:无牛1至9:牛一到牛九10牛牛11四花12五花13四炸14五小牛
+}
+
+//异步：准备广播	51029
+message JoloGame_Notice2Client_ReadyReq{
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string UserId = 3; //玩家ID
+    required string GameOrderId = 4; //游戏订单号，标识一局游戏（全局唯一）
+    required uint32 ReadyStatus = 5; //准备状态0:等待1:OK
+}
+//异步：广播抢庄倒计时(暂时未用)	51030
+message JoloGame_Notice2Client_RobDealerCDReq{
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string GameOrderId = 3; //游戏订单号，标识一局游戏（全局唯一）
+    required uint32 CountDownSec = 4; //倒计时
+    required string MultipleStr = 5; //抢庄倍数 "1,2,3"
+}
+
+//异步：广播定庄动画		51031
+message JoloGame_Notice2Client_FixDealerReq{
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string GameOrderId = 3; //游戏订单号，标识一局游戏（全局唯一）
+    repeated string userIds = 4; //抢庄倍数一样的抢庄人列表
+    required string userId = 5; //庄家
+}
+
+//异步：广播下注前信息		51032
+message JoloGame_Notice2Client_BetInfoReq{
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string GameOrderId = 3; //游戏订单号，标识一局游戏（全局唯一）
+    required uint32 CountDownSec = 4; //倒计时
+}
+
+//异步：广播玩家手上牌信息	51033
+message JoloGame_Notice2Client_HandCardsListReq{
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string GameOrderId = 3; //游戏订单号，标识一局游戏（全局唯一）
+    required uint32 CountDownSec = 4; //倒计时
+    repeated JoloGame_HandCardsInfo HandCardsList = 5;//手上牌
+}
+
+//异步：广播抢庄结果		51034
+message JoloGame_Notice2Client_RobDealerResultReq{
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string GameOrderId = 3; //游戏订单号，标识一局游戏（全局唯一）
+    repeated JoloGame_RobDealerResultInfo robResultList = 4;//抢庄结果列表
+}
+
+//异步：广播下注结果		51035
+message JoloGame_Notice2Client_BetResultReq{
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string GameOrderId = 3; //游戏订单号，标识一局游戏（全局唯一）
+    repeated JoloGame_BetResultInfo betResultList = 4;//下注结果列表
+}
+
+//异步：广播玩家show手上牌型	51036
+message JoloGame_Notice2Client_ShowHandCardsReq{
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string GameOrderId = 3; //游戏订单号，标识一局游戏（全局唯一）
+    required uint32 CountDownSec = 4; //倒计时
+    repeated JoloGame_HandCardsInfo HandCardsList = 5;//手上牌
+}
+
+//异步：广播抢庄倍数		51037
+message JoloGame_Notice2Client_RobMultipleInfoReq{
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string GameOrderId = 3; //游戏订单号，标识一局游戏（全局唯一）
+    repeated uint32 BtnsMultiple = 4; //下注倍数按钮
+}
+
+//异步：广播下注倍数		51038
+message JoloGame_Notice2Client_BetMultipleInfoReq{
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string GameOrderId = 3; //游戏订单号，标识一局游戏（全局唯一）
+    repeated uint32 BtnsMultiple = 4; //下注倍数按钮
+}
+
+//异步：通知全部客户端->RewardCroupier->打赏荷官 51050    by 20180322
+message JoloGame_Notice2Client_RewardCroupierReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32 TipValue = 4;//打赏值
+}
+//异步：通知全部客户端->GiveGifts->用户送礼 51051    by 20180322
+message JoloGame_Notice2Client_GiveGiftsReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required uint32 IsSendToAll = 4; //是否全桌发送（0：否，1：是）
+    required string ItemId = 5; //物品ID
+    repeated string targetIds = 6; //对方ID
+}
+
+//异步51061 任务进度返回
+message JoloGame_Notice2Client_TaskProgReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    required int32  Result = 4; //结果,成功或失败
+    optional string ResultMsg = 6; //失败信息
+    optional JoloGame_TaskInfo TaskInfo = 7; //任务信息
+}
+
+//异步51039 玩家入座
+message JoloGame_Notice2Client_PlayersIn {
+    required string GameOrderId = 1;
+	 required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+	required string GameId = 4; //游戏ID
+}
+
+//结算历史记录 嵌套结构
+message PlayInfo_list {
+    required string UserId = 1; //用户ID
+    required uint32 SeatNum = 2; //玩家座位号
+    required double Bet = 3;    //下注金额
+    required uint32 card1 = 4; //牌1
+    required uint32 card2 = 5; //牌2
+}
+
+//聊天服务器消息 80001
+message JoloGame_ChatReq {
+    required string UserId = 1; //用户ID
+    required string RoomId = 2; //房间ID
+    required string TableId = 3; //桌子ID
+    optional string Mesg = 4; //聊天的内容
+    optional string IcoMesg = 5; //聊天的表情
+}
+//聊天服务器消息 80001 | 0xFF000000
+message JoloGame_ChatAck {
+    required uint32 Result = 1; //结果,成功或失败
+    optional string ResultMsg = 2; //失败信息
+}
+//聊天服务器推送消息 80002 | 0xFF000000
+message JoloGame_ChatMesgSend {
+    required string RoomId = 1; //房间ID
+    required string TableId = 2; //桌子ID
+    required string UserId = 3; //用户ID
+    optional string Mesg = 4; //聊天的内容
+    optional string IcoMesg = 5; //聊天的表情
+}
+
+///////////////////////////////// GameSvr -> Client 桌内消息推送 End //////////////////////////////////

@@ -1,0 +1,59 @@
+﻿syntax = "proto2";
+option java_outer_classname = "JoloNotice";
+package JoloProtobuf.NoticeSvr;
+
+///////////////////////////////// Notice逻辑 start //////////////////////////////////
+
+//内部通用对象
+message JoloNotice_PayLoad {
+    required fixed32 Length = 1; //消息头长度
+    required fixed32 FunctionId = 2; //消息头长度
+    required fixed32 GameId = 3; //游戏id
+    required fixed32 GameSvrId = 4; //游戏服务器
+    required fixed32 IsAsync = 5; //同步异步
+    required fixed32 ReqNum = 6; //序号
+    required fixed32 Resver1 = 7; //预留
+    required fixed32 Resver2 = 8; //预留
+    required bytes PayLopad = 9; //包含的protocbuf
+}
+//同步：接收普通Notice数据  function_id 10000
+message JoloNotice_SendNormalMsgReq {
+    required string UserId = 1; //用户ID
+    required bytes Content = 2; //需要推送给客户端的透传消息
+}
+// function_id 10000 | 0xFF000000
+message JoloNotice_SendNormalMsgAck {
+    required string UserId = 1; //用户ID
+    required int32 Result = 2; //结果,成功或失败
+    optional string ResultMsg = 3; //失败信息
+}
+
+//同步：接收Game牌桌内Notice数据 function_id 10001
+message JoloNotice_SendGamePlayMsgReq {
+    required string TableId = 1; //桌子ID
+    repeated string userIds = 2; //玩家id
+    required bytes Content = 3; //需要推送给客户端的透传消息
+}
+// function_id 10001 | 0xFF000000
+message JoloNotice_SendGamePlayMsgAck {
+    required string TableId = 1; //桌子ID
+    repeated string userIds = 2; //玩家id
+    required int32 Result = 3; //结果,成功或失败
+    optional string ResultMsg = 4; //失败信息
+}
+///////////////////////////////// Notice逻辑 end //////////////////////////////////
+
+///////////////////////////////// Notice -> Gate 逻辑 start //////////////////////////////////
+//同步：接收普通Notice数据  function_id 70000
+message JoloNotice2Gate_MsgReq {
+    required string UserId = 1; //用户ID
+    required bytes Content = 2; //需要推送给客户端的透传消息
+}
+// function_id 70000 | 0xFF000000
+message JoloNotice2Gate_MsgAck {
+    required string UserId = 1; //用户ID
+    required int32 Result = 2; //结果,成功或失败
+    optional string ResultMsg = 3; //失败信息
+}
+
+///////////////////////////////// Notice -> Gate end //////////////////////////////////

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "pay-verify",
+  "private_key_id": "e6568f75ab16230ecb1470060a8570365ec36aa1",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCtD9AdqsgmB5xM\nzY3ND/72Lus2cY6BsMPcIpIf3c6BXd7dTescCoYgkaXl9Mmcw4a/Am8YG8DXyjub\nXLHqux2r9QJ9iECgLClEc0YxfXQwRsHomr54TiIpZ7hj4Ta9aobgpv8s0idrU2HV\nVw3NrXSqUw5tL+tG3eUp+xeUeKCJB5STt5p7pm/TfllDxDygQ3iEscOs5c+sl98D\n94Q8hi61ivLrsVOqDmUyXGgH+nl/TLj0bs3KcVsN+9463eZi6T73Hc7rIy4B68Z0\nDReBlq2R6VYDEgt7hUduyvwdd2E/lwfZbco3fZF9cVGuW3capVI2gxq0Q7m2UyGA\n1af/R0eLAgMBAAECggEAFG6lAhOrPL4ySGkOYFMOpY8lixB+JDaz8RYNzYBZBLIK\nAXPVGcLuUgMQJKWxdfYpvvxxFFYWfwOr5OxdPxrnZmlvaVXAV4jPOHspoucuZBK+\nixFWAosrAltyDCzHUza0BOsCfo6zQ7sc9lyoTwu3FfLnZaG+M+g3yayQ/KD/Rx4x\nuYyQ9XvtR7E2usVlG4TTR66TJdq7RnpiKnVqa2iUdonKDVRGfoyMQVtV8JNa5qRK\nQltu0J+slgcE3r1dp3n14wbuKHQRMLuq7fTp5UY+vwnlbt0Bl+KSU8mYSXfZdi1/\nyvI/Cv7KjXfa+74gQQJVlyXGW4IQFC5shz8Ncr5DTQKBgQDd6u7WX0wdzPuWHDEL\nGwKAJmtgARFpg3h46m8hz3eTndJ+3SOrtHMZMDpy8MpuMnmPFh2rD4xJXTXvtE6u\n3eBiX7PLLc+S11bmZfNot8HbIbIdDqxGyyTinsC/MZECrdJv8XdMURAMq9t3is7j\n7OkIfl4sPDCql7x0aT4juXLbtwKBgQDHpAbeFNAlZ9DY04AS74snoX5CkkZoZ01E\nbH4EI0awsZOs+gvEjRqzFvk8V+jxpG3kSNRp6XJWeAchXqJC21FwhIc9WHDqTBXe\n5Jl/Vl/Y3TYqKCU8eqPZLfCHKd1fWJSremHJ8H3HYN2dzdIWge98E4PBNxBX2aNX\nS6Y/+WlazQKBgQDXEGxAkwB4TQRw+IdLBPUKbrFWzBIs2H2zaTckZCS1iZjK29NK\n/0kgWw36AIOeAgqucbd05U+Gde/kizBJ5bskey0KNi5ZV5nfFWSs0pDrph8wa9zn\nis4HVeTkJcwr9Xrgg/mim1jbft3lXz+bwigg1B697eMYII9BnhDbnEjExwKBgQCa\nhqzGIygFe/jci8C7Z2y3bTnUf3I+B494Id3ciA2EYL7kidqn9WwwKN0bxxPITjS9\nGV5I6GgW4+ro+l3wD+BWjk47voQP5nqbPyhMtueTbY4qTU6dJHREe1mM1WvDDEZv\nAFhGvX4t4B1JsvEleMeMq3I1END2nr/epvB03jGdFQKBgAfQS/qQrC7l333yfXDS\ntmtvgS2q8uUBanA4aBLAUkFbYoRd1ixz7pESAj4xTMUHpKJzM8ehr/HA7147P6/D\nIf1U8+pl6Shp2AA/QoBVJ5caKloDdoiceFTfUKs1tItoVkkfNx4s5VlGRP2GZcF8\n0sCvoV6aqbgY2dGO6xKu8ANj\n-----END PRIVATE KEY-----\n",
+  "client_email": "jolopay@pay-verify.iam.gserviceaccount.com",
+  "client_id": "115132048027182895003",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/jolopay%40pay-verify.iam.gserviceaccount.com"
+}

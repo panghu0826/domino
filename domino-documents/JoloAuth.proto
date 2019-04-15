@@ -1,0 +1,447 @@
+﻿syntax = "proto2";
+option java_outer_classname = "JoloAuth";
+
+package JoloProtobuf.AuthSvr;
+//600001登陆
+message JoloCommon_LoginReq {
+    required string UserId = 1; //用户ID
+    required string Token = 2; //用于验证用户合法性的token
+    required string ClientVersion = 3; //客户端版本号
+    required string ChannelId = 4; //guest,facebook
+    required string Verify = 5;    //用户登录auth获取的验证串
+    optional string UserIp = 6; //用户IP
+    optional int32 Platform = 7; //用户所用平台：安卓、IOS、安卓浏览器、IOS浏览器、PC浏览器
+    optional string PlatformVersion = 8; //用户所用平台版本号1.1.1.0
+    optional string DeviceNum = 9; //用户所用设备的编号
+    optional string DownPlatform = 10; //下载渠道
+    optional string PackName = 11;	//包名
+}
+//600001 | 0xff000000
+message JoloCommon_LoginAck {
+    optional string UserId = 1; //用户Id
+    optional string defaultIco = 2; //玩家选择的头像
+    optional string nickName = 3; //游戏ID
+    optional string icoUrl = 4; //游戏ID
+    optional double money = 5; //当前钱数
+    required int32 Result = 6; //登录结果，成功或失败
+    required string Verify = 7;    //用户登录auth获取的验证串
+    optional string ResultMsg = 8; //失败信息
+    optional bool isNew = 9 [default = false]; //  是新玩家 true，
+    optional int32 FirstLanding = 10;    //玩家每日首次登陆
+    optional string ChannelId = 11; //guest,facebook
+    repeated JoLoCommon_ServerInfo serverinfo = 12;
+}
+
+message JoLoCommon_CloseNoticeReq {
+    required string UserId = 1;
+}
+
+message JoLoCommon_CloseNoticeAck {
+    required int32 Result = 1;
+	optional string ResultMsg = 2;
+}
+
+message JoLoCommon_ServerInfo {
+    required string gameId = 1;
+    required string ip = 2;
+    required uint32 port = 3;
+}
+//600002 商城列表
+message JoLoCommon_ProductReq {
+    required string appId = 1;
+}
+//600002 | 0xff000000
+message JoLoCommon_ProductAck {
+    required string appId = 1;
+    required int32 Result = 2; //登录结果，成功或失败
+    optional string ResultMsg = 3; //失败信息
+    repeated JoLoCommon_ProtocInfo productInfos = 4;
+}
+
+message JoLoCommon_ProtocInfo {
+    required string pid = 1;
+    required double price = 2;
+    required uint32 totalReward = 3; //=baseReward + extraReward
+    required uint32 baseReward = 4;
+    optional uint32 extraReward = 5 [default = 0]; //额外奖励数值
+    optional uint32 extraPercent = 6 [default = 0]; //额外奖励百分比
+    optional string tag = 7 [default = ""]; //额外奖励百分比
+    optional string payChannel = 8; //支付渠道
+    optional uint32 icoCount = 9 [default = 0]; //筹码显示数量
+    optional uint32 idx = 10; //位置
+    optional string type = 11; //类型(money:充值,item:礼物、荷官、头像)
+    optional uint32 itemTmpId = 12; //物品Id
+}
+//600003 下单
+message JoloCommon_OrderReq {
+    required string appId = 1;
+    required string pid = 2;
+    required string userId = 3;
+}
+//600003 | 0xff000000
+message JoLoCmmon_OrderAck {
+    optional string statement = 1; //订单号
+    required int32 Result = 2; //登录结果，成功或失败
+    optional string ResultMsg = 3; //失败信息
+}
+//600004 google支付履行
+message JoloCommon_GoogleVerifyReq {
+    required string googleStatement = 1; //Googlplay 订单号
+    required string packageName = 2;
+    required string productId = 3;
+    required string payToken = 4;
+    required string inAppPurchaseData = 5;
+    required string inAppSignature = 6;
+}
+//600004 | 0xff000000
+message JoloCommon_GoogleVerifyAck {
+    required int32 Result = 1; //登录结果，成功或失败
+    optional string ResultMsg = 2; //失败信息
+    optional double currentMoney = 3; //支付后金额 这个字段只有在ret=1 的情况下可用
+    optional uint32 type = 4;//1:充值，2:物品购买
+    optional uint32 itemTmpId = 5;//支付后物品ID
+    optional string userId = 6;//userId
+}
+
+//玩家头像修改 600005
+message JoloAuth_ChangeIcoReq {
+    required string UserId = 1; //用户ID
+    required string IcoUrl = 2; //头像地址
+}
+message JoloAuth_ChangeIcoAck {
+    required int32  Result = 1; //结果,成功或失败(1成功其它失败)
+    optional string ResultMsg = 2; //失败信息
+}
+
+//600006 强制更新版本
+message JoloAuth_VersionAck {
+    required int32  Result = 1; //结果,是否需要更新(1更新，0不用更新)
+    optional string ResultMsg = 2; //失败信息
+    optional string DownLoadUrl = 3; //最新版本的下载地址
+}
+
+//600007返回购买礼物、荷官、头像状态
+message JoloAuth_ItemsStatusAck {
+    required string UserId = 1; //用户ID
+    required string ItemId = 2; //物品ID
+    required uint64 CountDown = 3; //倒计时(毫秒)
+    required int32 Num = 4; //拥有物品数量
+    optional int32 BigType = 5; //物品大类(//限时头像 7;//限时NPC 8;//限时礼物 9;//头像 10;//NPC 11;//礼物 12)
+}
+
+//600008获取头像配置
+message JoloAuth_HeadListReq {
+    required string UserId = 1; //用户ID
+}
+message JoloAuth_HeadListAck {
+    required string UserId = 1; //用户ID
+    repeated JoloAuth_ItemInfo ItemInfoList = 2; //物品列表
+    required int32  Result = 3; //结果,成功或失败
+    optional string ResultMsg = 4; //失败信息
+    repeated JoloAuth_ItemInfo LimitItemList = 5; //限时物品列表
+}
+
+
+//600009请求礼物、荷官状态
+message JoloAuth_ItemsStatusListReq {
+    required string UserId = 1; //用户ID
+    required int32  ItemType = 2; //类型(9限时礼物,8限时NPC,7限时头像)
+}
+
+//返回请求礼物、荷官状态
+message JoloAuth_ItemsStatusListAck {
+    required string UserId = 1; //用户ID
+    repeated JoloAuth_ItemStatusInfo ItemStatusInfoList = 2; //物品列表
+    required int32  Result = 3; //结果,成功或失败
+    optional string ResultMsg = 4; //失败信息
+}
+
+
+
+//异步：支付通知 52001
+message JoloAuth_Notice2Client_PayResultReq {
+    required string userId = 1; //玩家id
+    required double money = 2; //当前钱数
+}
+//异步：支付增加通知 52002
+message JoloAuth_Notice2Client_PayAddReq {
+    required string userId = 1; //玩家id
+    required double addmoney = 2; //当前获得钱数
+}
+
+
+//600010 | 0xff000000
+message JoloCommon_LoginElsewhereAck {
+    required int32 Result = 1; //登录结果，成功或失败
+    optional string ResultMsg = 2; //失败信息
+}
+
+//600011返回是否在房间内 | 0xff000000
+message JoloCommon_InTableAck {
+    required int32 Result = 1; //结果,1在桌内或0不在桌内
+    optional string ResultMsg = 2; //失败信息
+    optional string UserId = 3; //用户ID
+    optional string GameId = 4; //游戏ID
+    optional string RoomId = 5; //房间ID
+    optional string TableId = 6; //桌子ID
+    optional uint32 SeatNum = 7; //座位号
+}
+
+//600012请求礼物、荷官状态
+message JoloAuth_UnlockReq {
+    required string UserId = 1; //用户ID
+    required string ItemId = 2; //物品Id
+}
+
+//返回请求礼物、荷官状态
+message JoloAuth_UnlockAck {
+    required string UserId = 1; //用户ID
+    required JoloAuth_ItemStatusInfo ItemStatusInfoList = 4; //物品状态
+    required int32  Result = 5; //结果,成功或失败
+    optional string ResultMsg = 6; //失败信息
+}
+
+//600013命令请求
+message JoloAuth_CMDReq{
+    required string CMDType = 1; //命令类型
+    required string CMDArgs = 2; //命令参数
+}
+//600013命令返回
+message JoloAuth_CMDAck {
+    required int32  Result = 1; //结果,成功或失败
+    optional string ResultMsg = 2; //失败信息
+}
+
+//600020 请求邮件红点
+message JoloAuth_RedDotReq{
+    required string UserId = 1; //玩家id
+}
+
+//600020 请求邮件红点
+message JoloAuth_RedDotAck{
+    required string UserId = 1; //玩家id
+    required int32 result = 2; //结果,1成功0失败
+    optional string resultMsg = 3; //失败错误号
+    repeated JoloAuth_RedDotInfo redDots =4;//红点内容
+}
+
+//600021 邮件列表
+message JoloAuth_MailListReq {
+    required string userId = 1; //用户ID
+    required uint32 Forced2Refresh = 2; //强制刷新邮件列表1强制0不需要刷新
+}
+
+//600021 邮件列表
+message JoloAuth_MailListAck {
+    required string UserId = 1; //用户ID
+    required int32 result = 2; //结果,1成功0失败
+    optional string resultMsg = 3; //失败错误号
+    repeated JoloAuth_MailItem mailItem = 4;//邮件内容
+}
+
+//600022 邮件查看（修改状态）
+message JoloAuth_MailCheckReq {
+    required string UserId = 1; //用户ID
+    required uint64 mailId = 2; //邮件ID
+}
+
+//600022 邮件查看
+message JoloAuth_MailCheckAck {
+    required string UserId = 1; //用户ID
+    required int32 result = 2; //结果,1成功0失败
+    optional string resultMsg = 3; //失败错误号
+    required uint64 mailId = 4; //邮件ID
+    required uint32 isRead=5;//是否已读（1已读0未读）
+
+}
+
+//600023 邮件领取附件
+message JoloAuth_MailAwardReq {
+    required string UserId = 1; //用户ID
+    repeated uint64 mailId = 2; //邮件ID
+}
+
+
+
+//600023 邮件领取附件
+message JoloAuth_MailAwardAck {
+    required string UserId = 1; //用户ID
+    repeated uint64 mailIds = 2; //邮件IDs
+    required int32 result = 3; //结果,1成功0失败
+    optional string resultMsg = 4; //失败错误号
+    repeated JoloAuth_MailAwardInfo mailRewards = 5; //邮件奖励列表
+}
+//600024 邮件删除
+message JoloAuth_MailDelReq {
+    required string userId = 1; //用户ID
+    repeated uint64 mailId = 2; //邮件ID
+}
+
+//600024 邮件删除
+message JoloAuth_MailDelAck {
+    required string UserId = 1; //用户ID
+    required int32 result = 2; //结果,1成功0失败
+    optional string resultMsg = 3; //失败错误号
+    repeated uint64 mailId = 4; //邮件ID
+}
+
+//600025 给在线的玩家发送邮件强制更新
+message JoloAuth_MailAck {
+    required string UserId = 1; //用户ID
+    required uint32 Forced2Refresh = 2; //强制刷新邮件列表1强制0不需要刷新
+}
+
+
+//签到消息
+message JoloAuth_PlayerCheckInReq { //90001
+    required string PlayerId = 1; //用户ID
+}
+message JoloAuth_PlayerCheckInAck {
+    required uint32 WhetherCheckInToo = 1; //玩家是否可以签到
+    optional uint32 CurrentCheckInDays = 2; //当前是第几天签到
+    optional uint32 LoginMode = 3; //用户登陆方式，游客或facebook
+    repeated JoloAuth_CheckInRewardObject CheckInReward = 4; //每天签到对应的奖励
+}
+
+//签到消息
+message JoloAuth_PlayerSeeCheckInReq { //90002
+    required string PlayerId = 1; //用户ID
+}
+message JoloAuth_PlayerSeeCheckInAck {
+    required uint32 WhetherCheckInToo = 1; //玩家是否可以签到
+    optional uint32 CurrentCheckInDays = 2; //当前是第几天签到
+    repeated JoloAuth_CheckInRewardObject CheckInReward = 5; //每天签到对应的奖励
+}
+
+
+//签到请求消息
+message JoloAuth_SignReachReq { //90003
+    required string PlayerId = 1; //用户ID
+}
+
+message JoloAuth_SignReachAck {
+    required uint32 Result = 1; //结果,成功或失败
+    required double Money = 2; //用户当前的钱数
+    optional string ResultMsg = 3; //失败信息
+    optional string Type = 4;//道具类型money货币item物品
+    optional string ItemUrl=5;//物品url
+    optional uint32 ItemNum = 6;//物品数量
+    optional uint32 ItemType =7; //9礼物8荷官7头像
+}
+
+//在线参数      80000
+message JoloCommon_onlineParamsReq {
+    required string packName = 1;	//包名
+    required string channel = 2;		//渠道	
+    required string version = 3;	//版本						
+}
+message JoloCommon_onlineParamsAck {
+    required int32 showActivity = 1;	//首页活动图标：1为显示，0或空位不现实
+    required int32 showMail = 2;	//首页邮件图标：1为显示，0或空位不现实
+    required int32 showAdvertising = 3;	//首页外接广告：1为显示，0或空位不现实
+    required string playTypes = 4;	// 1.classic,2.joker,3.hukam,4.changecard,5.blind,6.dealer;
+    optional string iconUrl = 5;	//广告显示的图片链接地址
+    optional string jumpArgs = 6;   //广告跳转参数
+    optional int32 playnowTurn = 7;	//playnow跳转参数
+    optional int32 exitAdvertising = 8;	//退出广告概率
+}
+
+//奖励次数80004
+message JoloCommon_AdCountReq {
+    required string userid = 1;	//角色
+}
+message JoloCommon_AdCountAck {
+    required int32 result = 1; //返回结果
+	required int32 times = 2;  //剩余次数
+	optional uint64 nextIntvel = 3; //重置时间
+	optional string resultMsg = 4;
+}
+
+//奖励广告80003
+message JoloCommon_AdInfoReq {
+    required string userid = 1;	//角色	
+    required int32 itemtype = 2;//数量	
+    required int32 account = 3;//数量	
+    required string sign = 4;	//验签 = md5(userid + itemtype + account + googlepk)
+}
+message JoloCommon_AdInfoAck {
+    required int32 result = 1; //返回结果
+    required int32 times = 2;  //剩余次数
+    required double money = 3;  //玩家当前货币数	
+    optional string resultMsg = 4;
+}
+//80007 最近N条牌局记录
+message JoloCommon_PlayRecordsReq {
+	required string UserId = 1; //用户ID
+	required string GameId = 2; //玩法ID
+}
+message JoloCommon_PlayRecordsAck {
+	required string UserId = 1; //用户ID
+	required int32  Result = 2; //结果,成功或失败
+	optional string ResultMsg = 3; //失败信息 
+	repeated JoloAuth_GameRecordsInfo Records = 4; //牌局记录
+}
+
+///////////////////////////////// 数据对象 start //////////////////////////////////
+
+//奖励对象
+message JoloAuth_CheckInRewardObject {
+    required string RewardPictureAddress = 1;//奖励的图片地址
+    required double GuestCheckInReward = 2;//游客签到的奖励
+    required double FacebookCheckInReward = 3;//facebook签到的奖励
+    optional string RewardGoodsType = 4;//money货币item物品
+    optional uint32 ItemType = 5;//7、8、9限时
+}
+
+message JoloAuth_RedDotInfo{
+    required uint32 type=1;//类型1邮件
+    required uint32 value=2;//值(0:无红点，>1时则有红点或相应数值)
+}
+message JoloAuth_MailItem{
+    required uint64 id = 1; //邮件ID
+    required string title=2;//标题
+    required string content=3;//内容
+    required uint64 time =4;//时间戳
+    required uint32 isRead=5;//是否已读（1已读0未读）
+    repeated JoloAuth_MailAwardInfo attachmentItem = 6;//附件奖励，暂时只有一种筹码，显示数量即可，为0是无附件
+}
+
+//邮件奖励信息
+message JoloAuth_MailAwardInfo {
+    required string itemId = 1; //奖励ID
+    required uint32 type = 2; //类型
+    required string url = 3; //url
+    required string name = 4; //名称
+    required uint32 num = 5; //数量
+}
+
+//物品信息
+message JoloAuth_ItemInfo {
+    required string ItemId = 1; //物品ID(配置Id)
+    required string ItemName = 2; //物品名称
+    required string ItemIcon = 3; //物品图片
+    required int32 ItemPrice = 4; //物品价格
+    required int32 ItemExtraPrice = 5; //物品额外价格
+    required int32 ItemType = 6; //物品类型(0 normal,1 popular 100荷官)
+    optional string ItemDesc = 7; //物品描述
+    optional int32 BigType = 8; //物品大类(//限时头像 7;//限时NPC 8;//限时礼物 9;//头像 10;//NPC 11;//礼物 12)
+    optional string UnlockPrice = 9;//解锁价格
+    optional string pid = 10;//购买时传的物品ID
+}
+//物品状态信息
+message JoloAuth_ItemStatusInfo {
+    required string ItemId = 1; //物品ID
+    required uint64 CountDown = 2; //倒计时(毫秒)
+    required int32 Num = 3; //拥有物品数量
+}
+
+//牌局记录
+message JoloAuth_GameRecordsInfo {
+	required string GameOrderId = 1; //牌局编号
+	required string RoomId = 2;  //房间
+	required string TableId = 3; //桌子
+	required int32 isWin = 4;    //0胜1负
+	required double Wins = 5;     //净胜
+	required string Time = 6;    //时间如2018-9-12 13:46:10
+}
+///////////////////////////////// 数据对象 end //////////////////////////////////

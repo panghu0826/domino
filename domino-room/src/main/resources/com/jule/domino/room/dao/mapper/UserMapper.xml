@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.room.dao.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.base.dao.bean.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nick_name" />
+    <result column="ico_url" jdbcType="VARCHAR" property="ico_url" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="registration_time" jdbcType="TIMESTAMP" property="registration_time" />
+    <result column="last_login" jdbcType="TIMESTAMP" property="last_login" />
+    <result column="last_offline" jdbcType="TIMESTAMP" property="last_offline" />
+    <result column="client_version" jdbcType="VARCHAR" property="client_version" />
+    <result column="channel_id" jdbcType="VARCHAR" property="channel_id" />
+    <result column="user_ip" jdbcType="VARCHAR" property="user_ip" />
+    <result column="platform" jdbcType="INTEGER" property="platform" />
+    <result column="down_platform" jdbcType="VARCHAR" property="down_platform" />
+    <result column="device_num" jdbcType="VARCHAR" property="device_num" />
+    <result column="user_defined_head" jdbcType="VARCHAR" property="user_defined_head" />
+    <result column="android_id" jdbcType="VARCHAR" property="android_id" />
+    <result column="mei_code" jdbcType="VARCHAR" property="mei_code" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.base.dao.bean.User">
+    insert into user (id, nick_name, ico_url, 
+      money,registration_time, last_login,last_offline, client_version,
+      channel_id, user_ip, platform, down_platform,
+      device_num,user_defined_head,android_id,mei_code)
+    values (#{id,jdbcType=VARCHAR}, #{nick_name,jdbcType=VARCHAR}, #{ico_url,jdbcType=VARCHAR}, 
+      #{money,jdbcType=DECIMAL},#{registration_time,jdbcType=TIMESTAMP}, #{last_login,jdbcType=TIMESTAMP},#{last_offline,jdbcType=TIMESTAMP},
+       #{client_version,jdbcType=VARCHAR},
+      #{channel_id,jdbcType=VARCHAR}, #{user_ip,jdbcType=VARCHAR}, #{platform,jdbcType=INTEGER}, #{down_platform,jdbcType=VARCHAR},
+      #{device_num,jdbcType=VARCHAR}, #{user_defined_head,jdbcType=VARCHAR}, #{android_id,jdbcType=VARCHAR}, #{mei_code,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.base.dao.bean.User">
+    update user
+    set nick_name = #{nick_name,jdbcType=VARCHAR},
+      ico_url = #{ico_url,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DECIMAL},
+      registration_time = #{registration_time,jdbcType=TIMESTAMP},
+      last_login = #{last_login,jdbcType=TIMESTAMP},
+      last_offline = #{last_offline,jdbcType=TIMESTAMP},
+      client_version = #{client_version,jdbcType=VARCHAR},
+      channel_id = #{channel_id,jdbcType=VARCHAR},
+      user_ip = #{user_ip,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=INTEGER},
+      down_platform = #{down_platform,jdbcType=VARCHAR},
+      device_num = #{device_num,jdbcType=VARCHAR},
+      user_defined_head = #{user_defined_head,jdbcType=VARCHAR},
+      android_id = #{android_id,jdbcType=VARCHAR},
+      mei_code = #{mei_code,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, nick_name, ico_url, money,registration_time, last_login,last_offline, client_version, channel_id, user_ip,
+    platform,down_platform, device_num,user_defined_head, android_id,mei_code
+    from user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, nick_name, ico_url, money, registration_time, last_login,last_offline, client_version, channel_id, user_ip,
+    platform, down_platform,device_num,user_defined_head, android_id , mei_code
+    from user
+  </select>
+
+</mapper>

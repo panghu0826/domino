@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.game.dao.mapper.GiftConfigModelMapper">
+    <resultMap id="BaseResultMap" type="com.jule.domino.game.dao.bean.GiftConfigModel">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="gift_item_name" jdbcType="VARCHAR" property="name"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="price" jdbcType="INTEGER" property="price"/>
+        <result column="extra_price" jdbcType="INTEGER" property="extraPrice"/>
+        <result column="item_type" jdbcType="INTEGER" property="itemType"/>
+        <result column="gift_item_desc" jdbcType="VARCHAR" property="desc"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, gift_item_name, icon, price,extra_price,item_type, gift_item_desc
+    from gift_config
+  </select>
+</mapper>

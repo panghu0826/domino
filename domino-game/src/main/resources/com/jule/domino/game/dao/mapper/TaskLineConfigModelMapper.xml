@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.game.dao.mapper.TaskLineConfigModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.base.dao.bean.TaskLineConfigModel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="lineId" jdbcType="INTEGER" property="lineId" />
+    <result column="beginTime" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="endTime" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from task_line_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.base.dao.bean.TaskLineConfigModel">
+    insert into task_line_config (id, lineId, beginTime, 
+      endTime, createTime, updateTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{lineId,jdbcType=INTEGER}, #{beginTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.base.dao.bean.TaskLineConfigModel">
+    update task_line_config
+    set lineId = #{lineId,jdbcType=INTEGER},
+      beginTime = #{beginTime,jdbcType=TIMESTAMP},
+      endTime = #{endTime,jdbcType=TIMESTAMP},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, lineId, beginTime, endTime, createTime, updateTime
+    from task_line_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, lineId, beginTime, endTime, createTime, updateTime
+    from task_line_config
+  </select>
+
+</mapper>

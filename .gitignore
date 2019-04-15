@@ -1,0 +1,18 @@
+# Build and Release Folders
+bin-debug/
+bin-release/
+[Oo]bj/
+[Bb]in/
+target/
+logs/
+
+# Other files and folders
+.settings/
+.idea/
+
+# Executables
+*.swf
+*.air
+*.ipa
+*.apk
+*.iml

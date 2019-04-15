@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.dispacher.dao.mapper.OnlineArgsModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.dispacher.dao.bean.OnlineArgsModel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="online_id" jdbcType="INTEGER" property="online_id" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from online_args
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.dispacher.dao.bean.OnlineArgsModel">
+    insert into online_args (id, online_id, type, value, updateTime)
+    values (#{id,jdbcType=INTEGER}, #{online_id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{value,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.dispacher.dao.bean.OnlineArgsModel">
+    update online_args
+    set online_id = #{online_id,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      value = #{value,jdbcType=VARCHAR},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, online_id, type, value, updateTime
+    from online_args
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, online_id, type, value, updateTime
+    from online_args
+    order by id asc
+  </select>
+  <select id="selectOnlineIds" resultType="java.lang.Integer">
+    select online_id
+    from online_args
+    group by online_id
+  </select>
+  <select id="selectByOnlineId" parameterType="java.lang.Integer" resultType="java.lang.String">
+    select value
+    from online_args
+    where online_id = #{online_id,jdbcType=INTEGER};
+  </select>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.dispacher.dao.mapper.VersionConfigModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.dispacher.dao.bean.VersionConfigModel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+    <result column="down_platform" jdbcType="VARCHAR" property="down_platform" />
+    <result column="downloadLink" jdbcType="VARCHAR" property="downloadLink" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from version
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.dispacher.dao.bean.VersionConfigModel">
+    insert into version (id, version,down_platform,downloadLink)
+    values (#{id,jdbcType=INTEGER}, #{version,jdbcType=VARCHAR},#{down_platform,jdbcType=VARCHAR},#{downloadLink,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.dispacher.dao.bean.VersionConfigModel">
+    update version
+    set version = #{version,jdbcType=VARCHAR},down_platform = #{down_platform,jdbcType=VARCHAR},
+    downloadLink = #{downloadLink,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, version,down_platform,downloadLink
+    from version
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByDownPlatform" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, version,down_platform,downloadLink
+    from version
+    where down_platform = #{down_platform,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, version,down_platform,downloadLink
+    from version
+  </select>
+</mapper>

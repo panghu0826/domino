@@ -1,0 +1,159 @@
+﻿syntax = "proto2";
+option java_outer_classname = "JoloRoom";
+
+package JoloProtobuf.RoomSvr;
+///////////////////////////////// RoomSvr数据对象 start //////////////////////////////////
+//房间目录信息
+message JoloRoom_RoomInfo {
+    required string RoomId = 1; //房间编号
+    required string RoomName = 2; //房间名称
+    optional string RoomDesc = 3; //房间描述
+    optional double MinJoin = 4; //最小准入
+    optional double Ante = 5; //底分
+    repeated int32 DoubleRoles = 6; //加倍规则
+    optional int64 OnLiners = 7; //在线人数
+}
+//房间信息
+message JoloRoom_TableInfo {
+    required string TableId = 1; //桌子编号
+    optional string TableName = 2; //桌子名称
+    required string RoomId = 3; //从属于的房间编号
+    optional string TableDesc = 4; //桌子描述
+    required int32 Stakes = 5; //押注底分
+    required int32 MaxBet = 6; //最大押注值
+    optional int32 Bandar = 7; //庄家代入
+    required int32 PlayerCnt = 8; //入座人数
+    required int32 WaitingCnt = 9; //观众人数
+}
+//桌子当前状态信息
+message JoloRoom_Table_StatusInfo {
+    required string TableId = 1; //桌子ID
+    required int32 CurrPlayerCnt = 2; //当前玩家人数
+    required string RoomId = 3; //从属于的房间编号
+    optional int32 WaitingPlayerCnt = 4; //等待列表中玩家人数
+    repeated JoloRoom_Table_UserInfo PlayersInfo = 5; //玩家信息列表
+    optional string GameSvrId = 6; //桌子当前在那个game服务器
+}
+//桌子当前用户状态
+message JoloRoom_Table_UserInfo {
+    required string TableId = 1; //桌子ID
+    required string UserId = 2; //玩家ID
+    required string RoomId = 3; //从属于的房间编号
+    optional int32 PlayScore = 4; //当前玩牌的积分数
+    optional int32 WinCnt = 5; //此桌内的赢次数
+    optional int32 LoseCnt = 6; //此桌内的输次数
+    optional int32 WinLoseScore = 7; //此桌内的输赢积分数
+    optional string NickName = 8; //玩家昵称
+}
+
+///////////////////////////////// RoomSvr数据对象 end //////////////////////////////////
+///////////////////////////////// RoomSvr逻辑 start //////////////////////////////////
+//同步：获得房间列表40005
+message JoloRoom_GetRoomListReq {
+    required string UserId = 1; //用户ID
+    required string GameId = 2; //游戏ID
+}
+message JoloRoom_GetRoomListAck {
+    required string UserId = 1; //用户ID
+    required string GameId = 2; //游戏ID
+    required int32 IsGetTableList = 3; //是否在返回房间列表时，同时获取从属于房间的桌子列表
+    required int32 Result = 4; //结果,成功或失败
+    optional string ResultMsg = 5; //失败信息
+    repeated JoloRoom_RoomInfo RoomList = 6; //房间列表
+}
+
+//同步：获得桌子列表
+message JoloRoom_GetTableListReq {
+    required string UserId = 1; //用户ID
+    required string GameId = 2; //游戏ID
+    required string RoomId = 3; //房间ID
+    optional int32 PageNum = 4; //页码，用于分页获取（默认为1）
+}
+message JoloRoom_GetTableListAck {
+    required string UserId = 1; //用户ID
+    required string GameId = 2; //游戏ID
+    required string RoomId = 3; //房间ID
+    optional int32 PageNum = 4; //页码，用于分页获取（默认为1）
+    optional uint32 TotalNum = 5; //总列表数量
+    required uint32 Result = 6; //结果,成功或失败
+    optional string ResultMsg = 7; //失败信息
+    repeated JoloRoom_TableInfo TableList = 8; //房间所属桌子列表
+}
+
+//同步：获得桌子状态信息
+message JoloRoom_GetTableStatusInfoReq {
+    required string UserId = 1; //用户ID
+    required string GameId = 2; //游戏ID
+    required string RoomId = 3; //房间ID
+    optional string TableId = 4; //桌子ID
+}
+message JoloRoom_GetTableStatusInfoAck {
+    required string UserId = 1; //用户ID
+    required string GameId = 2; //游戏ID
+    required string RoomId = 3; //房间ID
+    optional string TableId = 4; //桌子ID
+    required int32 Result = 5; //结果,成功或失败
+    optional string ResultMsg = 6; //失败信息
+    required JoloRoom_Table_StatusInfo StatusInfo = 7; //桌子状态信息
+}
+
+//同步：申请入桌
+message JoloRoom_ApplyJoinTableReq { //40001
+    required string UserId = 1; //用户ID
+    required string GameId = 2; //游戏ID
+    required string RoomId = 3; //房间ID
+}
+
+message JoloRoom_ApplyJoinTableAck {
+    required string UserId = 1; //用户ID
+    required string GameId = 2; //游戏ID
+    required string RoomId = 3; //房间ID
+    required string TableId = 4; //桌子ID
+    required string SeatId = 5; //座位ID
+    required int32 Result = 6; //结果,成功或失败
+    optional string ResultMsg = 7; //失败信息
+    optional string JoinGameSvrId = 8; //客户端可通过此ID调用GateSvr实现与GameSvr的交互
+    optional double BootAmount = 9; //底注
+    optional int32 BetCd = 10; //下注倒计时 and 选择用户比牌
+    optional int32 GameStartCd = 11; //游戏开始倒计时（发牌前倒计时）
+    optional int32 minJoinTableScore = 12;//最小入桌积分(所有房间)
+    optional int32 reconnection = 13;//是否断线重连1是0不是
+}
+
+//同步：申请入桌返回40001
+message JoloRoom_ApplyJoinTableRobotReq { //40003
+    required string UserId = 1; //用户ID
+    required string GameId = 2; //游戏ID
+    required string RoomId = 3; //房间ID
+    required string TableId = 4; //桌子ID
+}
+
+//同步：申请换桌
+message JoloRoom_ApplyChangeTableReq { //40002
+    required string UserId = 1; //用户ID
+    required string GameId = 2; //游戏ID
+    required string RoomId = 3; //房间ID
+    required string TableId = 4; //桌子ID
+}
+//40002的消息体
+message JoloRoom_ApplyChangeTableAck {
+    required string UserId = 1; //用户ID
+    required string GameId = 2; //游戏ID
+    required string RoomId = 3; //房间ID
+    required string TableId = 4; //桌子ID
+    required string SeatId = 5; //座位ID
+    required int32 Result = 6; //结果,成功或失败
+    optional string ResultMsg = 7; //失败信息
+    optional string JoinGameSvrId = 8; //客户端可通过此ID调用GateSvr实现与GameSvr的交互
+    optional double BootAmount = 9; //底注
+    optional int32 MaxBlinds = 10; //盲注最多轮数
+    optional double ChaalLimit = 11; //单注上限
+    optional double PotLimit = 12; //总封
+    optional int32 IsChangeCard = 13; //是否可以换牌 1/可以
+    optional int32 ChangeCardFee = 14; //换牌所需费用
+    optional int32 AllowSideshowCd = 15; //被比方同意比牌弹窗的倒计时  
+    optional int32 BetCd = 16; //下注倒计时 and 选择用户比牌
+    optional int32 GameStartCd = 17; //游戏开始倒计时（发牌前倒计时）
+    optional int32 minJoinTableScore = 18;//最小入桌积分(所有房间)
+}
+///////////////////////////////// RoomSvr逻辑 end //////////////////////////////////

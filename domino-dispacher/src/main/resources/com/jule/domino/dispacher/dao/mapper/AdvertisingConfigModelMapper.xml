@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.dispacher.dao.mapper.AdvertisingConfigModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.dispacher.dao.bean.AdvertisingConfigModel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="establishl_time" jdbcType="BIGINT" property="establishl_time" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="create_time" jdbcType="BIGINT" property="create_time" />
+    <result column="expire_time" jdbcType="BIGINT" property="expire_time" />
+    <result column="jump_link" jdbcType="VARCHAR" property="jump_link" />
+    <result column="advert_switch" jdbcType="TINYINT" property="advert_switch" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from advertising_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.dispacher.dao.bean.AdvertisingConfigModel">
+    insert into advertising_config (id, establishl_time, address, 
+      create_time, expire_time, jump_link, 
+      advert_switch)
+    values (#{id,jdbcType=INTEGER}, #{establishl_time,jdbcType=BIGINT}, #{address,jdbcType=VARCHAR}, 
+      #{create_time,jdbcType=BIGINT}, #{expire_time,jdbcType=BIGINT}, #{jump_link,jdbcType=VARCHAR}, 
+      #{advert_switch,jdbcType=TINYINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.dispacher.dao.bean.AdvertisingConfigModel">
+    update advertising_config
+    set establishl_time = #{establishl_time,jdbcType=BIGINT},
+      address = #{address,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=BIGINT},
+      expire_time = #{expire_time,jdbcType=BIGINT},
+      jump_link = #{jump_link,jdbcType=VARCHAR},
+      advert_switch = #{advert_switch,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, establishl_time, address, create_time, expire_time, jump_link, advert_switch
+    from advertising_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, establishl_time, address, create_time, expire_time, jump_link, advert_switch
+    from advertising_config
+    order by id asc
+  </select>
+</mapper>

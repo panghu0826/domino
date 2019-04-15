@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.auth.dao.mapper.RewardReceiveRecordModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.auth.dao.bean.RewardReceiveRecordModel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="player_id" jdbcType="VARCHAR" property="playerId" />
+    <result column="reward_type" jdbcType="VARCHAR" property="rewardType" />
+    <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
+    <result column="receive_mode" jdbcType="INTEGER" property="receiveMode" />
+    <result column="receive_amount" jdbcType="BIGINT" property="receiveAmount" />
+    <result column="receive_number" jdbcType="BIGINT" property="receiveNumber" />
+    <result column="continuity_login_day" jdbcType="INTEGER" property="continuityLoginDay" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from reward_receive_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.auth.dao.bean.RewardReceiveRecordModel">
+    insert into reward_receive_record (player_id, reward_type,
+      receive_time, receive_mode, receive_amount, 
+      receive_number, continuity_login_day)
+    values (#{playerId,jdbcType=VARCHAR}, #{rewardType,jdbcType=VARCHAR},
+      #{receiveTime,jdbcType=TIMESTAMP}, #{receiveMode,jdbcType=INTEGER}, #{receiveAmount,jdbcType=BIGINT},
+      #{receiveNumber,jdbcType=BIGINT}, #{continuityLoginDay,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.auth.dao.bean.RewardReceiveRecordModel">
+    update reward_receive_record
+    set player_id = #{playerId,jdbcType=VARCHAR},
+      reward_type = #{rewardType,jdbcType=VARCHAR},
+      receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      receive_mode = #{receiveMode,jdbcType=INTEGER},
+      receive_amount = #{receiveAmount,jdbcType=BIGINT},
+      receive_number = #{receiveNumber,jdbcType=BIGINT},
+      continuity_login_day = #{continuityLoginDay,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, player_id, reward_type, receive_time, receive_mode, receive_amount, receive_number, 
+    continuity_login_day
+    from reward_receive_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, player_id, reward_type, receive_time, receive_mode, receive_amount, receive_number, 
+    continuity_login_day
+    from reward_receive_record
+    order by id asc
+  </select>
+</mapper>

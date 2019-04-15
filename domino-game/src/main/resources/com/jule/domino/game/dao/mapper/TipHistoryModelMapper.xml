@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.game.dao.mapper.TipHistoryModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.game.dao.bean.TipHistoryModel">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="user_id" />
+    <result column="target_user_id" jdbcType="VARCHAR" property="target_user_id" />
+    <result column="play_type" jdbcType="INTEGER" property="play_type" />
+    <result column="room_id" jdbcType="VARCHAR" property="room_id" />
+    <result column="table_id" jdbcType="VARCHAR" property="table_id" />
+    <result column="tip_value" jdbcType="INTEGER" property="tip_value" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tip_history
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.game.dao.bean.TipHistoryModel">
+    insert into tip_history (id, user_id, target_user_id, 
+      play_type, room_id, table_id, 
+      tip_value, create_time)
+    values (#{id,jdbcType=BIGINT}, #{user_id,jdbcType=VARCHAR}, #{target_user_id,jdbcType=VARCHAR}, 
+      #{play_type,jdbcType=INTEGER}, #{room_id,jdbcType=VARCHAR}, #{table_id,jdbcType=VARCHAR}, 
+      #{tip_value,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.game.dao.bean.TipHistoryModel">
+    update tip_history
+    set user_id = #{user_id,jdbcType=VARCHAR},
+      target_user_id = #{target_user_id,jdbcType=VARCHAR},
+      play_type = #{play_type,jdbcType=INTEGER},
+      room_id = #{room_id,jdbcType=VARCHAR},
+      table_id = #{table_id,jdbcType=VARCHAR},
+      tip_value = #{tip_value,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, user_id, target_user_id, play_type, room_id, table_id, tip_value, create_time
+    from tip_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, user_id, target_user_id, play_type, room_id, table_id, tip_value, create_time
+    from tip_history
+    order by pid asc
+  </select>
+</mapper>

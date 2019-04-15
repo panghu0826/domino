@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.game.dao.mapper.TaskUserAwardLogModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.game.dao.bean.TaskUserAwardLogModel">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="taskId" jdbcType="INTEGER" property="taskId" />
+    <result column="taskGameId" jdbcType="VARCHAR" property="taskGameId" />
+    <result column="taskType" jdbcType="TINYINT" property="taskType" />
+    <result column="taskName" jdbcType="VARCHAR" property="taskName" />
+    <result column="taskTargetValue" jdbcType="INTEGER" property="taskTargetValue" />
+    <result column="taskBeginTime" jdbcType="TIMESTAMP" property="taskBeginTime" />
+    <result column="taskEndTime" jdbcType="TIMESTAMP" property="taskEndTime" />
+    <result column="itemId" jdbcType="VARCHAR" property="itemId" />
+    <result column="itemNum" jdbcType="INTEGER" property="itemNum" />
+    <result column="succAward" jdbcType="TINYINT" property="succAward" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from task_user_award_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.game.dao.bean.TaskUserAwardLogModel">
+    insert into task_user_award_log (id, taskId, taskGameId, 
+      taskType, taskName, taskTargetValue, 
+      taskBeginTime, taskEndTime, itemId, 
+      itemNum, succAward, createTime, 
+      updateTime)
+    values (#{id,jdbcType=BIGINT}, #{taskId,jdbcType=INTEGER}, #{taskGameId,jdbcType=VARCHAR}, 
+      #{taskType,jdbcType=TINYINT}, #{taskName,jdbcType=VARCHAR}, #{taskTargetValue,jdbcType=INTEGER}, 
+      #{taskBeginTime,jdbcType=TIMESTAMP}, #{taskEndTime,jdbcType=TIMESTAMP}, #{itemId,jdbcType=VARCHAR}, 
+      #{itemNum,jdbcType=INTEGER}, #{succAward,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.game.dao.bean.TaskUserAwardLogModel">
+    update task_user_award_log
+    set taskId = #{taskId,jdbcType=INTEGER},
+      taskGameId = #{taskGameId,jdbcType=VARCHAR},
+      taskType = #{taskType,jdbcType=TINYINT},
+      taskName = #{taskName,jdbcType=VARCHAR},
+      taskTargetValue = #{taskTargetValue,jdbcType=INTEGER},
+      taskBeginTime = #{taskBeginTime,jdbcType=TIMESTAMP},
+      taskEndTime = #{taskEndTime,jdbcType=TIMESTAMP},
+      itemId = #{itemId,jdbcType=VARCHAR},
+      itemNum = #{itemNum,jdbcType=INTEGER},
+      succAward = #{succAward,jdbcType=TINYINT},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, taskId, taskGameId, taskType, taskName, taskTargetValue, taskBeginTime, 
+    taskEndTime, itemId, itemNum, succAward, createTime, updateTime
+    from task_user_award_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, taskId, taskGameId, taskType, taskName, taskTargetValue, taskBeginTime, 
+    taskEndTime, itemId, itemNum, succAward, createTime, updateTime
+    from task_user_award_log
+  </select>
+</mapper>

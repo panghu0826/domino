@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.dispacher.dao.mapper.AdInfoMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.dispacher.dao.bean.AdInfoModel">
+    <id column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="times" jdbcType="INTEGER" property="times" />
+    <result column="totalmoney" jdbcType="BIGINT" property="totalmoney" />
+    <result column="lastTime" jdbcType="BIGINT" property="lastTime" />
+  </resultMap>
+
+  <insert id="insert" parameterType="com.jule.domino.dispacher.dao.bean.AdInfoModel">
+    insert into adinfomodel (uid, times, totalmoney,lastTime)
+    values (#{uid,jdbcType=VARCHAR}, #{times,jdbcType=INTEGER}, #{totalmoney,jdbcType=BIGINT},#{lastTime,jdbcType=BIGINT})
+  </insert>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select uid, times, totalmoney, lastTime
+    from adinfomodel
+    where uid = #{uid,jdbcType=VARCHAR}
+  </select>
+
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.dispacher.dao.bean.AdInfoModel">
+    update adinfomodel  set
+    times = #{times,jdbcType=INTEGER},
+    totalmoney = #{totalmoney,jdbcType=BIGINT},
+    lastTime = #{lastTime,jdbcType=BIGINT}
+    where uid = #{uid,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

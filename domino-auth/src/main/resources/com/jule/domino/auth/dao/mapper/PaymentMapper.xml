@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.auth.dao.mapper.PaymentMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.auth.dao.bean.Payment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="VARCHAR" property="pid" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="channel_statement" jdbcType="VARCHAR" property="channel_statement" />
+    <result column="statement" jdbcType="VARCHAR" property="statement" />
+    <result column="app_id" jdbcType="VARCHAR" property="app_id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="sub_state" jdbcType="VARCHAR" property="sub_state" />
+    <result column="channel" jdbcType="VARCHAR" property="channel" />
+    <result column="syn_state" jdbcType="VARCHAR" property="syn_state" />
+    <result column="reserved1" jdbcType="VARCHAR" property="reserved1" />
+    <result column="reserved2" jdbcType="VARCHAR" property="reserved2" />
+    <result column="reserved3" jdbcType="VARCHAR" property="reserved3" />
+    <result column="reserved4" jdbcType="VARCHAR" property="reserved4" />
+    <result column="reserved5" jdbcType="VARCHAR" property="reserved5" />
+    <result column="reserved6" jdbcType="VARCHAR" property="reserved6" />
+    <result column="reserved7" jdbcType="VARCHAR" property="reserved7" />
+    <result column="reserved8" jdbcType="VARCHAR" property="reserved8" />
+    <result column="reserved9" jdbcType="VARCHAR" property="reserved9" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from payment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.auth.dao.bean.Payment">
+    insert into payment (id, pid, price, 
+      channel_statement, statement, app_id, 
+      create_time, update_time, state, 
+      sub_state, channel, syn_state, 
+      reserved1, reserved2, reserved3, 
+      reserved4, reserved5, reserved6, 
+      reserved7, reserved8, reserved9
+      )
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{channel_statement,jdbcType=VARCHAR}, #{statement,jdbcType=VARCHAR}, #{app_id,jdbcType=VARCHAR}, 
+      #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, 
+      #{sub_state,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, #{syn_state,jdbcType=VARCHAR}, 
+      #{reserved1,jdbcType=VARCHAR}, #{reserved2,jdbcType=VARCHAR}, #{reserved3,jdbcType=VARCHAR}, 
+      #{reserved4,jdbcType=VARCHAR}, #{reserved5,jdbcType=VARCHAR}, #{reserved6,jdbcType=VARCHAR}, 
+      #{reserved7,jdbcType=VARCHAR}, #{reserved8,jdbcType=VARCHAR}, #{reserved9,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.auth.dao.bean.Payment">
+    update payment
+    set pid = #{pid,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      channel_statement = #{channel_statement,jdbcType=VARCHAR},
+      statement = #{statement,jdbcType=VARCHAR},
+      app_id = #{app_id,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      update_time = #{update_time,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER},
+      sub_state = #{sub_state,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      syn_state = #{syn_state,jdbcType=VARCHAR},
+      reserved1 = #{reserved1,jdbcType=VARCHAR},
+      reserved2 = #{reserved2,jdbcType=VARCHAR},
+      reserved3 = #{reserved3,jdbcType=VARCHAR},
+      reserved4 = #{reserved4,jdbcType=VARCHAR},
+      reserved5 = #{reserved5,jdbcType=VARCHAR},
+      reserved6 = #{reserved6,jdbcType=VARCHAR},
+      reserved7 = #{reserved7,jdbcType=VARCHAR},
+      reserved8 = #{reserved8,jdbcType=VARCHAR},
+      reserved9 = #{reserved9,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, pid, price, channel_statement, statement, app_id, create_time, update_time, 
+    state, sub_state, channel, syn_state, reserved1, reserved2, reserved3, reserved4, 
+    reserved5, reserved6, reserved7, reserved8, reserved9
+    from payment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByStatement" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, pid, price, channel_statement, statement, app_id, create_time, update_time,
+    state, sub_state, channel, syn_state, reserved1, reserved2, reserved3, reserved4,
+    reserved5, reserved6, reserved7, reserved8, reserved9
+    from payment
+    where statement = #{statement,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, pid, price, channel_statement, statement, app_id, create_time, update_time, 
+    state, sub_state, channel, syn_state, reserved1, reserved2, reserved3, reserved4, 
+    reserved5, reserved6, reserved7, reserved8, reserved9
+    from payment
+  </select>
+  <select id="selectAllByUser" resultMap="BaseResultMap">
+    select id, pid, price, channel_statement, statement, app_id, create_time, update_time,
+    state, sub_state, channel, syn_state, reserved1, reserved2, reserved3, reserved4,
+    reserved5, reserved6, reserved7, reserved8, reserved9
+    from payment
+    where reserved2 = #{reserved2,jdbcType=VARCHAR} and state = 1
+  </select>
+
+</mapper>

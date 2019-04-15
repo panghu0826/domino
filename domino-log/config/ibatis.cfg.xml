@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+    <settings
+            cacheModelsEnabled="true"
+            enhancementEnabled="true"
+            lazyLoadingEnabled="true"
+            maxRequests="64"
+            maxSessions="32"
+            maxTransactions="5"
+            useStatementNamespaces="false" />
+
+    <transactionManager type="JDBC">
+        <dataSource type="SIMPLE">
+            <property name="JDBC.Driver" value="${DB.jdbcDriver}" />
+            <property name="JDBC.ConnectionURL" value="${DB.connectionString}" />
+            <property name="JDBC.Username" value="${DB.userName}" />
+            <property name="JDBC.Password" value="${DB.passWord}" />
+            <property name="Pool.MaximumActiveConnections" value="64" />
+            <property name="Pool.MaximumIdleConnections" value="2" />
+        </dataSource>
+    </transactionManager>
+
+    <sqlMap resource="auto.xml" />
+
+</sqlMapConfig>

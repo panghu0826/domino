@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.game.dao.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.base.dao.bean.Product">
+    <id column="pid" jdbcType="VARCHAR" property="pid" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="total_reward" jdbcType="INTEGER" property="total_reward" />
+    <result column="base_reward" jdbcType="INTEGER" property="base_reward" />
+    <result column="extra_reward" jdbcType="INTEGER" property="extra_reward" />
+    <result column="extra_percent" jdbcType="INTEGER" property="extra_percent" />
+    <result column="ico_count" jdbcType="INTEGER" property="ico_count" />
+    <result column="pos" jdbcType="INTEGER" property="pos" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="app_id" jdbcType="VARCHAR" property="app_id" />
+    <result column="pay_channel" jdbcType="VARCHAR" property="pay_channel" />
+    <result column="contain_type" jdbcType="VARCHAR" property="contain_type" />
+    <result column="contain_item_id" jdbcType="INTEGER" property="contain_item_id" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from product
+    where pid = #{pid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.base.dao.bean.Product">
+    insert into product (pid, price, total_reward, 
+      base_reward, extra_reward, extra_percent, 
+      ico_count, pos, tag, 
+      app_id, pay_channel,contain_type,contain_item_id)
+    values (#{pid,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{total_reward,jdbcType=INTEGER}, 
+      #{base_reward,jdbcType=INTEGER}, #{extra_reward,jdbcType=INTEGER}, #{extra_percent,jdbcType=INTEGER}, 
+      #{ico_count,jdbcType=INTEGER}, #{pos,jdbcType=INTEGER}, #{tag,jdbcType=VARCHAR}, 
+      #{app_id,jdbcType=VARCHAR}, #{pay_channel,jdbcType=VARCHAR},
+      #{contain_type,jdbcType=VARCHAR}, #{contain_item_id,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.base.dao.bean.Product">
+    update product
+    set price = #{price,jdbcType=DOUBLE},
+      total_reward = #{total_reward,jdbcType=INTEGER},
+      base_reward = #{base_reward,jdbcType=INTEGER},
+      extra_reward = #{extra_reward,jdbcType=INTEGER},
+      extra_percent = #{extra_percent,jdbcType=INTEGER},
+      ico_count = #{ico_count,jdbcType=INTEGER},
+      pos = #{pos,jdbcType=INTEGER},
+      tag = #{tag,jdbcType=VARCHAR},
+      app_id = #{app_id,jdbcType=VARCHAR},
+      pay_channel = #{pay_channel,jdbcType=VARCHAR},
+      contain_type = #{contain_type,jdbcType=VARCHAR},
+      contain_item_id = #{contain_item_id,jdbcType=INTEGER}
+    where pid = #{pid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select pid, price, total_reward, base_reward, extra_reward, extra_percent, ico_count, 
+    pos, tag, app_id, pay_channel,contain_type,contain_item_id
+    from product
+    where pid = #{pid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select pid, price, total_reward, base_reward, extra_reward, extra_percent, ico_count, 
+    pos, tag, app_id, pay_channel,contain_type,contain_item_id
+    from product
+    order by pid asc
+  </select>
+
+  <select id="selectAllByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select pid, price, total_reward, base_reward, extra_reward, extra_percent, ico_count,
+    pos, tag, app_id, pay_channel,contain_type,contain_item_id
+    from product WHERE contain_type = #{containType,jdbcType=VARCHAR}
+    order by pid asc
+  </select>
+</mapper>

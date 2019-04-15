@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.auth.dao.mapper.CurrencyMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.auth.dao.bean.Currency">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="game_id" jdbcType="VARCHAR" property="game_id" />
+    <result column="table_id" jdbcType="VARCHAR" property="table_id" />
+    <result column="player_id" jdbcType="VARCHAR" property="player_id" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nick_name" />
+    <result column="operation" jdbcType="CHAR" property="operation" />
+    <result column="amount" jdbcType="BIGINT" property="amount" />
+    <result column="game_order_id" jdbcType="VARCHAR" property="game_order_id" />
+    <result column="bet" jdbcType="BIGINT" property="bet" />
+    <result column="poundage" jdbcType="BIGINT" property="poundage" />
+    <result column="win_jetton" jdbcType="BIGINT" property="win_jetton" />
+    <result column="lose_jetton" jdbcType="BIGINT" property="lose_jetton" />
+    <result column="jetton" jdbcType="BIGINT" property="jetton" />
+    <result column="money" jdbcType="BIGINT" property="money" />
+    <result column="total_money" jdbcType="BIGINT" property="total_money" />
+    <result column="universal" jdbcType="VARCHAR" property="universal" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from currency
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.auth.dao.bean.Currency">
+    insert into currency (id, game_id, table_id, 
+      player_id, nick_name, operation, 
+      amount, game_order_id, bet, 
+      poundage, win_jetton, lose_jetton, 
+      jetton, money, total_money, 
+      universal)
+    values (#{id,jdbcType=INTEGER}, #{game_id,jdbcType=VARCHAR}, #{table_id,jdbcType=VARCHAR}, 
+      #{player_id,jdbcType=VARCHAR}, #{nick_name,jdbcType=VARCHAR}, #{operation,jdbcType=CHAR}, 
+      #{amount,jdbcType=BIGINT}, #{game_order_id,jdbcType=VARCHAR}, #{bet,jdbcType=BIGINT}, 
+      #{poundage,jdbcType=BIGINT}, #{win_jetton,jdbcType=BIGINT}, #{lose_jetton,jdbcType=BIGINT}, 
+      #{jetton,jdbcType=BIGINT}, #{money,jdbcType=BIGINT}, #{total_money,jdbcType=BIGINT}, 
+      #{universal,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.auth.dao.bean.Currency">
+    update currency
+    set game_id = #{game_id,jdbcType=VARCHAR},
+      table_id = #{table_id,jdbcType=VARCHAR},
+      player_id = #{player_id,jdbcType=VARCHAR},
+      nick_name = #{nick_name,jdbcType=VARCHAR},
+      operation = #{operation,jdbcType=CHAR},
+      amount = #{amount,jdbcType=BIGINT},
+      game_order_id = #{game_order_id,jdbcType=VARCHAR},
+      bet = #{bet,jdbcType=BIGINT},
+      poundage = #{poundage,jdbcType=BIGINT},
+      win_jetton = #{win_jetton,jdbcType=BIGINT},
+      lose_jetton = #{lose_jetton,jdbcType=BIGINT},
+      jetton = #{jetton,jdbcType=BIGINT},
+      money = #{money,jdbcType=BIGINT},
+      total_money = #{total_money,jdbcType=BIGINT},
+      universal = #{universal,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, game_id, table_id, player_id, nick_name, operation, amount, game_order_id, 
+    bet, poundage, win_jetton, lose_jetton, jetton, money, total_money, universal
+    from currency
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, game_id, table_id, player_id, nick_name, operation, amount, game_order_id, 
+    bet, poundage, win_jetton, lose_jetton, jetton, money, total_money, universal
+    from currency
+    order by pid asc
+  </select>
+</mapper>

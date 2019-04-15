@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.game.dao.mapper.TaskUserHistModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.base.dao.bean.TaskUserHistModel">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="lineId" jdbcType="INTEGER" property="lineId" />
+    <result column="taskId" jdbcType="INTEGER" property="taskId" />
+    <result column="taskGameId" jdbcType="VARCHAR" property="taskGameId" />
+    <result column="taskType" jdbcType="TINYINT" property="taskType" />
+    <result column="taskTargetValue" jdbcType="INTEGER" property="taskTargetValue" />
+    <result column="taskStatus" jdbcType="TINYINT" property="taskStatus" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from task_user_hist
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.base.dao.bean.TaskUserHistModel">
+    insert into task_user_hist (id, userId, lineId, 
+      taskId, taskGameId, taskType, 
+      taskTargetValue, taskStatus, createTime, 
+      updateTime)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{lineId,jdbcType=INTEGER}, 
+      #{taskId,jdbcType=INTEGER}, #{taskGameId,jdbcType=VARCHAR}, #{taskType,jdbcType=TINYINT}, 
+      #{taskTargetValue,jdbcType=INTEGER}, #{taskStatus,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.base.dao.bean.TaskUserHistModel">
+    update task_user_hist
+    set userId = #{userId,jdbcType=VARCHAR},
+      lineId = #{lineId,jdbcType=INTEGER},
+      taskId = #{taskId,jdbcType=INTEGER},
+      taskGameId = #{taskGameId,jdbcType=VARCHAR},
+      taskType = #{taskType,jdbcType=TINYINT},
+      taskTargetValue = #{taskTargetValue,jdbcType=INTEGER},
+      taskStatus = #{taskStatus,jdbcType=TINYINT},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, userId, lineId, taskId, taskGameId, taskType, taskTargetValue, taskStatus, 
+    createTime, updateTime
+    from task_user_hist
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+    <select id="selectByLineIdUserIdGameIdTaskType" resultMap="BaseResultMap">
+        select id, userId, lineId, taskId, taskGameId, taskType, taskTargetValue, taskStatus,
+        createTime, updateTime
+        from task_user_hist
+        where userId = #{userId} and lineId = #{lineId} and taskId = #{taskId} AND taskGameId=#{taskGameId} AND taskType=#{taskType} and taskStatus=0
+    </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, userId, lineId, taskId, taskGameId, taskType, taskTargetValue, taskStatus, 
+    createTime, updateTime
+    from task_user_hist
+  </select>
+</mapper>

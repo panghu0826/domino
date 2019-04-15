@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+    <mappers>
+        <mapper resource="com/jule/domino/dispacher/dao/mapper/UserMapper.xml"/>
+        <mapper resource="com/jule/domino/dispacher/dao/mapper/RewardConfigModelMapper.xml"/>
+        <mapper resource="com/jule/domino/dispacher/dao/mapper/RewardReceiveRecordModelMapper.xml"/>
+        <mapper resource="com/jule/domino/dispacher/dao/mapper/BlackWhiteMapper.xml"/>
+        <mapper resource="com/jule/domino/dispacher/dao/mapper/TaskUserHistModelMapper.xml"/>
+        <mapper resource="com/jule/domino/dispacher/dao/mapper/OnlineArgsModelMapper.xml"/>
+        <mapper resource="com/jule/domino/dispacher/dao/mapper/OnlineConfigModelMapper.xml"/>
+        <mapper resource="com/jule/domino/dispacher/dao/mapper/AdvertisingConfigModelMapper.xml"/>
+        <mapper resource="com/jule/domino/dispacher/dao/mapper/AdInfoMapper.xml"/>
+        <mapper resource="com/jule/domino/dispacher/dao/mapper/TaskUserStatModelMapper.xml"/>
+        <mapper resource="com/jule/domino/dispacher/dao/mapper/AdConfigMapper.xml"/>
+
+        <mapper resource="com/jule/domino/dispacher/dao/mapper/VersionConfigModelMapper.xml"/>
+        <mapper resource="com/jule/domino/dispacher/dao/mapper/ProductMapper.xml"/>
+        <mapper resource="com/jule/domino/dispacher/dao/mapper/RoomConfigModelMapper.xml"/>
+    </mappers>
+</configuration>

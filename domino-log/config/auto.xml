@@ -1,0 +1,2034 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap>
+
+<statement id="createTable_Auth_PlayerCreateLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`giveMoney` bigint, 
+`createTime` varchar( 128 ), 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Auth_PlayerCreateLog" parameterClass="com.jule.domino.log.logobjs.impl.Auth_PlayerCreateLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`giveMoney`, 
+`createTime`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#giveMoney#, 
+#createTime#
+);
+</statement>
+
+<insert id="insertInto_Auth_PlayerCreateLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`giveMoney`, 
+`createTime`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].giveMoney$', 
+'$values[].createTime$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Auth_PlayerFirstPayLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`channel` varchar( 128 ), 
+`orderId` text default null, 
+`statement` text default null, 
+`pid` varchar( 128 ), 
+`appid` varchar( 128 ), 
+`price` varchar( 128 ), 
+`orderTime` varchar( 128 ), 
+`totalReward` varchar( 128 ), 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Auth_PlayerFirstPayLog" parameterClass="com.jule.domino.log.logobjs.impl.Auth_PlayerFirstPayLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`channel`, 
+`orderId`, 
+`statement`, 
+`pid`, 
+`appid`, 
+`price`, 
+`orderTime`, 
+`totalReward`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#channel#, 
+#orderId#, 
+#statement#, 
+#pid#, 
+#appid#, 
+#price#, 
+#orderTime#, 
+#totalReward#
+);
+</statement>
+
+<insert id="insertInto_Auth_PlayerFirstPayLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`channel`, 
+`orderId`, 
+`statement`, 
+`pid`, 
+`appid`, 
+`price`, 
+`orderTime`, 
+`totalReward`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].channel$', 
+'$values[].orderId$', 
+'$values[].statement$', 
+'$values[].pid$', 
+'$values[].appid$', 
+'$values[].price$', 
+'$values[].orderTime$', 
+'$values[].totalReward$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Auth_PlayerloginLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`idfa` varchar( 256 ), 
+`loginTime` varchar( 128 ), 
+`ipAddress` varchar( 128 ), 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Auth_PlayerloginLog" parameterClass="com.jule.domino.log.logobjs.impl.Auth_PlayerloginLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`idfa`, 
+`loginTime`, 
+`ipAddress`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#idfa#, 
+#loginTime#, 
+#ipAddress#
+);
+</statement>
+
+<insert id="insertInto_Auth_PlayerloginLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`idfa`, 
+`loginTime`, 
+`ipAddress`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].idfa$', 
+'$values[].loginTime$', 
+'$values[].ipAddress$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Auth_PlayerlogoutLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`logoutTime` bigint, 
+`onlineTime` bigint, 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Auth_PlayerlogoutLog" parameterClass="com.jule.domino.log.logobjs.impl.Auth_PlayerlogoutLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`logoutTime`, 
+`onlineTime`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#logoutTime#, 
+#onlineTime#
+);
+</statement>
+
+<insert id="insertInto_Auth_PlayerlogoutLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`logoutTime`, 
+`onlineTime`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].logoutTime$', 
+'$values[].onlineTime$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Auth_PlayerOrderLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`channel` varchar( 128 ), 
+`orderId` text default null, 
+`statement` text default null, 
+`pid` varchar( 128 ), 
+`appid` varchar( 128 ), 
+`price` varchar( 128 ), 
+`orderTime` varchar( 64 ), 
+`totalReward` varchar( 64 ), 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Auth_PlayerOrderLog" parameterClass="com.jule.domino.log.logobjs.impl.Auth_PlayerOrderLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`channel`, 
+`orderId`, 
+`statement`, 
+`pid`, 
+`appid`, 
+`price`, 
+`orderTime`, 
+`totalReward`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#channel#, 
+#orderId#, 
+#statement#, 
+#pid#, 
+#appid#, 
+#price#, 
+#orderTime#, 
+#totalReward#
+);
+</statement>
+
+<insert id="insertInto_Auth_PlayerOrderLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`channel`, 
+`orderId`, 
+`statement`, 
+`pid`, 
+`appid`, 
+`price`, 
+`orderTime`, 
+`totalReward`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].channel$', 
+'$values[].orderId$', 
+'$values[].statement$', 
+'$values[].pid$', 
+'$values[].appid$', 
+'$values[].price$', 
+'$values[].orderTime$', 
+'$values[].totalReward$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Auth_PlayerPayLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`channel` varchar( 128 ), 
+`orderId` text default null, 
+`statement` text default null, 
+`pid` varchar( 128 ), 
+`appid` varchar( 128 ), 
+`price` varchar( 128 ), 
+`orderTime` varchar( 128 ), 
+`totalReward` varchar( 128 ), 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Auth_PlayerPayLog" parameterClass="com.jule.domino.log.logobjs.impl.Auth_PlayerPayLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`channel`, 
+`orderId`, 
+`statement`, 
+`pid`, 
+`appid`, 
+`price`, 
+`orderTime`, 
+`totalReward`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#channel#, 
+#orderId#, 
+#statement#, 
+#pid#, 
+#appid#, 
+#price#, 
+#orderTime#, 
+#totalReward#
+);
+</statement>
+
+<insert id="insertInto_Auth_PlayerPayLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`channel`, 
+`orderId`, 
+`statement`, 
+`pid`, 
+`appid`, 
+`price`, 
+`orderTime`, 
+`totalReward`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].channel$', 
+'$values[].orderId$', 
+'$values[].statement$', 
+'$values[].pid$', 
+'$values[].appid$', 
+'$values[].price$', 
+'$values[].orderTime$', 
+'$values[].totalReward$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Game_DealerChangeLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`dealerID` varchar( 64 ), 
+`fee` bigint, 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Game_DealerChangeLog" parameterClass="com.jule.domino.log.logobjs.impl.Game_DealerChangeLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`dealerID`, 
+`fee`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#dealerID#, 
+#fee#
+);
+</statement>
+
+<insert id="insertInto_Game_DealerChangeLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`dealerID`, 
+`fee`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].dealerID$', 
+'$values[].fee$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Game_GameLoseWinLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`gameId` varchar( 128 ), 
+`score` bigint, 
+`tableId` varchar( 128 ), 
+`roomId` varchar( 128 ), 
+`loseWin` varchar( 128 ), 
+`gameOrderId` varchar( 256 ), 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Game_GameLoseWinLog" parameterClass="com.jule.domino.log.logobjs.impl.Game_GameLoseWinLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`gameId`, 
+`score`, 
+`tableId`, 
+`roomId`, 
+`loseWin`, 
+`gameOrderId`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#gameId#, 
+#score#, 
+#tableId#, 
+#roomId#, 
+#loseWin#, 
+#gameOrderId#
+);
+</statement>
+
+<insert id="insertInto_Game_GameLoseWinLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`gameId`, 
+`score`, 
+`tableId`, 
+`roomId`, 
+`loseWin`, 
+`gameOrderId`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].gameId$', 
+'$values[].score$', 
+'$values[].tableId$', 
+'$values[].roomId$', 
+'$values[].loseWin$', 
+'$values[].gameOrderId$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Game_GameSettleLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`playType` varchar( 128 ), 
+`gameId` varchar( 128 ), 
+`tableId` varchar( 128 ), 
+`serviceFree` real, 
+`roomId` varchar( 128 ), 
+`players` varchar( 512 ), 
+`winner` varchar( 128 ), 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Game_GameSettleLog" parameterClass="com.jule.domino.log.logobjs.impl.Game_GameSettleLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`playType`, 
+`gameId`, 
+`tableId`, 
+`serviceFree`, 
+`roomId`, 
+`players`, 
+`winner`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#playType#, 
+#gameId#, 
+#tableId#, 
+#serviceFree#, 
+#roomId#, 
+#players#, 
+#winner#
+);
+</statement>
+
+<insert id="insertInto_Game_GameSettleLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`playType`, 
+`gameId`, 
+`tableId`, 
+`serviceFree`, 
+`roomId`, 
+`players`, 
+`winner`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].playType$', 
+'$values[].gameId$', 
+'$values[].tableId$', 
+'$values[].serviceFree$', 
+'$values[].roomId$', 
+'$values[].players$', 
+'$values[].winner$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Game_GameSitLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`gameId` varchar( 128 ), 
+`tableId` varchar( 128 ), 
+`roomId` varchar( 128 ), 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Game_GameSitLog" parameterClass="com.jule.domino.log.logobjs.impl.Game_GameSitLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`gameId`, 
+`tableId`, 
+`roomId`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#gameId#, 
+#tableId#, 
+#roomId#
+);
+</statement>
+
+<insert id="insertInto_Game_GameSitLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`gameId`, 
+`tableId`, 
+`roomId`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].gameId$', 
+'$values[].tableId$', 
+'$values[].roomId$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Game_GameStartLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`startTime` varchar( 128 ), 
+`playerNum` int( 128 ), 
+`gameId` varchar( 128 ), 
+`tableId` varchar( 128 ), 
+`serviceFree` real, 
+`roomId` varchar( 128 ), 
+`players` varchar( 512 ), 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Game_GameStartLog" parameterClass="com.jule.domino.log.logobjs.impl.Game_GameStartLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`startTime`, 
+`playerNum`, 
+`gameId`, 
+`tableId`, 
+`serviceFree`, 
+`roomId`, 
+`players`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#startTime#, 
+#playerNum#, 
+#gameId#, 
+#tableId#, 
+#serviceFree#, 
+#roomId#, 
+#players#
+);
+</statement>
+
+<insert id="insertInto_Game_GameStartLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`startTime`, 
+`playerNum`, 
+`gameId`, 
+`tableId`, 
+`serviceFree`, 
+`roomId`, 
+`players`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].startTime$', 
+'$values[].playerNum$', 
+'$values[].gameId$', 
+'$values[].tableId$', 
+'$values[].serviceFree$', 
+'$values[].roomId$', 
+'$values[].players$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Game_GameStartPlayerLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`gameId` varchar( 128 ), 
+`tableId` varchar( 128 ), 
+`roomId` varchar( 128 ), 
+`gameOrderId` varchar( 256 ), 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Game_GameStartPlayerLog" parameterClass="com.jule.domino.log.logobjs.impl.Game_GameStartPlayerLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`gameId`, 
+`tableId`, 
+`roomId`, 
+`gameOrderId`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#gameId#, 
+#tableId#, 
+#roomId#, 
+#gameOrderId#
+);
+</statement>
+
+<insert id="insertInto_Game_GameStartPlayerLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`gameId`, 
+`tableId`, 
+`roomId`, 
+`gameOrderId`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].gameId$', 
+'$values[].tableId$', 
+'$values[].roomId$', 
+'$values[].gameOrderId$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Game_IcoChangeLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`orgIco` text default null, 
+`curIco` text default null, 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Game_IcoChangeLog" parameterClass="com.jule.domino.log.logobjs.impl.Game_IcoChangeLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`orgIco`, 
+`curIco`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#orgIco#, 
+#curIco#
+);
+</statement>
+
+<insert id="insertInto_Game_IcoChangeLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`orgIco`, 
+`curIco`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].orgIco$', 
+'$values[].curIco$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Game_OnlineNumberLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`position` varchar( 2048 ), 
+`server` varchar( 2048 ), 
+`playerNumber` int, 
+`currTime` bigint, 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Game_OnlineNumberLog" parameterClass="com.jule.domino.log.logobjs.impl.Game_OnlineNumberLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`position`, 
+`server`, 
+`playerNumber`, 
+`currTime`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#position#, 
+#server#, 
+#playerNumber#, 
+#currTime#
+);
+</statement>
+
+<insert id="insertInto_Game_OnlineNumberLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`position`, 
+`server`, 
+`playerNumber`, 
+`currTime`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].position$', 
+'$values[].server$', 
+'$values[].playerNumber$', 
+'$values[].currTime$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Game_PlayerChipsLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`cur_chips` bigint, 
+`org_chips` bigint, 
+`change` bigint, 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Game_PlayerChipsLog" parameterClass="com.jule.domino.log.logobjs.impl.Game_PlayerChipsLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`cur_chips`, 
+`org_chips`, 
+`change`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#cur_chips#, 
+#org_chips#, 
+#change#
+);
+</statement>
+
+<insert id="insertInto_Game_PlayerChipsLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`cur_chips`, 
+`org_chips`, 
+`change`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].cur_chips$', 
+'$values[].org_chips$', 
+'$values[].change$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Game_ReconnectLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`offTime` bigint, 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Game_ReconnectLog" parameterClass="com.jule.domino.log.logobjs.impl.Game_ReconnectLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`offTime`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#offTime#
+);
+</statement>
+
+<insert id="insertInto_Game_ReconnectLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`offTime`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].offTime$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Game_SendGiftLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`fee` bigint, 
+`giftName` varchar( 64 ), 
+`sendTo` varchar( 256 ), 
+`giftID` varchar( 64 ), 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Game_SendGiftLog" parameterClass="com.jule.domino.log.logobjs.impl.Game_SendGiftLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`fee`, 
+`giftName`, 
+`sendTo`, 
+`giftID`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#fee#, 
+#giftName#, 
+#sendTo#, 
+#giftID#
+);
+</statement>
+
+<insert id="insertInto_Game_SendGiftLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`fee`, 
+`giftName`, 
+`sendTo`, 
+`giftID`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].fee$', 
+'$values[].giftName$', 
+'$values[].sendTo$', 
+'$values[].giftID$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Game_UserUpdateLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`oper` text default null, 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Game_UserUpdateLog" parameterClass="com.jule.domino.log.logobjs.impl.Game_UserUpdateLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`oper`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#oper#
+);
+</statement>
+
+<insert id="insertInto_Game_UserUpdateLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`oper`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].oper$'
+ )]]>   
+</iterate>
+</insert>
+
+<statement id="createTable_Robot_LedgerLog" parameterClass="java.lang.String">
+create table if not exists `$splitTableName$` ( 
+`id` bigint not null auto_increment, 
+`logTime` bigint, 
+`level` int, 
+`vipLevel` int, 
+`charId` varchar( 2048 ), 
+`ip` varchar( 64 ), 
+`reason` text default null, 
+`platform` varchar( 64 ), 
+`os` varchar( 64 ), 
+`device` varchar( 256 ), 
+`charName` varchar( 64 ), 
+`param` text default null, 
+`downPlatform` varchar( 64 ), 
+`openId` varchar( 64 ), 
+`org_capitalPool` bigint, 
+`cur_capitalPool` bigint, 
+`playType` varchar( 24 ), 
+`changeChips` bigint, 
+primary key ( `ID` ) 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+</statement>
+
+<statement id="insertInto_Robot_LedgerLog" parameterClass="com.jule.domino.log.logobjs.impl.Robot_LedgerLog">
+insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`org_capitalPool`, 
+`cur_capitalPool`, 
+`playType`, 
+`changeChips`
+) values ( 
+#logTime#, 
+#level#, 
+#vipLevel#, 
+#charId#, 
+#ip#, 
+#reason#, 
+#platform#, 
+#os#, 
+#device#, 
+#charName#, 
+#param#, 
+#downPlatform#, 
+#openId#, 
+#org_capitalPool#, 
+#cur_capitalPool#, 
+#playType#, 
+#changeChips#
+);
+</statement>
+
+<insert id="insertInto_Robot_LedgerLogList" parameterClass="java.util.HashMap">
+ insert into `$splitTableName$` ( 
+`logTime`, 
+`level`, 
+`vipLevel`, 
+`charId`, 
+`ip`, 
+`reason`, 
+`platform`, 
+`os`, 
+`device`, 
+`charName`, 
+`param`, 
+`downPlatform`, 
+`openId`, 
+`org_capitalPool`, 
+`cur_capitalPool`, 
+`playType`, 
+`changeChips`
+) values  
+<iterate property="values"  conjunction=",">  <![CDATA[ (  
+'$values[].logTime$', 
+'$values[].level$', 
+'$values[].vipLevel$', 
+'$values[].charId$', 
+'$values[].ip$', 
+'$values[].reason$', 
+'$values[].platform$', 
+'$values[].os$', 
+'$values[].device$', 
+'$values[].charName$', 
+'$values[].param$', 
+'$values[].downPlatform$', 
+'$values[].openId$', 
+'$values[].org_capitalPool$', 
+'$values[].cur_capitalPool$', 
+'$values[].playType$', 
+'$values[].changeChips$'
+ )]]>   
+</iterate>
+</insert>
+
+</sqlMap>

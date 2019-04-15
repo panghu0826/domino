@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.dispacher.dao.mapper.RewardConfigModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.dispacher.dao.bean.RewardConfigModel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="reward_type" jdbcType="CHAR" property="reward_type" />
+    <result column="reward_goods_type" jdbcType="VARCHAR" property="reward_goods_type" />
+    <result column="reward_receive_mode" jdbcType="INTEGER" property="reward_receive_mode" />
+    <result column="reward_picture_address" jdbcType="VARCHAR" property="reward_picture_address" />
+    <result column="valid_date_type" jdbcType="TIMESTAMP" property="valid_date_type" />
+    <result column="reward_amount" jdbcType="BIGINT" property="reward_amount" />
+    <result column="reward_goods_id" jdbcType="INTEGER" property="reward_goods_id" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from reward_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.dispacher.dao.bean.RewardConfigModel">
+    insert into reward_config (id, reward_type, reward_goods_type,
+      reward_receive_mode, reward_picture_address, 
+      valid_date_type, reward_amount,reward_goods_id)
+    values (#{id,jdbcType=INTEGER}, #{reward_type,jdbcType=CHAR}, #{reward_goods_type,jdbcType=VARCHAR},
+      #{reward_receive_mode,jdbcType=INTEGER}, #{reward_picture_address,jdbcType=VARCHAR}, 
+      #{valid_date_type,jdbcType=TIMESTAMP}, #{reward_amount,jdbcType=BIGINT},#{reward_goods_id,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.dispacher.dao.bean.RewardConfigModel">
+    update reward_config
+    set reward_type = #{reward_type,jdbcType=CHAR},
+      reward_goods_type = #{reward_goods_type,jdbcType=VARCHAR},
+      reward_receive_mode = #{reward_receive_mode,jdbcType=INTEGER},
+      reward_picture_address = #{reward_picture_address,jdbcType=VARCHAR},
+      valid_date_type = #{valid_date_type,jdbcType=TIMESTAMP},
+      reward_amount = #{reward_amount,jdbcType=BIGINT},
+      reward_goods_id =#{reward_goods_id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, reward_type, reward_goods_type, reward_receive_mode, reward_picture_address,
+    valid_date_type, reward_amount,reward_goods_id
+    from reward_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, reward_type, reward_goods_type, reward_receive_mode, reward_picture_address,
+    valid_date_type, reward_amount,reward_goods_id
+    from reward_config
+    order by id asc
+  </select>
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.room.dao.mapper.CommonConfigModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.room.dao.bean.CommonConfigModel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="play_type" jdbcType="INTEGER" property="playType" />
+    <result column="rob_dealer_pct" jdbcType="INTEGER" property="robDealerPct" />
+    <result column="change_fee" jdbcType="BIGINT" property="changeCardFee" />
+    <result column="settle_type" jdbcType="INTEGER" property="autoSettleType" />
+    <result column="is_allow_sideshow" jdbcType="BIT" property="isNeedAllowSideShow" />
+    <result column="is_sideshow_user" jdbcType="BIT" property="isChooseSideShowUser" />
+    <result column="fix_dealer_cd" jdbcType="INTEGER" property="fixDealerCD" />
+    <result column="bet_cd" jdbcType="INTEGER" property="betCountDownSec" />
+    <result column="game_start_cd" jdbcType="INTEGER" property="gameStartCountDownSec" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from common_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.room.dao.bean.CommonConfigModel">
+    insert into common_config ( play_type, rob_dealer_pct,
+      change_fee, settle_type, is_allow_sideshow, 
+      is_sideshow_user, fix_dealer_cd, bet_cd,
+      game_start_cd)
+    values ( #{playType,jdbcType=INTEGER}, #{robDealerPct,jdbcType=INTEGER},
+      #{changeCardFee,jdbcType=BIGINT}, #{autoSettleType,jdbcType=INTEGER}, #{isNeedAllowSideShow,jdbcType=BIT},
+      #{isChooseSiseShowUser,jdbcType=BIT}, #{fixDealerCD,jdbcType=INTEGER}, #{betCountDownSec,jdbcType=INTEGER},
+      #{gameStartCountDownSec,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.room.dao.bean.CommonConfigModel">
+    update common_config
+    set play_type = #{playType,jdbcType=INTEGER},
+      rob_dealer_pct = #{robDealerPct,jdbcType=INTEGER},
+      change_fee = #{changeCardFee,jdbcType=BIGINT},
+      settle_type = #{autoSettleType,jdbcType=INTEGER},
+      is_allow_sideshow = #{isNeedAllowSideShow,jdbcType=BIT},
+      is_sideshow_user = #{isChooseSiseShowUser,jdbcType=BIT},
+      fix_dealer_cd = #{fixDealerCD,jdbcType=INTEGER},
+      bet_cd = #{betCountDownSec,jdbcType=INTEGER},
+      game_start_cd = #{gameStartCountDownSec,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, play_type, rob_dealer_pct, change_fee, settle_type, is_allow_sideshow,
+    is_sideshow_user, fix_dealer_cd, bet_cd, game_start_cd
+    from common_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, play_type, rob_dealer_pct, change_fee, settle_type, is_allow_sideshow,
+    is_sideshow_user, fix_dealer_cd, bet_cd, game_start_cd
+    from common_config
+    order by id asc
+  </select>
+</mapper>

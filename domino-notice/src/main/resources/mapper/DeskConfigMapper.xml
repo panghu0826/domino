@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.room.dao.mapper.DeskConfigMapper">
+  <resultMap id="BaseResultMap" type="com.jule.room.dao.bean.DeskConfig">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="mix_bet" jdbcType="INTEGER" property="mix_bet" />
+    <result column="max_bet" jdbcType="INTEGER" property="max_bet" />
+    <result column="zhuang_limit" jdbcType="INTEGER" property="zhuang_limit" />
+    <result column="cost" jdbcType="DECIMAL" property="cost" />
+    <result column="desk_begin" jdbcType="INTEGER" property="desk_begin" />
+    <result column="desk_end" jdbcType="INTEGER" property="desk_end" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from desk_config
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jule.room.dao.bean.DeskConfig">
+    insert into desk_config (id, mix_bet, max_bet, 
+      zhuang_limit, cost, desk_begin, 
+      desk_end)
+    values (#{id,jdbcType=VARCHAR}, #{mix_bet,jdbcType=INTEGER}, #{max_bet,jdbcType=INTEGER}, 
+      #{zhuang_limit,jdbcType=INTEGER}, #{cost,jdbcType=DECIMAL}, #{desk_begin,jdbcType=INTEGER}, 
+      #{desk_end,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.room.dao.bean.DeskConfig">
+    update desk_config
+    set mix_bet = #{mix_bet,jdbcType=INTEGER},
+      max_bet = #{max_bet,jdbcType=INTEGER},
+      zhuang_limit = #{zhuang_limit,jdbcType=INTEGER},
+      cost = #{cost,jdbcType=DECIMAL},
+      desk_begin = #{desk_begin,jdbcType=INTEGER},
+      desk_end = #{desk_end,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, mix_bet, max_bet, zhuang_limit, cost, desk_begin, desk_end
+    from desk_config
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, mix_bet, max_bet, zhuang_limit, cost, desk_begin, desk_end
+    from desk_config
+    order by mix_bet asc
+  </select>
+</mapper>

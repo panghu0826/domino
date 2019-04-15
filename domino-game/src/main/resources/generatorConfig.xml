@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 驱动包路径！ 慎用此功能，，会覆盖掉手动添加代码，，若使用请先备份文件，最好一次只生成一个表的，，否则后果很严重 -->
+    <classPathEntry
+            location="D:\all_tools\apache-maven-3.5.3\maven-repository\mysql\mysql-connector-java\5.1.20\mysql-connector-java-5.1.20.jar"/>
+    <context id="MysqlTables" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="mergeable" value="true"></property>
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!-- jdbc url地址 ！ -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.0.14:3306/poker_niuniu?generateSimpleParameterMetadata=true"
+                        userId="root" password="root">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!-- targetPackage 生成后的路径 ，targetProject 绝对路径  该配置生成java代码  -->
+        <javaModelGenerator targetPackage="com.jule.domino.game.dao.bean"
+                            targetProject="D:\ws\svn\Product_Code\Niuniu\3_SourceCode\Server\trunk\niuniu-game\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 该配置生成 mybatis 映射文件   -->
+        <sqlMapGenerator targetPackage="com.jule.domino.game.dao.mapper"
+                         targetProject="D:\ws\svn\Product_Code\Niuniu\3_SourceCode\Server\trunk\niuniu-game\src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- 生成 java 接口代码  -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jule.domino.game.dao.mapper"
+                             targetProject="D:\ws\svn\Product_Code\Niuniu\3_SourceCode\Server\trunk\niuniu-game\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--&lt;!&ndash;需要修改：schema：数据库名(oracle需要去掉该值) tableName：表名 domainObjectName：entity名&ndash;&gt;-->
+        <!--<table schema="jule_common" tableName="user" domainObjectName="User" enableCountByExample="false"-->
+        <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--<property name="useActualColumnNames" value="true"/>-->
+        <!--</table>-->
+        <!--需要修改：schema：数据库名(oracle需要去掉该值) tableName：表名 domainObjectName：entity名-->
+        <!--<table schema="jule_common" tableName="payment" domainObjectName="Payment" enableCountByExample="false"-->
+        <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--<property name="useActualColumnNames" value="true"/>-->
+        <!--</table>-->
+        <table schema="poker_niuniu" tableName="cardtype_multiple" domainObjectName="CardTypeMultipleModel" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
+            <property name="selectAllOrderByClause" value="id asc"/><!--asc正序 desc倒序-->
+        </table>
+        <!--<table schema="teen_patti_gold" tableName="room_config" domainObjectName="RoomConfigModel" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
+            <!--<property name="selectAllOrderByClause" value="pid asc"/>&lt;!&ndash;asc正序 desc倒序&ndash;&gt;-->
+        <!--</table>-->
+    </context>
+</generatorConfiguration>

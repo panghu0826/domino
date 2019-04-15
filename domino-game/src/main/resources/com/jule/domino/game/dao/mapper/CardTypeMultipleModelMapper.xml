@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.game.dao.mapper.CardTypeMultipleModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.game.dao.bean.CardTypeMultipleModel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="card_type" jdbcType="INTEGER" property="card_type" />
+    <result column="multiple" jdbcType="INTEGER" property="multiple" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cardtype_multiple
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.game.dao.bean.CardTypeMultipleModel">
+    insert into cardtype_multiple (id, card_type, multiple
+      )
+    values (#{id,jdbcType=INTEGER}, #{card_type,jdbcType=INTEGER}, #{multiple,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.game.dao.bean.CardTypeMultipleModel">
+    update cardtype_multiple
+    set card_type = #{card_type,jdbcType=INTEGER},
+      multiple = #{multiple,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, card_type, multiple
+    from cardtype_multiple
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, card_type, multiple
+    from cardtype_multiple
+    order by id asc
+  </select>
+</mapper>

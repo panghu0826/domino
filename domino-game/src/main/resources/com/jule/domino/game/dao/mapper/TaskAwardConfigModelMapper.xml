@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.game.dao.mapper.TaskAwardConfigModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.base.dao.bean.TaskAwardConfigModel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="taskId" jdbcType="INTEGER" property="taskId" />
+    <result column="itemId" jdbcType="VARCHAR" property="itemId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from task_award_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.base.dao.bean.TaskAwardConfigModel">
+    insert into task_award_config (id, taskId, itemId, 
+      type, url, name, num, 
+      createTime, updateTime)
+    values (#{id,jdbcType=INTEGER}, #{taskId,jdbcType=INTEGER}, #{itemId,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.base.dao.bean.TaskAwardConfigModel">
+    update task_award_config
+    set taskId = #{taskId,jdbcType=INTEGER},
+      itemId = #{itemId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, taskId, itemId, type, url, name, num, createTime, updateTime
+    from task_award_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, taskId, itemId, type, url, name, num, createTime, updateTime
+    from task_award_config
+  </select>
+  <select id="selectByTaskId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, taskId, itemId, type, url, name, num, createTime, updateTime
+    from task_award_config
+    where taskId = #{taskId,jdbcType=INTEGER}
+  </select>
+</mapper>

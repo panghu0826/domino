@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.dispacher.dao.mapper.OnlineConfigModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.dispacher.dao.bean.OnlineConfigModel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="grouping" jdbcType="VARCHAR" property="grouping" />
+    <result column="activitySwitch" jdbcType="TINYINT" property="activitySwitch" />
+    <result column="mailSwitch" jdbcType="TINYINT" property="mailSwitch" />
+    <result column="advertisingSwitch" jdbcType="TINYINT" property="advertisingSwitch" />
+    <result column="gameOrder" jdbcType="VARCHAR" property="gameOrder" />
+    <result column="playnowTurn" jdbcType="TINYINT" property="playnowTurn" />
+    <result column="exitAdvertising" jdbcType="TINYINT" property="exitAdvertising" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from online_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.dispacher.dao.bean.OnlineConfigModel">
+    insert into online_config (id, grouping, activitySwitch, 
+      mailSwitch, advertisingSwitch, gameOrder, 
+      playnowTurn, exitAdvertising)
+    values (#{id,jdbcType=INTEGER}, #{grouping,jdbcType=VARCHAR}, #{activitySwitch,jdbcType=TINYINT}, 
+      #{mailSwitch,jdbcType=TINYINT}, #{advertisingSwitch,jdbcType=TINYINT}, #{gameOrder,jdbcType=VARCHAR}, 
+      #{playnowTurn,jdbcType=TINYINT}, #{exitAdvertising,jdbcType=TINYINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.dispacher.dao.bean.OnlineConfigModel">
+    update online_config
+    set grouping = #{grouping,jdbcType=VARCHAR},
+      activitySwitch = #{activitySwitch,jdbcType=TINYINT},
+      mailSwitch = #{mailSwitch,jdbcType=TINYINT},
+      advertisingSwitch = #{advertisingSwitch,jdbcType=TINYINT},
+      gameOrder = #{gameOrder,jdbcType=VARCHAR},
+      playnowTurn = #{playnowTurn,jdbcType=TINYINT},
+      exitAdvertising = #{exitAdvertising,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, grouping, activitySwitch, mailSwitch, advertisingSwitch, gameOrder, playnowTurn, 
+    exitAdvertising
+    from online_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, grouping, activitySwitch, mailSwitch, advertisingSwitch, gameOrder, playnowTurn, 
+    exitAdvertising
+    from online_config
+    order by id asc
+  </select>
+</mapper>

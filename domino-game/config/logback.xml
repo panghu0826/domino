@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<configuration scan="true">
+	<property name="logFolder" value="logs/"/>
+
+	<appender name="out_console" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="commons.slf4j.filters.ConsoleFilter"></filter>
+		<encoder>
+			<Pattern>%date %-5level [%thread] %logger [%file:%line] %message%n</Pattern>
+		</encoder>
+	</appender>
+
+	<appender name="app_console" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="commons.slf4j.filters.ConsoleFilter"></filter>
+		<encoder>
+			<Pattern>%date %-5level [%thread] %logger [%file:%line] %message%n</Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${logFolder}/%d{yyyy-MM-dd}/console.log</fileNamePattern>
+		</rollingPolicy>
+	</appender>
+
+
+	<appender name="out_debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>debug</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<Pattern>%date %-5level [%thread] %logger [%file:%line] %message%n</Pattern>
+		</encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logFolder}/%d{yyyy-MM-dd}/debug.%d.log</fileNamePattern>
+        </rollingPolicy>
+	</appender>
+
+
+	<appender name="out_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>info</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<Pattern>%date %-5level [%thread] %logger [%file:%line] %message%n</Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${logFolder}/%d{yyyy-MM-dd}/info.%d.log</fileNamePattern>
+		</rollingPolicy>
+	</appender>
+	<appender name="out_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${logFolder}/%d{yyyy-MM-dd}/error.%d.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%date %-5level [%thread] %logger [%file:%line] %message%n</Pattern>
+		</encoder>
+	</appender>
+	<appender name="out_warn" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<Pattern>%date %-5level [%thread] %logger [%file:%line] %message%n</Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${logFolder}/%d{yyyy-MM-dd}/warn.%d.log</fileNamePattern>
+		</rollingPolicy>
+	</appender>
+
+	<appender name="file_table" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<Pattern>%date %msg%n</Pattern>
+		</encoder>
+		<!--滚动策略-->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--路径-->
+			<fileNamePattern>${logFolder}/%d{yyyy-MM-dd}/table.%d.log</fileNamePattern>
+		</rollingPolicy>
+	</appender>
+	<appender name="file_robot" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<Pattern>%date %-5level [%thread] %logger [%file:%line] %message%n</Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${logFolder}/%d{yyyy-MM-dd}/robot.%d.log</fileNamePattern>
+		</rollingPolicy>
+	</appender>
+	<appender name="performance_console" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="commons.slf4j.filters.ConsoleFilter"></filter>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%date %-5level [%thread] %logger [%file:%line] %message%n</Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${logFolder}/%d{yyyy-MM-dd}/performance.%d.log</fileNamePattern>
+		</rollingPolicy>
+	</appender>
+	<root>
+		<level value="debug"/>
+		<appender-ref ref="app_console"/>
+		<appender-ref ref="out_console"/>
+		<appender-ref ref="out_debug"/>
+		<appender-ref ref="out_info"/>
+		<appender-ref ref="out_error"/>
+		<appender-ref ref="out_warn"/>
+	</root>
+	<logger name="com.game.table" level="info">
+		<appender-ref ref="file_table"/>
+	</logger>
+	<logger name="com.game.robot" level="info">
+		<appender-ref ref="file_robot"/>
+	</logger>
+	<logger name="com.jule.performance" level="info" >
+		<appender-ref ref="performance_console"/>
+	</logger>
+	<logger name="com.game.timer_service" level="info"/>
+	<logger name="org.quartz.core.JobRunShell" level="info" />
+	<logger name="org.quartz.core.QuartzSchedulerThread" level="info" />
+	<logger name="org.quartz.simpl.PropertySettingJobFactory" level="info" />
+	<logger name="com.zaxxer.hikari.pool.HikariPool" level="info" />
+</configuration>
