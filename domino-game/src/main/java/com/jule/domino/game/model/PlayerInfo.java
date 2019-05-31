@@ -121,6 +121,10 @@ public class PlayerInfo {
     private int cardSkin;
     //玩家特殊功能(部分人有)
     private int specialFunction;
+    //最大牌型功能的状态
+    private boolean controlCardType;
+    //看底牌功能的状态
+    private boolean seeHandCards;
 
     public PlayerInfo(RoomTableRelationModel relationModel, String playerId, String nickName, String icon, RoleType roleType, User user) {
         this.roomId = relationModel.getRoomId();

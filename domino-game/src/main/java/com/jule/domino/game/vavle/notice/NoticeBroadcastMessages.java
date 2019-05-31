@@ -815,5 +815,13 @@ public class NoticeBroadcastMessages {
                 .setPreviousBetScore(maxBetScore).build();
     }
 
-
+    //推给vip单人的特殊功能提示(开启或关闭)
+    public static void sendSpecialFunctionMsg(String playerId,AbstractTable table,String msg){
+        table.boardcastMessageSingle(playerId,
+                JoloGame.JoloGame_Notice2Client_RobMultipleInfoReq.newBuilder()
+                        .setRoomId(table.getRoomId())
+                        .setTableId(table.getTableId())
+                        .setGameOrderId(msg).build(),
+                FunctionIdHolder.Game_SpecialFunction_Msg);
+    }
 }

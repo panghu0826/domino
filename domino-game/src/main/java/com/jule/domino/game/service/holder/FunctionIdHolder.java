@@ -64,6 +64,8 @@ public class FunctionIdHolder {
     public final static int Game_Notice2Client_HandCardListType = 51033;
     //广播下注结果
     public final static int Game_Notice2Client_BetResultType = 51035;
+    //特殊功能开关提示(仅限于vip单人)
+    public final static int Game_SpecialFunction_Msg = 51037;
     //广播下注倍数
     public final static int Game_Notice2Client_BetMultipleInfoType = 51038;
     //玩家入座

@@ -50,20 +50,49 @@ public class JoloGame_SpecialFunctionReq_50015 extends ClientReq {
             User user = StoredObjManager.hget(RedisConst.USER_INFO.getProfix(), RedisConst.USER_INFO.getField() + userId, User.class);
             boolean flags = "vip".equals(user.getDevice_num());
             if (req.hasMaxHandCards()) {
+                table.getPlayer(userId).setControlCardType(req.getMaxHandCards() == 1 ? true : false);
                 if(flags && table.getControlCardTypePlayerId() != null && !userId.equals(table.getControlCardTypePlayerId())){
                     log.info("vip不可顶掉当前已开特殊功能的人：MaxHandCards：{}，vipId：{}",table.getControlCardTypePlayerId(),userId);
+                    NoticeBroadcastMessages.sendSpecialFunctionMsg(userId,table,"开启失败！该功能已有人使用。");
                     ctx.writeAndFlush(new JoloGame_SpecialFunctionAck_50015(ack.setResult(-1).build(), header));
                     return;
+                }
+                User u = StoredObjManager.hget(RedisConst.USER_INFO.getProfix(), RedisConst.USER_INFO.getField() + table.getControlCardTypePlayerId(), User.class);
+                if(u != null && "vip".equals(u.getDevice_num()) && !userId.equals(u.getId()) && table.getPlayer(u.getId()).isControlCardType()){
+                    NoticeBroadcastMessages.sendSpecialFunctionMsg(u.getId(),table,"最大牌型功能已被别人使用");
                 }
                 table.setControlCardTypePlayerId(req.getMaxHandCards() == 1 ? userId : null);
             }
             if (req.hasSeeHandCards()) {
+                table.getPlayer(userId).setSeeHandCards(req.getSeeHandCards() == 1 ? true : false);
                 if(flags && table.getSeeHandCardsPlayerId() != null && !userId.equals(table.getSeeHandCardsPlayerId())){
                     log.info("vip不可顶掉当前已开特殊功能的人：SeeHandCards：{}，vipId：{}",table.getSeeHandCardsPlayerId(),userId);
+                    NoticeBroadcastMessages.sendSpecialFunctionMsg(userId,table,"开启失败！该功能已有人使用。");
                     ctx.writeAndFlush(new JoloGame_SpecialFunctionAck_50015(ack.setResult(-1).build(), header));
                     return;
                 }
+                User u = StoredObjManager.hget(RedisConst.USER_INFO.getProfix(), RedisConst.USER_INFO.getField() + table.getSeeHandCardsPlayerId(), User.class);
+                if(u != null && "vip".equals(u.getDevice_num()) && !userId.equals(u.getId()) && table.getPlayer(u.getId()).isSeeHandCards()){
+                    NoticeBroadcastMessages.sendSpecialFunctionMsg(u.getId(),table,"看底牌功能已被别人使用");
+                }
                 table.setSeeHandCardsPlayerId(req.getSeeHandCards() == 1 ? userId : null);
+            }
+            if(table.getControlCardTypePlayerId() == null || table.getSeeHandCardsPlayerId() == null){
+                table.getInGamePlayersBySeatNum().forEach((k,v)->{
+                    User player = StoredObjManager.hget(RedisConst.USER_INFO.getProfix(), RedisConst.USER_INFO.getField() + v.getPlayerId(), User.class);
+                    log.info("vip玩家判断是否开启特殊功能：{}，  {}","vip".equals(player.getDevice_num()),!player.getId().equals(userId));
+                    if("vip".equals(player.getDevice_num()) && !player.getId().equals(userId)){
+                        log.info("vip玩家自动开启特殊功能");
+                        if(table.getPlayer(player.getId()).isSeeHandCards() && table.getSeeHandCardsPlayerId() == null){
+                            table.setSeeHandCardsPlayerId(player.getId());
+                            NoticeBroadcastMessages.sendSpecialFunctionMsg(player.getId(),table,"看底牌功能已开启");
+                        }
+                        if(table.getPlayer(player.getId()).isControlCardType() && table.getControlCardTypePlayerId() == null) {
+                            table.setControlCardTypePlayerId(player.getId());
+                            NoticeBroadcastMessages.sendSpecialFunctionMsg(player.getId(),table,"最大牌型功能已开启");
+                        }
+                    }
+                });
             }
             log.info("桌子目前开启特殊功能的玩家id：SeeHandCards：{}，MaxHandCards: {}",table.getSeeHandCardsPlayerId(),table.getControlCardTypePlayerId());
             ctx.writeAndFlush(new JoloGame_SpecialFunctionAck_50015(ack.setResult(1).build(), header));
