@@ -77,7 +77,7 @@ public final class ThreadPoolManager {
      */
     public final void execute(Runnable r) {
         instantPool.execute(r);
-        LoggerUtils.performance.info("execute() taskNum:{}，threadNum:{}",
+        LoggerUtils.performance.debug("execute() taskNum:{}，threadNum:{}",
                 instantPool.getQueue().size(),instantPool.getActiveCount());
     }
 

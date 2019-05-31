@@ -12,5 +12,11 @@
         <mapper resource="com/jule/domino/game/dao/mapper/RoomConfigModelMapper.xml"/>
         <mapper resource="com/jule/domino/game/dao/mapper/ProductMapper.xml"/>
         <mapper resource="com/jule/domino/game/dao/mapper/CardTypeMultipleModelMapper.xml"/>
+        <mapper resource="com/jule/domino/game/dao/mapper/TableCreationRecordsModelMapper.xml"/>
+        <mapper resource="com/jule/domino/game/dao/mapper/GameRecordModelMapper.xml"/>
+        <mapper resource="com/jule/domino/game/dao/mapper/RoomCardRecordsModelMapper.xml"/>
+        <mapper resource="com/jule/domino/game/dao/mapper/FriendTableModelMapper.xml"/>
+        <mapper resource="com/jule/domino/game/dao/mapper/ItemRecordsModelMapper.xml"/>
+        <mapper resource="com/jule/domino/game/dao/mapper/UserItemModelMapper.xml"/>
     </mappers>
 </configuration>

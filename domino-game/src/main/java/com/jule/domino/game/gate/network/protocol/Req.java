@@ -92,13 +92,13 @@ public abstract class Req implements Cloneable, Runnable {
      * 返回消息
      */
     protected void sendResponse(int functionId, byte[] bytes){
-        GateFunctionFactory.getInstance().getResponse(functionId, bytes).send(ctx, reqHeader);;
+        GateFunctionFactory.getInstance().getResponse(functionId, bytes).send(ctx, reqHeader);
     }
 
     /**
      * 返回消息
      */
     protected void sendResponseAndClose(int functionId, byte[] bytes, boolean isClose){
-        GateFunctionFactory.getInstance().getResponse(functionId, bytes).send(ctx, reqHeader);;
+        GateFunctionFactory.getInstance().getResponse(functionId, bytes).send(ctx, reqHeader);
     }
 }

@@ -34,7 +34,8 @@ public class JoinTableStrategry extends BaseRobotStrategry {
 
                 //存储牌桌基础信息
 //                logger.debug("设置bootAmount->"+ack.getBootAmount());
-                client.setBootAmount(ack.getBootAmount());
+//                client.setBootAmount(ack.getBootAmount());
+
 
                 if(Config.TEST_TYPE_IS_STRESS == 1){
                     client.setRoomId(ack.getRoomId());

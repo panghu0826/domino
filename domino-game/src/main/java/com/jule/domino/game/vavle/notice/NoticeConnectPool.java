@@ -80,7 +80,7 @@ public class NoticeConnectPool {
      */
     private void reConnect() {
         int needNum = size - CHANNELS.size();
-        logger.info("notice pool now size ->" + CHANNELS.size() + ", need->" + needNum + ", bind port: "+Config.NOTICE_FORWARD_PORT);
+        logger.debug("notice pool now size ->" + CHANNELS.size() + ", need->" + needNum + ", bind port: "+Config.NOTICE_FORWARD_PORT);
         if (needNum > 0) {
             for (int i = 0; i < needNum; i++) {
                 bootstrap.connect(Config.NOTICE_FORWARD_PORT);

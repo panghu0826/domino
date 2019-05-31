@@ -2,6 +2,7 @@ package com.jule.domino.game.network.protocol.reqs;
 
 import JoloProtobuf.GameSvr.JoloGame;
 import com.jule.core.common.log.LoggerUtils;
+import com.jule.domino.base.enums.PlayerStateEnum;
 import com.jule.domino.game.log.producer.RabbitMqSender;
 import com.jule.domino.game.model.PlayerInfo;
 import com.jule.domino.base.enums.TableStateEnum;
@@ -14,6 +15,7 @@ import com.jule.domino.base.enums.ErrorCodeEnum;
 import com.jule.domino.base.enums.GameConst;
 import com.jule.domino.game.network.protocol.ClientReq;
 import com.jule.domino.game.network.protocol.acks.JoloGame_ApplyLeaveAck_50003;
+import com.jule.domino.game.vavle.notice.NoticeBroadcastMessages;
 import io.netty.buffer.ByteBuf;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,7 +35,6 @@ public class JoloGame_ApplyLeaveReq_50003 extends ClientReq {
 
     @Override
     public void readPayLoadImpl(ByteBuf buf) throws Exception {
-        time = System.currentTimeMillis();
         byte[] blob = new byte[buf.readableBytes()];
         buf.readBytes(blob);
         req = JoloGame.JoloGame_ApplyLeaveReq.parseFrom(blob);
@@ -44,62 +45,30 @@ public class JoloGame_ApplyLeaveReq_50003 extends ClientReq {
     @Override
     public void processImpl() throws Exception {
         log.debug("收到消息-> " + functionId + " reqNum-> " + header.reqNum + "req->" + req.toString());
-        String userId = this.userId;
+        String userId = req.getUserId();
         PlayerService.getInstance().onPlayerLoutOut("" + userId);
         AbstractTable table = getTable();
-        if (table == null) {
-            log.error("table is null ");
-            return;
-        }
         PlayerInfo player = table.getPlayer(userId);
         JoloGame.JoloGame_ApplyLeaveAck.Builder ack = JoloGame.JoloGame_ApplyLeaveAck.newBuilder();
         try {
-
+            //记录桌子最后操作时间
+            table.setLastActionTime(System.currentTimeMillis());
             ack.setUserId(userId);
             ack.setRoomId(req.getRoomId());
             ack.setTableId(req.getTableId());
             ack.setResult(1);
-
-            if (table.getTableStateEnum().equals(TableStateEnum.IDEL) ||
-                    table.getTableStateEnum().equals(TableStateEnum.GAME_READY) ||
-                    table.getTableStateEnum().equals(TableStateEnum.SETTLE_ANIMATION)) {
-
-            } else {
-                log.error("请在本局结束后操作 state:" + table.getTableStateEnum());
-                ack.setResult(-1).setResultMsg("请在本局结束后操作");
-                ctx.writeAndFlush(new JoloGame_ApplyLeaveAck_50003(ack.build(), header));
-                return;
+            if(player.getTotalAlreadyBetScore4Hand() == 0) {
+                //处理玩家离桌的redis信息
+                LeaveTableLogic.getInstance().logic(player, table);
             }
-            if (null == player) {
-                log.error("can't found player info, playerId->" + userId);
-                ack.setResult(1).setResultMsg(ErrorCodeEnum.GAME_50050_2.getCode());//modify by gx 20181010 resut=1,因为找不到玩家信息，可以返回大厅
-                ctx.writeAndFlush(new JoloGame_ApplyLeaveAck_50003(ack.build(), header));
-                return;
-            }
-
-            LeaveTableLogic.getInstance().logic(player, table, ack);
-
             //输出结果给客户端
             ctx.writeAndFlush(new JoloGame_ApplyLeaveAck_50003(ack.build(), header));
-            long timeMillis = System.currentTimeMillis() - time;
-            if (timeMillis > GameConst.COST_TIME) {
-                LoggerUtils.performance.info("ApplyLeaveReq_50003,cost time:{},req:{}", timeMillis, req.toString());
-            }
+            //玩家离桌广播
+            NoticeBroadcastMessages.sendPlayerLeaveNotice(table,player);
         } catch (Exception ex) {
-            //TODO 是否必须字段都加上了
-            ack.setResult(-10).setResultMsg(ErrorCodeEnum.GAME_50002_2.getCode());
-            ack.setCurrStoreScore(0);
-            ctx.writeAndFlush(new JoloGame_ApplyLeaveAck_50003(ack.build(), header));
-            log.error("", ex);
+            ex.printStackTrace();
         } finally {
-            log.debug("Leave ACK info: " + ack.toString());
-            log.debug("Leave ACK bytes length: " + ack.build().toByteArray().length);
-            if (null != table) {
-                log.debug("All Player info: " + System.getProperty("line.separator") + TableUtil.toStringAllPlayers(table));
-
-                log.debug("InGame Player info: " + System.getProperty("line.separator") + TableUtil.toStringInGamePlayers(table));
-            }
-            log.debug("Leave over. Table state: " + table.getTableStateEnum());
+            log.info("50003 ack 玩家离桌->: {}", ack.toString());
         }
     }
 }

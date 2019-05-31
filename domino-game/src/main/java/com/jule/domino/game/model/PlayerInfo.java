@@ -1,5 +1,6 @@
 package com.jule.domino.game.model;
 
+import com.google.common.primitives.Ints;
 import com.jule.domino.base.enums.PlayerStateEnum;
 import com.jule.domino.base.dao.bean.User;
 import com.jule.domino.base.enums.RedisConst;
@@ -7,6 +8,7 @@ import com.jule.domino.base.enums.RoleType;
 import com.jule.domino.base.model.RoomTableRelationModel;
 import com.jule.domino.game.service.LogService;
 import com.jule.domino.game.service.MoneyService;
+import com.jule.domino.game.service.holder.CardValueHolder;
 import com.jule.domino.game.utils.NumUtils;
 import com.jule.domino.log.service.LogReasons;
 import com.jule.core.jedis.StoredObjManager;
@@ -16,9 +18,7 @@ import lombok.ToString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * 玩家信息
@@ -47,10 +47,6 @@ public class PlayerInfo {
     private int isCurrActive; //是否当前行动玩家
     private long alreadyBetScore4Round; //当前轮次已经下注的积分量 (非累积值，每轮次重新计算)
     private PlayerStateEnum state;//玩家状态 0/旁观 1/入座 2/游戏中 3/已下注 4/已开牌
-    /**
-     * 牌数组的下标
-     */
-    private int[] handCards = null;
     //手中的牌
     private List<Byte> cards;
     private List<Byte> betMultipleAry = new ArrayList<>();
@@ -60,8 +56,9 @@ public class PlayerInfo {
      */
     private int isCanSideShow;
     private int isCanShow; //玩家是否可以比牌结算
-    private long totalAlreadyBetScore4Hand; //当前牌局累积已下注金额，方便后续结算时判断用户输赢
+    private long totalAlreadyBetScore4Hand; //玩家所有牌局累积已下注金额
     private long winLoseScore4Hand; //当前牌局输赢积分数量
+    private int roundScore;//玩家当前轮次下注
     private int mixedCard; //玩家手上有几张癞子牌
     private List<Integer> mixedCardList; //记录玩家结算后的混牌id
     //endregion
@@ -84,6 +81,7 @@ public class PlayerInfo {
 
     private WinLoseRecord handsWon = new WinLoseRecord();
     private boolean isWinner;//是否是本局赢家
+    private int cardType;//玩家目前的牌型
     /**
      * 旁观次数累计(连续超过三局自动离桌)
      */
@@ -100,7 +98,29 @@ public class PlayerInfo {
     private int betMultiple = 1;
     //当前局的分数
     private double curScore;
+    //玩家开始行动时间
+    private long startActionTime;
 
+    //手牌数组
+    private int[] handCards = null;
+    //控牌数组
+    private int[] controlCards = null;
+    //明牌数组
+    private int[] mingCards;
+    //明牌牌型
+    private int mingTypeCard;
+    //明牌最大牌型
+    private CardValueModel mingMaxCard;
+    //玩家本轮下注方式
+    private int betMode;
+    //玩家本轮下注积分
+    private int betScore;
+    //玩家头像框
+    private int headSculpture;
+    //玩家手牌皮肤
+    private int cardSkin;
+    //玩家特殊功能(部分人有)
+    private int specialFunction;
 
     public PlayerInfo(RoomTableRelationModel relationModel, String playerId, String nickName, String icon, RoleType roleType, User user) {
         this.roomId = relationModel.getRoomId();
@@ -135,8 +155,8 @@ public class PlayerInfo {
         this.handCards = null;
         this.isCanSideShow = 0;
         this.isCanShow = 0;
-        this.totalAlreadyBetScore4Hand = 0;
         this.winLoseScore4Hand = 0;
+//        this.setTotalAlreadyBetScore4Hand(0);
         this.mixedCard = 0;
         this.isWinner = false;
         this.spectatorCount = 0;
@@ -164,11 +184,19 @@ public class PlayerInfo {
         this.handCards = null;
         this.isCanSideShow = 0;
         this.isCanShow = 0;
-        this.totalAlreadyBetScore4Hand = 0;
         this.winLoseScore4Hand = 0;
         this.mixedCard = 0;
         this.isWinner = false;
         this.spectatorCount = 0;
+        this.cardType = 0;
+        this.startActionTime = 0;
+        this.mingCards = null;
+        this.mingMaxCard = null;
+        this.mingTypeCard = 0;
+        this.controlCards = null;
+        this.roundScore = 0;
+        this.betMode = 0;
+        this.betScore = 0;
     }
 
     public void sitDownAfterInit() {
@@ -180,19 +208,15 @@ public class PlayerInfo {
 
 
     public String toSitDownString() {
-
         return "Player{" +
-                "playerId='" + playerId + '\'' +
-                ", roomId='" + roomId + '\'' +
-                ", tableId='" + tableId + '\'' +
-                ", seatNum=" + seatNum +
-                ", playScoreStore=" + playScoreStore +
+                ", tableId='" + tableId  +
+                ", playerId='" + playerId  +
                 ", state=" + state +
-                ", handCards=" + Arrays.toString(handCards) +
-                ", sitDownTime=" + sitDownTime +
-                ", standUpTime=" + standUpTime +
-                ", totalPlayMinutes=" + totalPlayMinutes +
+                ", handCards=" + (handCards == null ? null : Arrays.toString(handCards)) +
+                ", playScoreStore=" + playScoreStore +
                 ", totalWinLoseScore=" + totalWinLoseScore +
+                ", roomId='" + roomId  +
+                ", seatNum=" + seatNum +
                 '}';
     }
 
@@ -271,4 +295,40 @@ public class PlayerInfo {
     public double getPlayScoreStore() {
         return NumUtils.double2Decimal(playScoreStore);
     }
+
+    /**
+     * 设置玩家明牌牌型，方便计算本轮次谁先下注
+     */
+    public void setMingCardArgs(int... cards) {
+        Set<Integer> mingCards = new HashSet();
+        for (int i = 0; i < cards.length; i++) {
+            mingCards.add(cards[i] % 7);
+        }
+        if (cards.length == 1) {
+            mingTypeCard = 1;
+            mingMaxCard = CardValueHolder.getCardValueModel(cards[0]);
+        } else if (cards.length == 2) {
+            if (mingCards.size() == 1) {
+                mingTypeCard = 2;
+                mingMaxCard = CardValueHolder.getCardValueModel(cards[1] < cards[0] ? cards[1] : cards[0]);
+            } else {
+                mingTypeCard = 1;
+                mingMaxCard = CardValueHolder.getCardValueModel(cards[1]);
+            }
+        } else if (cards.length == 3) {
+            if (mingCards.size() == 1) {
+                mingTypeCard = 3;
+                List<Integer> list = Ints.asList(cards[0], cards[1], cards[2]);
+                Collections.sort(list);
+                mingMaxCard = CardValueHolder.getCardValueModel(list.get(0));
+            } else if (cards[2] % 7 == cards[1] % 7) {
+                mingTypeCard = 2;
+                mingMaxCard = CardValueHolder.getCardValueModel(cards[2] < cards[1] ? cards[2] : cards[1]);
+            } else {
+                mingTypeCard = 1;
+                mingMaxCard = CardValueHolder.getCardValueModel(cards[2]);
+            }
+        }
+    }
+
 }

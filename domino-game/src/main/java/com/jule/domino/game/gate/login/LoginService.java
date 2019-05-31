@@ -28,6 +28,7 @@ public class LoginService {
         new Login_Guest();
         new Login_Robot();
         new Login_Test();
+        new Login_wx();
     }
 
     /**

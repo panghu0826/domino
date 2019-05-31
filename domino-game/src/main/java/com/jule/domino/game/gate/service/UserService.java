@@ -7,6 +7,7 @@ import com.jule.core.network.ChannelHandler;
 import com.jule.domino.base.enums.RedisConst;
 import com.jule.domino.game.config.Config;
 import com.jule.domino.game.gate.pool.game.GameServerGroup;
+import com.jule.domino.game.gate.pool.net.ChannelManageCenter;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.SwappedByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -78,7 +79,8 @@ public class UserService {
             }
 
             CACHE.remove(user);
-            Integer lastGameSvrId = channelHandlerContext.channel().attr(LAST_GAMESVR_ID).get();
+//            Integer lastGameSvrId = channelHandlerContext.channel().attr(LAST_GAMESVR_ID).get();
+            Integer lastGameSvrId = 88888;
             logger.debug("offline gameSvrId->" + lastGameSvrId + ",userId->" + user + ", isExceptionOffline:" + isExceptionOffline);
             if (lastGameSvrId != null) {// && lastGameSvrId > 0) {
                 //通知游戏服务器玩家推出或者说是掉线
@@ -100,6 +102,7 @@ public class UserService {
             }
             logger.info("user logout userId->" + user + ", isExceptionOffline:" + isExceptionOffline);
         }
+        ChannelManageCenter.getInstance().removeTempSession(channelHandlerContext);
     }
 
     /**

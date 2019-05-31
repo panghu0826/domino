@@ -77,48 +77,13 @@ public abstract class AbstractLogin {
         StoredObjManager.set(RedisConst.USER_PLATFORM_TOKEN+userId, token);
     }
 
-    protected User createUser(JoloAuth.JoloCommon_LoginReq req,long newId){
-        Date curTime = new Date();
-        //创建角色
-        User user = new User();
-        user.setId(String.valueOf(newId));
-        user.setNick_name(getNickName(user.getId()));
-        user.setIco_url("");
-        user.setUser_defined_head(randomIcon());
-        user.setMoney(Config.GUEST_INIT_MONEY);
-        user.setChannel_id(req.getChannelId());
-        user.setSub_channel_id("");
-        user.setClient_version(req.getClientVersion());
-        user.setDevice_num(req.getDeviceNum());
-        user.setPlatform(req.getPlatform());
-        user.setUser_ip(req.getUserIp());
-        user.setRegistration_time(curTime);
-        user.setLast_login(curTime);
-        user.setLast_offline(curTime);
-        user.setAndroid_id(req.getUserId());
-        user.setMei_code(req.getDeviceNum());
-        user.setDown_platform(req.getDownPlatform());
-        user.setPackage_name(req.getPackName());
-
-        //数据持久化
-        DBUtil.insert(user);
-        log.debug("created userInfo -> {}" , user.toString());
-
-        StoredObjManager.hset(RedisConst.USER_INFO.getProfix(), RedisConst.USER_INFO.getField() + user.getId(), user);
-        log.info("created user -> {} " , newId);
-
-        //发送日志
-        LogService.OBJ.sendMoneyLog(user, 0, user.getMoney(), user.getMoney(), LogReasons.CommonLogReason.CREATE_ROLE);
-        return user;
-    }
-
     /**
      * 来一个名字
      *
      * @param userId
      * @return
      */
-    private String getNickName(String userId) {
+    protected String getNickName(String userId) {
         try {
             String prefix = "G-";
             if (StringUtils.isEmpty(userId)) {

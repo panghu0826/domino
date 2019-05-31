@@ -41,7 +41,8 @@ public class UserTableService {
      * 玩家离线，需要检查是观战还是参战状态
      */
     public AbstractTable getTableByUserId(long userId) {
-        RoomTableRelationModel roomTable = USERID_TO_TABLE.remove(userId + "");
+//        RoomTableRelationModel roomTable = USERID_TO_TABLE.remove(userId + "");
+        RoomTableRelationModel roomTable = USERID_TO_TABLE.get(userId + "");
         if (roomTable != null) {
             return TableService.getInstance().getTable(roomTable.getGameId(),roomTable.getRoomId(), roomTable.getTableId());
         }

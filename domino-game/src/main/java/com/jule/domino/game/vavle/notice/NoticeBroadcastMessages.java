@@ -1,10 +1,13 @@
 package com.jule.domino.game.vavle.notice;
 
 import JoloProtobuf.GameSvr.JoloGame;
+import com.google.common.primitives.Ints;
 import com.jule.core.jedis.StoredObjManager;
+import com.jule.domino.base.dao.bean.User;
 import com.jule.domino.base.enums.GameConst;
 import com.jule.domino.base.enums.RedisConst;
 import com.jule.domino.base.enums.RoleType;
+import com.jule.domino.game.dao.DBUtil;
 import com.jule.domino.game.model.PlayerInfo;
 import com.jule.domino.base.enums.PlayerStateEnum;
 import com.jule.domino.game.play.AbstractTable;
@@ -41,14 +44,14 @@ public class NoticeBroadcastMessages {
             //总倍数
             int winDoubleMul = 0;
             int loseDoubleMul = 0;
-            for (String k: winners.keySet()){
+            for (String k : winners.keySet()) {
                 winDoubleMul += winners.get(k);
                 winnerList.add(k);
             }
 
             //计算输家筹码
-            Map<Integer,Double> canLoseMap = new HashMap<>();
-            Map<String,Double> loserMap = new HashMap<>();
+            Map<Integer, Double> canLoseMap = new HashMap<>();
+            Map<String, Double> loserMap = new HashMap<>();
             for (PlayerInfo player : table.getInGamePlayers().values()) {
                 strLog.append("{seat:" + player.getSeatNum() + ",");
                 strLog.append("userId:" + player.getPlayerId() + ",");
@@ -58,7 +61,7 @@ public class NoticeBroadcastMessages {
                 strLog.append("betMultiple:" + player.getBetMultiple() + ",");
                 strLog.append("ant:" + table.getRoomConfig().getAnte() + ",");
                 log.debug(strLog.toString());
-                if (winners.containsKey(player.getPlayerId())){
+                if (winners.containsKey(player.getPlayerId())) {
                     //我是赢家
                     continue;
                 }
@@ -74,7 +77,7 @@ public class NoticeBroadcastMessages {
                 canLoseScore += myCanLose;
                 loseDoubleMul += player.getBetMultiple();
                 virtaulCanLoseScore += canLose;
-                log.debug("玩家{}可以输{},理论输{}",player.getPlayerId(),myCanLose,canLose);
+                log.debug("玩家{}可以输{},理论输{}", player.getPlayerId(), myCanLose, canLose);
             }
 
             double servicefee = 0;
@@ -82,46 +85,46 @@ public class NoticeBroadcastMessages {
             String winner = null;
             double winScore = 0d;
             for (PlayerInfo player : table.getInGamePlayers().values()) {
-                if (!winners.containsKey(player.getPlayerId())){
+                if (!winners.containsKey(player.getPlayerId())) {
                     //我是输家
                     continue;
                 }
                 winner = player.getPlayerId();
                 //玩家理论能赢的筹码
-                double canWin = NumUtils.double2Decimal(virtaulCanLoseScore * player.getBetMultiple() /winDoubleMul);
+                double canWin = NumUtils.double2Decimal(virtaulCanLoseScore * player.getBetMultiple() / winDoubleMul);
                 //玩家有限责任能获得
                 double dutyWin = canWin > player.getPlayScoreStore() ? player.getPlayScoreStore() : canWin;
 
-                if (player.getPlayScoreStore() > canWin){
+                if (player.getPlayScoreStore() > canWin) {
                     //玩家真实获得
                     double realWin = 0d;
-                    for (Integer seatNum : canLoseMap.keySet()){
+                    for (Integer seatNum : canLoseMap.keySet()) {
                         PlayerInfo loser = table.getInGamePlayers().get(seatNum);
                         //能输给此赢家的钱
                         double maxLose = canLoseMap.get(seatNum);
-                        if (loser.getPlayScoreStore() < maxLose){
+                        if (loser.getPlayScoreStore() < maxLose) {
                             maxLose = loser.getPlayScoreStore();
                         }
 
-                        log.debug("maxLose={},BetMultiple={},winDoubleMul={}",maxLose,player.getBetMultiple(),winDoubleMul);
-                        double dutyLose = NumUtils.double2Decimal(maxLose * player.getBetMultiple()/winDoubleMul);
+                        log.debug("maxLose={},BetMultiple={},winDoubleMul={}", maxLose, player.getBetMultiple(), winDoubleMul);
+                        double dutyLose = NumUtils.double2Decimal(maxLose * player.getBetMultiple() / winDoubleMul);
                         realWin += dutyLose;
-                        loserMap.put(loser.getPlayerId(), loserMap.get(loser.getPlayerId())+dutyLose);
+                        loserMap.put(loser.getPlayerId(), loserMap.get(loser.getPlayerId()) + dutyLose);
 
-                        log.debug("GameOrderId={},play={},dutylose={},canlose={}",String.valueOf(table.getCurrGameOrderId()),
-                                loser.getPlayerId(),dutyLose,canLoseMap.get(seatNum));
+                        log.debug("GameOrderId={},play={},dutylose={},canlose={}", String.valueOf(table.getCurrGameOrderId()),
+                                loser.getPlayerId(), dutyLose, canLoseMap.get(seatNum));
                     }
 
                     servicefee = NumUtils.double2Decimal(realWin * table.getRoomConfig().getServiceChargeRate());
                     double realWinScore = NumUtils.double2Decimal(realWin - servicefee);
 
                     log.debug("GameOrderId={},玩家{} realwin={}, 赢了{}, 产生服务费{}",
-                            String.valueOf(table.getCurrGameOrderId()),realWin,
+                            String.valueOf(table.getCurrGameOrderId()), realWin,
                             player.getPlayerId(), realWinScore, servicefee);
                     JoloGame.JoloGame_TablePlay_PlayerSettleInfo.Builder loseBuilder = JoloGame.JoloGame_TablePlay_PlayerSettleInfo.newBuilder();
                     //加钱
                     player.addPlayScoreStore(realWinScore, LogReasons.CommonLogReason.GAME_SETTLE);
-                    NoticePlatformSerivce.OBJ.updateMoney(table, player, NoticePlatformSerivce.SETTLEMENT, realWinScore,true);
+                    NoticePlatformSerivce.OBJ.updateMoney(table, player, NoticePlatformSerivce.SETTLEMENT, realWinScore, true);
 
                     table.getAlreadyBet().put(player.getPlayerId(), realWinScore);
 
@@ -138,41 +141,41 @@ public class NoticeBroadcastMessages {
                     winScore = realWinScore;
                     //发送结算日志
                     LogService.OBJ.sendGameSettleLog(table, servicefee, player.getPlayerId());
-                }else {
+                } else {
                     //玩家真实获得
                     double realWin = 0d;
-                    for (Integer seatNum : canLoseMap.keySet()){
+                    for (Integer seatNum : canLoseMap.keySet()) {
                         PlayerInfo loser = table.getInGamePlayers().get(seatNum);
-                        double needlose = NumUtils.double2Decimal(dutyWin * loser.getBetMultiple()/loseDoubleMul);
+                        double needlose = NumUtils.double2Decimal(dutyWin * loser.getBetMultiple() / loseDoubleMul);
                         //能输给此赢家的钱
                         double maxLose = canLoseMap.get(seatNum);
-                        if (loser.getPlayScoreStore() < maxLose){
+                        if (loser.getPlayScoreStore() < maxLose) {
                             maxLose = loser.getPlayScoreStore();
                         }
 
-                        log.debug("maxLose={},BetMultiple={},winDoubleMul={}",maxLose,player.getBetMultiple(),winDoubleMul);
-                        double dutyLose = NumUtils.double2Decimal(maxLose * player.getBetMultiple()/winDoubleMul);
-                        if (needlose > dutyLose){
+                        log.debug("maxLose={},BetMultiple={},winDoubleMul={}", maxLose, player.getBetMultiple(), winDoubleMul);
+                        double dutyLose = NumUtils.double2Decimal(maxLose * player.getBetMultiple() / winDoubleMul);
+                        if (needlose > dutyLose) {
                             realWin += dutyLose;
-                            loserMap.put(loser.getPlayerId(), loserMap.get(loser.getPlayerId())+dutyLose);
-                        }else {
+                            loserMap.put(loser.getPlayerId(), loserMap.get(loser.getPlayerId()) + dutyLose);
+                        } else {
                             realWin += needlose;
-                            loserMap.put(loser.getPlayerId(), loserMap.get(loser.getPlayerId())+needlose);
+                            loserMap.put(loser.getPlayerId(), loserMap.get(loser.getPlayerId()) + needlose);
                         }
-                        log.debug("GameOrderId={},play={},needlose={},dutylose={},canlose={}",String.valueOf(table.getCurrGameOrderId()),
-                                loser.getPlayerId(),needlose,dutyLose,canLoseMap.get(seatNum));
+                        log.debug("GameOrderId={},play={},needlose={},dutylose={},canlose={}", String.valueOf(table.getCurrGameOrderId()),
+                                loser.getPlayerId(), needlose, dutyLose, canLoseMap.get(seatNum));
                     }
 
                     servicefee = NumUtils.double2Decimal(realWin * table.getRoomConfig().getServiceChargeRate());
                     double realWinScore = NumUtils.double2Decimal(realWin - servicefee);
 
                     log.debug("GameOrderId={},玩家{} realwin={}, 赢了{}, 产生服务费{}",
-                            String.valueOf(table.getCurrGameOrderId()),realWin,
+                            String.valueOf(table.getCurrGameOrderId()), realWin,
                             player.getPlayerId(), realWinScore, servicefee);
                     JoloGame.JoloGame_TablePlay_PlayerSettleInfo.Builder loseBuilder = JoloGame.JoloGame_TablePlay_PlayerSettleInfo.newBuilder();
                     //加钱
                     player.addPlayScoreStore(realWinScore, LogReasons.CommonLogReason.GAME_SETTLE);
-                    NoticePlatformSerivce.OBJ.updateMoney(table, player, NoticePlatformSerivce.SETTLEMENT, realWinScore,true);
+                    NoticePlatformSerivce.OBJ.updateMoney(table, player, NoticePlatformSerivce.SETTLEMENT, realWinScore, true);
 
                     table.getAlreadyBet().put(player.getPlayerId(), realWinScore);
 
@@ -195,21 +198,21 @@ public class NoticeBroadcastMessages {
             int pct = table.getCommonConfig().getTotalLosePct();
             double totalPlayerLoseScore = 0;
             for (PlayerInfo player : table.getInGamePlayers().values()) {
-                if (!loserMap.containsKey(player.getPlayerId())){
+                if (!loserMap.containsKey(player.getPlayerId())) {
                     //我是赢家
                     continue;
                 }
 
                 //能输掉的筹码
                 double scoreTmp = loserMap.get(player.getPlayerId());
-                double loseScore = scoreTmp > player.getPlayScoreStore() ? player.getPlayScoreStore(): scoreTmp;
+                double loseScore = scoreTmp > player.getPlayScoreStore() ? player.getPlayScoreStore() : scoreTmp;
                 double playerLoseScore = NumUtils.double2Decimal(loseScore);
                 totalPlayerLoseScore += playerLoseScore;
 
-                StoredObjManager.incrByFloat(RedisConst.GAME_KILL_AMOUNT_POOL.getProfix(), Math.abs(loseScore) * pct/100.0);
+                StoredObjManager.incrByFloat(RedisConst.GAME_KILL_AMOUNT_POOL.getProfix(), Math.abs(loseScore) * pct / 100.0);
                 //扣钱
-                player.minusPlayScoreStore(playerLoseScore , LogReasons.CommonLogReason.GAME_SETTLE);
-                NoticePlatformSerivce.OBJ.updateMoney(table, player, NoticePlatformSerivce.SETTLEMENT, playerLoseScore,false);
+                player.minusPlayScoreStore(playerLoseScore, LogReasons.CommonLogReason.GAME_SETTLE);
+                NoticePlatformSerivce.OBJ.updateMoney(table, player, NoticePlatformSerivce.SETTLEMENT, playerLoseScore, false);
 
                 log.debug("玩家{},输了{}筹码~", player.getPlayerId(), playerLoseScore);
                 table.getAlreadyBet().put(player.getPlayerId(), playerLoseScore);
@@ -228,15 +231,33 @@ public class NoticeBroadcastMessages {
                 oprRobotPool(player, playerLoseScore, false);
             }
 
-            NoticePlatformSerivce.OBJ.records(table,servicefee,winner,winScore);
+            NoticePlatformSerivce.OBJ.records(table, servicefee, winner, winScore);
 
             //发送输赢日志
-            LogService.OBJ.sendLoseWinLog(table, winnerList,0, 0);
+            LogService.OBJ.sendLoseWinLog(table, winnerList, 0, 0);
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
         }
     }
 
+    //TODO:新玩家入桌 41001
+    public static void playerJoinTable(final AbstractTable table,PlayerInfo player) {
+        try {
+            table.boardcastMessage(table.getTableId(),
+                    JoloGame.JoloGame_Notice2Client_SitDownReq.newBuilder()
+                            .setUserId(player.getPlayerId())
+                            .setRoomId(table.getRoomId())
+                            .setTableId(table.getTableId())
+                            .setNickName(player.getNickName())
+                            .setPlayScore(player.getPlayScoreStore())
+                            .setSeatNum(player.getSeatNum())
+                            .setSpecialFunction(player.getSpecialFunction())
+                            .build(),
+                    FunctionIdHolder.Game_Notice_JoinTable);
+        } catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
+        }
+    }
 
     //TODO:新玩家入座 51001
     public static void playerSitDown(final AbstractTable table, String userId) {
@@ -251,6 +272,7 @@ public class NoticeBroadcastMessages {
                             .setPlayScore(player.getPlayScoreStore())
                             .setSeatNum(player.getSeatNum())
                             .setIcon(player.getIcon())
+                            .setSpecialFunction(player.getSpecialFunction())
                             .build(),
                     FunctionIdHolder.Game_Notice_SiteDown);
         } catch (Exception ex) {
@@ -282,7 +304,7 @@ public class NoticeBroadcastMessages {
         }
     }
 
-    //TODO:准备状态1：OK 0：等待
+    //准备状态1：OK 0：等待 51029
 
     /**
      * @param table
@@ -293,13 +315,14 @@ public class NoticeBroadcastMessages {
             if (playerInfo == null) {
                 return;
             }
-            table.boardcastMessage(table.getTableId(), JoloGame.JoloGame_Notice2Client_ReadyReq.newBuilder()
-                    .setUserId(playerInfo.getPlayerId())
-                    .setRoomId(table.getRoomId())
-                    .setTableId(table.getTableId())
-                    .setGameOrderId(table.getCurrGameOrderId())
-                    .setReadyStatus(playerInfo.getState().equals(PlayerStateEnum.game_ready) ? 1 : 0)
-                    .build(), FunctionIdHolder.Game_Notice2Client_ReadyType);
+            table.boardcastMessage(table.getTableId(),
+                    JoloGame.JoloGame_Notice2Client_ReadyReq.newBuilder()
+                            .setUserId(playerInfo.getPlayerId())
+                            .setRoomId(table.getRoomId())
+                            .setTableId(table.getTableId())
+                            .setGameOrderId(table.getCurrGameOrderId())
+                            .setReadyStatus(playerInfo.getState().equals(PlayerStateEnum.game_ready) ? 1 : 0)
+                            .build(), FunctionIdHolder.Game_Notice2Client_ReadyType);
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
         }
@@ -308,41 +331,46 @@ public class NoticeBroadcastMessages {
     //TODO：牌局开始 51004
     public static void gameStart(AbstractTable tableInfo) {
         try {
-            JoloGame.JoloGame_Notice2Client_GameStartReq.Builder gameStart =
-                    JoloGame.JoloGame_Notice2Client_GameStartReq.newBuilder();
+            JoloGame.JoloGame_Notice2Client_GameStartReq.Builder gameStart = JoloGame.JoloGame_Notice2Client_GameStartReq.newBuilder();
             gameStart.setRoomId(tableInfo.getRoomId())
                     .setTableId(tableInfo.getTableId())
                     .setGameOrderId(tableInfo.getCurrGameOrderId())
-                    .setCountDownSec(tableInfo.getCommonConfig().getGameStartCountDownSec());
-
-            tableInfo.boardcastMessage(tableInfo.getTableId(), gameStart.build(),
-                    FunctionIdHolder.Game_Notice_GameStart);
-            TableLogUtil.gameStart(FunctionIdHolder.Game_Notice_GameStart, "gameStart",
-                    "" + tableInfo.getPlayType(), tableInfo.getRoomId(), tableInfo.getTableId(),
-                    tableInfo.getCurrGameOrderId(), TableUtil.inGamePlayersBySeatNumToString(tableInfo), 0,
-                    TableUtil.tableInfoToString(tableInfo));
+                    .setCountDownSec(tableInfo.getReadyCd())
+                    .setCurrGameNum(tableInfo.getCurrGameNum());
+            tableInfo.boardcastMessage(tableInfo.getTableId(), gameStart.build(),FunctionIdHolder.Game_Notice_GameStart);
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
         }
     }
 
     //TODO：通知全部客户端->发牌轮->开始 51005
-    public static void giveCardBoardcast(AbstractTable table) {
+    public static void giveCardBoardcast(AbstractTable table, boolean isGameStart, int firstGiveCard) {
         try {
-            JoloGame.JoloGame_Notice2Client_GiveCardRound_StartReq.Builder reqBuilder = JoloGame.JoloGame_Notice2Client_GiveCardRound_StartReq.newBuilder();
-            reqBuilder.setRoomId(table.getRoomId())
-                    .setTableId(table.getTableId())
-                    .setGameOrderId(table.getCurrGameOrderId())
-                    .addAllPlayerInfoList(TableUtil.getPlayersInTable(table));
-            table.boardcastMessage(table.getTableId(), reqBuilder.build(), FunctionIdHolder.Game_Notice_GiveCardRound_Start);
+            for (PlayerInfo player : table.getAllPlayers().values()) {
+                //每轮发牌重置玩家本轮的下注方式以及下注积分
+                player.setRoundScore(0);
+                player.setBetMode(0);
+                player.setBetScore(0);
+                String playerId = player.getPlayerId();
+                JoloGame.JoloGame_Notice2Client_GiveCardRound_StartReq.Builder reqBuilder = JoloGame.JoloGame_Notice2Client_GiveCardRound_StartReq.newBuilder();
+                reqBuilder.setRoomId(table.getRoomId())
+                        .setTableId(table.getTableId())
+                        .setGameOrderId(table.getCurrGameOrderId())
+                        .setCurrGameNum(table.getCurrGameNum())
+                        .setIsGameStart(isGameStart ? 1 : 2)
+                        .setTotalTableScore(table.getTableAlreadyBetScore())
+                        .setFirstGiveCardSeatNum(firstGiveCard);
+                reqBuilder.addAllPlayerInfoList(TableUtil.getPlayersInTable(table, playerId));
+                //推给单个人的广播
+                table.boardcastMessageSingle(playerId, reqBuilder.build(), FunctionIdHolder.Game_Notice_GiveCardRound_Start);
+            }
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
         }
     }
 
-
     //TODO:通知全部客户端->下注轮次->玩家实施下注 51007
-    public static void betRoundDoBet(AbstractTable table, PlayerInfo doBetPlayer) {
+    public static void betRoundDoBet(AbstractTable table, PlayerInfo doBetPlayer, PlayerInfo nextActionPlayerInfo, int betScore, int betMode) {
         try {
             JoloGame.JoloGame_Notice2Client_BetRound_DoBetReq.Builder reqBuilder = JoloGame.JoloGame_Notice2Client_BetRound_DoBetReq.newBuilder();
             reqBuilder.setRoomId(table.getRoomId())
@@ -350,14 +378,51 @@ public class NoticeBroadcastMessages {
                     .setGameOrderId(table.getCurrGameOrderId())
                     .setBetUserId(doBetPlayer.getPlayerId())
                     .setBetUserSeatNum(doBetPlayer.getSeatNum())
-                    .setBetScore(doBetPlayer.getBetMultiple());
-
-            table.boardcastMessage(table.getTableId(),
-                    reqBuilder.build(),
-                    FunctionIdHolder.Game_Notice_BetRound_DoBet);
+                    .setBetScore(betScore)
+                    .setBetMode(betMode)
+                    .setTableTotalBetScore(table.getTableAlreadyBetScore());
+            if (nextActionPlayerInfo != null) {
+                log.info("下一个操作玩家：{}",nextActionPlayerInfo.toSitDownString());
+                reqBuilder.setNextActionPlayerInfo(nextActionPlayerInfo(nextActionPlayerInfo, table, false));
+            }
+            table.boardcastMessage(table.getTableId(), reqBuilder.build(), FunctionIdHolder.Game_Notice_BetRound_DoBet);
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
         }
+    }
+
+    //TODO:通知全部客户端->玩家已亮牌 51008
+    public static void playerOpenCard(AbstractTable table, PlayerInfo player) {
+        JoloGame.JoloGame_Notice2Client_PlayerSeeCardReq.Builder builder = JoloGame.JoloGame_Notice2Client_PlayerSeeCardReq.newBuilder();
+        builder.setRoomId(table.getRoomId())
+                .setTableId(table.getTableId())
+                .setGameOrderId(table.getCurrGameOrderId())
+                .setUserId(player.getPlayerId())
+                .setSeatNum(player.getSeatNum())
+                .setPlayerInfo(nextActionPlayerInfo(player, table, true));
+        table.boardcastMessage(table.getTableId(), builder.build(), FunctionIdHolder.Game_Notice_OpenCard);
+    }
+
+    //通知全部客户端->广播亮牌倒计时 51032
+    public static void openCardCd(AbstractTable table) {
+        table.boardcastMessage(table.getTableId(),
+                JoloGame.JoloGame_Notice2Client_BetInfoReq.newBuilder()
+                        .setRoomId(table.getRoomId())
+                        .setTableId(table.getTableId())
+                        .setGameOrderId(table.getCurrGameOrderId())
+                        .setCountDownSec(table.getOpenCardCd()).build(),
+                FunctionIdHolder.Game_Notice_OpenCardCd);
+    }
+
+    //倒计时广播 51034
+    public static void  countdownBroadcast(AbstractTable table,int time) {
+        table.boardcastMessage(table.getTableId(),
+                JoloGame.JoloGame_Notice2Client_BetInfoReq.newBuilder()
+                        .setRoomId(table.getRoomId())
+                        .setTableId(table.getTableId())
+                        .setGameOrderId(table.getCurrGameOrderId())
+                        .setCountDownSec(time).build(),
+                FunctionIdHolder.Game_Notice_GiveCardCd);
     }
 
     /**
@@ -375,7 +440,7 @@ public class NoticeBroadcastMessages {
             Iterator<PlayerInfo> iter = table.getInGamePlayers().values().iterator();
             while (iter.hasNext()) {
                 PlayerInfo playerInfo = iter.next();
-                if(playerInfo.getIsDealer()==1){
+                if (playerInfo.getIsDealer() == 1) {
                     continue;
                 }
                 playerInfo.setIsBlind(1);
@@ -419,6 +484,7 @@ public class NoticeBroadcastMessages {
 
     /**
      * 广播下注倍数
+     *
      * @param table
      */
     public static void betMultiple(AbstractTable table) {
@@ -444,7 +510,8 @@ public class NoticeBroadcastMessages {
         try {
             //判断策略值
             int initKillPool = Integer.parseInt(StoredObjManager.get(RedisConst.ROBOT_INIT_KILL_POOL.getProfix()));
-            int initRobotPool = Integer.parseInt(StoredObjManager.get(RedisConst.ROBOT_INIT_ROBOT_POOL.getProfix()));;
+            int initRobotPool = Integer.parseInt(StoredObjManager.get(RedisConst.ROBOT_INIT_ROBOT_POOL.getProfix()));
+            ;
 
             double x = Double.parseDouble(StoredObjManager.get(RedisConst.ROBOT_POOL_CURRENT_MONEY.getProfix())) + initRobotPool;
 
@@ -455,21 +522,22 @@ public class NoticeBroadcastMessages {
             double max = table.getCommonConfig().getStrategyMaxPct();
             double min = table.getCommonConfig().getStrategyMinPct();
 
-            log.debug("AI配置initKillPool={}，initRobotPool={}",initKillPool,initRobotPool);
+            log.debug("AI配置initKillPool={}，initRobotPool={}", initKillPool, initRobotPool);
             log.debug("AI机器人策略比值x={},z={}", String.valueOf(x), String.valueOf(z));
             /*if (x > max * z ){
                 //机器人输
                 log.debug("AI机器人策略 x > {}*z ,机器人应该输", max);
                 doExchangeCard(false,robots,table);
-            }else */if (x < min * z){
+            }else */
+            if (x < min * z) {
                 //机器人赢
                 log.debug("AI机器人策略 x < {}*z ,机器人应该赢", min);
-                doExchangeCard(true,robots,table);
-            }else {
+                doExchangeCard(true, robots, table);
+            } else {
                 log.debug("AI机器人策略正常发牌、不做操作");
             }
-        }catch (Exception ex ){
-            log.error("机器人验证异常 ex = {}",ex);
+        } catch (Exception ex) {
+            log.error("机器人验证异常 ex = {}", ex);
         }
 
 
@@ -486,8 +554,8 @@ public class NoticeBroadcastMessages {
         }
     }
 
-    private static void doExchangeCard(boolean robotWin, List<PlayerInfo> robots, AbstractTable table){
-        Map<String,Integer> winners = CardComparator.OBJ.getWinner(table.getInGamePlayers());
+    private static void doExchangeCard(boolean robotWin, List<PlayerInfo> robots, AbstractTable table) {
+        Map<String, Integer> winners = CardComparator.OBJ.getWinner(table.getInGamePlayers());
 
         //牌型列表
         List<int[]> winnerCards = new ArrayList<>();
@@ -497,37 +565,37 @@ public class NoticeBroadcastMessages {
         List<PlayerInfo> players = new ArrayList<>();
 
         boolean needChange = false;
-        for (Integer seat : table.getInGamePlayers().keySet()){
+        for (Integer seat : table.getInGamePlayers().keySet()) {
             PlayerInfo player = table.getInGamePlayers().get(seat);
 
             //玩家分类
-            if (player.getRoleType() == RoleType.ROBOT){
+            if (player.getRoleType() == RoleType.ROBOT) {
                 robots.add(player);
-            }else {
+            } else {
                 players.add(player);
             }
 
             //牌型分类
-            if (winners.containsKey(player.getPlayerId())){
+            if (winners.containsKey(player.getPlayerId())) {
                 //赢家牌型
                 winnerCards.add(player.getHandCards());
-                if (player.getRoleType() == RoleType.ROBOT ){
-                    if (!robotWin){
+                if (player.getRoleType() == RoleType.ROBOT) {
+                    if (!robotWin) {
                         needChange = true;
                     }
-                }else {
-                    if (robotWin){
+                } else {
+                    if (robotWin) {
                         needChange = true;
                     }
                 }
-            }else {
+            } else {
                 //输家牌型
                 loserCards.add(player.getHandCards());
             }
         }
 
         //不需要换牌
-        if (!needChange){
+        if (!needChange) {
             return;
         }
 
@@ -541,13 +609,13 @@ public class NoticeBroadcastMessages {
             int[] arrHandCards = null;
 
             int index = 0;
-            if (player.getRoleType() == RoleType.ROBOT ){
-                if (!robotWin){
-                    index = sortedCard.size()-1;
+            if (player.getRoleType() == RoleType.ROBOT) {
+                if (!robotWin) {
+                    index = sortedCard.size() - 1;
                 }
-            }else {
-                if (robotWin){
-                    index = sortedCard.size()-1;
+            } else {
+                if (robotWin) {
+                    index = sortedCard.size() - 1;
                 }
             }
 
@@ -577,7 +645,7 @@ public class NoticeBroadcastMessages {
                     .setTableId(table.getTableId());
 
             List<JoloGame.JoloGame_HandCardsInfo> handCardsInfos = new ArrayList<>();
-            fillHandCardsInfo(table, handCardsInfos);
+//            fillHandCardsInfo(table, handCardsInfos);
             notice.addAllHandCardsList(handCardsInfos);
 
             table.boardcastMessage(table.getTableId(),
@@ -590,45 +658,72 @@ public class NoticeBroadcastMessages {
 
     //TODO:通知全部客户端->结算动画 51013
     public static void settleAnimationBroadcast(AbstractTable table) {
-        Long time = System.currentTimeMillis();
         try {
-            StringBuilder strLog = new StringBuilder();
-            strLog.append("[");
-
-            List<JoloGame.JoloGame_TablePlay_PlayerSettleInfo> winList = new ArrayList<>();
-            List<JoloGame.JoloGame_TablePlay_PlayerSettleInfo> loseList = new ArrayList<>();
-            winLoseList(table, winList, loseList, strLog);
             JoloGame.JoloGame_Notice2Client_SettleRound_SettleReq.Builder reqBuilder = JoloGame.JoloGame_Notice2Client_SettleRound_SettleReq.newBuilder();
             reqBuilder.setRoomId(table.getRoomId())
                     .setTableId(table.getTableId())
-                    .setGameOrderId(table.getCurrGameOrderId())
-                    .addAllSettleWinList(winList)
-                    .addAllSettleLoseList(loseList);
-
-            table.boardcastMessage(table.getTableId(),
-                    reqBuilder.build(), FunctionIdHolder.Game_Notice_SettleRound_SettleResult);
-
-
-            if (strLog.indexOf(",") > 0) {
-                strLog.replace(strLog.length() - 1, strLog.length(), "");
+                    .setGameOrderId(table.getCurrGameOrderId());
+            List<JoloGame.JoloGame_TablePlay_PlayerSettleInfo> settleInfoList = new ArrayList<>();
+            for (PlayerInfo player : table.getInGamePlayersBySeatNum().values()) {
+//            for (PlayerInfo player : table.getInGamePlayers().values()) {
+//                if (player.getState().getValue() < PlayerStateEnum.beting.getValue()
+//                        || player.getHandCards() == null) {
+//                    continue;
+//                }
+                JoloGame.JoloGame_TablePlay_PlayerSettleInfo.Builder playerSettleInfo = JoloGame.JoloGame_TablePlay_PlayerSettleInfo.newBuilder();
+                int winScore = table.getTableAlreadyBetScore() - (int) player.getWinLoseScore4Hand();
+                if (player.isWinner()) {
+                    player.setPlayScoreStore(player.getPlayScoreStore() + winScore);
+                } else {
+                    player.setPlayScoreStore(player.getPlayScoreStore() - player.getWinLoseScore4Hand());
+                }
+                playerSettleInfo.setUserId(player.getPlayerId())
+                        .setSeatNum(player.getSeatNum())
+                        .setWinLose(player.isWinner() ? 1 : 0)
+                        .setWinLoseScore(player.isWinner() ? winScore : player.getWinLoseScore4Hand())
+                        .setPlayScoreStore(player.getPlayScoreStore())
+                        .addAllHandCards(player.getHandCards() == null ? new ArrayList<>() : Ints.asList(player.getHandCards()))
+                        .setCardType(player.getCardType());
+                settleInfoList.add(playerSettleInfo.build());
             }
-            strLog.append("]");
-            TableLogUtil.settle(FunctionIdHolder.Game_Notice_SettleRound_SettleResult, "settleAnimationBroadcast", table.getPlayType() + "",
-                    table.getRoomId(), table.getTableId(), strLog.toString());
+            reqBuilder.addAllSettleInfoList(settleInfoList);
+            table.boardcastMessage(table.getTableId(), reqBuilder.build(), FunctionIdHolder.Game_Notice_SettleRound_SettleResult);
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
         }
-        long cost = System.currentTimeMillis() - time;
-        if (cost > 1000) {
-            log.error("settleAnimationBroadcast() 超时" + cost);
+    }
+
+    //单独通知：通知玩家更新货币 51055
+    public static void useItem(AbstractTable table,String userId,int headSculpture,int cardSkin) {
+        table.boardcastMessage(table.getTableId(),
+                JoloGame.JoloGame_Notice2Client_SkinReq.newBuilder()
+                        .setUserId(userId)
+                        .setHeadSculpture(headSculpture)
+                        .setCardSkin(cardSkin).build(),
+                FunctionIdHolder.Game_Notice2Client_Item);
+    }
+
+    //通知全部客户端->betRound->用户弃牌 51017
+    public static void applyFold(AbstractTable table, PlayerInfo applyPlayer, PlayerInfo nextBetPlayer) {
+        JoloGame.JoloGame_Notice2Client_BetRound_FoldReq.Builder reqBuilder = JoloGame.JoloGame_Notice2Client_BetRound_FoldReq.newBuilder();
+        reqBuilder.setRoomId(table.getRoomId())
+                .setTableId(table.getTableId())
+                .setApplyUserId(applyPlayer == null ? table.getOfflinePlayerId() : applyPlayer.getPlayerId())
+                .setApplyUserSeatNum(applyPlayer == null ? table.getOfflineSeatNum() : applyPlayer.getSeatNum())
+                .setInGamePlayers(table.getInGamePlayers().size())
+                .setGameOrderId(table.getCurrGameOrderId());
+        if (nextBetPlayer != null) {
+            reqBuilder.setNextActionPlayerInfo(nextActionPlayerInfo(nextBetPlayer, table, false));
         }
+        table.boardcastMessage(table.getTableId(), reqBuilder.build(), FunctionIdHolder.Game_Notice_BetRound_Fold);
     }
 
     /**
      * 发送玩家进入消息 51039
+     *
      * @param table
      */
-    public static void sendPlayerInNotice(AbstractTable table){
+    public static void sendPlayerInNotice(AbstractTable table) {
         try {
             JoloGame.JoloGame_Notice2Client_PlayersIn.Builder
                     notice = JoloGame.JoloGame_Notice2Client_PlayersIn.newBuilder();
@@ -646,41 +741,79 @@ public class NoticeBroadcastMessages {
     }
 
     /**
-     * 通知机器人离座、回收金币
+     * 玩家离桌广播 51023
+     *
      * @param table
      * @param player
      */
-    public static void sendPlayerLeaveNotice(AbstractTable table, PlayerInfo player){
+    public static void sendPlayerLeaveNotice(AbstractTable table, PlayerInfo player) {
         try {
-            if (player.getRoleType() != RoleType.ROBOT){
-                return;
-            }
+            table.boardcastMessage(table.getTableId(),
+                    JoloGame.JoloGame_Notice2Client_leaveReq.newBuilder()
+                            .setTableId(table.getTableId())
+                            .setRoomId(table.getRoomId())
+                            .setUserId(player.getPlayerId())
+                            .setIsLeaveTable(player.getTotalAlreadyBetScore4Hand() == 0 ? 1 : 2).build(),
+                    FunctionIdHolder.Game_Notice2Client_leavel);
+        } catch (Exception ex) {
+            log.error("发送消息失败 exception={}", ex);
+        }
+    }
 
-            JoloGame.JoloGame_Notice2Client_leaveReq.Builder notice = JoloGame.JoloGame_Notice2Client_leaveReq.newBuilder();
-            notice.setTableId(table.getTableId()).setRoomId(table.getRoomId()).setUserId(player.getPlayerId());
-
-            //table.boardcastMessage(table.getTableId(), notice.build(), FunctionIdHolder.Game_Notice2Client_leavel);
-            table.boardcastMessageSingle(player.getPlayerId(), notice.build(), FunctionIdHolder.Game_Notice2Client_leavel);
-        }catch (Exception ex){
-            log.error("发送消息失败 exception={}",ex);
+    /**
+     * 玩家聊天广播  51052
+     */
+    public static void chatMesgSend(AbstractTable table,String userId,int chatType,int chatId,String targeId) {
+        try {
+            table.boardcastMessage(table.getTableId(),
+                    JoloGame.JoloGame_ChatMesgSend.newBuilder()
+                            .setRoomId(table.getRoomId())
+                            .setTableId(table.getTableId())
+                            .setUserId(userId)
+                            .setChatType(chatType)
+                            .setChatId(chatId)
+                            .setTargetId(targeId).build(),
+                    FunctionIdHolder.Game_Notice_ChatMesgSend);
+        } catch (Exception ex) {
+            log.error("发送消息失败 exception={}", ex);
         }
     }
 
     /**
      * 机器人资金池 X 操作
+     *
      * @param player
      * @param score
      */
-    private static void oprRobotPool(PlayerInfo player, double score, boolean win){
-        if (player == null || player.getRoleType() != RoleType.ROBOT){
+    private static void oprRobotPool(PlayerInfo player, double score, boolean win) {
+        if (player == null || player.getRoleType() != RoleType.ROBOT) {
             return;
         }
 
         double incr = score;
-        if (!win){
+        if (!win) {
             incr = -score;
         }
 
         StoredObjManager.incrByFloat(RedisConst.ROBOT_POOL_CURRENT_MONEY.getProfix(), incr);
     }
+
+    private static JoloGame.JoloGame_TablePlay_PlayerInfo nextActionPlayerInfo(PlayerInfo player, AbstractTable table, Boolean isOpenCard) {
+        //玩家该跟注多少
+        int maxBetScore = table.getEqualScore().size() == 0 ? 0 : Collections.max(table.getEqualScore()) - (int) player.getWinLoseScore4Hand();
+        return JoloGame.JoloGame_TablePlay_PlayerInfo.newBuilder()
+                .setUserId(player.getPlayerId())
+                .setNickName(player.getNickName())
+                .setPlayScoreStore(player.getPlayScoreStore())
+                .setSeatNum(player.getSeatNum())
+                .setIsCurrAction(player.getIsCurrActive())
+                .setCurrActionSurplusTime(table.getBetCd())
+                .addAllHandCards(isOpenCard ? Ints.asList(player.getHandCards()) : new ArrayList<>())
+                .setIsDealer(0)
+                .setState(player.getState().getValue())
+                .setIsBlind(0)
+                .setPreviousBetScore(maxBetScore).build();
+    }
+
+
 }

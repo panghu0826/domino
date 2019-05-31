@@ -171,7 +171,7 @@ public class Login_Test extends AbstractLogin{
      * @param userId
      * @return
      */
-    private String getNickName(String userId) {
+    protected String getNickName(String userId) {
         try {
             String prefix = "G-";
             if (StringUtils.isEmpty(userId)) {

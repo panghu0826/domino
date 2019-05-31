@@ -2,6 +2,7 @@ package com.jule.domino.game.play;
 
 import JoloProtobuf.GameSvr.JoloGame;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.primitives.Ints;
 import com.google.protobuf.MessageLite;
 import com.jule.core.common.log.LoggerUtils;
 import com.jule.core.jedis.StoredObjManager;
@@ -9,9 +10,12 @@ import com.jule.core.utils.fifo.FIFORunnableQueue;
 import com.jule.domino.base.enums.*;
 import com.jule.domino.game.log.producer.RabbitMqSender;
 import com.jule.domino.game.model.CardConstent;
+import com.jule.domino.game.model.CardValueModel;
 import com.jule.domino.game.model.PlayerInfo;
+import com.jule.domino.game.model.TexasPoker;
+import com.jule.domino.game.network.protocol.TableInnerReq;
 import com.jule.domino.game.room.service.RoomOprService;
-import com.jule.domino.game.service.holder.CardOfTableHolder;
+import com.jule.domino.game.service.holder.*;
 import com.jule.domino.game.utils.CardComparator;
 import com.jule.domino.game.utils.NumUtils;
 import com.jule.domino.game.utils.log.TableLogUtil;
@@ -28,9 +32,6 @@ import com.jule.domino.game.network.protocol.ClientReq;
 import com.jule.domino.game.network.protocol.logic.LeaveTableLogic;
 import com.jule.domino.game.network.protocol.protoutil.JoloGame_tablePlay_OtherPlayerInfoBuilder;
 import com.jule.domino.game.service.*;
-import com.jule.domino.game.service.holder.CommonConfigHolder;
-import com.jule.domino.game.service.holder.FunctionIdHolder;
-import com.jule.domino.game.service.holder.RoomConfigHolder;
 import com.jule.domino.log.service.LogReasons;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,12 +39,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-@Setter
-@Getter
+@Setter @Getter
 public class AbstractTable implements ITable {
     protected final static Logger log = LoggerFactory.getLogger(AbstractTable.class);
 
@@ -53,9 +54,9 @@ public class AbstractTable implements ITable {
      * 玩法类型
      */
     private int playType;
-    private String tableId;
+    protected String tableId;
     private String roomId;
-    private RoomTableRelationModel roomTableRelation;
+    protected RoomTableRelationModel roomTableRelation;
     private boolean propertyChange = false;
     /**
      * 每次开局前重新加载
@@ -67,7 +68,9 @@ public class AbstractTable implements ITable {
      */
     private int currDealerSeatNum;
     //房间所有人 key：userId
-    private final Map<String, PlayerInfo> allPlayers = new ConcurrentHashMap<>();
+    protected final Map<String, PlayerInfo> allPlayers = new ConcurrentHashMap<>();
+
+    private final Map<String, PlayerInfo> demoPlayers = new ConcurrentHashMap<>();
     /*
      * 已坐下的玩家列表<位置，playerInfo>
      * key：seatNum
@@ -82,40 +85,62 @@ public class AbstractTable implements ITable {
      * 游戏中的人(弃牌就移出)
      * key：seatNum
      */
-    private final Map<Integer, PlayerInfo> inGamePlayers = new ConcurrentHashMap<>();
+    protected final Map<Integer, PlayerInfo> inGamePlayers = new ConcurrentHashMap<>();
     /*
      * 玩家每局游戏的下注额，结算清空(统计日志)
      * key：playerId
      */
     private final Map<String, Double> alreadyBet = new ConcurrentHashMap<>();
 
-    private String currGameOrderId = ""; //当前牌局单号
-
-    //当前基础下注值
-    private long currBaseBetScore;
+    //当前牌局单号
+    protected String currGameOrderId = "";
     //死机玩家的id 用于强制提出
     private int offlineSeatNum;
     private String offlinePlayerId;
-    private TableStateEnum tableStateEnum; //牌桌状态
-
-
+    protected TableStateEnum tableStateEnum;//牌桌状态
 
     //当前行动玩家座位号(需要在换桌、站起时进行处理)
-    private int currActionSeatNum;
+    protected int currActionSeatNum;
+    protected int firstGiveCardSeatNum;//第一个发牌玩家(第一轮发牌为0)
     private Set<String> openCardPlayerIds = new HashSet<>(2);
     private String currDoSideShowPlayerId; //当前比牌发起用户ID
     private String currTargetSideShowPlayerId; //当前被比牌用户ID
-    private ConcurrentLinkedQueue<Integer> nullSeatList = new ConcurrentLinkedQueue<>(); //可用的空座位列表
     private List<String> loseUserIds = new ArrayList<>();
-    //上次本桌操作时间
-    private long lastActionTime = 0;
+    private ConcurrentLinkedQueue<Integer> nullSeatList = new ConcurrentLinkedQueue<>(); //可用的空座位列表
+    private long lastActionTime = 0;//上次本桌操作时间
 
+    protected boolean everyoneCanJoinIn;//桌子是否所有人可加入(玩家是否开启了好友功能)
+    protected String createTableUserId;//创建桌子的userId
+    protected String controlCardTypePlayerId;//控制牌型的玩家id
+    protected String seeHandCardsPlayerId;//可看全部人底牌的玩家id
+    protected Set<Integer> equalScore = new HashSet<>();//判断房间所有人下注积分是否相等
+    protected int roundTableScore;//当前轮次桌内下注额(根据下注最大的人变化)
+    protected int playerNum;//人数（房间座位数）
+    protected long currBaseBetScore;//当前基础下注值
+    protected int readyCd;//准备cd
+    protected int betCd;//下注cd（超时则弃牌）
+    protected int openCardCd;//亮牌cd
+    protected int betMaxScore;//下注积分上限
+    protected int gameNum;//游戏局数
+    protected String betMultiple;//桌子加注倍数
+    protected int currGameNum; //桌子当前进行的游戏局数
+    protected boolean isWatch;//是否可以观战
+    protected int tableAlreadyBetScore; //桌子当前牌局累积已下注金额
+    protected int tableTotalAlreadyBetScore; //桌子所有牌局累积已下注金额
+    protected Date startTime;//牌局开始时间
+
+    public AbstractTable() {}
+
+    //此处为港式五张构造类
+    public AbstractTable(String gameId, String roomId, String tableId, int playerNum) {
+        log.error("此处子类重写了，不应该再使用了");
+    }
 
     public AbstractTable(String gameId, String roomId, String tableId) {
         setPlayType(Integer.parseInt(gameId));
         setRoomId(roomId);
         setTableId(tableId);
-        roomTableRelation = new RoomTableRelationModel(gameId, roomId, tableId,TableStateEnum.IDEL.getValue());
+        roomTableRelation = new RoomTableRelationModel(gameId, roomId, tableId, TableStateEnum.IDEL.getValue());
 
         //初始化空座位
         addNullSeat(1);
@@ -143,7 +168,7 @@ public class AbstractTable implements ITable {
         }
     }
 
-    public PlayerInfo joinRoom(PlayerInfo player){
+    public PlayerInfo joinRoom(PlayerInfo player) {
         String gameId = String.valueOf(this.getPlayType());
         UserTableService.getInstance().onPlayerInTable(gameId, player, this);
         RoomStateService.getInstance().onPlayerJoinTable(this);
@@ -153,6 +178,8 @@ public class AbstractTable implements ITable {
         //设置玩家所在位置
         StoredObjManager.hset(RedisConst.USER_TABLE_SEAT.getProfix(), RedisConst.USER_TABLE_SEAT.getField() + player.getPlayerId(),
                 new GameRoomTableSeatRelationModel(gameId, player.getRoomId(), player.getTableId(), 0, ""));
+        demoPlayers.put(player.getPlayerId(), player);
+        log.debug("房间人数：===================={} ", demoPlayers.size());
         return allPlayers.put(player.getPlayerId(), player);
     }
 
@@ -244,23 +271,23 @@ public class AbstractTable implements ITable {
             flag = true;
             TableLogUtil.standUp(FunctionIdHolder.Game_REQ_ApplyLeave, standUpType, player.getPlayerId(), getPlayType() + "", getRoomId(),
                     getTableId(), player.getPlayScoreStore(), TableUtil.inGamePlayersBySeatNumToString(this));
-            log.debug("用户站起成功，从游戏用户列表中移除此用户。playerId->" + player.getPlayerId() + ", table->" + TableUtil.toStringNormal(this));
+            log.info("用户站起成功，从游戏用户列表中移除此用户。playerId->" + player.getPlayerId() + ", table->" + TableUtil.toStringNormal(this));
 
             StoredObjManager.hdel(RedisConst.TABLE_SEAT.getProfix() + getPlayType() + player.getRoomId() + player.getTableId(),
                     RedisConst.TABLE_SEAT.getField() + player.getSeatNum());
 
             log.info(getPlayType() + "_" + player.getRoomId() + "_" + player.getTableId());
 
-            log.debug("发给room的站起协议 table->" + TableUtil.toStringNormal(this));
-            RoomOprService.OBJ.standupHandler(String.valueOf(getPlayType()),player.getRoomId(),player.getTableId());
+//            log.debug("发给room的站起协议 table->" + TableUtil.toStringNormal(this));
+//            RoomOprService.OBJ.standupHandler(String.valueOf(getPlayType()), player.getRoomId(), player.getTableId());
 
             //设置座位
             StoredObjManager.hdel(RedisConst.USER_TABLE_SEAT.getProfix(), RedisConst.USER_TABLE_SEAT.getField() + userId);
         }
 
-        if (inGamePlayersBySeatNum.size() == 0) {
-            lastActionTime = 0;
-        }
+//        if (inGamePlayersBySeatNum.size() == 0) {
+//            lastActionTime = 0;
+//        }
         if (!flag && player != null) {
             LoggerUtils.tableLog.error("stand up fail，standUpType:{},seatNum:{},userId:{},tableInfo:{},in AllPlayers:{}," +
                             "inGamePlayersBySeatNum 's playerInfo:{},inGamePlayersByPlayerId:{}", standUpType, seatNum, userId, TableUtil.toStringNormal(this),
@@ -281,7 +308,7 @@ public class AbstractTable implements ITable {
         //flag = judageStandup(seatNum, player, userId);
 
         if (player != null && player.isOffLine() && flag) {
-            LeaveTableLogic.getInstance().logic(player, this, null);
+            LeaveTableLogic.getInstance().logic(player, this);
         }
         return flag;
     }
@@ -340,7 +367,7 @@ public class AbstractTable implements ITable {
 
     @Override
     public void returnLobby(String userId, boolean force) {
-        log.debug("删除用户列表中的用户，userId->" + userId + "，删除前列表人数->" + allPlayers.size());
+        log.info("删除用户列表中的用户，userId->" + userId + "，删除前列表人数->" + allPlayers.size());
         PlayerInfo playerInfo = allPlayers.remove(userId);
         if (playerInfo != null && playerInfo.getSeatNum() > 0) {
             PlayerInfo inGamePlayerInfo = inGamePlayersBySeatNum.get(playerInfo.getSeatNum());
@@ -368,21 +395,21 @@ public class AbstractTable implements ITable {
                 RedisConst.USER_TABLE_SEAT.getField() + userId, isDel
         );
 
-        if (force) {//强制广播
-            JoloGame.JoloGame_TablePlay_OtherPlayerInfo.Builder otherPlayerInfo =
-                    JoloGame_tablePlay_OtherPlayerInfoBuilder.getOtherPlayerInfo(playerInfo);
-            User user = StoredObjManager.hget(RedisConst.USER_INFO.getProfix(), RedisConst.USER_INFO.getField() + userId, User.class);
-            //广播离桌
-            boardcastMessageSingle(userId, JoloGame.JoloGame_Notice2Client_leaveReq.newBuilder()
-                            .setRoomId(getRoomId())
-                            .setTableId(getTableId())
-                            .setUserId(userId)
-                            .setCurrStoreScore(user == null ? 0 : user.getMoney())
-                            .setOtherPlayerInfo(otherPlayerInfo)
-                            .setWinLoseScore(playerInfo == null ? 0 : playerInfo.getTotalWinLoseScore())
-                            .build(),
-                    FunctionIdHolder.Game_Notice2Client_leavel);
-        }
+//        if (force) {//强制广播
+//            JoloGame.JoloGame_TablePlay_OtherPlayerInfo.Builder otherPlayerInfo =
+//                    JoloGame_tablePlay_OtherPlayerInfoBuilder.getOtherPlayerInfo(playerInfo);
+//            User user = StoredObjManager.hget(RedisConst.USER_INFO.getProfix(), RedisConst.USER_INFO.getField() + userId, User.class);
+//            //广播离桌
+//            boardcastMessageSingle(userId, JoloGame.JoloGame_Notice2Client_leaveReq.newBuilder()
+//                            .setRoomId(getRoomId())
+//                            .setTableId(getTableId())
+//                            .setUserId(userId)
+//                            .setCurrStoreScore(user == null ? 0 : user.getMoney())
+//                            .setOtherPlayerInfo(otherPlayerInfo)
+//                            .setWinLoseScore(playerInfo == null ? 0 : playerInfo.getTotalWinLoseScore())
+//                            .build(),
+//                    FunctionIdHolder.Game_Notice2Client_leavel);
+//        }
     }
 
     @Override
@@ -453,6 +480,7 @@ public class AbstractTable implements ITable {
     public double playerDataSettlement(PlayerInfo player) {
         return this.playerDataSettlement(player, true);
     }
+
     /**
      * 结算玩家数据
      *
@@ -462,7 +490,7 @@ public class AbstractTable implements ITable {
      *                     为了方面客户端不处理站起Notice，因此控制可不发送站起Notice消息
      * @return
      */
-    public double playerDataSettlement(PlayerInfo player,boolean isSendNotice) {
+    public double playerDataSettlement(PlayerInfo player, boolean isSendNotice) {
         log.info("getTotalWinLoseScore:" + player.getTotalWinLoseScore() + " getPlayScoreStore:" + player.getPlayScoreStore() + " takeInStore:" + player.getTotalTakeInScore());
         if (player.getPlayScoreStore() > 0) {
             player.setTotalWinLoseScore(player.getPlayScoreStore() - player.getTotalTakeInScore());
@@ -487,7 +515,7 @@ public class AbstractTable implements ITable {
             //广播玩家站起消息
             log.info("玩家站起，isSendNotice->{}, userId->{}, nickName->{}, seatNum->{}, gameId->{}, roomId->{}, tableId->{}",
                     isSendNotice, player.getPlayerId(), player.getNickName(), player.getSeatNum(), this.getPlayType(), this.getRoomId(), this.getTableId());
-            if(isSendNotice) {
+            if (isSendNotice) {
                 NoticeBroadcastMessages.playerStandUp(this, player.getPlayerId(), player.getSeatNum());
             }
 
@@ -525,15 +553,15 @@ public class AbstractTable implements ITable {
         for (String playerId : allPlayers.keySet()) {
             PlayerInfo player = allPlayers.get(playerId);
             if (player != null) {
-                if (!player.isOffLine()) {
+//                if (!player.isOffLine()) {
                     list.add(player.getPlayerId());
-                }
+//                }
             }
         }
 
-        log.debug("message functionId:" + functionId + "push player:" + list + ",getPlayType:" + getPlayType()+", functionId: "+functionId);
+        log.debug("message functionId:" + functionId + "push player:" + list + ",getPlayType:" + getPlayType() + ", functionId: " + functionId);
         NoticeRPCUtil.senMuliMsg(getPlayType(), tableId, list, functionId, messageLite);
-        RabbitMqSender.me.producer(functionId,messageLite.toString());
+        RabbitMqSender.me.producer(functionId, messageLite.toString());
     }
 
     /**
@@ -552,7 +580,7 @@ public class AbstractTable implements ITable {
      */
     public void boardcastMessageSingle(String playerId, MessageLite messageLite, int functionId) {
         NoticeRPCUtil.sendSingMsg(getPlayType(), playerId, functionId, messageLite);
-        RabbitMqSender.me.producer(functionId,messageLite.toString());
+        RabbitMqSender.me.producer(functionId, messageLite.toString());
     }
 
     @Getter
@@ -616,18 +644,19 @@ public class AbstractTable implements ITable {
                     }
                 }
             } else if (getInGamePlayersBySeatNum().size() > 1) {
-                //2分钟本桌没有操作则重新开始
-                if (lastActionTime > 0 && nowTime - lastActionTime >= 2 * DateUtils.MILLIS_PER_MINUTE) {
-                    log.error("correct func tableInfo:{},players:{},inGameBySeatNum userInfo:{}", TableUtil.toStringNormal(this), TableUtil.toStringAllPlayers(this),
+                //5分钟本桌没有操作则重新开始
+                if (lastActionTime > 0 && nowTime - lastActionTime >= 5 * DateUtils.MILLIS_PER_MINUTE) {
+                    log.error("此桌子长时间没有任何操作 tableInfo:{},players:{},inGameBySeatNum userInfo:{}", TableUtil.toStringNormal(this), TableUtil.toStringAllPlayers(this),
                             TableUtil.inGamePlayersBySeatNumToString(this));
-                    lastActionTime = System.currentTimeMillis();
-                    setTableStateEnum(TableStateEnum.IDEL);
-                    setTableStatus();
-                    TableService.getInstance().playGame(this);
-
-                    StoredObjManager.set(RedisConst.GAME_STATUS_ACTIVE.getProfix() + Config.BIND_IP, "The game pauses ，" +
-                            "playType:" + getPlayType() + ",roomId:" + roomId + ",tableId:" + tableId);
                 }
+//                if (lastActionTime > 0 && nowTime - lastActionTime >= 2 * DateUtils.MILLIS_PER_MINUTE) {
+//                    lastActionTime = System.currentTimeMillis();
+//                    setTableStateEnum(TableStateEnum.IDEL);
+//                    setTableStatus();
+//                    TableService.getInstance().playGame(this);
+//                    StoredObjManager.set(RedisConst.GAME_STATUS_ACTIVE.getProfix() + Config.BIND_IP, "The game pauses ，" +
+//                            "playType:" + getPlayType() + ",roomId:" + roomId + ",tableId:" + tableId);
+//                }
             }
 
             //循环检查全部玩家，如果玩家已经站起，并且旁观时间
@@ -635,7 +664,7 @@ public class AbstractTable implements ITable {
                 if (v.getStandUpTime() != 0L && nowTime - v.getStandUpTime() >= DateUtils.MILLIS_PER_MINUTE) {
                     //玩家达到离桌标准，强制离桌（标准：桌子上无任何玩家，并且玩家旁观等待时间超过配置的临界值）
                     try {
-                        LeaveTableLogic.getInstance().logic(v, this, null);
+                        LeaveTableLogic.getInstance().logic(v, this);
                         v.setStandUpTime(0L);
                         sb.append(",强制玩家离开桌子 ,PlayerId:" + v.getPlayerId() + ", stanupTime->" + v.getStandUpTime() + ";" + System.getProperty("line.separator"));
                     } catch (Exception ex) {
@@ -668,49 +697,27 @@ public class AbstractTable implements ITable {
     public void initTableStateAttribute() {
         //初始化牌桌配置
         try {
-            if (roomConfig != null) {
-            }
             this.inGamePlayers.clear(); //座位信息清除
         } catch (Exception e) {
         }
     }
 
-    public void pressCard() {
-        int cardCnt = 2;
-        Iterator<PlayerInfo> iter = inGamePlayers.values().iterator();
-        while (iter.hasNext()) {
-            PlayerInfo playerInfo = iter.next();
-            if (playerInfo.getRoleType() == RoleType.ROBOT){
-                //log.debug("使用机器人发牌策略");
-            }
+    //设置玩家手牌
+    public void setPlayerHandCards() {}
 
-            //根据玩法的不同获取不同数量的手牌
-            int[] arrHandCards = CardOfTableHolder.TakeCardOperationObj(currGameOrderId).hair_card(cardCnt, playerInfo.getPlayerId());
-            playerInfo.setHandCards(arrHandCards); //玩家看牌后则为手牌赋值
-            playerInfo.setCards(NumUtils.ConvertInt2ByteArr(arrHandCards));
-            playerInfo.setType(CardComparator.OBJ.isSpecialCard(arrHandCards));
+    //发牌并设置玩家牌数组
+    public void pressCard(boolean isFirstRound,boolean allCards) {}
 
-        }
+    //寻找第一个下注玩家
+    public void lookForFirstBetPlayer() {}
 
-    }
-
-    @Override
-    public String toString() {
-        return "Table{" +
-                "roomId=" + roomId +
-                ", tableId='" + tableId + '\'' +
-                ", tableStateEnum=" + tableStateEnum +
-                ", allPlayers=" + allPlayers +
-                ", inGamePlayers=" + inGamePlayersBySeatNum +
-                '}';
-    }
-
-    public void setTableStatus(){
+    public void setTableStatus() {
         RoomTableRelationModel ret = StoredObjManager.getStoredObjInMap(RoomTableRelationModel.class,
                 RedisConst.TABLE_INSTANCE.getProfix() + getPlayType() + getRoomId(),
                 RedisConst.TABLE_INSTANCE.getField() + getTableId());
-        if (ret == null){
-            log.error("setTableStatus ERROR, ret from redis is null. {}, {}, {}", getPlayType() , getRoomId(),getTableId());
+        log.debug("从redis查找桌子信息：--key: {}, --field: {}", RedisConst.TABLE_INSTANCE.getProfix() + getPlayType() + getRoomId(), RedisConst.TABLE_INSTANCE.getField() + tableId);
+        if (ret == null) {
+            log.error("setTableStatus ERROR, ret from redis is null. {}, {}, {}", getPlayType(), getRoomId(), getTableId());
             return;
         }
         ret.setTableStatus(getTableStateEnum().getValue());
@@ -718,7 +725,7 @@ public class AbstractTable implements ITable {
                 RedisConst.TABLE_INSTANCE.getField() + getTableId(), ret);
     }
 
-    public void clearAllSeats(){
+    public void clearAllSeats() {
         allPlayers.clear();
         inGamePlayers.clear();
         inGamePlayersBySeatNum.clear();
@@ -726,7 +733,53 @@ public class AbstractTable implements ITable {
         tmpTableUsers.clear();
     }
 
-    public String getPlayTypeStr(){
+    public String getPlayTypeStr() {
         return String.valueOf(this.playType);
+    }
+
+    /**
+     * 获得下一个行动的玩家
+     *
+     * @param preBetSeatNum
+     * @return
+     */
+    public PlayerInfo getNextBetPlayer(int preBetSeatNum) {
+        PlayerInfo nextBetPlayer = null;
+        //计算下一个下注玩家的座位号
+        int nextBetSeatNum = preBetSeatNum;
+        while (true) {
+            nextBetSeatNum += 1;
+            if (nextBetSeatNum > playerNum) {
+                nextBetSeatNum = 1;
+            }
+            //再次找到当前位置，说明已无合适下一个行动者，返回null
+            if (nextBetSeatNum == preBetSeatNum) {
+                log.error("再次找到当前座位，已无合适的下一个行动者 nextBetSeatNum == preBetSeatNum=={}", preBetSeatNum);
+                return null;
+            }
+            if (this.getInGamePlayers().containsKey(nextBetSeatNum)) {
+                nextBetPlayer = this.getInGamePlayers().get(nextBetSeatNum);
+                if (nextBetPlayer.getState() != PlayerStateEnum.fold) {
+                    //找到了合适的下一个行动者，结束循环
+                    currActionSeatNum = nextBetSeatNum;//记录当前行动者座位号
+                    nextBetPlayer.setState(PlayerStateEnum.beting);
+                    nextBetPlayer.setIsCurrActive(1);
+                    //记录玩家开始行动的时间
+                    nextBetPlayer.setStartActionTime(System.currentTimeMillis());
+                    break;
+                }
+            }
+        }
+        return nextBetPlayer;
+    }
+
+    @Override
+    public String toString() {
+        return "此方法应该被子类重写";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tableId, roomId, roomTableRelation);
     }
 }

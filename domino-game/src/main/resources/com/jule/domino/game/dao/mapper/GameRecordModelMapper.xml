@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.game.dao.mapper.GameRecordModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.game.dao.bean.GameRecordModel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="gameId" jdbcType="INTEGER" property="gameId" />
+    <result column="tableId" jdbcType="VARCHAR" property="tableId" />
+    <result column="currGameNum" jdbcType="INTEGER" property="currGameNum" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="nickName" jdbcType="VARCHAR" property="nickName" />
+    <result column="cardType" jdbcType="INTEGER" property="cardType" />
+    <result column="handCards" jdbcType="VARCHAR" property="handCards" />
+    <result column="totalTableScore" jdbcType="INTEGER" property="totalTableScore" />
+    <result column="winLoseScore" jdbcType="INTEGER" property="winLoseScore" />
+    <result column="startTime" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="endTime" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="playerCurrScore" jdbcType="INTEGER" property="playerCurrScore" />
+    <result column="icoUrl" jdbcType="VARCHAR" property="icoUrl" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from game_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.game.dao.bean.GameRecordModel">
+    insert into game_record (id, gameId, tableId, 
+      currGameNum, userId, nickName, 
+      cardType, handCards, totalTableScore, 
+      winLoseScore, startTime, endTime, 
+      playerCurrScore, icoUrl)
+    values (#{id,jdbcType=INTEGER}, #{gameId,jdbcType=INTEGER}, #{tableId,jdbcType=VARCHAR}, 
+      #{currGameNum,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{cardType,jdbcType=INTEGER}, #{handCards,jdbcType=VARCHAR}, #{totalTableScore,jdbcType=INTEGER}, 
+      #{winLoseScore,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{playerCurrScore,jdbcType=INTEGER}, #{icoUrl,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.game.dao.bean.GameRecordModel">
+    update game_record
+    set gameId = #{gameId,jdbcType=INTEGER},
+      tableId = #{tableId,jdbcType=VARCHAR},
+      currGameNum = #{currGameNum,jdbcType=INTEGER},
+      userId = #{userId,jdbcType=VARCHAR},
+      nickName = #{nickName,jdbcType=VARCHAR},
+      cardType = #{cardType,jdbcType=INTEGER},
+      handCards = #{handCards,jdbcType=VARCHAR},
+      totalTableScore = #{totalTableScore,jdbcType=INTEGER},
+      winLoseScore = #{winLoseScore,jdbcType=INTEGER},
+      startTime = #{startTime,jdbcType=TIMESTAMP},
+      endTime = #{endTime,jdbcType=TIMESTAMP},
+      playerCurrScore = #{playerCurrScore,jdbcType=INTEGER},
+      icoUrl = #{icoUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByTableId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, gameId, tableId, currGameNum, userId, nickName, cardType, handCards, totalTableScore, 
+    winLoseScore, startTime, endTime, playerCurrScore, icoUrl
+    from game_record
+    where tableId = #{tableId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT * FROM
+        (SELECT * FROM `game_record`
+        WHERE userId = #{userId,jdbcType=INTEGER}
+        GROUP BY tableId,currGameNum DESC)as a
+    GROUP BY tableId
+    order by id desc
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, gameId, tableId, currGameNum, userId, nickName, cardType, handCards, totalTableScore, 
+    winLoseScore, startTime, endTime, playerCurrScore, icoUrl
+    from game_record
+    order by id asc
+  </select>
+</mapper>

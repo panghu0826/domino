@@ -136,10 +136,11 @@ public class RegisterService {
      * @return
      */
     private int makeGameSvrId(String address) {
-        CRC32 crc32 = new CRC32();
-        crc32.update(address.getBytes());
-        long ret = Math.abs(crc32.getValue() & 0xFFFFFFFF);
-        //强转会变为负数
-        return (int) ret;
+//        CRC32 crc32 = new CRC32();
+//        crc32.update(address.getBytes());
+//        long ret = Math.abs(crc32.getValue() & 0xFFFFFFFF);
+//        //强转会变为负数
+//        return (int) ret;
+        return 88888;
     }
 }

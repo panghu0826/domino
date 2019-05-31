@@ -16242,6 +16242,228 @@ public final class JoloRoom {
      */
     com.google.protobuf.ByteString
         getRoomIdBytes();
+
+    /**
+     * <pre>
+     *桌子ID
+     * </pre>
+     *
+     * <code>optional string TableId = 5;</code>
+     */
+    boolean hasTableId();
+    /**
+     * <pre>
+     *桌子ID
+     * </pre>
+     *
+     * <code>optional string TableId = 5;</code>
+     */
+    java.lang.String getTableId();
+    /**
+     * <pre>
+     *桌子ID
+     * </pre>
+     *
+     * <code>optional string TableId = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getTableIdBytes();
+
+    /**
+     * <pre>
+     *玩家人数
+     * </pre>
+     *
+     * <code>required int32 PlayerNum = 6;</code>
+     */
+    boolean hasPlayerNum();
+    /**
+     * <pre>
+     *玩家人数
+     * </pre>
+     *
+     * <code>required int32 PlayerNum = 6;</code>
+     */
+    int getPlayerNum();
+
+    /**
+     * <pre>
+     *当前基础下注值
+     * </pre>
+     *
+     * <code>required int32 BaseBetScore = 7;</code>
+     */
+    boolean hasBaseBetScore();
+    /**
+     * <pre>
+     *当前基础下注值
+     * </pre>
+     *
+     * <code>required int32 BaseBetScore = 7;</code>
+     */
+    int getBaseBetScore();
+
+    /**
+     * <pre>
+     *准备cd
+     * </pre>
+     *
+     * <code>optional int32 ReadyCd = 8;</code>
+     */
+    boolean hasReadyCd();
+    /**
+     * <pre>
+     *准备cd
+     * </pre>
+     *
+     * <code>optional int32 ReadyCd = 8;</code>
+     */
+    int getReadyCd();
+
+    /**
+     * <pre>
+     *下注cd（超时则弃牌）
+     * </pre>
+     *
+     * <code>optional int32 BetCd = 9;</code>
+     */
+    boolean hasBetCd();
+    /**
+     * <pre>
+     *下注cd（超时则弃牌）
+     * </pre>
+     *
+     * <code>optional int32 BetCd = 9;</code>
+     */
+    int getBetCd();
+
+    /**
+     * <pre>
+     *亮牌cd
+     * </pre>
+     *
+     * <code>optional int32 OpenCardCd = 10;</code>
+     */
+    boolean hasOpenCardCd();
+    /**
+     * <pre>
+     *亮牌cd
+     * </pre>
+     *
+     * <code>optional int32 OpenCardCd = 10;</code>
+     */
+    int getOpenCardCd();
+
+    /**
+     * <pre>
+     *下注积分上限
+     * </pre>
+     *
+     * <code>required int32 BetMaxScore = 11;</code>
+     */
+    boolean hasBetMaxScore();
+    /**
+     * <pre>
+     *下注积分上限
+     * </pre>
+     *
+     * <code>required int32 BetMaxScore = 11;</code>
+     */
+    int getBetMaxScore();
+
+    /**
+     * <pre>
+     *游戏局数
+     * </pre>
+     *
+     * <code>required int32 GameNum = 12;</code>
+     */
+    boolean hasGameNum();
+    /**
+     * <pre>
+     *游戏局数
+     * </pre>
+     *
+     * <code>required int32 GameNum = 12;</code>
+     */
+    int getGameNum();
+
+    /**
+     * <pre>
+     *是否可以观战
+     * </pre>
+     *
+     * <code>optional int32 IsWatch = 13;</code>
+     */
+    boolean hasIsWatch();
+    /**
+     * <pre>
+     *是否可以观战
+     * </pre>
+     *
+     * <code>optional int32 IsWatch = 13;</code>
+     */
+    int getIsWatch();
+
+    /**
+     * <pre>
+     *桌子加注倍数
+     * </pre>
+     *
+     * <code>required string BetMultiple = 14;</code>
+     */
+    boolean hasBetMultiple();
+    /**
+     * <pre>
+     *桌子加注倍数
+     * </pre>
+     *
+     * <code>required string BetMultiple = 14;</code>
+     */
+    java.lang.String getBetMultiple();
+    /**
+     * <pre>
+     *桌子加注倍数
+     * </pre>
+     *
+     * <code>required string BetMultiple = 14;</code>
+     */
+    com.google.protobuf.ByteString
+        getBetMultipleBytes();
+
+    /**
+     * <pre>
+     *头像id
+     * </pre>
+     *
+     * <code>optional int32 HeadSculpture = 15;</code>
+     */
+    boolean hasHeadSculpture();
+    /**
+     * <pre>
+     *头像id
+     * </pre>
+     *
+     * <code>optional int32 HeadSculpture = 15;</code>
+     */
+    int getHeadSculpture();
+
+    /**
+     * <pre>
+     *手牌皮肤
+     * </pre>
+     *
+     * <code>optional int32 CardSkin = 16;</code>
+     */
+    boolean hasCardSkin();
+    /**
+     * <pre>
+     *手牌皮肤
+     * </pre>
+     *
+     * <code>optional int32 CardSkin = 16;</code>
+     */
+    int getCardSkin();
   }
   /**
    * <pre>
@@ -16263,6 +16485,18 @@ public final class JoloRoom {
       userId_ = "";
       gameId_ = "";
       roomId_ = "";
+      tableId_ = "";
+      playerNum_ = 0;
+      baseBetScore_ = 0;
+      readyCd_ = 0;
+      betCd_ = 0;
+      openCardCd_ = 0;
+      betMaxScore_ = 0;
+      gameNum_ = 0;
+      isWatch_ = 0;
+      betMultiple_ = "";
+      headSculpture_ = 0;
+      cardSkin_ = 0;
     }
 
     @java.lang.Override
@@ -16312,6 +16546,68 @@ public final class JoloRoom {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
               roomId_ = bs;
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              tableId_ = bs;
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000010;
+              playerNum_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000020;
+              baseBetScore_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000040;
+              readyCd_ = input.readInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000080;
+              betCd_ = input.readInt32();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000100;
+              openCardCd_ = input.readInt32();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000200;
+              betMaxScore_ = input.readInt32();
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000400;
+              gameNum_ = input.readInt32();
+              break;
+            }
+            case 104: {
+              bitField0_ |= 0x00000800;
+              isWatch_ = input.readInt32();
+              break;
+            }
+            case 114: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00001000;
+              betMultiple_ = bs;
+              break;
+            }
+            case 120: {
+              bitField0_ |= 0x00002000;
+              headSculpture_ = input.readInt32();
+              break;
+            }
+            case 128: {
+              bitField0_ |= 0x00004000;
+              cardSkin_ = input.readInt32();
               break;
             }
           }
@@ -16501,6 +16797,344 @@ public final class JoloRoom {
       }
     }
 
+    public static final int TABLEID_FIELD_NUMBER = 5;
+    private volatile java.lang.Object tableId_;
+    /**
+     * <pre>
+     *桌子ID
+     * </pre>
+     *
+     * <code>optional string TableId = 5;</code>
+     */
+    public boolean hasTableId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <pre>
+     *桌子ID
+     * </pre>
+     *
+     * <code>optional string TableId = 5;</code>
+     */
+    public java.lang.String getTableId() {
+      java.lang.Object ref = tableId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          tableId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *桌子ID
+     * </pre>
+     *
+     * <code>optional string TableId = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTableIdBytes() {
+      java.lang.Object ref = tableId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tableId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PLAYERNUM_FIELD_NUMBER = 6;
+    private int playerNum_;
+    /**
+     * <pre>
+     *玩家人数
+     * </pre>
+     *
+     * <code>required int32 PlayerNum = 6;</code>
+     */
+    public boolean hasPlayerNum() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <pre>
+     *玩家人数
+     * </pre>
+     *
+     * <code>required int32 PlayerNum = 6;</code>
+     */
+    public int getPlayerNum() {
+      return playerNum_;
+    }
+
+    public static final int BASEBETSCORE_FIELD_NUMBER = 7;
+    private int baseBetScore_;
+    /**
+     * <pre>
+     *当前基础下注值
+     * </pre>
+     *
+     * <code>required int32 BaseBetScore = 7;</code>
+     */
+    public boolean hasBaseBetScore() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <pre>
+     *当前基础下注值
+     * </pre>
+     *
+     * <code>required int32 BaseBetScore = 7;</code>
+     */
+    public int getBaseBetScore() {
+      return baseBetScore_;
+    }
+
+    public static final int READYCD_FIELD_NUMBER = 8;
+    private int readyCd_;
+    /**
+     * <pre>
+     *准备cd
+     * </pre>
+     *
+     * <code>optional int32 ReadyCd = 8;</code>
+     */
+    public boolean hasReadyCd() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <pre>
+     *准备cd
+     * </pre>
+     *
+     * <code>optional int32 ReadyCd = 8;</code>
+     */
+    public int getReadyCd() {
+      return readyCd_;
+    }
+
+    public static final int BETCD_FIELD_NUMBER = 9;
+    private int betCd_;
+    /**
+     * <pre>
+     *下注cd（超时则弃牌）
+     * </pre>
+     *
+     * <code>optional int32 BetCd = 9;</code>
+     */
+    public boolean hasBetCd() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <pre>
+     *下注cd（超时则弃牌）
+     * </pre>
+     *
+     * <code>optional int32 BetCd = 9;</code>
+     */
+    public int getBetCd() {
+      return betCd_;
+    }
+
+    public static final int OPENCARDCD_FIELD_NUMBER = 10;
+    private int openCardCd_;
+    /**
+     * <pre>
+     *亮牌cd
+     * </pre>
+     *
+     * <code>optional int32 OpenCardCd = 10;</code>
+     */
+    public boolean hasOpenCardCd() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <pre>
+     *亮牌cd
+     * </pre>
+     *
+     * <code>optional int32 OpenCardCd = 10;</code>
+     */
+    public int getOpenCardCd() {
+      return openCardCd_;
+    }
+
+    public static final int BETMAXSCORE_FIELD_NUMBER = 11;
+    private int betMaxScore_;
+    /**
+     * <pre>
+     *下注积分上限
+     * </pre>
+     *
+     * <code>required int32 BetMaxScore = 11;</code>
+     */
+    public boolean hasBetMaxScore() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <pre>
+     *下注积分上限
+     * </pre>
+     *
+     * <code>required int32 BetMaxScore = 11;</code>
+     */
+    public int getBetMaxScore() {
+      return betMaxScore_;
+    }
+
+    public static final int GAMENUM_FIELD_NUMBER = 12;
+    private int gameNum_;
+    /**
+     * <pre>
+     *游戏局数
+     * </pre>
+     *
+     * <code>required int32 GameNum = 12;</code>
+     */
+    public boolean hasGameNum() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <pre>
+     *游戏局数
+     * </pre>
+     *
+     * <code>required int32 GameNum = 12;</code>
+     */
+    public int getGameNum() {
+      return gameNum_;
+    }
+
+    public static final int ISWATCH_FIELD_NUMBER = 13;
+    private int isWatch_;
+    /**
+     * <pre>
+     *是否可以观战
+     * </pre>
+     *
+     * <code>optional int32 IsWatch = 13;</code>
+     */
+    public boolean hasIsWatch() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <pre>
+     *是否可以观战
+     * </pre>
+     *
+     * <code>optional int32 IsWatch = 13;</code>
+     */
+    public int getIsWatch() {
+      return isWatch_;
+    }
+
+    public static final int BETMULTIPLE_FIELD_NUMBER = 14;
+    private volatile java.lang.Object betMultiple_;
+    /**
+     * <pre>
+     *桌子加注倍数
+     * </pre>
+     *
+     * <code>required string BetMultiple = 14;</code>
+     */
+    public boolean hasBetMultiple() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <pre>
+     *桌子加注倍数
+     * </pre>
+     *
+     * <code>required string BetMultiple = 14;</code>
+     */
+    public java.lang.String getBetMultiple() {
+      java.lang.Object ref = betMultiple_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          betMultiple_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *桌子加注倍数
+     * </pre>
+     *
+     * <code>required string BetMultiple = 14;</code>
+     */
+    public com.google.protobuf.ByteString
+        getBetMultipleBytes() {
+      java.lang.Object ref = betMultiple_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        betMultiple_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int HEADSCULPTURE_FIELD_NUMBER = 15;
+    private int headSculpture_;
+    /**
+     * <pre>
+     *头像id
+     * </pre>
+     *
+     * <code>optional int32 HeadSculpture = 15;</code>
+     */
+    public boolean hasHeadSculpture() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    /**
+     * <pre>
+     *头像id
+     * </pre>
+     *
+     * <code>optional int32 HeadSculpture = 15;</code>
+     */
+    public int getHeadSculpture() {
+      return headSculpture_;
+    }
+
+    public static final int CARDSKIN_FIELD_NUMBER = 16;
+    private int cardSkin_;
+    /**
+     * <pre>
+     *手牌皮肤
+     * </pre>
+     *
+     * <code>optional int32 CardSkin = 16;</code>
+     */
+    public boolean hasCardSkin() {
+      return ((bitField0_ & 0x00004000) == 0x00004000);
+    }
+    /**
+     * <pre>
+     *手牌皮肤
+     * </pre>
+     *
+     * <code>optional int32 CardSkin = 16;</code>
+     */
+    public int getCardSkin() {
+      return cardSkin_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -16519,6 +17153,26 @@ public final class JoloRoom {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasPlayerNum()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBaseBetScore()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBetMaxScore()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasGameNum()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBetMultiple()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -16533,6 +17187,42 @@ public final class JoloRoom {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, roomId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, tableId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(6, playerNum_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(7, baseBetScore_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(8, readyCd_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(9, betCd_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeInt32(10, openCardCd_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(11, betMaxScore_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeInt32(12, gameNum_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeInt32(13, isWatch_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 14, betMultiple_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        output.writeInt32(15, headSculpture_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        output.writeInt32(16, cardSkin_);
       }
       unknownFields.writeTo(output);
     }
@@ -16550,6 +17240,52 @@ public final class JoloRoom {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, roomId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, tableId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, playerNum_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, baseBetScore_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, readyCd_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, betCd_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, openCardCd_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(11, betMaxScore_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(12, gameNum_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(13, isWatch_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, betMultiple_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(15, headSculpture_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(16, cardSkin_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -16582,6 +17318,66 @@ public final class JoloRoom {
         result = result && getRoomId()
             .equals(other.getRoomId());
       }
+      result = result && (hasTableId() == other.hasTableId());
+      if (hasTableId()) {
+        result = result && getTableId()
+            .equals(other.getTableId());
+      }
+      result = result && (hasPlayerNum() == other.hasPlayerNum());
+      if (hasPlayerNum()) {
+        result = result && (getPlayerNum()
+            == other.getPlayerNum());
+      }
+      result = result && (hasBaseBetScore() == other.hasBaseBetScore());
+      if (hasBaseBetScore()) {
+        result = result && (getBaseBetScore()
+            == other.getBaseBetScore());
+      }
+      result = result && (hasReadyCd() == other.hasReadyCd());
+      if (hasReadyCd()) {
+        result = result && (getReadyCd()
+            == other.getReadyCd());
+      }
+      result = result && (hasBetCd() == other.hasBetCd());
+      if (hasBetCd()) {
+        result = result && (getBetCd()
+            == other.getBetCd());
+      }
+      result = result && (hasOpenCardCd() == other.hasOpenCardCd());
+      if (hasOpenCardCd()) {
+        result = result && (getOpenCardCd()
+            == other.getOpenCardCd());
+      }
+      result = result && (hasBetMaxScore() == other.hasBetMaxScore());
+      if (hasBetMaxScore()) {
+        result = result && (getBetMaxScore()
+            == other.getBetMaxScore());
+      }
+      result = result && (hasGameNum() == other.hasGameNum());
+      if (hasGameNum()) {
+        result = result && (getGameNum()
+            == other.getGameNum());
+      }
+      result = result && (hasIsWatch() == other.hasIsWatch());
+      if (hasIsWatch()) {
+        result = result && (getIsWatch()
+            == other.getIsWatch());
+      }
+      result = result && (hasBetMultiple() == other.hasBetMultiple());
+      if (hasBetMultiple()) {
+        result = result && getBetMultiple()
+            .equals(other.getBetMultiple());
+      }
+      result = result && (hasHeadSculpture() == other.hasHeadSculpture());
+      if (hasHeadSculpture()) {
+        result = result && (getHeadSculpture()
+            == other.getHeadSculpture());
+      }
+      result = result && (hasCardSkin() == other.hasCardSkin());
+      if (hasCardSkin()) {
+        result = result && (getCardSkin()
+            == other.getCardSkin());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -16604,6 +17400,54 @@ public final class JoloRoom {
       if (hasRoomId()) {
         hash = (37 * hash) + ROOMID_FIELD_NUMBER;
         hash = (53 * hash) + getRoomId().hashCode();
+      }
+      if (hasTableId()) {
+        hash = (37 * hash) + TABLEID_FIELD_NUMBER;
+        hash = (53 * hash) + getTableId().hashCode();
+      }
+      if (hasPlayerNum()) {
+        hash = (37 * hash) + PLAYERNUM_FIELD_NUMBER;
+        hash = (53 * hash) + getPlayerNum();
+      }
+      if (hasBaseBetScore()) {
+        hash = (37 * hash) + BASEBETSCORE_FIELD_NUMBER;
+        hash = (53 * hash) + getBaseBetScore();
+      }
+      if (hasReadyCd()) {
+        hash = (37 * hash) + READYCD_FIELD_NUMBER;
+        hash = (53 * hash) + getReadyCd();
+      }
+      if (hasBetCd()) {
+        hash = (37 * hash) + BETCD_FIELD_NUMBER;
+        hash = (53 * hash) + getBetCd();
+      }
+      if (hasOpenCardCd()) {
+        hash = (37 * hash) + OPENCARDCD_FIELD_NUMBER;
+        hash = (53 * hash) + getOpenCardCd();
+      }
+      if (hasBetMaxScore()) {
+        hash = (37 * hash) + BETMAXSCORE_FIELD_NUMBER;
+        hash = (53 * hash) + getBetMaxScore();
+      }
+      if (hasGameNum()) {
+        hash = (37 * hash) + GAMENUM_FIELD_NUMBER;
+        hash = (53 * hash) + getGameNum();
+      }
+      if (hasIsWatch()) {
+        hash = (37 * hash) + ISWATCH_FIELD_NUMBER;
+        hash = (53 * hash) + getIsWatch();
+      }
+      if (hasBetMultiple()) {
+        hash = (37 * hash) + BETMULTIPLE_FIELD_NUMBER;
+        hash = (53 * hash) + getBetMultiple().hashCode();
+      }
+      if (hasHeadSculpture()) {
+        hash = (37 * hash) + HEADSCULPTURE_FIELD_NUMBER;
+        hash = (53 * hash) + getHeadSculpture();
+      }
+      if (hasCardSkin()) {
+        hash = (37 * hash) + CARDSKIN_FIELD_NUMBER;
+        hash = (53 * hash) + getCardSkin();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -16744,6 +17588,30 @@ public final class JoloRoom {
         bitField0_ = (bitField0_ & ~0x00000002);
         roomId_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
+        tableId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        playerNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        baseBetScore_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        readyCd_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        betCd_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        openCardCd_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        betMaxScore_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        gameNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        isWatch_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000800);
+        betMultiple_ = "";
+        bitField0_ = (bitField0_ & ~0x00001000);
+        headSculpture_ = 0;
+        bitField0_ = (bitField0_ & ~0x00002000);
+        cardSkin_ = 0;
+        bitField0_ = (bitField0_ & ~0x00004000);
         return this;
       }
 
@@ -16780,6 +17648,54 @@ public final class JoloRoom {
           to_bitField0_ |= 0x00000004;
         }
         result.roomId_ = roomId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.tableId_ = tableId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.playerNum_ = playerNum_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.baseBetScore_ = baseBetScore_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.readyCd_ = readyCd_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.betCd_ = betCd_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.openCardCd_ = openCardCd_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.betMaxScore_ = betMaxScore_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.gameNum_ = gameNum_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.isWatch_ = isWatch_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.betMultiple_ = betMultiple_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00002000;
+        }
+        result.headSculpture_ = headSculpture_;
+        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        result.cardSkin_ = cardSkin_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -16837,6 +17753,46 @@ public final class JoloRoom {
           roomId_ = other.roomId_;
           onChanged();
         }
+        if (other.hasTableId()) {
+          bitField0_ |= 0x00000008;
+          tableId_ = other.tableId_;
+          onChanged();
+        }
+        if (other.hasPlayerNum()) {
+          setPlayerNum(other.getPlayerNum());
+        }
+        if (other.hasBaseBetScore()) {
+          setBaseBetScore(other.getBaseBetScore());
+        }
+        if (other.hasReadyCd()) {
+          setReadyCd(other.getReadyCd());
+        }
+        if (other.hasBetCd()) {
+          setBetCd(other.getBetCd());
+        }
+        if (other.hasOpenCardCd()) {
+          setOpenCardCd(other.getOpenCardCd());
+        }
+        if (other.hasBetMaxScore()) {
+          setBetMaxScore(other.getBetMaxScore());
+        }
+        if (other.hasGameNum()) {
+          setGameNum(other.getGameNum());
+        }
+        if (other.hasIsWatch()) {
+          setIsWatch(other.getIsWatch());
+        }
+        if (other.hasBetMultiple()) {
+          bitField0_ |= 0x00001000;
+          betMultiple_ = other.betMultiple_;
+          onChanged();
+        }
+        if (other.hasHeadSculpture()) {
+          setHeadSculpture(other.getHeadSculpture());
+        }
+        if (other.hasCardSkin()) {
+          setCardSkin(other.getCardSkin());
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -16850,6 +17806,21 @@ public final class JoloRoom {
           return false;
         }
         if (!hasRoomId()) {
+          return false;
+        }
+        if (!hasPlayerNum()) {
+          return false;
+        }
+        if (!hasBaseBetScore()) {
+          return false;
+        }
+        if (!hasBetMaxScore()) {
+          return false;
+        }
+        if (!hasGameNum()) {
+          return false;
+        }
+        if (!hasBetMultiple()) {
           return false;
         }
         return true;
@@ -17173,6 +18144,686 @@ public final class JoloRoom {
         onChanged();
         return this;
       }
+
+      private java.lang.Object tableId_ = "";
+      /**
+       * <pre>
+       *桌子ID
+       * </pre>
+       *
+       * <code>optional string TableId = 5;</code>
+       */
+      public boolean hasTableId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <pre>
+       *桌子ID
+       * </pre>
+       *
+       * <code>optional string TableId = 5;</code>
+       */
+      public java.lang.String getTableId() {
+        java.lang.Object ref = tableId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            tableId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *桌子ID
+       * </pre>
+       *
+       * <code>optional string TableId = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTableIdBytes() {
+        java.lang.Object ref = tableId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tableId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *桌子ID
+       * </pre>
+       *
+       * <code>optional string TableId = 5;</code>
+       */
+      public Builder setTableId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        tableId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *桌子ID
+       * </pre>
+       *
+       * <code>optional string TableId = 5;</code>
+       */
+      public Builder clearTableId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        tableId_ = getDefaultInstance().getTableId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *桌子ID
+       * </pre>
+       *
+       * <code>optional string TableId = 5;</code>
+       */
+      public Builder setTableIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        tableId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int playerNum_ ;
+      /**
+       * <pre>
+       *玩家人数
+       * </pre>
+       *
+       * <code>required int32 PlayerNum = 6;</code>
+       */
+      public boolean hasPlayerNum() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <pre>
+       *玩家人数
+       * </pre>
+       *
+       * <code>required int32 PlayerNum = 6;</code>
+       */
+      public int getPlayerNum() {
+        return playerNum_;
+      }
+      /**
+       * <pre>
+       *玩家人数
+       * </pre>
+       *
+       * <code>required int32 PlayerNum = 6;</code>
+       */
+      public Builder setPlayerNum(int value) {
+        bitField0_ |= 0x00000010;
+        playerNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家人数
+       * </pre>
+       *
+       * <code>required int32 PlayerNum = 6;</code>
+       */
+      public Builder clearPlayerNum() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        playerNum_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int baseBetScore_ ;
+      /**
+       * <pre>
+       *当前基础下注值
+       * </pre>
+       *
+       * <code>required int32 BaseBetScore = 7;</code>
+       */
+      public boolean hasBaseBetScore() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <pre>
+       *当前基础下注值
+       * </pre>
+       *
+       * <code>required int32 BaseBetScore = 7;</code>
+       */
+      public int getBaseBetScore() {
+        return baseBetScore_;
+      }
+      /**
+       * <pre>
+       *当前基础下注值
+       * </pre>
+       *
+       * <code>required int32 BaseBetScore = 7;</code>
+       */
+      public Builder setBaseBetScore(int value) {
+        bitField0_ |= 0x00000020;
+        baseBetScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *当前基础下注值
+       * </pre>
+       *
+       * <code>required int32 BaseBetScore = 7;</code>
+       */
+      public Builder clearBaseBetScore() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        baseBetScore_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int readyCd_ ;
+      /**
+       * <pre>
+       *准备cd
+       * </pre>
+       *
+       * <code>optional int32 ReadyCd = 8;</code>
+       */
+      public boolean hasReadyCd() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <pre>
+       *准备cd
+       * </pre>
+       *
+       * <code>optional int32 ReadyCd = 8;</code>
+       */
+      public int getReadyCd() {
+        return readyCd_;
+      }
+      /**
+       * <pre>
+       *准备cd
+       * </pre>
+       *
+       * <code>optional int32 ReadyCd = 8;</code>
+       */
+      public Builder setReadyCd(int value) {
+        bitField0_ |= 0x00000040;
+        readyCd_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *准备cd
+       * </pre>
+       *
+       * <code>optional int32 ReadyCd = 8;</code>
+       */
+      public Builder clearReadyCd() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        readyCd_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int betCd_ ;
+      /**
+       * <pre>
+       *下注cd（超时则弃牌）
+       * </pre>
+       *
+       * <code>optional int32 BetCd = 9;</code>
+       */
+      public boolean hasBetCd() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <pre>
+       *下注cd（超时则弃牌）
+       * </pre>
+       *
+       * <code>optional int32 BetCd = 9;</code>
+       */
+      public int getBetCd() {
+        return betCd_;
+      }
+      /**
+       * <pre>
+       *下注cd（超时则弃牌）
+       * </pre>
+       *
+       * <code>optional int32 BetCd = 9;</code>
+       */
+      public Builder setBetCd(int value) {
+        bitField0_ |= 0x00000080;
+        betCd_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *下注cd（超时则弃牌）
+       * </pre>
+       *
+       * <code>optional int32 BetCd = 9;</code>
+       */
+      public Builder clearBetCd() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        betCd_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int openCardCd_ ;
+      /**
+       * <pre>
+       *亮牌cd
+       * </pre>
+       *
+       * <code>optional int32 OpenCardCd = 10;</code>
+       */
+      public boolean hasOpenCardCd() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <pre>
+       *亮牌cd
+       * </pre>
+       *
+       * <code>optional int32 OpenCardCd = 10;</code>
+       */
+      public int getOpenCardCd() {
+        return openCardCd_;
+      }
+      /**
+       * <pre>
+       *亮牌cd
+       * </pre>
+       *
+       * <code>optional int32 OpenCardCd = 10;</code>
+       */
+      public Builder setOpenCardCd(int value) {
+        bitField0_ |= 0x00000100;
+        openCardCd_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *亮牌cd
+       * </pre>
+       *
+       * <code>optional int32 OpenCardCd = 10;</code>
+       */
+      public Builder clearOpenCardCd() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        openCardCd_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int betMaxScore_ ;
+      /**
+       * <pre>
+       *下注积分上限
+       * </pre>
+       *
+       * <code>required int32 BetMaxScore = 11;</code>
+       */
+      public boolean hasBetMaxScore() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <pre>
+       *下注积分上限
+       * </pre>
+       *
+       * <code>required int32 BetMaxScore = 11;</code>
+       */
+      public int getBetMaxScore() {
+        return betMaxScore_;
+      }
+      /**
+       * <pre>
+       *下注积分上限
+       * </pre>
+       *
+       * <code>required int32 BetMaxScore = 11;</code>
+       */
+      public Builder setBetMaxScore(int value) {
+        bitField0_ |= 0x00000200;
+        betMaxScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *下注积分上限
+       * </pre>
+       *
+       * <code>required int32 BetMaxScore = 11;</code>
+       */
+      public Builder clearBetMaxScore() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        betMaxScore_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int gameNum_ ;
+      /**
+       * <pre>
+       *游戏局数
+       * </pre>
+       *
+       * <code>required int32 GameNum = 12;</code>
+       */
+      public boolean hasGameNum() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <pre>
+       *游戏局数
+       * </pre>
+       *
+       * <code>required int32 GameNum = 12;</code>
+       */
+      public int getGameNum() {
+        return gameNum_;
+      }
+      /**
+       * <pre>
+       *游戏局数
+       * </pre>
+       *
+       * <code>required int32 GameNum = 12;</code>
+       */
+      public Builder setGameNum(int value) {
+        bitField0_ |= 0x00000400;
+        gameNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *游戏局数
+       * </pre>
+       *
+       * <code>required int32 GameNum = 12;</code>
+       */
+      public Builder clearGameNum() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        gameNum_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int isWatch_ ;
+      /**
+       * <pre>
+       *是否可以观战
+       * </pre>
+       *
+       * <code>optional int32 IsWatch = 13;</code>
+       */
+      public boolean hasIsWatch() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <pre>
+       *是否可以观战
+       * </pre>
+       *
+       * <code>optional int32 IsWatch = 13;</code>
+       */
+      public int getIsWatch() {
+        return isWatch_;
+      }
+      /**
+       * <pre>
+       *是否可以观战
+       * </pre>
+       *
+       * <code>optional int32 IsWatch = 13;</code>
+       */
+      public Builder setIsWatch(int value) {
+        bitField0_ |= 0x00000800;
+        isWatch_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *是否可以观战
+       * </pre>
+       *
+       * <code>optional int32 IsWatch = 13;</code>
+       */
+      public Builder clearIsWatch() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        isWatch_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object betMultiple_ = "";
+      /**
+       * <pre>
+       *桌子加注倍数
+       * </pre>
+       *
+       * <code>required string BetMultiple = 14;</code>
+       */
+      public boolean hasBetMultiple() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <pre>
+       *桌子加注倍数
+       * </pre>
+       *
+       * <code>required string BetMultiple = 14;</code>
+       */
+      public java.lang.String getBetMultiple() {
+        java.lang.Object ref = betMultiple_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            betMultiple_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *桌子加注倍数
+       * </pre>
+       *
+       * <code>required string BetMultiple = 14;</code>
+       */
+      public com.google.protobuf.ByteString
+          getBetMultipleBytes() {
+        java.lang.Object ref = betMultiple_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          betMultiple_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *桌子加注倍数
+       * </pre>
+       *
+       * <code>required string BetMultiple = 14;</code>
+       */
+      public Builder setBetMultiple(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00001000;
+        betMultiple_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *桌子加注倍数
+       * </pre>
+       *
+       * <code>required string BetMultiple = 14;</code>
+       */
+      public Builder clearBetMultiple() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        betMultiple_ = getDefaultInstance().getBetMultiple();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *桌子加注倍数
+       * </pre>
+       *
+       * <code>required string BetMultiple = 14;</code>
+       */
+      public Builder setBetMultipleBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00001000;
+        betMultiple_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int headSculpture_ ;
+      /**
+       * <pre>
+       *头像id
+       * </pre>
+       *
+       * <code>optional int32 HeadSculpture = 15;</code>
+       */
+      public boolean hasHeadSculpture() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      /**
+       * <pre>
+       *头像id
+       * </pre>
+       *
+       * <code>optional int32 HeadSculpture = 15;</code>
+       */
+      public int getHeadSculpture() {
+        return headSculpture_;
+      }
+      /**
+       * <pre>
+       *头像id
+       * </pre>
+       *
+       * <code>optional int32 HeadSculpture = 15;</code>
+       */
+      public Builder setHeadSculpture(int value) {
+        bitField0_ |= 0x00002000;
+        headSculpture_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *头像id
+       * </pre>
+       *
+       * <code>optional int32 HeadSculpture = 15;</code>
+       */
+      public Builder clearHeadSculpture() {
+        bitField0_ = (bitField0_ & ~0x00002000);
+        headSculpture_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int cardSkin_ ;
+      /**
+       * <pre>
+       *手牌皮肤
+       * </pre>
+       *
+       * <code>optional int32 CardSkin = 16;</code>
+       */
+      public boolean hasCardSkin() {
+        return ((bitField0_ & 0x00004000) == 0x00004000);
+      }
+      /**
+       * <pre>
+       *手牌皮肤
+       * </pre>
+       *
+       * <code>optional int32 CardSkin = 16;</code>
+       */
+      public int getCardSkin() {
+        return cardSkin_;
+      }
+      /**
+       * <pre>
+       *手牌皮肤
+       * </pre>
+       *
+       * <code>optional int32 CardSkin = 16;</code>
+       */
+      public Builder setCardSkin(int value) {
+        bitField0_ |= 0x00004000;
+        cardSkin_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *手牌皮肤
+       * </pre>
+       *
+       * <code>optional int32 CardSkin = 16;</code>
+       */
+      public Builder clearCardSkin() {
+        bitField0_ = (bitField0_ & ~0x00004000);
+        cardSkin_ = 0;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
@@ -17335,7 +18986,7 @@ public final class JoloRoom {
      *座位ID
      * </pre>
      *
-     * <code>required string SeatId = 5;</code>
+     * <code>optional string SeatId = 6;</code>
      */
     boolean hasSeatId();
     /**
@@ -17343,7 +18994,7 @@ public final class JoloRoom {
      *座位ID
      * </pre>
      *
-     * <code>required string SeatId = 5;</code>
+     * <code>optional string SeatId = 6;</code>
      */
     java.lang.String getSeatId();
     /**
@@ -17351,17 +19002,86 @@ public final class JoloRoom {
      *座位ID
      * </pre>
      *
-     * <code>required string SeatId = 5;</code>
+     * <code>optional string SeatId = 6;</code>
      */
     com.google.protobuf.ByteString
         getSeatIdBytes();
 
     /**
      * <pre>
+     *正在桌子上玩牌的玩家打牌状态信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+     */
+    java.util.List<JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo> 
+        getPlayerInfoListList();
+    /**
+     * <pre>
+     *正在桌子上玩牌的玩家打牌状态信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+     */
+    JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo getPlayerInfoList(int index);
+    /**
+     * <pre>
+     *正在桌子上玩牌的玩家打牌状态信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+     */
+    int getPlayerInfoListCount();
+    /**
+     * <pre>
+     *正在桌子上玩牌的玩家打牌状态信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+     */
+    java.util.List<? extends JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfoOrBuilder> 
+        getPlayerInfoListOrBuilderList();
+    /**
+     * <pre>
+     *正在桌子上玩牌的玩家打牌状态信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+     */
+    JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfoOrBuilder getPlayerInfoListOrBuilder(
+        int index);
+
+    /**
+     * <pre>
+     *桌子信息
+     * </pre>
+     *
+     * <code>required .JoloProtobuf.RoomSvr.JoloGame_Table_Info TableInfo = 8;</code>
+     */
+    boolean hasTableInfo();
+    /**
+     * <pre>
+     *桌子信息
+     * </pre>
+     *
+     * <code>required .JoloProtobuf.RoomSvr.JoloGame_Table_Info TableInfo = 8;</code>
+     */
+    JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info getTableInfo();
+    /**
+     * <pre>
+     *桌子信息
+     * </pre>
+     *
+     * <code>required .JoloProtobuf.RoomSvr.JoloGame_Table_Info TableInfo = 8;</code>
+     */
+    JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_InfoOrBuilder getTableInfoOrBuilder();
+
+    /**
+     * <pre>
      *结果,成功或失败
      * </pre>
      *
-     * <code>required int32 Result = 6;</code>
+     * <code>required int32 Result = 9;</code>
      */
     boolean hasResult();
     /**
@@ -17369,7 +19089,7 @@ public final class JoloRoom {
      *结果,成功或失败
      * </pre>
      *
-     * <code>required int32 Result = 6;</code>
+     * <code>required int32 Result = 9;</code>
      */
     int getResult();
 
@@ -17378,7 +19098,7 @@ public final class JoloRoom {
      *失败信息
      * </pre>
      *
-     * <code>optional string ResultMsg = 7;</code>
+     * <code>optional string ResultMsg = 10;</code>
      */
     boolean hasResultMsg();
     /**
@@ -17386,7 +19106,7 @@ public final class JoloRoom {
      *失败信息
      * </pre>
      *
-     * <code>optional string ResultMsg = 7;</code>
+     * <code>optional string ResultMsg = 10;</code>
      */
     java.lang.String getResultMsg();
     /**
@@ -17394,7 +19114,7 @@ public final class JoloRoom {
      *失败信息
      * </pre>
      *
-     * <code>optional string ResultMsg = 7;</code>
+     * <code>optional string ResultMsg = 10;</code>
      */
     com.google.protobuf.ByteString
         getResultMsgBytes();
@@ -17404,7 +19124,7 @@ public final class JoloRoom {
      *客户端可通过此ID调用GateSvr实现与GameSvr的交互
      * </pre>
      *
-     * <code>optional string JoinGameSvrId = 8;</code>
+     * <code>optional string JoinGameSvrId = 11;</code>
      */
     boolean hasJoinGameSvrId();
     /**
@@ -17412,7 +19132,7 @@ public final class JoloRoom {
      *客户端可通过此ID调用GateSvr实现与GameSvr的交互
      * </pre>
      *
-     * <code>optional string JoinGameSvrId = 8;</code>
+     * <code>optional string JoinGameSvrId = 11;</code>
      */
     java.lang.String getJoinGameSvrId();
     /**
@@ -17420,85 +19140,17 @@ public final class JoloRoom {
      *客户端可通过此ID调用GateSvr实现与GameSvr的交互
      * </pre>
      *
-     * <code>optional string JoinGameSvrId = 8;</code>
+     * <code>optional string JoinGameSvrId = 11;</code>
      */
     com.google.protobuf.ByteString
         getJoinGameSvrIdBytes();
 
     /**
      * <pre>
-     *底注
-     * </pre>
-     *
-     * <code>optional double BootAmount = 9;</code>
-     */
-    boolean hasBootAmount();
-    /**
-     * <pre>
-     *底注
-     * </pre>
-     *
-     * <code>optional double BootAmount = 9;</code>
-     */
-    double getBootAmount();
-
-    /**
-     * <pre>
-     *下注倒计时 and 选择用户比牌
-     * </pre>
-     *
-     * <code>optional int32 BetCd = 10;</code>
-     */
-    boolean hasBetCd();
-    /**
-     * <pre>
-     *下注倒计时 and 选择用户比牌
-     * </pre>
-     *
-     * <code>optional int32 BetCd = 10;</code>
-     */
-    int getBetCd();
-
-    /**
-     * <pre>
-     *游戏开始倒计时（发牌前倒计时）
-     * </pre>
-     *
-     * <code>optional int32 GameStartCd = 11;</code>
-     */
-    boolean hasGameStartCd();
-    /**
-     * <pre>
-     *游戏开始倒计时（发牌前倒计时）
-     * </pre>
-     *
-     * <code>optional int32 GameStartCd = 11;</code>
-     */
-    int getGameStartCd();
-
-    /**
-     * <pre>
-     *最小入桌积分(所有房间)
-     * </pre>
-     *
-     * <code>optional int32 minJoinTableScore = 12;</code>
-     */
-    boolean hasMinJoinTableScore();
-    /**
-     * <pre>
-     *最小入桌积分(所有房间)
-     * </pre>
-     *
-     * <code>optional int32 minJoinTableScore = 12;</code>
-     */
-    int getMinJoinTableScore();
-
-    /**
-     * <pre>
      *是否断线重连1是0不是
      * </pre>
      *
-     * <code>optional int32 reconnection = 13;</code>
+     * <code>optional int32 reconnection = 12;</code>
      */
     boolean hasReconnection();
     /**
@@ -17506,9 +19158,95 @@ public final class JoloRoom {
      *是否断线重连1是0不是
      * </pre>
      *
-     * <code>optional int32 reconnection = 13;</code>
+     * <code>optional int32 reconnection = 12;</code>
      */
     int getReconnection();
+
+    /**
+     * <pre>
+     *玩家不在游戏中（存在并且不在游戏中1）
+     * </pre>
+     *
+     * <code>optional uint32 NotInGame = 13;</code>
+     */
+    boolean hasNotInGame();
+    /**
+     * <pre>
+     *玩家不在游戏中（存在并且不在游戏中1）
+     * </pre>
+     *
+     * <code>optional uint32 NotInGame = 13;</code>
+     */
+    int getNotInGame();
+
+    /**
+     * <pre>
+     *选定的玩法
+     * </pre>
+     *
+     * <code>optional string PlayType = 14;</code>
+     */
+    boolean hasPlayType();
+    /**
+     * <pre>
+     *选定的玩法
+     * </pre>
+     *
+     * <code>optional string PlayType = 14;</code>
+     */
+    java.lang.String getPlayType();
+    /**
+     * <pre>
+     *选定的玩法
+     * </pre>
+     *
+     * <code>optional string PlayType = 14;</code>
+     */
+    com.google.protobuf.ByteString
+        getPlayTypeBytes();
+
+    /**
+     * <pre>
+     *桌子加注倍数
+     * </pre>
+     *
+     * <code>required string BetMultiple = 15;</code>
+     */
+    boolean hasBetMultiple();
+    /**
+     * <pre>
+     *桌子加注倍数
+     * </pre>
+     *
+     * <code>required string BetMultiple = 15;</code>
+     */
+    java.lang.String getBetMultiple();
+    /**
+     * <pre>
+     *桌子加注倍数
+     * </pre>
+     *
+     * <code>required string BetMultiple = 15;</code>
+     */
+    com.google.protobuf.ByteString
+        getBetMultipleBytes();
+
+    /**
+     * <pre>
+     *玩家当前的房卡数量
+     * </pre>
+     *
+     * <code>optional int32 money = 16;</code>
+     */
+    boolean hasMoney();
+    /**
+     * <pre>
+     *玩家当前的房卡数量
+     * </pre>
+     *
+     * <code>optional int32 money = 16;</code>
+     */
+    int getMoney();
   }
   /**
    * Protobuf type {@code JoloProtobuf.RoomSvr.JoloRoom_ApplyJoinTableAck}
@@ -17528,14 +19266,15 @@ public final class JoloRoom {
       roomId_ = "";
       tableId_ = "";
       seatId_ = "";
+      playerInfoList_ = java.util.Collections.emptyList();
       result_ = 0;
       resultMsg_ = "";
       joinGameSvrId_ = "";
-      bootAmount_ = 0D;
-      betCd_ = 0;
-      gameStartCd_ = 0;
-      minJoinTableScore_ = 0;
       reconnection_ = 0;
+      notInGame_ = 0;
+      playType_ = "";
+      betMultiple_ = "";
+      money_ = 0;
     }
 
     @java.lang.Override
@@ -17593,52 +19332,76 @@ public final class JoloRoom {
               tableId_ = bs;
               break;
             }
-            case 42: {
+            case 50: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
               seatId_ = bs;
               break;
             }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              result_ = input.readInt32();
-              break;
-            }
             case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000040;
-              resultMsg_ = bs;
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+                playerInfoList_ = new java.util.ArrayList<JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo>();
+                mutable_bitField0_ |= 0x00000020;
+              }
+              playerInfoList_.add(
+                  input.readMessage(JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.PARSER, extensionRegistry));
               break;
             }
             case 66: {
+              JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000020) == 0x00000020)) {
+                subBuilder = tableInfo_.toBuilder();
+              }
+              tableInfo_ = input.readMessage(JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(tableInfo_);
+                tableInfo_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000020;
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000040;
+              result_ = input.readInt32();
+              break;
+            }
+            case 82: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000080;
+              resultMsg_ = bs;
+              break;
+            }
+            case 90: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000100;
               joinGameSvrId_ = bs;
               break;
             }
-            case 73: {
-              bitField0_ |= 0x00000100;
-              bootAmount_ = input.readDouble();
-              break;
-            }
-            case 80: {
-              bitField0_ |= 0x00000200;
-              betCd_ = input.readInt32();
-              break;
-            }
-            case 88: {
-              bitField0_ |= 0x00000400;
-              gameStartCd_ = input.readInt32();
-              break;
-            }
             case 96: {
-              bitField0_ |= 0x00000800;
-              minJoinTableScore_ = input.readInt32();
+              bitField0_ |= 0x00000200;
+              reconnection_ = input.readInt32();
               break;
             }
             case 104: {
+              bitField0_ |= 0x00000400;
+              notInGame_ = input.readUInt32();
+              break;
+            }
+            case 114: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000800;
+              playType_ = bs;
+              break;
+            }
+            case 122: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00001000;
-              reconnection_ = input.readInt32();
+              betMultiple_ = bs;
+              break;
+            }
+            case 128: {
+              bitField0_ |= 0x00002000;
+              money_ = input.readInt32();
               break;
             }
           }
@@ -17649,6 +19412,9 @@ public final class JoloRoom {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+          playerInfoList_ = java.util.Collections.unmodifiableList(playerInfoList_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -17882,14 +19648,14 @@ public final class JoloRoom {
       }
     }
 
-    public static final int SEATID_FIELD_NUMBER = 5;
+    public static final int SEATID_FIELD_NUMBER = 6;
     private volatile java.lang.Object seatId_;
     /**
      * <pre>
      *座位ID
      * </pre>
      *
-     * <code>required string SeatId = 5;</code>
+     * <code>optional string SeatId = 6;</code>
      */
     public boolean hasSeatId() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
@@ -17899,7 +19665,7 @@ public final class JoloRoom {
      *座位ID
      * </pre>
      *
-     * <code>required string SeatId = 5;</code>
+     * <code>optional string SeatId = 6;</code>
      */
     public java.lang.String getSeatId() {
       java.lang.Object ref = seatId_;
@@ -17920,7 +19686,7 @@ public final class JoloRoom {
      *座位ID
      * </pre>
      *
-     * <code>required string SeatId = 5;</code>
+     * <code>optional string SeatId = 6;</code>
      */
     public com.google.protobuf.ByteString
         getSeatIdBytes() {
@@ -17936,47 +19702,135 @@ public final class JoloRoom {
       }
     }
 
-    public static final int RESULT_FIELD_NUMBER = 6;
+    public static final int PLAYERINFOLIST_FIELD_NUMBER = 7;
+    private java.util.List<JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo> playerInfoList_;
+    /**
+     * <pre>
+     *正在桌子上玩牌的玩家打牌状态信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+     */
+    public java.util.List<JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo> getPlayerInfoListList() {
+      return playerInfoList_;
+    }
+    /**
+     * <pre>
+     *正在桌子上玩牌的玩家打牌状态信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+     */
+    public java.util.List<? extends JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfoOrBuilder> 
+        getPlayerInfoListOrBuilderList() {
+      return playerInfoList_;
+    }
+    /**
+     * <pre>
+     *正在桌子上玩牌的玩家打牌状态信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+     */
+    public int getPlayerInfoListCount() {
+      return playerInfoList_.size();
+    }
+    /**
+     * <pre>
+     *正在桌子上玩牌的玩家打牌状态信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+     */
+    public JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo getPlayerInfoList(int index) {
+      return playerInfoList_.get(index);
+    }
+    /**
+     * <pre>
+     *正在桌子上玩牌的玩家打牌状态信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+     */
+    public JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfoOrBuilder getPlayerInfoListOrBuilder(
+        int index) {
+      return playerInfoList_.get(index);
+    }
+
+    public static final int TABLEINFO_FIELD_NUMBER = 8;
+    private JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info tableInfo_;
+    /**
+     * <pre>
+     *桌子信息
+     * </pre>
+     *
+     * <code>required .JoloProtobuf.RoomSvr.JoloGame_Table_Info TableInfo = 8;</code>
+     */
+    public boolean hasTableInfo() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <pre>
+     *桌子信息
+     * </pre>
+     *
+     * <code>required .JoloProtobuf.RoomSvr.JoloGame_Table_Info TableInfo = 8;</code>
+     */
+    public JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info getTableInfo() {
+      return tableInfo_ == null ? JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.getDefaultInstance() : tableInfo_;
+    }
+    /**
+     * <pre>
+     *桌子信息
+     * </pre>
+     *
+     * <code>required .JoloProtobuf.RoomSvr.JoloGame_Table_Info TableInfo = 8;</code>
+     */
+    public JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_InfoOrBuilder getTableInfoOrBuilder() {
+      return tableInfo_ == null ? JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.getDefaultInstance() : tableInfo_;
+    }
+
+    public static final int RESULT_FIELD_NUMBER = 9;
     private int result_;
     /**
      * <pre>
      *结果,成功或失败
      * </pre>
      *
-     * <code>required int32 Result = 6;</code>
+     * <code>required int32 Result = 9;</code>
      */
     public boolean hasResult() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <pre>
      *结果,成功或失败
      * </pre>
      *
-     * <code>required int32 Result = 6;</code>
+     * <code>required int32 Result = 9;</code>
      */
     public int getResult() {
       return result_;
     }
 
-    public static final int RESULTMSG_FIELD_NUMBER = 7;
+    public static final int RESULTMSG_FIELD_NUMBER = 10;
     private volatile java.lang.Object resultMsg_;
     /**
      * <pre>
      *失败信息
      * </pre>
      *
-     * <code>optional string ResultMsg = 7;</code>
+     * <code>optional string ResultMsg = 10;</code>
      */
     public boolean hasResultMsg() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
      * <pre>
      *失败信息
      * </pre>
      *
-     * <code>optional string ResultMsg = 7;</code>
+     * <code>optional string ResultMsg = 10;</code>
      */
     public java.lang.String getResultMsg() {
       java.lang.Object ref = resultMsg_;
@@ -17997,7 +19851,7 @@ public final class JoloRoom {
      *失败信息
      * </pre>
      *
-     * <code>optional string ResultMsg = 7;</code>
+     * <code>optional string ResultMsg = 10;</code>
      */
     public com.google.protobuf.ByteString
         getResultMsgBytes() {
@@ -18013,24 +19867,24 @@ public final class JoloRoom {
       }
     }
 
-    public static final int JOINGAMESVRID_FIELD_NUMBER = 8;
+    public static final int JOINGAMESVRID_FIELD_NUMBER = 11;
     private volatile java.lang.Object joinGameSvrId_;
     /**
      * <pre>
      *客户端可通过此ID调用GateSvr实现与GameSvr的交互
      * </pre>
      *
-     * <code>optional string JoinGameSvrId = 8;</code>
+     * <code>optional string JoinGameSvrId = 11;</code>
      */
     public boolean hasJoinGameSvrId() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
      * <pre>
      *客户端可通过此ID调用GateSvr实现与GameSvr的交互
      * </pre>
      *
-     * <code>optional string JoinGameSvrId = 8;</code>
+     * <code>optional string JoinGameSvrId = 11;</code>
      */
     public java.lang.String getJoinGameSvrId() {
       java.lang.Object ref = joinGameSvrId_;
@@ -18051,7 +19905,7 @@ public final class JoloRoom {
      *客户端可通过此ID调用GateSvr实现与GameSvr的交互
      * </pre>
      *
-     * <code>optional string JoinGameSvrId = 8;</code>
+     * <code>optional string JoinGameSvrId = 11;</code>
      */
     public com.google.protobuf.ByteString
         getJoinGameSvrIdBytes() {
@@ -18067,119 +19921,181 @@ public final class JoloRoom {
       }
     }
 
-    public static final int BOOTAMOUNT_FIELD_NUMBER = 9;
-    private double bootAmount_;
-    /**
-     * <pre>
-     *底注
-     * </pre>
-     *
-     * <code>optional double BootAmount = 9;</code>
-     */
-    public boolean hasBootAmount() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
-    }
-    /**
-     * <pre>
-     *底注
-     * </pre>
-     *
-     * <code>optional double BootAmount = 9;</code>
-     */
-    public double getBootAmount() {
-      return bootAmount_;
-    }
-
-    public static final int BETCD_FIELD_NUMBER = 10;
-    private int betCd_;
-    /**
-     * <pre>
-     *下注倒计时 and 选择用户比牌
-     * </pre>
-     *
-     * <code>optional int32 BetCd = 10;</code>
-     */
-    public boolean hasBetCd() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
-    }
-    /**
-     * <pre>
-     *下注倒计时 and 选择用户比牌
-     * </pre>
-     *
-     * <code>optional int32 BetCd = 10;</code>
-     */
-    public int getBetCd() {
-      return betCd_;
-    }
-
-    public static final int GAMESTARTCD_FIELD_NUMBER = 11;
-    private int gameStartCd_;
-    /**
-     * <pre>
-     *游戏开始倒计时（发牌前倒计时）
-     * </pre>
-     *
-     * <code>optional int32 GameStartCd = 11;</code>
-     */
-    public boolean hasGameStartCd() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
-    }
-    /**
-     * <pre>
-     *游戏开始倒计时（发牌前倒计时）
-     * </pre>
-     *
-     * <code>optional int32 GameStartCd = 11;</code>
-     */
-    public int getGameStartCd() {
-      return gameStartCd_;
-    }
-
-    public static final int MINJOINTABLESCORE_FIELD_NUMBER = 12;
-    private int minJoinTableScore_;
-    /**
-     * <pre>
-     *最小入桌积分(所有房间)
-     * </pre>
-     *
-     * <code>optional int32 minJoinTableScore = 12;</code>
-     */
-    public boolean hasMinJoinTableScore() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
-    }
-    /**
-     * <pre>
-     *最小入桌积分(所有房间)
-     * </pre>
-     *
-     * <code>optional int32 minJoinTableScore = 12;</code>
-     */
-    public int getMinJoinTableScore() {
-      return minJoinTableScore_;
-    }
-
-    public static final int RECONNECTION_FIELD_NUMBER = 13;
+    public static final int RECONNECTION_FIELD_NUMBER = 12;
     private int reconnection_;
     /**
      * <pre>
      *是否断线重连1是0不是
      * </pre>
      *
-     * <code>optional int32 reconnection = 13;</code>
+     * <code>optional int32 reconnection = 12;</code>
      */
     public boolean hasReconnection() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
      * <pre>
      *是否断线重连1是0不是
      * </pre>
      *
-     * <code>optional int32 reconnection = 13;</code>
+     * <code>optional int32 reconnection = 12;</code>
      */
     public int getReconnection() {
       return reconnection_;
+    }
+
+    public static final int NOTINGAME_FIELD_NUMBER = 13;
+    private int notInGame_;
+    /**
+     * <pre>
+     *玩家不在游戏中（存在并且不在游戏中1）
+     * </pre>
+     *
+     * <code>optional uint32 NotInGame = 13;</code>
+     */
+    public boolean hasNotInGame() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <pre>
+     *玩家不在游戏中（存在并且不在游戏中1）
+     * </pre>
+     *
+     * <code>optional uint32 NotInGame = 13;</code>
+     */
+    public int getNotInGame() {
+      return notInGame_;
+    }
+
+    public static final int PLAYTYPE_FIELD_NUMBER = 14;
+    private volatile java.lang.Object playType_;
+    /**
+     * <pre>
+     *选定的玩法
+     * </pre>
+     *
+     * <code>optional string PlayType = 14;</code>
+     */
+    public boolean hasPlayType() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <pre>
+     *选定的玩法
+     * </pre>
+     *
+     * <code>optional string PlayType = 14;</code>
+     */
+    public java.lang.String getPlayType() {
+      java.lang.Object ref = playType_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          playType_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *选定的玩法
+     * </pre>
+     *
+     * <code>optional string PlayType = 14;</code>
+     */
+    public com.google.protobuf.ByteString
+        getPlayTypeBytes() {
+      java.lang.Object ref = playType_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        playType_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int BETMULTIPLE_FIELD_NUMBER = 15;
+    private volatile java.lang.Object betMultiple_;
+    /**
+     * <pre>
+     *桌子加注倍数
+     * </pre>
+     *
+     * <code>required string BetMultiple = 15;</code>
+     */
+    public boolean hasBetMultiple() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <pre>
+     *桌子加注倍数
+     * </pre>
+     *
+     * <code>required string BetMultiple = 15;</code>
+     */
+    public java.lang.String getBetMultiple() {
+      java.lang.Object ref = betMultiple_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          betMultiple_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *桌子加注倍数
+     * </pre>
+     *
+     * <code>required string BetMultiple = 15;</code>
+     */
+    public com.google.protobuf.ByteString
+        getBetMultipleBytes() {
+      java.lang.Object ref = betMultiple_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        betMultiple_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int MONEY_FIELD_NUMBER = 16;
+    private int money_;
+    /**
+     * <pre>
+     *玩家当前的房卡数量
+     * </pre>
+     *
+     * <code>optional int32 money = 16;</code>
+     */
+    public boolean hasMoney() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    /**
+     * <pre>
+     *玩家当前的房卡数量
+     * </pre>
+     *
+     * <code>optional int32 money = 16;</code>
+     */
+    public int getMoney() {
+      return money_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -18204,11 +20120,25 @@ public final class JoloRoom {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasSeatId()) {
+      if (!hasTableInfo()) {
         memoizedIsInitialized = 0;
         return false;
       }
       if (!hasResult()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBetMultiple()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getPlayerInfoListCount(); i++) {
+        if (!getPlayerInfoList(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (!getTableInfo().isInitialized()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -18231,31 +20161,37 @@ public final class JoloRoom {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, tableId_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, seatId_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, seatId_);
+      }
+      for (int i = 0; i < playerInfoList_.size(); i++) {
+        output.writeMessage(7, playerInfoList_.get(i));
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, result_);
+        output.writeMessage(8, getTableInfo());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, resultMsg_);
+        output.writeInt32(9, result_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, joinGameSvrId_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, resultMsg_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeDouble(9, bootAmount_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 11, joinGameSvrId_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeInt32(10, betCd_);
+        output.writeInt32(12, reconnection_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt32(11, gameStartCd_);
+        output.writeUInt32(13, notInGame_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeInt32(12, minJoinTableScore_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 14, playType_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        output.writeInt32(13, reconnection_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 15, betMultiple_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        output.writeInt32(16, money_);
       }
       unknownFields.writeTo(output);
     }
@@ -18278,37 +20214,43 @@ public final class JoloRoom {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, tableId_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, seatId_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, seatId_);
+      }
+      for (int i = 0; i < playerInfoList_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, playerInfoList_.get(i));
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, result_);
+          .computeMessageSize(8, getTableInfo());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, resultMsg_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, result_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, joinGameSvrId_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, resultMsg_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(9, bootAmount_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, joinGameSvrId_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, betCd_);
+          .computeInt32Size(12, reconnection_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, gameStartCd_);
+          .computeUInt32Size(13, notInGame_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(12, minJoinTableScore_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, playType_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(15, betMultiple_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(13, reconnection_);
+          .computeInt32Size(16, money_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -18351,6 +20293,13 @@ public final class JoloRoom {
         result = result && getSeatId()
             .equals(other.getSeatId());
       }
+      result = result && getPlayerInfoListList()
+          .equals(other.getPlayerInfoListList());
+      result = result && (hasTableInfo() == other.hasTableInfo());
+      if (hasTableInfo()) {
+        result = result && getTableInfo()
+            .equals(other.getTableInfo());
+      }
       result = result && (hasResult() == other.hasResult());
       if (hasResult()) {
         result = result && (getResult()
@@ -18366,32 +20315,30 @@ public final class JoloRoom {
         result = result && getJoinGameSvrId()
             .equals(other.getJoinGameSvrId());
       }
-      result = result && (hasBootAmount() == other.hasBootAmount());
-      if (hasBootAmount()) {
-        result = result && (
-            java.lang.Double.doubleToLongBits(getBootAmount())
-            == java.lang.Double.doubleToLongBits(
-                other.getBootAmount()));
-      }
-      result = result && (hasBetCd() == other.hasBetCd());
-      if (hasBetCd()) {
-        result = result && (getBetCd()
-            == other.getBetCd());
-      }
-      result = result && (hasGameStartCd() == other.hasGameStartCd());
-      if (hasGameStartCd()) {
-        result = result && (getGameStartCd()
-            == other.getGameStartCd());
-      }
-      result = result && (hasMinJoinTableScore() == other.hasMinJoinTableScore());
-      if (hasMinJoinTableScore()) {
-        result = result && (getMinJoinTableScore()
-            == other.getMinJoinTableScore());
-      }
       result = result && (hasReconnection() == other.hasReconnection());
       if (hasReconnection()) {
         result = result && (getReconnection()
             == other.getReconnection());
+      }
+      result = result && (hasNotInGame() == other.hasNotInGame());
+      if (hasNotInGame()) {
+        result = result && (getNotInGame()
+            == other.getNotInGame());
+      }
+      result = result && (hasPlayType() == other.hasPlayType());
+      if (hasPlayType()) {
+        result = result && getPlayType()
+            .equals(other.getPlayType());
+      }
+      result = result && (hasBetMultiple() == other.hasBetMultiple());
+      if (hasBetMultiple()) {
+        result = result && getBetMultiple()
+            .equals(other.getBetMultiple());
+      }
+      result = result && (hasMoney() == other.hasMoney());
+      if (hasMoney()) {
+        result = result && (getMoney()
+            == other.getMoney());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -18424,6 +20371,14 @@ public final class JoloRoom {
         hash = (37 * hash) + SEATID_FIELD_NUMBER;
         hash = (53 * hash) + getSeatId().hashCode();
       }
+      if (getPlayerInfoListCount() > 0) {
+        hash = (37 * hash) + PLAYERINFOLIST_FIELD_NUMBER;
+        hash = (53 * hash) + getPlayerInfoListList().hashCode();
+      }
+      if (hasTableInfo()) {
+        hash = (37 * hash) + TABLEINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getTableInfo().hashCode();
+      }
       if (hasResult()) {
         hash = (37 * hash) + RESULT_FIELD_NUMBER;
         hash = (53 * hash) + getResult();
@@ -18436,26 +20391,25 @@ public final class JoloRoom {
         hash = (37 * hash) + JOINGAMESVRID_FIELD_NUMBER;
         hash = (53 * hash) + getJoinGameSvrId().hashCode();
       }
-      if (hasBootAmount()) {
-        hash = (37 * hash) + BOOTAMOUNT_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            java.lang.Double.doubleToLongBits(getBootAmount()));
-      }
-      if (hasBetCd()) {
-        hash = (37 * hash) + BETCD_FIELD_NUMBER;
-        hash = (53 * hash) + getBetCd();
-      }
-      if (hasGameStartCd()) {
-        hash = (37 * hash) + GAMESTARTCD_FIELD_NUMBER;
-        hash = (53 * hash) + getGameStartCd();
-      }
-      if (hasMinJoinTableScore()) {
-        hash = (37 * hash) + MINJOINTABLESCORE_FIELD_NUMBER;
-        hash = (53 * hash) + getMinJoinTableScore();
-      }
       if (hasReconnection()) {
         hash = (37 * hash) + RECONNECTION_FIELD_NUMBER;
         hash = (53 * hash) + getReconnection();
+      }
+      if (hasNotInGame()) {
+        hash = (37 * hash) + NOTINGAME_FIELD_NUMBER;
+        hash = (53 * hash) + getNotInGame();
+      }
+      if (hasPlayType()) {
+        hash = (37 * hash) + PLAYTYPE_FIELD_NUMBER;
+        hash = (53 * hash) + getPlayType().hashCode();
+      }
+      if (hasBetMultiple()) {
+        hash = (37 * hash) + BETMULTIPLE_FIELD_NUMBER;
+        hash = (53 * hash) + getBetMultiple().hashCode();
+      }
+      if (hasMoney()) {
+        hash = (37 * hash) + MONEY_FIELD_NUMBER;
+        hash = (53 * hash) + getMoney();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -18582,6 +20536,8 @@ public final class JoloRoom {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
+          getPlayerInfoListFieldBuilder();
+          getTableInfoFieldBuilder();
         }
       }
       public Builder clear() {
@@ -18596,22 +20552,34 @@ public final class JoloRoom {
         bitField0_ = (bitField0_ & ~0x00000008);
         seatId_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
-        result_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        resultMsg_ = "";
+        if (playerInfoListBuilder_ == null) {
+          playerInfoList_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+        } else {
+          playerInfoListBuilder_.clear();
+        }
+        if (tableInfoBuilder_ == null) {
+          tableInfo_ = null;
+        } else {
+          tableInfoBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000040);
-        joinGameSvrId_ = "";
+        result_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
-        bootAmount_ = 0D;
+        resultMsg_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
-        betCd_ = 0;
+        joinGameSvrId_ = "";
         bitField0_ = (bitField0_ & ~0x00000200);
-        gameStartCd_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000400);
-        minJoinTableScore_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000800);
         reconnection_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        notInGame_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000800);
+        playType_ = "";
         bitField0_ = (bitField0_ & ~0x00001000);
+        betMultiple_ = "";
+        bitField0_ = (bitField0_ & ~0x00002000);
+        money_ = 0;
+        bitField0_ = (bitField0_ & ~0x00004000);
         return this;
       }
 
@@ -18656,38 +20624,55 @@ public final class JoloRoom {
           to_bitField0_ |= 0x00000010;
         }
         result.seatId_ = seatId_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (playerInfoListBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            playerInfoList_ = java.util.Collections.unmodifiableList(playerInfoList_);
+            bitField0_ = (bitField0_ & ~0x00000020);
+          }
+          result.playerInfoList_ = playerInfoList_;
+        } else {
+          result.playerInfoList_ = playerInfoListBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.result_ = result_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+        if (tableInfoBuilder_ == null) {
+          result.tableInfo_ = tableInfo_;
+        } else {
+          result.tableInfo_ = tableInfoBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.resultMsg_ = resultMsg_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+        result.result_ = result_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.joinGameSvrId_ = joinGameSvrId_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+        result.resultMsg_ = resultMsg_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.bootAmount_ = bootAmount_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+        result.joinGameSvrId_ = joinGameSvrId_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000200;
         }
-        result.betCd_ = betCd_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+        result.reconnection_ = reconnection_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000400;
         }
-        result.gameStartCd_ = gameStartCd_;
-        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+        result.notInGame_ = notInGame_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00000800;
         }
-        result.minJoinTableScore_ = minJoinTableScore_;
-        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+        result.playType_ = playType_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
           to_bitField0_ |= 0x00001000;
         }
-        result.reconnection_ = reconnection_;
+        result.betMultiple_ = betMultiple_;
+        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+          to_bitField0_ |= 0x00002000;
+        }
+        result.money_ = money_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -18755,33 +20740,66 @@ public final class JoloRoom {
           seatId_ = other.seatId_;
           onChanged();
         }
+        if (playerInfoListBuilder_ == null) {
+          if (!other.playerInfoList_.isEmpty()) {
+            if (playerInfoList_.isEmpty()) {
+              playerInfoList_ = other.playerInfoList_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+            } else {
+              ensurePlayerInfoListIsMutable();
+              playerInfoList_.addAll(other.playerInfoList_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.playerInfoList_.isEmpty()) {
+            if (playerInfoListBuilder_.isEmpty()) {
+              playerInfoListBuilder_.dispose();
+              playerInfoListBuilder_ = null;
+              playerInfoList_ = other.playerInfoList_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+              playerInfoListBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getPlayerInfoListFieldBuilder() : null;
+            } else {
+              playerInfoListBuilder_.addAllMessages(other.playerInfoList_);
+            }
+          }
+        }
+        if (other.hasTableInfo()) {
+          mergeTableInfo(other.getTableInfo());
+        }
         if (other.hasResult()) {
           setResult(other.getResult());
         }
         if (other.hasResultMsg()) {
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000100;
           resultMsg_ = other.resultMsg_;
           onChanged();
         }
         if (other.hasJoinGameSvrId()) {
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000200;
           joinGameSvrId_ = other.joinGameSvrId_;
           onChanged();
         }
-        if (other.hasBootAmount()) {
-          setBootAmount(other.getBootAmount());
-        }
-        if (other.hasBetCd()) {
-          setBetCd(other.getBetCd());
-        }
-        if (other.hasGameStartCd()) {
-          setGameStartCd(other.getGameStartCd());
-        }
-        if (other.hasMinJoinTableScore()) {
-          setMinJoinTableScore(other.getMinJoinTableScore());
-        }
         if (other.hasReconnection()) {
           setReconnection(other.getReconnection());
+        }
+        if (other.hasNotInGame()) {
+          setNotInGame(other.getNotInGame());
+        }
+        if (other.hasPlayType()) {
+          bitField0_ |= 0x00001000;
+          playType_ = other.playType_;
+          onChanged();
+        }
+        if (other.hasBetMultiple()) {
+          bitField0_ |= 0x00002000;
+          betMultiple_ = other.betMultiple_;
+          onChanged();
+        }
+        if (other.hasMoney()) {
+          setMoney(other.getMoney());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -18801,10 +20819,21 @@ public final class JoloRoom {
         if (!hasTableId()) {
           return false;
         }
-        if (!hasSeatId()) {
+        if (!hasTableInfo()) {
           return false;
         }
         if (!hasResult()) {
+          return false;
+        }
+        if (!hasBetMultiple()) {
+          return false;
+        }
+        for (int i = 0; i < getPlayerInfoListCount(); i++) {
+          if (!getPlayerInfoList(i).isInitialized()) {
+            return false;
+          }
+        }
+        if (!getTableInfo().isInitialized()) {
           return false;
         }
         return true;
@@ -19235,7 +21264,7 @@ public final class JoloRoom {
        *座位ID
        * </pre>
        *
-       * <code>required string SeatId = 5;</code>
+       * <code>optional string SeatId = 6;</code>
        */
       public boolean hasSeatId() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
@@ -19245,7 +21274,7 @@ public final class JoloRoom {
        *座位ID
        * </pre>
        *
-       * <code>required string SeatId = 5;</code>
+       * <code>optional string SeatId = 6;</code>
        */
       public java.lang.String getSeatId() {
         java.lang.Object ref = seatId_;
@@ -19266,7 +21295,7 @@ public final class JoloRoom {
        *座位ID
        * </pre>
        *
-       * <code>required string SeatId = 5;</code>
+       * <code>optional string SeatId = 6;</code>
        */
       public com.google.protobuf.ByteString
           getSeatIdBytes() {
@@ -19286,7 +21315,7 @@ public final class JoloRoom {
        *座位ID
        * </pre>
        *
-       * <code>required string SeatId = 5;</code>
+       * <code>optional string SeatId = 6;</code>
        */
       public Builder setSeatId(
           java.lang.String value) {
@@ -19303,7 +21332,7 @@ public final class JoloRoom {
        *座位ID
        * </pre>
        *
-       * <code>required string SeatId = 5;</code>
+       * <code>optional string SeatId = 6;</code>
        */
       public Builder clearSeatId() {
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -19316,7 +21345,7 @@ public final class JoloRoom {
        *座位ID
        * </pre>
        *
-       * <code>required string SeatId = 5;</code>
+       * <code>optional string SeatId = 6;</code>
        */
       public Builder setSeatIdBytes(
           com.google.protobuf.ByteString value) {
@@ -19329,23 +21358,489 @@ public final class JoloRoom {
         return this;
       }
 
+      private java.util.List<JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo> playerInfoList_ =
+        java.util.Collections.emptyList();
+      private void ensurePlayerInfoListIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          playerInfoList_ = new java.util.ArrayList<JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo>(playerInfoList_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo, JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.Builder, JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfoOrBuilder> playerInfoListBuilder_;
+
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public java.util.List<JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo> getPlayerInfoListList() {
+        if (playerInfoListBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(playerInfoList_);
+        } else {
+          return playerInfoListBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public int getPlayerInfoListCount() {
+        if (playerInfoListBuilder_ == null) {
+          return playerInfoList_.size();
+        } else {
+          return playerInfoListBuilder_.getCount();
+        }
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo getPlayerInfoList(int index) {
+        if (playerInfoListBuilder_ == null) {
+          return playerInfoList_.get(index);
+        } else {
+          return playerInfoListBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public Builder setPlayerInfoList(
+          int index, JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo value) {
+        if (playerInfoListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePlayerInfoListIsMutable();
+          playerInfoList_.set(index, value);
+          onChanged();
+        } else {
+          playerInfoListBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public Builder setPlayerInfoList(
+          int index, JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.Builder builderForValue) {
+        if (playerInfoListBuilder_ == null) {
+          ensurePlayerInfoListIsMutable();
+          playerInfoList_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          playerInfoListBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public Builder addPlayerInfoList(JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo value) {
+        if (playerInfoListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePlayerInfoListIsMutable();
+          playerInfoList_.add(value);
+          onChanged();
+        } else {
+          playerInfoListBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public Builder addPlayerInfoList(
+          int index, JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo value) {
+        if (playerInfoListBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePlayerInfoListIsMutable();
+          playerInfoList_.add(index, value);
+          onChanged();
+        } else {
+          playerInfoListBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public Builder addPlayerInfoList(
+          JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.Builder builderForValue) {
+        if (playerInfoListBuilder_ == null) {
+          ensurePlayerInfoListIsMutable();
+          playerInfoList_.add(builderForValue.build());
+          onChanged();
+        } else {
+          playerInfoListBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public Builder addPlayerInfoList(
+          int index, JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.Builder builderForValue) {
+        if (playerInfoListBuilder_ == null) {
+          ensurePlayerInfoListIsMutable();
+          playerInfoList_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          playerInfoListBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public Builder addAllPlayerInfoList(
+          java.lang.Iterable<? extends JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo> values) {
+        if (playerInfoListBuilder_ == null) {
+          ensurePlayerInfoListIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, playerInfoList_);
+          onChanged();
+        } else {
+          playerInfoListBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public Builder clearPlayerInfoList() {
+        if (playerInfoListBuilder_ == null) {
+          playerInfoList_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+          onChanged();
+        } else {
+          playerInfoListBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public Builder removePlayerInfoList(int index) {
+        if (playerInfoListBuilder_ == null) {
+          ensurePlayerInfoListIsMutable();
+          playerInfoList_.remove(index);
+          onChanged();
+        } else {
+          playerInfoListBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.Builder getPlayerInfoListBuilder(
+          int index) {
+        return getPlayerInfoListFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfoOrBuilder getPlayerInfoListOrBuilder(
+          int index) {
+        if (playerInfoListBuilder_ == null) {
+          return playerInfoList_.get(index);  } else {
+          return playerInfoListBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public java.util.List<? extends JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfoOrBuilder> 
+           getPlayerInfoListOrBuilderList() {
+        if (playerInfoListBuilder_ != null) {
+          return playerInfoListBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(playerInfoList_);
+        }
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.Builder addPlayerInfoListBuilder() {
+        return getPlayerInfoListFieldBuilder().addBuilder(
+            JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.Builder addPlayerInfoListBuilder(
+          int index) {
+        return getPlayerInfoListFieldBuilder().addBuilder(
+            index, JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       *正在桌子上玩牌的玩家打牌状态信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 7;</code>
+       */
+      public java.util.List<JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.Builder> 
+           getPlayerInfoListBuilderList() {
+        return getPlayerInfoListFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo, JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.Builder, JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfoOrBuilder> 
+          getPlayerInfoListFieldBuilder() {
+        if (playerInfoListBuilder_ == null) {
+          playerInfoListBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo, JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.Builder, JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfoOrBuilder>(
+                  playerInfoList_,
+                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  getParentForChildren(),
+                  isClean());
+          playerInfoList_ = null;
+        }
+        return playerInfoListBuilder_;
+      }
+
+      private JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info tableInfo_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info, JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.Builder, JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_InfoOrBuilder> tableInfoBuilder_;
+      /**
+       * <pre>
+       *桌子信息
+       * </pre>
+       *
+       * <code>required .JoloProtobuf.RoomSvr.JoloGame_Table_Info TableInfo = 8;</code>
+       */
+      public boolean hasTableInfo() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <pre>
+       *桌子信息
+       * </pre>
+       *
+       * <code>required .JoloProtobuf.RoomSvr.JoloGame_Table_Info TableInfo = 8;</code>
+       */
+      public JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info getTableInfo() {
+        if (tableInfoBuilder_ == null) {
+          return tableInfo_ == null ? JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.getDefaultInstance() : tableInfo_;
+        } else {
+          return tableInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       *桌子信息
+       * </pre>
+       *
+       * <code>required .JoloProtobuf.RoomSvr.JoloGame_Table_Info TableInfo = 8;</code>
+       */
+      public Builder setTableInfo(JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info value) {
+        if (tableInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          tableInfo_ = value;
+          onChanged();
+        } else {
+          tableInfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <pre>
+       *桌子信息
+       * </pre>
+       *
+       * <code>required .JoloProtobuf.RoomSvr.JoloGame_Table_Info TableInfo = 8;</code>
+       */
+      public Builder setTableInfo(
+          JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.Builder builderForValue) {
+        if (tableInfoBuilder_ == null) {
+          tableInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          tableInfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <pre>
+       *桌子信息
+       * </pre>
+       *
+       * <code>required .JoloProtobuf.RoomSvr.JoloGame_Table_Info TableInfo = 8;</code>
+       */
+      public Builder mergeTableInfo(JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info value) {
+        if (tableInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040) &&
+              tableInfo_ != null &&
+              tableInfo_ != JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.getDefaultInstance()) {
+            tableInfo_ =
+              JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.newBuilder(tableInfo_).mergeFrom(value).buildPartial();
+          } else {
+            tableInfo_ = value;
+          }
+          onChanged();
+        } else {
+          tableInfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <pre>
+       *桌子信息
+       * </pre>
+       *
+       * <code>required .JoloProtobuf.RoomSvr.JoloGame_Table_Info TableInfo = 8;</code>
+       */
+      public Builder clearTableInfo() {
+        if (tableInfoBuilder_ == null) {
+          tableInfo_ = null;
+          onChanged();
+        } else {
+          tableInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+      /**
+       * <pre>
+       *桌子信息
+       * </pre>
+       *
+       * <code>required .JoloProtobuf.RoomSvr.JoloGame_Table_Info TableInfo = 8;</code>
+       */
+      public JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.Builder getTableInfoBuilder() {
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return getTableInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       *桌子信息
+       * </pre>
+       *
+       * <code>required .JoloProtobuf.RoomSvr.JoloGame_Table_Info TableInfo = 8;</code>
+       */
+      public JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_InfoOrBuilder getTableInfoOrBuilder() {
+        if (tableInfoBuilder_ != null) {
+          return tableInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return tableInfo_ == null ?
+              JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.getDefaultInstance() : tableInfo_;
+        }
+      }
+      /**
+       * <pre>
+       *桌子信息
+       * </pre>
+       *
+       * <code>required .JoloProtobuf.RoomSvr.JoloGame_Table_Info TableInfo = 8;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info, JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.Builder, JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_InfoOrBuilder> 
+          getTableInfoFieldBuilder() {
+        if (tableInfoBuilder_ == null) {
+          tableInfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info, JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.Builder, JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_InfoOrBuilder>(
+                  getTableInfo(),
+                  getParentForChildren(),
+                  isClean());
+          tableInfo_ = null;
+        }
+        return tableInfoBuilder_;
+      }
+
       private int result_ ;
       /**
        * <pre>
        *结果,成功或失败
        * </pre>
        *
-       * <code>required int32 Result = 6;</code>
+       * <code>required int32 Result = 9;</code>
        */
       public boolean hasResult() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
        * <pre>
        *结果,成功或失败
        * </pre>
        *
-       * <code>required int32 Result = 6;</code>
+       * <code>required int32 Result = 9;</code>
        */
       public int getResult() {
         return result_;
@@ -19355,10 +21850,10 @@ public final class JoloRoom {
        *结果,成功或失败
        * </pre>
        *
-       * <code>required int32 Result = 6;</code>
+       * <code>required int32 Result = 9;</code>
        */
       public Builder setResult(int value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000080;
         result_ = value;
         onChanged();
         return this;
@@ -19368,10 +21863,10 @@ public final class JoloRoom {
        *结果,成功或失败
        * </pre>
        *
-       * <code>required int32 Result = 6;</code>
+       * <code>required int32 Result = 9;</code>
        */
       public Builder clearResult() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000080);
         result_ = 0;
         onChanged();
         return this;
@@ -19383,17 +21878,17 @@ public final class JoloRoom {
        *失败信息
        * </pre>
        *
-       * <code>optional string ResultMsg = 7;</code>
+       * <code>optional string ResultMsg = 10;</code>
        */
       public boolean hasResultMsg() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
        * <pre>
        *失败信息
        * </pre>
        *
-       * <code>optional string ResultMsg = 7;</code>
+       * <code>optional string ResultMsg = 10;</code>
        */
       public java.lang.String getResultMsg() {
         java.lang.Object ref = resultMsg_;
@@ -19414,7 +21909,7 @@ public final class JoloRoom {
        *失败信息
        * </pre>
        *
-       * <code>optional string ResultMsg = 7;</code>
+       * <code>optional string ResultMsg = 10;</code>
        */
       public com.google.protobuf.ByteString
           getResultMsgBytes() {
@@ -19434,14 +21929,14 @@ public final class JoloRoom {
        *失败信息
        * </pre>
        *
-       * <code>optional string ResultMsg = 7;</code>
+       * <code>optional string ResultMsg = 10;</code>
        */
       public Builder setResultMsg(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  bitField0_ |= 0x00000100;
         resultMsg_ = value;
         onChanged();
         return this;
@@ -19451,10 +21946,10 @@ public final class JoloRoom {
        *失败信息
        * </pre>
        *
-       * <code>optional string ResultMsg = 7;</code>
+       * <code>optional string ResultMsg = 10;</code>
        */
       public Builder clearResultMsg() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000100);
         resultMsg_ = getDefaultInstance().getResultMsg();
         onChanged();
         return this;
@@ -19464,14 +21959,14 @@ public final class JoloRoom {
        *失败信息
        * </pre>
        *
-       * <code>optional string ResultMsg = 7;</code>
+       * <code>optional string ResultMsg = 10;</code>
        */
       public Builder setResultMsgBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000040;
+  bitField0_ |= 0x00000100;
         resultMsg_ = value;
         onChanged();
         return this;
@@ -19483,17 +21978,17 @@ public final class JoloRoom {
        *客户端可通过此ID调用GateSvr实现与GameSvr的交互
        * </pre>
        *
-       * <code>optional string JoinGameSvrId = 8;</code>
+       * <code>optional string JoinGameSvrId = 11;</code>
        */
       public boolean hasJoinGameSvrId() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
        * <pre>
        *客户端可通过此ID调用GateSvr实现与GameSvr的交互
        * </pre>
        *
-       * <code>optional string JoinGameSvrId = 8;</code>
+       * <code>optional string JoinGameSvrId = 11;</code>
        */
       public java.lang.String getJoinGameSvrId() {
         java.lang.Object ref = joinGameSvrId_;
@@ -19514,7 +22009,7 @@ public final class JoloRoom {
        *客户端可通过此ID调用GateSvr实现与GameSvr的交互
        * </pre>
        *
-       * <code>optional string JoinGameSvrId = 8;</code>
+       * <code>optional string JoinGameSvrId = 11;</code>
        */
       public com.google.protobuf.ByteString
           getJoinGameSvrIdBytes() {
@@ -19534,14 +22029,14 @@ public final class JoloRoom {
        *客户端可通过此ID调用GateSvr实现与GameSvr的交互
        * </pre>
        *
-       * <code>optional string JoinGameSvrId = 8;</code>
+       * <code>optional string JoinGameSvrId = 11;</code>
        */
       public Builder setJoinGameSvrId(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000200;
         joinGameSvrId_ = value;
         onChanged();
         return this;
@@ -19551,10 +22046,10 @@ public final class JoloRoom {
        *客户端可通过此ID调用GateSvr实现与GameSvr的交互
        * </pre>
        *
-       * <code>optional string JoinGameSvrId = 8;</code>
+       * <code>optional string JoinGameSvrId = 11;</code>
        */
       public Builder clearJoinGameSvrId() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000200);
         joinGameSvrId_ = getDefaultInstance().getJoinGameSvrId();
         onChanged();
         return this;
@@ -19564,207 +22059,15 @@ public final class JoloRoom {
        *客户端可通过此ID调用GateSvr实现与GameSvr的交互
        * </pre>
        *
-       * <code>optional string JoinGameSvrId = 8;</code>
+       * <code>optional string JoinGameSvrId = 11;</code>
        */
       public Builder setJoinGameSvrIdBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000200;
         joinGameSvrId_ = value;
-        onChanged();
-        return this;
-      }
-
-      private double bootAmount_ ;
-      /**
-       * <pre>
-       *底注
-       * </pre>
-       *
-       * <code>optional double BootAmount = 9;</code>
-       */
-      public boolean hasBootAmount() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      /**
-       * <pre>
-       *底注
-       * </pre>
-       *
-       * <code>optional double BootAmount = 9;</code>
-       */
-      public double getBootAmount() {
-        return bootAmount_;
-      }
-      /**
-       * <pre>
-       *底注
-       * </pre>
-       *
-       * <code>optional double BootAmount = 9;</code>
-       */
-      public Builder setBootAmount(double value) {
-        bitField0_ |= 0x00000100;
-        bootAmount_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *底注
-       * </pre>
-       *
-       * <code>optional double BootAmount = 9;</code>
-       */
-      public Builder clearBootAmount() {
-        bitField0_ = (bitField0_ & ~0x00000100);
-        bootAmount_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      private int betCd_ ;
-      /**
-       * <pre>
-       *下注倒计时 and 选择用户比牌
-       * </pre>
-       *
-       * <code>optional int32 BetCd = 10;</code>
-       */
-      public boolean hasBetCd() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
-      }
-      /**
-       * <pre>
-       *下注倒计时 and 选择用户比牌
-       * </pre>
-       *
-       * <code>optional int32 BetCd = 10;</code>
-       */
-      public int getBetCd() {
-        return betCd_;
-      }
-      /**
-       * <pre>
-       *下注倒计时 and 选择用户比牌
-       * </pre>
-       *
-       * <code>optional int32 BetCd = 10;</code>
-       */
-      public Builder setBetCd(int value) {
-        bitField0_ |= 0x00000200;
-        betCd_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *下注倒计时 and 选择用户比牌
-       * </pre>
-       *
-       * <code>optional int32 BetCd = 10;</code>
-       */
-      public Builder clearBetCd() {
-        bitField0_ = (bitField0_ & ~0x00000200);
-        betCd_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int gameStartCd_ ;
-      /**
-       * <pre>
-       *游戏开始倒计时（发牌前倒计时）
-       * </pre>
-       *
-       * <code>optional int32 GameStartCd = 11;</code>
-       */
-      public boolean hasGameStartCd() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
-      }
-      /**
-       * <pre>
-       *游戏开始倒计时（发牌前倒计时）
-       * </pre>
-       *
-       * <code>optional int32 GameStartCd = 11;</code>
-       */
-      public int getGameStartCd() {
-        return gameStartCd_;
-      }
-      /**
-       * <pre>
-       *游戏开始倒计时（发牌前倒计时）
-       * </pre>
-       *
-       * <code>optional int32 GameStartCd = 11;</code>
-       */
-      public Builder setGameStartCd(int value) {
-        bitField0_ |= 0x00000400;
-        gameStartCd_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *游戏开始倒计时（发牌前倒计时）
-       * </pre>
-       *
-       * <code>optional int32 GameStartCd = 11;</code>
-       */
-      public Builder clearGameStartCd() {
-        bitField0_ = (bitField0_ & ~0x00000400);
-        gameStartCd_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int minJoinTableScore_ ;
-      /**
-       * <pre>
-       *最小入桌积分(所有房间)
-       * </pre>
-       *
-       * <code>optional int32 minJoinTableScore = 12;</code>
-       */
-      public boolean hasMinJoinTableScore() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
-      }
-      /**
-       * <pre>
-       *最小入桌积分(所有房间)
-       * </pre>
-       *
-       * <code>optional int32 minJoinTableScore = 12;</code>
-       */
-      public int getMinJoinTableScore() {
-        return minJoinTableScore_;
-      }
-      /**
-       * <pre>
-       *最小入桌积分(所有房间)
-       * </pre>
-       *
-       * <code>optional int32 minJoinTableScore = 12;</code>
-       */
-      public Builder setMinJoinTableScore(int value) {
-        bitField0_ |= 0x00000800;
-        minJoinTableScore_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *最小入桌积分(所有房间)
-       * </pre>
-       *
-       * <code>optional int32 minJoinTableScore = 12;</code>
-       */
-      public Builder clearMinJoinTableScore() {
-        bitField0_ = (bitField0_ & ~0x00000800);
-        minJoinTableScore_ = 0;
         onChanged();
         return this;
       }
@@ -19775,17 +22078,17 @@ public final class JoloRoom {
        *是否断线重连1是0不是
        * </pre>
        *
-       * <code>optional int32 reconnection = 13;</code>
+       * <code>optional int32 reconnection = 12;</code>
        */
       public boolean hasReconnection() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
        * <pre>
        *是否断线重连1是0不是
        * </pre>
        *
-       * <code>optional int32 reconnection = 13;</code>
+       * <code>optional int32 reconnection = 12;</code>
        */
       public int getReconnection() {
         return reconnection_;
@@ -19795,10 +22098,10 @@ public final class JoloRoom {
        *是否断线重连1是0不是
        * </pre>
        *
-       * <code>optional int32 reconnection = 13;</code>
+       * <code>optional int32 reconnection = 12;</code>
        */
       public Builder setReconnection(int value) {
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00000400;
         reconnection_ = value;
         onChanged();
         return this;
@@ -19808,11 +22111,307 @@ public final class JoloRoom {
        *是否断线重连1是0不是
        * </pre>
        *
-       * <code>optional int32 reconnection = 13;</code>
+       * <code>optional int32 reconnection = 12;</code>
        */
       public Builder clearReconnection() {
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00000400);
         reconnection_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int notInGame_ ;
+      /**
+       * <pre>
+       *玩家不在游戏中（存在并且不在游戏中1）
+       * </pre>
+       *
+       * <code>optional uint32 NotInGame = 13;</code>
+       */
+      public boolean hasNotInGame() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <pre>
+       *玩家不在游戏中（存在并且不在游戏中1）
+       * </pre>
+       *
+       * <code>optional uint32 NotInGame = 13;</code>
+       */
+      public int getNotInGame() {
+        return notInGame_;
+      }
+      /**
+       * <pre>
+       *玩家不在游戏中（存在并且不在游戏中1）
+       * </pre>
+       *
+       * <code>optional uint32 NotInGame = 13;</code>
+       */
+      public Builder setNotInGame(int value) {
+        bitField0_ |= 0x00000800;
+        notInGame_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家不在游戏中（存在并且不在游戏中1）
+       * </pre>
+       *
+       * <code>optional uint32 NotInGame = 13;</code>
+       */
+      public Builder clearNotInGame() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        notInGame_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object playType_ = "";
+      /**
+       * <pre>
+       *选定的玩法
+       * </pre>
+       *
+       * <code>optional string PlayType = 14;</code>
+       */
+      public boolean hasPlayType() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <pre>
+       *选定的玩法
+       * </pre>
+       *
+       * <code>optional string PlayType = 14;</code>
+       */
+      public java.lang.String getPlayType() {
+        java.lang.Object ref = playType_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            playType_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *选定的玩法
+       * </pre>
+       *
+       * <code>optional string PlayType = 14;</code>
+       */
+      public com.google.protobuf.ByteString
+          getPlayTypeBytes() {
+        java.lang.Object ref = playType_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          playType_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *选定的玩法
+       * </pre>
+       *
+       * <code>optional string PlayType = 14;</code>
+       */
+      public Builder setPlayType(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00001000;
+        playType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *选定的玩法
+       * </pre>
+       *
+       * <code>optional string PlayType = 14;</code>
+       */
+      public Builder clearPlayType() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        playType_ = getDefaultInstance().getPlayType();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *选定的玩法
+       * </pre>
+       *
+       * <code>optional string PlayType = 14;</code>
+       */
+      public Builder setPlayTypeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00001000;
+        playType_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object betMultiple_ = "";
+      /**
+       * <pre>
+       *桌子加注倍数
+       * </pre>
+       *
+       * <code>required string BetMultiple = 15;</code>
+       */
+      public boolean hasBetMultiple() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      /**
+       * <pre>
+       *桌子加注倍数
+       * </pre>
+       *
+       * <code>required string BetMultiple = 15;</code>
+       */
+      public java.lang.String getBetMultiple() {
+        java.lang.Object ref = betMultiple_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            betMultiple_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *桌子加注倍数
+       * </pre>
+       *
+       * <code>required string BetMultiple = 15;</code>
+       */
+      public com.google.protobuf.ByteString
+          getBetMultipleBytes() {
+        java.lang.Object ref = betMultiple_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          betMultiple_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *桌子加注倍数
+       * </pre>
+       *
+       * <code>required string BetMultiple = 15;</code>
+       */
+      public Builder setBetMultiple(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00002000;
+        betMultiple_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *桌子加注倍数
+       * </pre>
+       *
+       * <code>required string BetMultiple = 15;</code>
+       */
+      public Builder clearBetMultiple() {
+        bitField0_ = (bitField0_ & ~0x00002000);
+        betMultiple_ = getDefaultInstance().getBetMultiple();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *桌子加注倍数
+       * </pre>
+       *
+       * <code>required string BetMultiple = 15;</code>
+       */
+      public Builder setBetMultipleBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00002000;
+        betMultiple_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int money_ ;
+      /**
+       * <pre>
+       *玩家当前的房卡数量
+       * </pre>
+       *
+       * <code>optional int32 money = 16;</code>
+       */
+      public boolean hasMoney() {
+        return ((bitField0_ & 0x00004000) == 0x00004000);
+      }
+      /**
+       * <pre>
+       *玩家当前的房卡数量
+       * </pre>
+       *
+       * <code>optional int32 money = 16;</code>
+       */
+      public int getMoney() {
+        return money_;
+      }
+      /**
+       * <pre>
+       *玩家当前的房卡数量
+       * </pre>
+       *
+       * <code>optional int32 money = 16;</code>
+       */
+      public Builder setMoney(int value) {
+        bitField0_ |= 0x00004000;
+        money_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家当前的房卡数量
+       * </pre>
+       *
+       * <code>optional int32 money = 16;</code>
+       */
+      public Builder clearMoney() {
+        bitField0_ = (bitField0_ & ~0x00004000);
+        money_ = 0;
         onChanged();
         return this;
       }
@@ -19860,6 +22459,5413 @@ public final class JoloRoom {
     }
 
     public JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_ApplyJoinTableAck getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface JoloRoom_TablePlay_PlayerInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     *用户ID
+     * </pre>
+     *
+     * <code>required string UserId = 1;</code>
+     */
+    boolean hasUserId();
+    /**
+     * <pre>
+     *用户ID
+     * </pre>
+     *
+     * <code>required string UserId = 1;</code>
+     */
+    java.lang.String getUserId();
+    /**
+     * <pre>
+     *用户ID
+     * </pre>
+     *
+     * <code>required string UserId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+
+    /**
+     * <pre>
+     *显示的昵称
+     * </pre>
+     *
+     * <code>required string NickName = 2;</code>
+     */
+    boolean hasNickName();
+    /**
+     * <pre>
+     *显示的昵称
+     * </pre>
+     *
+     * <code>required string NickName = 2;</code>
+     */
+    java.lang.String getNickName();
+    /**
+     * <pre>
+     *显示的昵称
+     * </pre>
+     *
+     * <code>required string NickName = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getNickNameBytes();
+
+    /**
+     * <pre>
+     *玩家头像
+     * </pre>
+     *
+     * <code>required string Icourl = 3;</code>
+     */
+    boolean hasIcourl();
+    /**
+     * <pre>
+     *玩家头像
+     * </pre>
+     *
+     * <code>required string Icourl = 3;</code>
+     */
+    java.lang.String getIcourl();
+    /**
+     * <pre>
+     *玩家头像
+     * </pre>
+     *
+     * <code>required string Icourl = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getIcourlBytes();
+
+    /**
+     * <pre>
+     *玩家牌桌上的积分量
+     * </pre>
+     *
+     * <code>required double PlayScoreStore = 4;</code>
+     */
+    boolean hasPlayScoreStore();
+    /**
+     * <pre>
+     *玩家牌桌上的积分量
+     * </pre>
+     *
+     * <code>required double PlayScoreStore = 4;</code>
+     */
+    double getPlayScoreStore();
+
+    /**
+     * <pre>
+     *牌数组下标
+     * </pre>
+     *
+     * <code>repeated uint32 HandCards = 5;</code>
+     */
+    java.util.List<java.lang.Integer> getHandCardsList();
+    /**
+     * <pre>
+     *牌数组下标
+     * </pre>
+     *
+     * <code>repeated uint32 HandCards = 5;</code>
+     */
+    int getHandCardsCount();
+    /**
+     * <pre>
+     *牌数组下标
+     * </pre>
+     *
+     * <code>repeated uint32 HandCards = 5;</code>
+     */
+    int getHandCards(int index);
+
+    /**
+     * <pre>
+     *玩家状态
+     * </pre>
+     *
+     * <code>required uint32 State = 6;</code>
+     */
+    boolean hasState();
+    /**
+     * <pre>
+     *玩家状态
+     * </pre>
+     *
+     * <code>required uint32 State = 6;</code>
+     */
+    int getState();
+
+    /**
+     * <pre>
+     *玩家座位号
+     * </pre>
+     *
+     * <code>optional uint32 SeatNum = 7;</code>
+     */
+    boolean hasSeatNum();
+    /**
+     * <pre>
+     *玩家座位号
+     * </pre>
+     *
+     * <code>optional uint32 SeatNum = 7;</code>
+     */
+    int getSeatNum();
+
+    /**
+     * <pre>
+     *是否是当前行动者
+     * </pre>
+     *
+     * <code>optional uint32 IsCurrAction = 8;</code>
+     */
+    boolean hasIsCurrAction();
+    /**
+     * <pre>
+     *是否是当前行动者
+     * </pre>
+     *
+     * <code>optional uint32 IsCurrAction = 8;</code>
+     */
+    int getIsCurrAction();
+
+    /**
+     * <pre>
+     *当前行动者剩余操作时间 
+     * </pre>
+     *
+     * <code>optional int32 CurrActionSurplusTime = 9;</code>
+     */
+    boolean hasCurrActionSurplusTime();
+    /**
+     * <pre>
+     *当前行动者剩余操作时间 
+     * </pre>
+     *
+     * <code>optional int32 CurrActionSurplusTime = 9;</code>
+     */
+    int getCurrActionSurplusTime();
+
+    /**
+     * <pre>
+     *已经下注的积分量（用于客户端在展现牌桌信息时，将已下注玩家的积分量显示在牌桌上）
+     * </pre>
+     *
+     * <code>optional double AlreadyBetScore = 10;</code>
+     */
+    boolean hasAlreadyBetScore();
+    /**
+     * <pre>
+     *已经下注的积分量（用于客户端在展现牌桌信息时，将已下注玩家的积分量显示在牌桌上）
+     * </pre>
+     *
+     * <code>optional double AlreadyBetScore = 10;</code>
+     */
+    double getAlreadyBetScore();
+
+    /**
+     * <pre>
+     *是否庄家
+     * </pre>
+     *
+     * <code>optional uint32 IsDealer = 11;</code>
+     */
+    boolean hasIsDealer();
+    /**
+     * <pre>
+     *是否庄家
+     * </pre>
+     *
+     * <code>optional uint32 IsDealer = 11;</code>
+     */
+    int getIsDealer();
+
+    /**
+     * <pre>
+     *入桌时间
+     * </pre>
+     *
+     * <code>optional uint64 InTableTime = 12;</code>
+     */
+    boolean hasInTableTime();
+    /**
+     * <pre>
+     *入桌时间
+     * </pre>
+     *
+     * <code>optional uint64 InTableTime = 12;</code>
+     */
+    long getInTableTime();
+
+    /**
+     * <pre>
+     *坐下时间
+     * </pre>
+     *
+     * <code>optional uint64 SitDownTime = 13;</code>
+     */
+    boolean hasSitDownTime();
+    /**
+     * <pre>
+     *坐下时间
+     * </pre>
+     *
+     * <code>optional uint64 SitDownTime = 13;</code>
+     */
+    long getSitDownTime();
+
+    /**
+     * <pre>
+     *最后一次行动时间
+     * </pre>
+     *
+     * <code>optional uint64 LastActionTime = 14;</code>
+     */
+    boolean hasLastActionTime();
+    /**
+     * <pre>
+     *最后一次行动时间
+     * </pre>
+     *
+     * <code>optional uint64 LastActionTime = 14;</code>
+     */
+    long getLastActionTime();
+
+    /**
+     * <pre>
+     *玩家不在游戏中为0在游戏中，1不在游戏
+     * </pre>
+     *
+     * <code>optional uint32 NotInGame = 15;</code>
+     */
+    boolean hasNotInGame();
+    /**
+     * <pre>
+     *玩家不在游戏中为0在游戏中，1不在游戏
+     * </pre>
+     *
+     * <code>optional uint32 NotInGame = 15;</code>
+     */
+    int getNotInGame();
+
+    /**
+     * <pre>
+     *上一个玩家下注多少
+     * </pre>
+     *
+     * <code>optional int32 PreviousBetScore = 17;</code>
+     */
+    boolean hasPreviousBetScore();
+    /**
+     * <pre>
+     *上一个玩家下注多少
+     * </pre>
+     *
+     * <code>optional int32 PreviousBetScore = 17;</code>
+     */
+    int getPreviousBetScore();
+
+    /**
+     * <pre>
+     *玩家本轮下注方式
+     * </pre>
+     *
+     * <code>optional int32 BetMode = 18;</code>
+     */
+    boolean hasBetMode();
+    /**
+     * <pre>
+     *玩家本轮下注方式
+     * </pre>
+     *
+     * <code>optional int32 BetMode = 18;</code>
+     */
+    int getBetMode();
+
+    /**
+     * <pre>
+     *玩家本轮下注多少
+     * </pre>
+     *
+     * <code>optional int32 BetScore = 19;</code>
+     */
+    boolean hasBetScore();
+    /**
+     * <pre>
+     *玩家本轮下注多少
+     * </pre>
+     *
+     * <code>optional int32 BetScore = 19;</code>
+     */
+    int getBetScore();
+
+    /**
+     * <pre>
+     *头像id
+     * </pre>
+     *
+     * <code>optional int32 HeadSculpture = 20;</code>
+     */
+    boolean hasHeadSculpture();
+    /**
+     * <pre>
+     *头像id
+     * </pre>
+     *
+     * <code>optional int32 HeadSculpture = 20;</code>
+     */
+    int getHeadSculpture();
+
+    /**
+     * <pre>
+     *手牌皮肤
+     * </pre>
+     *
+     * <code>optional int32 CardSkin = 21;</code>
+     */
+    boolean hasCardSkin();
+    /**
+     * <pre>
+     *手牌皮肤
+     * </pre>
+     *
+     * <code>optional int32 CardSkin = 21;</code>
+     */
+    int getCardSkin();
+
+    /**
+     * <pre>
+     *特殊功能
+     * </pre>
+     *
+     * <code>optional int32 SpecialFunction = 22;</code>
+     */
+    boolean hasSpecialFunction();
+    /**
+     * <pre>
+     *特殊功能
+     * </pre>
+     *
+     * <code>optional int32 SpecialFunction = 22;</code>
+     */
+    int getSpecialFunction();
+  }
+  /**
+   * <pre>
+   *正在座位玩牌的玩家信息
+   * </pre>
+   *
+   * Protobuf type {@code JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo}
+   */
+  public  static final class JoloRoom_TablePlay_PlayerInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo)
+      JoloRoom_TablePlay_PlayerInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use JoloRoom_TablePlay_PlayerInfo.newBuilder() to construct.
+    private JoloRoom_TablePlay_PlayerInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private JoloRoom_TablePlay_PlayerInfo() {
+      userId_ = "";
+      nickName_ = "";
+      icourl_ = "";
+      playScoreStore_ = 0D;
+      handCards_ = java.util.Collections.emptyList();
+      state_ = 0;
+      seatNum_ = 0;
+      isCurrAction_ = 0;
+      currActionSurplusTime_ = 0;
+      alreadyBetScore_ = 0D;
+      isDealer_ = 0;
+      inTableTime_ = 0L;
+      sitDownTime_ = 0L;
+      lastActionTime_ = 0L;
+      notInGame_ = 0;
+      previousBetScore_ = 0;
+      betMode_ = 0;
+      betScore_ = 0;
+      headSculpture_ = 0;
+      cardSkin_ = 0;
+      specialFunction_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private JoloRoom_TablePlay_PlayerInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              userId_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              nickName_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              icourl_ = bs;
+              break;
+            }
+            case 33: {
+              bitField0_ |= 0x00000008;
+              playScoreStore_ = input.readDouble();
+              break;
+            }
+            case 40: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                handCards_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              handCards_.add(input.readUInt32());
+              break;
+            }
+            case 42: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010) && input.getBytesUntilLimit() > 0) {
+                handCards_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                handCards_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000010;
+              state_ = input.readUInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000020;
+              seatNum_ = input.readUInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000040;
+              isCurrAction_ = input.readUInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000080;
+              currActionSurplusTime_ = input.readInt32();
+              break;
+            }
+            case 81: {
+              bitField0_ |= 0x00000100;
+              alreadyBetScore_ = input.readDouble();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000200;
+              isDealer_ = input.readUInt32();
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000400;
+              inTableTime_ = input.readUInt64();
+              break;
+            }
+            case 104: {
+              bitField0_ |= 0x00000800;
+              sitDownTime_ = input.readUInt64();
+              break;
+            }
+            case 112: {
+              bitField0_ |= 0x00001000;
+              lastActionTime_ = input.readUInt64();
+              break;
+            }
+            case 120: {
+              bitField0_ |= 0x00002000;
+              notInGame_ = input.readUInt32();
+              break;
+            }
+            case 136: {
+              bitField0_ |= 0x00004000;
+              previousBetScore_ = input.readInt32();
+              break;
+            }
+            case 144: {
+              bitField0_ |= 0x00008000;
+              betMode_ = input.readInt32();
+              break;
+            }
+            case 152: {
+              bitField0_ |= 0x00010000;
+              betScore_ = input.readInt32();
+              break;
+            }
+            case 160: {
+              bitField0_ |= 0x00020000;
+              headSculpture_ = input.readInt32();
+              break;
+            }
+            case 168: {
+              bitField0_ |= 0x00040000;
+              cardSkin_ = input.readInt32();
+              break;
+            }
+            case 176: {
+              bitField0_ |= 0x00080000;
+              specialFunction_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          handCards_ = java.util.Collections.unmodifiableList(handCards_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return JoloProtobuf.RoomSvr.JoloRoom.internal_static_JoloProtobuf_RoomSvr_JoloRoom_TablePlay_PlayerInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return JoloProtobuf.RoomSvr.JoloRoom.internal_static_JoloProtobuf_RoomSvr_JoloRoom_TablePlay_PlayerInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.class, JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int USERID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object userId_;
+    /**
+     * <pre>
+     *用户ID
+     * </pre>
+     *
+     * <code>required string UserId = 1;</code>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <pre>
+     *用户ID
+     * </pre>
+     *
+     * <code>required string UserId = 1;</code>
+     */
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *用户ID
+     * </pre>
+     *
+     * <code>required string UserId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int NICKNAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object nickName_;
+    /**
+     * <pre>
+     *显示的昵称
+     * </pre>
+     *
+     * <code>required string NickName = 2;</code>
+     */
+    public boolean hasNickName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <pre>
+     *显示的昵称
+     * </pre>
+     *
+     * <code>required string NickName = 2;</code>
+     */
+    public java.lang.String getNickName() {
+      java.lang.Object ref = nickName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          nickName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *显示的昵称
+     * </pre>
+     *
+     * <code>required string NickName = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNickNameBytes() {
+      java.lang.Object ref = nickName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        nickName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ICOURL_FIELD_NUMBER = 3;
+    private volatile java.lang.Object icourl_;
+    /**
+     * <pre>
+     *玩家头像
+     * </pre>
+     *
+     * <code>required string Icourl = 3;</code>
+     */
+    public boolean hasIcourl() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <pre>
+     *玩家头像
+     * </pre>
+     *
+     * <code>required string Icourl = 3;</code>
+     */
+    public java.lang.String getIcourl() {
+      java.lang.Object ref = icourl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          icourl_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *玩家头像
+     * </pre>
+     *
+     * <code>required string Icourl = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIcourlBytes() {
+      java.lang.Object ref = icourl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        icourl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PLAYSCORESTORE_FIELD_NUMBER = 4;
+    private double playScoreStore_;
+    /**
+     * <pre>
+     *玩家牌桌上的积分量
+     * </pre>
+     *
+     * <code>required double PlayScoreStore = 4;</code>
+     */
+    public boolean hasPlayScoreStore() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <pre>
+     *玩家牌桌上的积分量
+     * </pre>
+     *
+     * <code>required double PlayScoreStore = 4;</code>
+     */
+    public double getPlayScoreStore() {
+      return playScoreStore_;
+    }
+
+    public static final int HANDCARDS_FIELD_NUMBER = 5;
+    private java.util.List<java.lang.Integer> handCards_;
+    /**
+     * <pre>
+     *牌数组下标
+     * </pre>
+     *
+     * <code>repeated uint32 HandCards = 5;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getHandCardsList() {
+      return handCards_;
+    }
+    /**
+     * <pre>
+     *牌数组下标
+     * </pre>
+     *
+     * <code>repeated uint32 HandCards = 5;</code>
+     */
+    public int getHandCardsCount() {
+      return handCards_.size();
+    }
+    /**
+     * <pre>
+     *牌数组下标
+     * </pre>
+     *
+     * <code>repeated uint32 HandCards = 5;</code>
+     */
+    public int getHandCards(int index) {
+      return handCards_.get(index);
+    }
+
+    public static final int STATE_FIELD_NUMBER = 6;
+    private int state_;
+    /**
+     * <pre>
+     *玩家状态
+     * </pre>
+     *
+     * <code>required uint32 State = 6;</code>
+     */
+    public boolean hasState() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <pre>
+     *玩家状态
+     * </pre>
+     *
+     * <code>required uint32 State = 6;</code>
+     */
+    public int getState() {
+      return state_;
+    }
+
+    public static final int SEATNUM_FIELD_NUMBER = 7;
+    private int seatNum_;
+    /**
+     * <pre>
+     *玩家座位号
+     * </pre>
+     *
+     * <code>optional uint32 SeatNum = 7;</code>
+     */
+    public boolean hasSeatNum() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <pre>
+     *玩家座位号
+     * </pre>
+     *
+     * <code>optional uint32 SeatNum = 7;</code>
+     */
+    public int getSeatNum() {
+      return seatNum_;
+    }
+
+    public static final int ISCURRACTION_FIELD_NUMBER = 8;
+    private int isCurrAction_;
+    /**
+     * <pre>
+     *是否是当前行动者
+     * </pre>
+     *
+     * <code>optional uint32 IsCurrAction = 8;</code>
+     */
+    public boolean hasIsCurrAction() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <pre>
+     *是否是当前行动者
+     * </pre>
+     *
+     * <code>optional uint32 IsCurrAction = 8;</code>
+     */
+    public int getIsCurrAction() {
+      return isCurrAction_;
+    }
+
+    public static final int CURRACTIONSURPLUSTIME_FIELD_NUMBER = 9;
+    private int currActionSurplusTime_;
+    /**
+     * <pre>
+     *当前行动者剩余操作时间 
+     * </pre>
+     *
+     * <code>optional int32 CurrActionSurplusTime = 9;</code>
+     */
+    public boolean hasCurrActionSurplusTime() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <pre>
+     *当前行动者剩余操作时间 
+     * </pre>
+     *
+     * <code>optional int32 CurrActionSurplusTime = 9;</code>
+     */
+    public int getCurrActionSurplusTime() {
+      return currActionSurplusTime_;
+    }
+
+    public static final int ALREADYBETSCORE_FIELD_NUMBER = 10;
+    private double alreadyBetScore_;
+    /**
+     * <pre>
+     *已经下注的积分量（用于客户端在展现牌桌信息时，将已下注玩家的积分量显示在牌桌上）
+     * </pre>
+     *
+     * <code>optional double AlreadyBetScore = 10;</code>
+     */
+    public boolean hasAlreadyBetScore() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <pre>
+     *已经下注的积分量（用于客户端在展现牌桌信息时，将已下注玩家的积分量显示在牌桌上）
+     * </pre>
+     *
+     * <code>optional double AlreadyBetScore = 10;</code>
+     */
+    public double getAlreadyBetScore() {
+      return alreadyBetScore_;
+    }
+
+    public static final int ISDEALER_FIELD_NUMBER = 11;
+    private int isDealer_;
+    /**
+     * <pre>
+     *是否庄家
+     * </pre>
+     *
+     * <code>optional uint32 IsDealer = 11;</code>
+     */
+    public boolean hasIsDealer() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <pre>
+     *是否庄家
+     * </pre>
+     *
+     * <code>optional uint32 IsDealer = 11;</code>
+     */
+    public int getIsDealer() {
+      return isDealer_;
+    }
+
+    public static final int INTABLETIME_FIELD_NUMBER = 12;
+    private long inTableTime_;
+    /**
+     * <pre>
+     *入桌时间
+     * </pre>
+     *
+     * <code>optional uint64 InTableTime = 12;</code>
+     */
+    public boolean hasInTableTime() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <pre>
+     *入桌时间
+     * </pre>
+     *
+     * <code>optional uint64 InTableTime = 12;</code>
+     */
+    public long getInTableTime() {
+      return inTableTime_;
+    }
+
+    public static final int SITDOWNTIME_FIELD_NUMBER = 13;
+    private long sitDownTime_;
+    /**
+     * <pre>
+     *坐下时间
+     * </pre>
+     *
+     * <code>optional uint64 SitDownTime = 13;</code>
+     */
+    public boolean hasSitDownTime() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <pre>
+     *坐下时间
+     * </pre>
+     *
+     * <code>optional uint64 SitDownTime = 13;</code>
+     */
+    public long getSitDownTime() {
+      return sitDownTime_;
+    }
+
+    public static final int LASTACTIONTIME_FIELD_NUMBER = 14;
+    private long lastActionTime_;
+    /**
+     * <pre>
+     *最后一次行动时间
+     * </pre>
+     *
+     * <code>optional uint64 LastActionTime = 14;</code>
+     */
+    public boolean hasLastActionTime() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <pre>
+     *最后一次行动时间
+     * </pre>
+     *
+     * <code>optional uint64 LastActionTime = 14;</code>
+     */
+    public long getLastActionTime() {
+      return lastActionTime_;
+    }
+
+    public static final int NOTINGAME_FIELD_NUMBER = 15;
+    private int notInGame_;
+    /**
+     * <pre>
+     *玩家不在游戏中为0在游戏中，1不在游戏
+     * </pre>
+     *
+     * <code>optional uint32 NotInGame = 15;</code>
+     */
+    public boolean hasNotInGame() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    /**
+     * <pre>
+     *玩家不在游戏中为0在游戏中，1不在游戏
+     * </pre>
+     *
+     * <code>optional uint32 NotInGame = 15;</code>
+     */
+    public int getNotInGame() {
+      return notInGame_;
+    }
+
+    public static final int PREVIOUSBETSCORE_FIELD_NUMBER = 17;
+    private int previousBetScore_;
+    /**
+     * <pre>
+     *上一个玩家下注多少
+     * </pre>
+     *
+     * <code>optional int32 PreviousBetScore = 17;</code>
+     */
+    public boolean hasPreviousBetScore() {
+      return ((bitField0_ & 0x00004000) == 0x00004000);
+    }
+    /**
+     * <pre>
+     *上一个玩家下注多少
+     * </pre>
+     *
+     * <code>optional int32 PreviousBetScore = 17;</code>
+     */
+    public int getPreviousBetScore() {
+      return previousBetScore_;
+    }
+
+    public static final int BETMODE_FIELD_NUMBER = 18;
+    private int betMode_;
+    /**
+     * <pre>
+     *玩家本轮下注方式
+     * </pre>
+     *
+     * <code>optional int32 BetMode = 18;</code>
+     */
+    public boolean hasBetMode() {
+      return ((bitField0_ & 0x00008000) == 0x00008000);
+    }
+    /**
+     * <pre>
+     *玩家本轮下注方式
+     * </pre>
+     *
+     * <code>optional int32 BetMode = 18;</code>
+     */
+    public int getBetMode() {
+      return betMode_;
+    }
+
+    public static final int BETSCORE_FIELD_NUMBER = 19;
+    private int betScore_;
+    /**
+     * <pre>
+     *玩家本轮下注多少
+     * </pre>
+     *
+     * <code>optional int32 BetScore = 19;</code>
+     */
+    public boolean hasBetScore() {
+      return ((bitField0_ & 0x00010000) == 0x00010000);
+    }
+    /**
+     * <pre>
+     *玩家本轮下注多少
+     * </pre>
+     *
+     * <code>optional int32 BetScore = 19;</code>
+     */
+    public int getBetScore() {
+      return betScore_;
+    }
+
+    public static final int HEADSCULPTURE_FIELD_NUMBER = 20;
+    private int headSculpture_;
+    /**
+     * <pre>
+     *头像id
+     * </pre>
+     *
+     * <code>optional int32 HeadSculpture = 20;</code>
+     */
+    public boolean hasHeadSculpture() {
+      return ((bitField0_ & 0x00020000) == 0x00020000);
+    }
+    /**
+     * <pre>
+     *头像id
+     * </pre>
+     *
+     * <code>optional int32 HeadSculpture = 20;</code>
+     */
+    public int getHeadSculpture() {
+      return headSculpture_;
+    }
+
+    public static final int CARDSKIN_FIELD_NUMBER = 21;
+    private int cardSkin_;
+    /**
+     * <pre>
+     *手牌皮肤
+     * </pre>
+     *
+     * <code>optional int32 CardSkin = 21;</code>
+     */
+    public boolean hasCardSkin() {
+      return ((bitField0_ & 0x00040000) == 0x00040000);
+    }
+    /**
+     * <pre>
+     *手牌皮肤
+     * </pre>
+     *
+     * <code>optional int32 CardSkin = 21;</code>
+     */
+    public int getCardSkin() {
+      return cardSkin_;
+    }
+
+    public static final int SPECIALFUNCTION_FIELD_NUMBER = 22;
+    private int specialFunction_;
+    /**
+     * <pre>
+     *特殊功能
+     * </pre>
+     *
+     * <code>optional int32 SpecialFunction = 22;</code>
+     */
+    public boolean hasSpecialFunction() {
+      return ((bitField0_ & 0x00080000) == 0x00080000);
+    }
+    /**
+     * <pre>
+     *特殊功能
+     * </pre>
+     *
+     * <code>optional int32 SpecialFunction = 22;</code>
+     */
+    public int getSpecialFunction() {
+      return specialFunction_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasNickName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasIcourl()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPlayScoreStore()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasState()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nickName_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, icourl_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeDouble(4, playScoreStore_);
+      }
+      for (int i = 0; i < handCards_.size(); i++) {
+        output.writeUInt32(5, handCards_.get(i));
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeUInt32(6, state_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeUInt32(7, seatNum_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeUInt32(8, isCurrAction_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(9, currActionSurplusTime_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeDouble(10, alreadyBetScore_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeUInt32(11, isDealer_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeUInt64(12, inTableTime_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeUInt64(13, sitDownTime_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeUInt64(14, lastActionTime_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        output.writeUInt32(15, notInGame_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        output.writeInt32(17, previousBetScore_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        output.writeInt32(18, betMode_);
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        output.writeInt32(19, betScore_);
+      }
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        output.writeInt32(20, headSculpture_);
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        output.writeInt32(21, cardSkin_);
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        output.writeInt32(22, specialFunction_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nickName_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, icourl_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(4, playScoreStore_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < handCards_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(handCards_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getHandCardsList().size();
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(6, state_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(7, seatNum_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(8, isCurrAction_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, currActionSurplusTime_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(10, alreadyBetScore_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(11, isDealer_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(12, inTableTime_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(13, sitDownTime_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(14, lastActionTime_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(15, notInGame_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(17, previousBetScore_);
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(18, betMode_);
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(19, betScore_);
+      }
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(20, headSculpture_);
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(21, cardSkin_);
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(22, specialFunction_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo)) {
+        return super.equals(obj);
+      }
+      JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo other = (JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo) obj;
+
+      boolean result = true;
+      result = result && (hasUserId() == other.hasUserId());
+      if (hasUserId()) {
+        result = result && getUserId()
+            .equals(other.getUserId());
+      }
+      result = result && (hasNickName() == other.hasNickName());
+      if (hasNickName()) {
+        result = result && getNickName()
+            .equals(other.getNickName());
+      }
+      result = result && (hasIcourl() == other.hasIcourl());
+      if (hasIcourl()) {
+        result = result && getIcourl()
+            .equals(other.getIcourl());
+      }
+      result = result && (hasPlayScoreStore() == other.hasPlayScoreStore());
+      if (hasPlayScoreStore()) {
+        result = result && (
+            java.lang.Double.doubleToLongBits(getPlayScoreStore())
+            == java.lang.Double.doubleToLongBits(
+                other.getPlayScoreStore()));
+      }
+      result = result && getHandCardsList()
+          .equals(other.getHandCardsList());
+      result = result && (hasState() == other.hasState());
+      if (hasState()) {
+        result = result && (getState()
+            == other.getState());
+      }
+      result = result && (hasSeatNum() == other.hasSeatNum());
+      if (hasSeatNum()) {
+        result = result && (getSeatNum()
+            == other.getSeatNum());
+      }
+      result = result && (hasIsCurrAction() == other.hasIsCurrAction());
+      if (hasIsCurrAction()) {
+        result = result && (getIsCurrAction()
+            == other.getIsCurrAction());
+      }
+      result = result && (hasCurrActionSurplusTime() == other.hasCurrActionSurplusTime());
+      if (hasCurrActionSurplusTime()) {
+        result = result && (getCurrActionSurplusTime()
+            == other.getCurrActionSurplusTime());
+      }
+      result = result && (hasAlreadyBetScore() == other.hasAlreadyBetScore());
+      if (hasAlreadyBetScore()) {
+        result = result && (
+            java.lang.Double.doubleToLongBits(getAlreadyBetScore())
+            == java.lang.Double.doubleToLongBits(
+                other.getAlreadyBetScore()));
+      }
+      result = result && (hasIsDealer() == other.hasIsDealer());
+      if (hasIsDealer()) {
+        result = result && (getIsDealer()
+            == other.getIsDealer());
+      }
+      result = result && (hasInTableTime() == other.hasInTableTime());
+      if (hasInTableTime()) {
+        result = result && (getInTableTime()
+            == other.getInTableTime());
+      }
+      result = result && (hasSitDownTime() == other.hasSitDownTime());
+      if (hasSitDownTime()) {
+        result = result && (getSitDownTime()
+            == other.getSitDownTime());
+      }
+      result = result && (hasLastActionTime() == other.hasLastActionTime());
+      if (hasLastActionTime()) {
+        result = result && (getLastActionTime()
+            == other.getLastActionTime());
+      }
+      result = result && (hasNotInGame() == other.hasNotInGame());
+      if (hasNotInGame()) {
+        result = result && (getNotInGame()
+            == other.getNotInGame());
+      }
+      result = result && (hasPreviousBetScore() == other.hasPreviousBetScore());
+      if (hasPreviousBetScore()) {
+        result = result && (getPreviousBetScore()
+            == other.getPreviousBetScore());
+      }
+      result = result && (hasBetMode() == other.hasBetMode());
+      if (hasBetMode()) {
+        result = result && (getBetMode()
+            == other.getBetMode());
+      }
+      result = result && (hasBetScore() == other.hasBetScore());
+      if (hasBetScore()) {
+        result = result && (getBetScore()
+            == other.getBetScore());
+      }
+      result = result && (hasHeadSculpture() == other.hasHeadSculpture());
+      if (hasHeadSculpture()) {
+        result = result && (getHeadSculpture()
+            == other.getHeadSculpture());
+      }
+      result = result && (hasCardSkin() == other.hasCardSkin());
+      if (hasCardSkin()) {
+        result = result && (getCardSkin()
+            == other.getCardSkin());
+      }
+      result = result && (hasSpecialFunction() == other.hasSpecialFunction());
+      if (hasSpecialFunction()) {
+        result = result && (getSpecialFunction()
+            == other.getSpecialFunction());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasUserId()) {
+        hash = (37 * hash) + USERID_FIELD_NUMBER;
+        hash = (53 * hash) + getUserId().hashCode();
+      }
+      if (hasNickName()) {
+        hash = (37 * hash) + NICKNAME_FIELD_NUMBER;
+        hash = (53 * hash) + getNickName().hashCode();
+      }
+      if (hasIcourl()) {
+        hash = (37 * hash) + ICOURL_FIELD_NUMBER;
+        hash = (53 * hash) + getIcourl().hashCode();
+      }
+      if (hasPlayScoreStore()) {
+        hash = (37 * hash) + PLAYSCORESTORE_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            java.lang.Double.doubleToLongBits(getPlayScoreStore()));
+      }
+      if (getHandCardsCount() > 0) {
+        hash = (37 * hash) + HANDCARDS_FIELD_NUMBER;
+        hash = (53 * hash) + getHandCardsList().hashCode();
+      }
+      if (hasState()) {
+        hash = (37 * hash) + STATE_FIELD_NUMBER;
+        hash = (53 * hash) + getState();
+      }
+      if (hasSeatNum()) {
+        hash = (37 * hash) + SEATNUM_FIELD_NUMBER;
+        hash = (53 * hash) + getSeatNum();
+      }
+      if (hasIsCurrAction()) {
+        hash = (37 * hash) + ISCURRACTION_FIELD_NUMBER;
+        hash = (53 * hash) + getIsCurrAction();
+      }
+      if (hasCurrActionSurplusTime()) {
+        hash = (37 * hash) + CURRACTIONSURPLUSTIME_FIELD_NUMBER;
+        hash = (53 * hash) + getCurrActionSurplusTime();
+      }
+      if (hasAlreadyBetScore()) {
+        hash = (37 * hash) + ALREADYBETSCORE_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            java.lang.Double.doubleToLongBits(getAlreadyBetScore()));
+      }
+      if (hasIsDealer()) {
+        hash = (37 * hash) + ISDEALER_FIELD_NUMBER;
+        hash = (53 * hash) + getIsDealer();
+      }
+      if (hasInTableTime()) {
+        hash = (37 * hash) + INTABLETIME_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getInTableTime());
+      }
+      if (hasSitDownTime()) {
+        hash = (37 * hash) + SITDOWNTIME_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getSitDownTime());
+      }
+      if (hasLastActionTime()) {
+        hash = (37 * hash) + LASTACTIONTIME_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getLastActionTime());
+      }
+      if (hasNotInGame()) {
+        hash = (37 * hash) + NOTINGAME_FIELD_NUMBER;
+        hash = (53 * hash) + getNotInGame();
+      }
+      if (hasPreviousBetScore()) {
+        hash = (37 * hash) + PREVIOUSBETSCORE_FIELD_NUMBER;
+        hash = (53 * hash) + getPreviousBetScore();
+      }
+      if (hasBetMode()) {
+        hash = (37 * hash) + BETMODE_FIELD_NUMBER;
+        hash = (53 * hash) + getBetMode();
+      }
+      if (hasBetScore()) {
+        hash = (37 * hash) + BETSCORE_FIELD_NUMBER;
+        hash = (53 * hash) + getBetScore();
+      }
+      if (hasHeadSculpture()) {
+        hash = (37 * hash) + HEADSCULPTURE_FIELD_NUMBER;
+        hash = (53 * hash) + getHeadSculpture();
+      }
+      if (hasCardSkin()) {
+        hash = (37 * hash) + CARDSKIN_FIELD_NUMBER;
+        hash = (53 * hash) + getCardSkin();
+      }
+      if (hasSpecialFunction()) {
+        hash = (37 * hash) + SPECIALFUNCTION_FIELD_NUMBER;
+        hash = (53 * hash) + getSpecialFunction();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *正在座位玩牌的玩家信息
+     * </pre>
+     *
+     * Protobuf type {@code JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo)
+        JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return JoloProtobuf.RoomSvr.JoloRoom.internal_static_JoloProtobuf_RoomSvr_JoloRoom_TablePlay_PlayerInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return JoloProtobuf.RoomSvr.JoloRoom.internal_static_JoloProtobuf_RoomSvr_JoloRoom_TablePlay_PlayerInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.class, JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.Builder.class);
+      }
+
+      // Construct using JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        userId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        nickName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        icourl_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        playScoreStore_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        handCards_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000010);
+        state_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        seatNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        isCurrAction_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        currActionSurplusTime_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        alreadyBetScore_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        isDealer_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        inTableTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000800);
+        sitDownTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00001000);
+        lastActionTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00002000);
+        notInGame_ = 0;
+        bitField0_ = (bitField0_ & ~0x00004000);
+        previousBetScore_ = 0;
+        bitField0_ = (bitField0_ & ~0x00008000);
+        betMode_ = 0;
+        bitField0_ = (bitField0_ & ~0x00010000);
+        betScore_ = 0;
+        bitField0_ = (bitField0_ & ~0x00020000);
+        headSculpture_ = 0;
+        bitField0_ = (bitField0_ & ~0x00040000);
+        cardSkin_ = 0;
+        bitField0_ = (bitField0_ & ~0x00080000);
+        specialFunction_ = 0;
+        bitField0_ = (bitField0_ & ~0x00100000);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return JoloProtobuf.RoomSvr.JoloRoom.internal_static_JoloProtobuf_RoomSvr_JoloRoom_TablePlay_PlayerInfo_descriptor;
+      }
+
+      public JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo getDefaultInstanceForType() {
+        return JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.getDefaultInstance();
+      }
+
+      public JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo build() {
+        JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo buildPartial() {
+        JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo result = new JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.nickName_ = nickName_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.icourl_ = icourl_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.playScoreStore_ = playScoreStore_;
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          handCards_ = java.util.Collections.unmodifiableList(handCards_);
+          bitField0_ = (bitField0_ & ~0x00000010);
+        }
+        result.handCards_ = handCards_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.state_ = state_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.seatNum_ = seatNum_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.isCurrAction_ = isCurrAction_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.currActionSurplusTime_ = currActionSurplusTime_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.alreadyBetScore_ = alreadyBetScore_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.isDealer_ = isDealer_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.inTableTime_ = inTableTime_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.sitDownTime_ = sitDownTime_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.lastActionTime_ = lastActionTime_;
+        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+          to_bitField0_ |= 0x00002000;
+        }
+        result.notInGame_ = notInGame_;
+        if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        result.previousBetScore_ = previousBetScore_;
+        if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
+          to_bitField0_ |= 0x00008000;
+        }
+        result.betMode_ = betMode_;
+        if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
+          to_bitField0_ |= 0x00010000;
+        }
+        result.betScore_ = betScore_;
+        if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+          to_bitField0_ |= 0x00020000;
+        }
+        result.headSculpture_ = headSculpture_;
+        if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
+          to_bitField0_ |= 0x00040000;
+        }
+        result.cardSkin_ = cardSkin_;
+        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
+          to_bitField0_ |= 0x00080000;
+        }
+        result.specialFunction_ = specialFunction_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo) {
+          return mergeFrom((JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo other) {
+        if (other == JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          bitField0_ |= 0x00000001;
+          userId_ = other.userId_;
+          onChanged();
+        }
+        if (other.hasNickName()) {
+          bitField0_ |= 0x00000002;
+          nickName_ = other.nickName_;
+          onChanged();
+        }
+        if (other.hasIcourl()) {
+          bitField0_ |= 0x00000004;
+          icourl_ = other.icourl_;
+          onChanged();
+        }
+        if (other.hasPlayScoreStore()) {
+          setPlayScoreStore(other.getPlayScoreStore());
+        }
+        if (!other.handCards_.isEmpty()) {
+          if (handCards_.isEmpty()) {
+            handCards_ = other.handCards_;
+            bitField0_ = (bitField0_ & ~0x00000010);
+          } else {
+            ensureHandCardsIsMutable();
+            handCards_.addAll(other.handCards_);
+          }
+          onChanged();
+        }
+        if (other.hasState()) {
+          setState(other.getState());
+        }
+        if (other.hasSeatNum()) {
+          setSeatNum(other.getSeatNum());
+        }
+        if (other.hasIsCurrAction()) {
+          setIsCurrAction(other.getIsCurrAction());
+        }
+        if (other.hasCurrActionSurplusTime()) {
+          setCurrActionSurplusTime(other.getCurrActionSurplusTime());
+        }
+        if (other.hasAlreadyBetScore()) {
+          setAlreadyBetScore(other.getAlreadyBetScore());
+        }
+        if (other.hasIsDealer()) {
+          setIsDealer(other.getIsDealer());
+        }
+        if (other.hasInTableTime()) {
+          setInTableTime(other.getInTableTime());
+        }
+        if (other.hasSitDownTime()) {
+          setSitDownTime(other.getSitDownTime());
+        }
+        if (other.hasLastActionTime()) {
+          setLastActionTime(other.getLastActionTime());
+        }
+        if (other.hasNotInGame()) {
+          setNotInGame(other.getNotInGame());
+        }
+        if (other.hasPreviousBetScore()) {
+          setPreviousBetScore(other.getPreviousBetScore());
+        }
+        if (other.hasBetMode()) {
+          setBetMode(other.getBetMode());
+        }
+        if (other.hasBetScore()) {
+          setBetScore(other.getBetScore());
+        }
+        if (other.hasHeadSculpture()) {
+          setHeadSculpture(other.getHeadSculpture());
+        }
+        if (other.hasCardSkin()) {
+          setCardSkin(other.getCardSkin());
+        }
+        if (other.hasSpecialFunction()) {
+          setSpecialFunction(other.getSpecialFunction());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          return false;
+        }
+        if (!hasNickName()) {
+          return false;
+        }
+        if (!hasIcourl()) {
+          return false;
+        }
+        if (!hasPlayScoreStore()) {
+          return false;
+        }
+        if (!hasState()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object userId_ = "";
+      /**
+       * <pre>
+       *用户ID
+       * </pre>
+       *
+       * <code>required string UserId = 1;</code>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <pre>
+       *用户ID
+       * </pre>
+       *
+       * <code>required string UserId = 1;</code>
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *用户ID
+       * </pre>
+       *
+       * <code>required string UserId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *用户ID
+       * </pre>
+       *
+       * <code>required string UserId = 1;</code>
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *用户ID
+       * </pre>
+       *
+       * <code>required string UserId = 1;</code>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *用户ID
+       * </pre>
+       *
+       * <code>required string UserId = 1;</code>
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object nickName_ = "";
+      /**
+       * <pre>
+       *显示的昵称
+       * </pre>
+       *
+       * <code>required string NickName = 2;</code>
+       */
+      public boolean hasNickName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <pre>
+       *显示的昵称
+       * </pre>
+       *
+       * <code>required string NickName = 2;</code>
+       */
+      public java.lang.String getNickName() {
+        java.lang.Object ref = nickName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            nickName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *显示的昵称
+       * </pre>
+       *
+       * <code>required string NickName = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNickNameBytes() {
+        java.lang.Object ref = nickName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          nickName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *显示的昵称
+       * </pre>
+       *
+       * <code>required string NickName = 2;</code>
+       */
+      public Builder setNickName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        nickName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *显示的昵称
+       * </pre>
+       *
+       * <code>required string NickName = 2;</code>
+       */
+      public Builder clearNickName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        nickName_ = getDefaultInstance().getNickName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *显示的昵称
+       * </pre>
+       *
+       * <code>required string NickName = 2;</code>
+       */
+      public Builder setNickNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        nickName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object icourl_ = "";
+      /**
+       * <pre>
+       *玩家头像
+       * </pre>
+       *
+       * <code>required string Icourl = 3;</code>
+       */
+      public boolean hasIcourl() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <pre>
+       *玩家头像
+       * </pre>
+       *
+       * <code>required string Icourl = 3;</code>
+       */
+      public java.lang.String getIcourl() {
+        java.lang.Object ref = icourl_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            icourl_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *玩家头像
+       * </pre>
+       *
+       * <code>required string Icourl = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIcourlBytes() {
+        java.lang.Object ref = icourl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          icourl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *玩家头像
+       * </pre>
+       *
+       * <code>required string Icourl = 3;</code>
+       */
+      public Builder setIcourl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        icourl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家头像
+       * </pre>
+       *
+       * <code>required string Icourl = 3;</code>
+       */
+      public Builder clearIcourl() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        icourl_ = getDefaultInstance().getIcourl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家头像
+       * </pre>
+       *
+       * <code>required string Icourl = 3;</code>
+       */
+      public Builder setIcourlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        icourl_ = value;
+        onChanged();
+        return this;
+      }
+
+      private double playScoreStore_ ;
+      /**
+       * <pre>
+       *玩家牌桌上的积分量
+       * </pre>
+       *
+       * <code>required double PlayScoreStore = 4;</code>
+       */
+      public boolean hasPlayScoreStore() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <pre>
+       *玩家牌桌上的积分量
+       * </pre>
+       *
+       * <code>required double PlayScoreStore = 4;</code>
+       */
+      public double getPlayScoreStore() {
+        return playScoreStore_;
+      }
+      /**
+       * <pre>
+       *玩家牌桌上的积分量
+       * </pre>
+       *
+       * <code>required double PlayScoreStore = 4;</code>
+       */
+      public Builder setPlayScoreStore(double value) {
+        bitField0_ |= 0x00000008;
+        playScoreStore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家牌桌上的积分量
+       * </pre>
+       *
+       * <code>required double PlayScoreStore = 4;</code>
+       */
+      public Builder clearPlayScoreStore() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        playScoreStore_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<java.lang.Integer> handCards_ = java.util.Collections.emptyList();
+      private void ensureHandCardsIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          handCards_ = new java.util.ArrayList<java.lang.Integer>(handCards_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+      /**
+       * <pre>
+       *牌数组下标
+       * </pre>
+       *
+       * <code>repeated uint32 HandCards = 5;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getHandCardsList() {
+        return java.util.Collections.unmodifiableList(handCards_);
+      }
+      /**
+       * <pre>
+       *牌数组下标
+       * </pre>
+       *
+       * <code>repeated uint32 HandCards = 5;</code>
+       */
+      public int getHandCardsCount() {
+        return handCards_.size();
+      }
+      /**
+       * <pre>
+       *牌数组下标
+       * </pre>
+       *
+       * <code>repeated uint32 HandCards = 5;</code>
+       */
+      public int getHandCards(int index) {
+        return handCards_.get(index);
+      }
+      /**
+       * <pre>
+       *牌数组下标
+       * </pre>
+       *
+       * <code>repeated uint32 HandCards = 5;</code>
+       */
+      public Builder setHandCards(
+          int index, int value) {
+        ensureHandCardsIsMutable();
+        handCards_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *牌数组下标
+       * </pre>
+       *
+       * <code>repeated uint32 HandCards = 5;</code>
+       */
+      public Builder addHandCards(int value) {
+        ensureHandCardsIsMutable();
+        handCards_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *牌数组下标
+       * </pre>
+       *
+       * <code>repeated uint32 HandCards = 5;</code>
+       */
+      public Builder addAllHandCards(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureHandCardsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, handCards_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *牌数组下标
+       * </pre>
+       *
+       * <code>repeated uint32 HandCards = 5;</code>
+       */
+      public Builder clearHandCards() {
+        handCards_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000010);
+        onChanged();
+        return this;
+      }
+
+      private int state_ ;
+      /**
+       * <pre>
+       *玩家状态
+       * </pre>
+       *
+       * <code>required uint32 State = 6;</code>
+       */
+      public boolean hasState() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <pre>
+       *玩家状态
+       * </pre>
+       *
+       * <code>required uint32 State = 6;</code>
+       */
+      public int getState() {
+        return state_;
+      }
+      /**
+       * <pre>
+       *玩家状态
+       * </pre>
+       *
+       * <code>required uint32 State = 6;</code>
+       */
+      public Builder setState(int value) {
+        bitField0_ |= 0x00000020;
+        state_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家状态
+       * </pre>
+       *
+       * <code>required uint32 State = 6;</code>
+       */
+      public Builder clearState() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        state_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int seatNum_ ;
+      /**
+       * <pre>
+       *玩家座位号
+       * </pre>
+       *
+       * <code>optional uint32 SeatNum = 7;</code>
+       */
+      public boolean hasSeatNum() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <pre>
+       *玩家座位号
+       * </pre>
+       *
+       * <code>optional uint32 SeatNum = 7;</code>
+       */
+      public int getSeatNum() {
+        return seatNum_;
+      }
+      /**
+       * <pre>
+       *玩家座位号
+       * </pre>
+       *
+       * <code>optional uint32 SeatNum = 7;</code>
+       */
+      public Builder setSeatNum(int value) {
+        bitField0_ |= 0x00000040;
+        seatNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家座位号
+       * </pre>
+       *
+       * <code>optional uint32 SeatNum = 7;</code>
+       */
+      public Builder clearSeatNum() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        seatNum_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int isCurrAction_ ;
+      /**
+       * <pre>
+       *是否是当前行动者
+       * </pre>
+       *
+       * <code>optional uint32 IsCurrAction = 8;</code>
+       */
+      public boolean hasIsCurrAction() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <pre>
+       *是否是当前行动者
+       * </pre>
+       *
+       * <code>optional uint32 IsCurrAction = 8;</code>
+       */
+      public int getIsCurrAction() {
+        return isCurrAction_;
+      }
+      /**
+       * <pre>
+       *是否是当前行动者
+       * </pre>
+       *
+       * <code>optional uint32 IsCurrAction = 8;</code>
+       */
+      public Builder setIsCurrAction(int value) {
+        bitField0_ |= 0x00000080;
+        isCurrAction_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *是否是当前行动者
+       * </pre>
+       *
+       * <code>optional uint32 IsCurrAction = 8;</code>
+       */
+      public Builder clearIsCurrAction() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        isCurrAction_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int currActionSurplusTime_ ;
+      /**
+       * <pre>
+       *当前行动者剩余操作时间 
+       * </pre>
+       *
+       * <code>optional int32 CurrActionSurplusTime = 9;</code>
+       */
+      public boolean hasCurrActionSurplusTime() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <pre>
+       *当前行动者剩余操作时间 
+       * </pre>
+       *
+       * <code>optional int32 CurrActionSurplusTime = 9;</code>
+       */
+      public int getCurrActionSurplusTime() {
+        return currActionSurplusTime_;
+      }
+      /**
+       * <pre>
+       *当前行动者剩余操作时间 
+       * </pre>
+       *
+       * <code>optional int32 CurrActionSurplusTime = 9;</code>
+       */
+      public Builder setCurrActionSurplusTime(int value) {
+        bitField0_ |= 0x00000100;
+        currActionSurplusTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *当前行动者剩余操作时间 
+       * </pre>
+       *
+       * <code>optional int32 CurrActionSurplusTime = 9;</code>
+       */
+      public Builder clearCurrActionSurplusTime() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        currActionSurplusTime_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private double alreadyBetScore_ ;
+      /**
+       * <pre>
+       *已经下注的积分量（用于客户端在展现牌桌信息时，将已下注玩家的积分量显示在牌桌上）
+       * </pre>
+       *
+       * <code>optional double AlreadyBetScore = 10;</code>
+       */
+      public boolean hasAlreadyBetScore() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <pre>
+       *已经下注的积分量（用于客户端在展现牌桌信息时，将已下注玩家的积分量显示在牌桌上）
+       * </pre>
+       *
+       * <code>optional double AlreadyBetScore = 10;</code>
+       */
+      public double getAlreadyBetScore() {
+        return alreadyBetScore_;
+      }
+      /**
+       * <pre>
+       *已经下注的积分量（用于客户端在展现牌桌信息时，将已下注玩家的积分量显示在牌桌上）
+       * </pre>
+       *
+       * <code>optional double AlreadyBetScore = 10;</code>
+       */
+      public Builder setAlreadyBetScore(double value) {
+        bitField0_ |= 0x00000200;
+        alreadyBetScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *已经下注的积分量（用于客户端在展现牌桌信息时，将已下注玩家的积分量显示在牌桌上）
+       * </pre>
+       *
+       * <code>optional double AlreadyBetScore = 10;</code>
+       */
+      public Builder clearAlreadyBetScore() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        alreadyBetScore_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private int isDealer_ ;
+      /**
+       * <pre>
+       *是否庄家
+       * </pre>
+       *
+       * <code>optional uint32 IsDealer = 11;</code>
+       */
+      public boolean hasIsDealer() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <pre>
+       *是否庄家
+       * </pre>
+       *
+       * <code>optional uint32 IsDealer = 11;</code>
+       */
+      public int getIsDealer() {
+        return isDealer_;
+      }
+      /**
+       * <pre>
+       *是否庄家
+       * </pre>
+       *
+       * <code>optional uint32 IsDealer = 11;</code>
+       */
+      public Builder setIsDealer(int value) {
+        bitField0_ |= 0x00000400;
+        isDealer_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *是否庄家
+       * </pre>
+       *
+       * <code>optional uint32 IsDealer = 11;</code>
+       */
+      public Builder clearIsDealer() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        isDealer_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long inTableTime_ ;
+      /**
+       * <pre>
+       *入桌时间
+       * </pre>
+       *
+       * <code>optional uint64 InTableTime = 12;</code>
+       */
+      public boolean hasInTableTime() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <pre>
+       *入桌时间
+       * </pre>
+       *
+       * <code>optional uint64 InTableTime = 12;</code>
+       */
+      public long getInTableTime() {
+        return inTableTime_;
+      }
+      /**
+       * <pre>
+       *入桌时间
+       * </pre>
+       *
+       * <code>optional uint64 InTableTime = 12;</code>
+       */
+      public Builder setInTableTime(long value) {
+        bitField0_ |= 0x00000800;
+        inTableTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *入桌时间
+       * </pre>
+       *
+       * <code>optional uint64 InTableTime = 12;</code>
+       */
+      public Builder clearInTableTime() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        inTableTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long sitDownTime_ ;
+      /**
+       * <pre>
+       *坐下时间
+       * </pre>
+       *
+       * <code>optional uint64 SitDownTime = 13;</code>
+       */
+      public boolean hasSitDownTime() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <pre>
+       *坐下时间
+       * </pre>
+       *
+       * <code>optional uint64 SitDownTime = 13;</code>
+       */
+      public long getSitDownTime() {
+        return sitDownTime_;
+      }
+      /**
+       * <pre>
+       *坐下时间
+       * </pre>
+       *
+       * <code>optional uint64 SitDownTime = 13;</code>
+       */
+      public Builder setSitDownTime(long value) {
+        bitField0_ |= 0x00001000;
+        sitDownTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *坐下时间
+       * </pre>
+       *
+       * <code>optional uint64 SitDownTime = 13;</code>
+       */
+      public Builder clearSitDownTime() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        sitDownTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long lastActionTime_ ;
+      /**
+       * <pre>
+       *最后一次行动时间
+       * </pre>
+       *
+       * <code>optional uint64 LastActionTime = 14;</code>
+       */
+      public boolean hasLastActionTime() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      /**
+       * <pre>
+       *最后一次行动时间
+       * </pre>
+       *
+       * <code>optional uint64 LastActionTime = 14;</code>
+       */
+      public long getLastActionTime() {
+        return lastActionTime_;
+      }
+      /**
+       * <pre>
+       *最后一次行动时间
+       * </pre>
+       *
+       * <code>optional uint64 LastActionTime = 14;</code>
+       */
+      public Builder setLastActionTime(long value) {
+        bitField0_ |= 0x00002000;
+        lastActionTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *最后一次行动时间
+       * </pre>
+       *
+       * <code>optional uint64 LastActionTime = 14;</code>
+       */
+      public Builder clearLastActionTime() {
+        bitField0_ = (bitField0_ & ~0x00002000);
+        lastActionTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private int notInGame_ ;
+      /**
+       * <pre>
+       *玩家不在游戏中为0在游戏中，1不在游戏
+       * </pre>
+       *
+       * <code>optional uint32 NotInGame = 15;</code>
+       */
+      public boolean hasNotInGame() {
+        return ((bitField0_ & 0x00004000) == 0x00004000);
+      }
+      /**
+       * <pre>
+       *玩家不在游戏中为0在游戏中，1不在游戏
+       * </pre>
+       *
+       * <code>optional uint32 NotInGame = 15;</code>
+       */
+      public int getNotInGame() {
+        return notInGame_;
+      }
+      /**
+       * <pre>
+       *玩家不在游戏中为0在游戏中，1不在游戏
+       * </pre>
+       *
+       * <code>optional uint32 NotInGame = 15;</code>
+       */
+      public Builder setNotInGame(int value) {
+        bitField0_ |= 0x00004000;
+        notInGame_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家不在游戏中为0在游戏中，1不在游戏
+       * </pre>
+       *
+       * <code>optional uint32 NotInGame = 15;</code>
+       */
+      public Builder clearNotInGame() {
+        bitField0_ = (bitField0_ & ~0x00004000);
+        notInGame_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int previousBetScore_ ;
+      /**
+       * <pre>
+       *上一个玩家下注多少
+       * </pre>
+       *
+       * <code>optional int32 PreviousBetScore = 17;</code>
+       */
+      public boolean hasPreviousBetScore() {
+        return ((bitField0_ & 0x00008000) == 0x00008000);
+      }
+      /**
+       * <pre>
+       *上一个玩家下注多少
+       * </pre>
+       *
+       * <code>optional int32 PreviousBetScore = 17;</code>
+       */
+      public int getPreviousBetScore() {
+        return previousBetScore_;
+      }
+      /**
+       * <pre>
+       *上一个玩家下注多少
+       * </pre>
+       *
+       * <code>optional int32 PreviousBetScore = 17;</code>
+       */
+      public Builder setPreviousBetScore(int value) {
+        bitField0_ |= 0x00008000;
+        previousBetScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *上一个玩家下注多少
+       * </pre>
+       *
+       * <code>optional int32 PreviousBetScore = 17;</code>
+       */
+      public Builder clearPreviousBetScore() {
+        bitField0_ = (bitField0_ & ~0x00008000);
+        previousBetScore_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int betMode_ ;
+      /**
+       * <pre>
+       *玩家本轮下注方式
+       * </pre>
+       *
+       * <code>optional int32 BetMode = 18;</code>
+       */
+      public boolean hasBetMode() {
+        return ((bitField0_ & 0x00010000) == 0x00010000);
+      }
+      /**
+       * <pre>
+       *玩家本轮下注方式
+       * </pre>
+       *
+       * <code>optional int32 BetMode = 18;</code>
+       */
+      public int getBetMode() {
+        return betMode_;
+      }
+      /**
+       * <pre>
+       *玩家本轮下注方式
+       * </pre>
+       *
+       * <code>optional int32 BetMode = 18;</code>
+       */
+      public Builder setBetMode(int value) {
+        bitField0_ |= 0x00010000;
+        betMode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家本轮下注方式
+       * </pre>
+       *
+       * <code>optional int32 BetMode = 18;</code>
+       */
+      public Builder clearBetMode() {
+        bitField0_ = (bitField0_ & ~0x00010000);
+        betMode_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int betScore_ ;
+      /**
+       * <pre>
+       *玩家本轮下注多少
+       * </pre>
+       *
+       * <code>optional int32 BetScore = 19;</code>
+       */
+      public boolean hasBetScore() {
+        return ((bitField0_ & 0x00020000) == 0x00020000);
+      }
+      /**
+       * <pre>
+       *玩家本轮下注多少
+       * </pre>
+       *
+       * <code>optional int32 BetScore = 19;</code>
+       */
+      public int getBetScore() {
+        return betScore_;
+      }
+      /**
+       * <pre>
+       *玩家本轮下注多少
+       * </pre>
+       *
+       * <code>optional int32 BetScore = 19;</code>
+       */
+      public Builder setBetScore(int value) {
+        bitField0_ |= 0x00020000;
+        betScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家本轮下注多少
+       * </pre>
+       *
+       * <code>optional int32 BetScore = 19;</code>
+       */
+      public Builder clearBetScore() {
+        bitField0_ = (bitField0_ & ~0x00020000);
+        betScore_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int headSculpture_ ;
+      /**
+       * <pre>
+       *头像id
+       * </pre>
+       *
+       * <code>optional int32 HeadSculpture = 20;</code>
+       */
+      public boolean hasHeadSculpture() {
+        return ((bitField0_ & 0x00040000) == 0x00040000);
+      }
+      /**
+       * <pre>
+       *头像id
+       * </pre>
+       *
+       * <code>optional int32 HeadSculpture = 20;</code>
+       */
+      public int getHeadSculpture() {
+        return headSculpture_;
+      }
+      /**
+       * <pre>
+       *头像id
+       * </pre>
+       *
+       * <code>optional int32 HeadSculpture = 20;</code>
+       */
+      public Builder setHeadSculpture(int value) {
+        bitField0_ |= 0x00040000;
+        headSculpture_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *头像id
+       * </pre>
+       *
+       * <code>optional int32 HeadSculpture = 20;</code>
+       */
+      public Builder clearHeadSculpture() {
+        bitField0_ = (bitField0_ & ~0x00040000);
+        headSculpture_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int cardSkin_ ;
+      /**
+       * <pre>
+       *手牌皮肤
+       * </pre>
+       *
+       * <code>optional int32 CardSkin = 21;</code>
+       */
+      public boolean hasCardSkin() {
+        return ((bitField0_ & 0x00080000) == 0x00080000);
+      }
+      /**
+       * <pre>
+       *手牌皮肤
+       * </pre>
+       *
+       * <code>optional int32 CardSkin = 21;</code>
+       */
+      public int getCardSkin() {
+        return cardSkin_;
+      }
+      /**
+       * <pre>
+       *手牌皮肤
+       * </pre>
+       *
+       * <code>optional int32 CardSkin = 21;</code>
+       */
+      public Builder setCardSkin(int value) {
+        bitField0_ |= 0x00080000;
+        cardSkin_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *手牌皮肤
+       * </pre>
+       *
+       * <code>optional int32 CardSkin = 21;</code>
+       */
+      public Builder clearCardSkin() {
+        bitField0_ = (bitField0_ & ~0x00080000);
+        cardSkin_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int specialFunction_ ;
+      /**
+       * <pre>
+       *特殊功能
+       * </pre>
+       *
+       * <code>optional int32 SpecialFunction = 22;</code>
+       */
+      public boolean hasSpecialFunction() {
+        return ((bitField0_ & 0x00100000) == 0x00100000);
+      }
+      /**
+       * <pre>
+       *特殊功能
+       * </pre>
+       *
+       * <code>optional int32 SpecialFunction = 22;</code>
+       */
+      public int getSpecialFunction() {
+        return specialFunction_;
+      }
+      /**
+       * <pre>
+       *特殊功能
+       * </pre>
+       *
+       * <code>optional int32 SpecialFunction = 22;</code>
+       */
+      public Builder setSpecialFunction(int value) {
+        bitField0_ |= 0x00100000;
+        specialFunction_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *特殊功能
+       * </pre>
+       *
+       * <code>optional int32 SpecialFunction = 22;</code>
+       */
+      public Builder clearSpecialFunction() {
+        bitField0_ = (bitField0_ & ~0x00100000);
+        specialFunction_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:JoloProtobuf.RoomSvr.JoloRoom_TablePlay_PlayerInfo)
+    private static final JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo();
+    }
+
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<JoloRoom_TablePlay_PlayerInfo>
+        PARSER = new com.google.protobuf.AbstractParser<JoloRoom_TablePlay_PlayerInfo>() {
+      public JoloRoom_TablePlay_PlayerInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new JoloRoom_TablePlay_PlayerInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<JoloRoom_TablePlay_PlayerInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<JoloRoom_TablePlay_PlayerInfo> getParserForType() {
+      return PARSER;
+    }
+
+    public JoloProtobuf.RoomSvr.JoloRoom.JoloRoom_TablePlay_PlayerInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface JoloGame_Table_InfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:JoloProtobuf.RoomSvr.JoloGame_Table_Info)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     *桌子ID
+     * </pre>
+     *
+     * <code>required string TableId = 1;</code>
+     */
+    boolean hasTableId();
+    /**
+     * <pre>
+     *桌子ID
+     * </pre>
+     *
+     * <code>required string TableId = 1;</code>
+     */
+    java.lang.String getTableId();
+    /**
+     * <pre>
+     *桌子ID
+     * </pre>
+     *
+     * <code>required string TableId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getTableIdBytes();
+
+    /**
+     * <pre>
+     *玩家人数
+     * </pre>
+     *
+     * <code>required int32 PlayerNum = 2;</code>
+     */
+    boolean hasPlayerNum();
+    /**
+     * <pre>
+     *玩家人数
+     * </pre>
+     *
+     * <code>required int32 PlayerNum = 2;</code>
+     */
+    int getPlayerNum();
+
+    /**
+     * <pre>
+     *当前基础下注值
+     * </pre>
+     *
+     * <code>required int32 BaseBetScore = 3;</code>
+     */
+    boolean hasBaseBetScore();
+    /**
+     * <pre>
+     *当前基础下注值
+     * </pre>
+     *
+     * <code>required int32 BaseBetScore = 3;</code>
+     */
+    int getBaseBetScore();
+
+    /**
+     * <pre>
+     *下注积分上限
+     * </pre>
+     *
+     * <code>required int32 BetMaxScore = 4;</code>
+     */
+    boolean hasBetMaxScore();
+    /**
+     * <pre>
+     *下注积分上限
+     * </pre>
+     *
+     * <code>required int32 BetMaxScore = 4;</code>
+     */
+    int getBetMaxScore();
+
+    /**
+     * <pre>
+     *游戏局数
+     * </pre>
+     *
+     * <code>required int32 GameNum = 5;</code>
+     */
+    boolean hasGameNum();
+    /**
+     * <pre>
+     *游戏局数
+     * </pre>
+     *
+     * <code>required int32 GameNum = 5;</code>
+     */
+    int getGameNum();
+
+    /**
+     * <pre>
+     *当前进行的游戏局数
+     * </pre>
+     *
+     * <code>required int32 CurrGameNum = 6;</code>
+     */
+    boolean hasCurrGameNum();
+    /**
+     * <pre>
+     *当前进行的游戏局数
+     * </pre>
+     *
+     * <code>required int32 CurrGameNum = 6;</code>
+     */
+    int getCurrGameNum();
+
+    /**
+     * <pre>
+     *准备cd
+     * </pre>
+     *
+     * <code>optional int32 ReadyCd = 7;</code>
+     */
+    boolean hasReadyCd();
+    /**
+     * <pre>
+     *准备cd
+     * </pre>
+     *
+     * <code>optional int32 ReadyCd = 7;</code>
+     */
+    int getReadyCd();
+
+    /**
+     * <pre>
+     *下注cd（超时则弃牌）
+     * </pre>
+     *
+     * <code>optional int32 BetCd = 8;</code>
+     */
+    boolean hasBetCd();
+    /**
+     * <pre>
+     *下注cd（超时则弃牌）
+     * </pre>
+     *
+     * <code>optional int32 BetCd = 8;</code>
+     */
+    int getBetCd();
+
+    /**
+     * <pre>
+     *亮牌cd
+     * </pre>
+     *
+     * <code>optional int32 OpenCardCd = 9;</code>
+     */
+    boolean hasOpenCardCd();
+    /**
+     * <pre>
+     *亮牌cd
+     * </pre>
+     *
+     * <code>optional int32 OpenCardCd = 9;</code>
+     */
+    int getOpenCardCd();
+
+    /**
+     * <pre>
+     *是否可以观战
+     * </pre>
+     *
+     * <code>optional int32 IsWatch = 10;</code>
+     */
+    boolean hasIsWatch();
+    /**
+     * <pre>
+     *是否可以观战
+     * </pre>
+     *
+     * <code>optional int32 IsWatch = 10;</code>
+     */
+    int getIsWatch();
+
+    /**
+     * <pre>
+     *牌桌目前总的下注金额
+     * </pre>
+     *
+     * <code>optional double totalAlreadyBet = 11;</code>
+     */
+    boolean hasTotalAlreadyBet();
+    /**
+     * <pre>
+     *牌桌目前总的下注金额
+     * </pre>
+     *
+     * <code>optional double totalAlreadyBet = 11;</code>
+     */
+    double getTotalAlreadyBet();
+
+    /**
+     * <pre>
+     *桌子目前的状态值
+     * </pre>
+     *
+     * <code>optional uint32 TableState = 12;</code>
+     */
+    boolean hasTableState();
+    /**
+     * <pre>
+     *桌子目前的状态值
+     * </pre>
+     *
+     * <code>optional uint32 TableState = 12;</code>
+     */
+    int getTableState();
+
+    /**
+     * <pre>
+     *下注轮次ID
+     * </pre>
+     *
+     * <code>optional uint32 BetRoundId = 13;</code>
+     */
+    boolean hasBetRoundId();
+    /**
+     * <pre>
+     *下注轮次ID
+     * </pre>
+     *
+     * <code>optional uint32 BetRoundId = 13;</code>
+     */
+    int getBetRoundId();
+  }
+  /**
+   * <pre>
+   *当前桌子信息
+   * </pre>
+   *
+   * Protobuf type {@code JoloProtobuf.RoomSvr.JoloGame_Table_Info}
+   */
+  public  static final class JoloGame_Table_Info extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:JoloProtobuf.RoomSvr.JoloGame_Table_Info)
+      JoloGame_Table_InfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use JoloGame_Table_Info.newBuilder() to construct.
+    private JoloGame_Table_Info(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private JoloGame_Table_Info() {
+      tableId_ = "";
+      playerNum_ = 0;
+      baseBetScore_ = 0;
+      betMaxScore_ = 0;
+      gameNum_ = 0;
+      currGameNum_ = 0;
+      readyCd_ = 0;
+      betCd_ = 0;
+      openCardCd_ = 0;
+      isWatch_ = 0;
+      totalAlreadyBet_ = 0D;
+      tableState_ = 0;
+      betRoundId_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private JoloGame_Table_Info(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              tableId_ = bs;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              playerNum_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              baseBetScore_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              betMaxScore_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              gameNum_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              currGameNum_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              readyCd_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              betCd_ = input.readInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000100;
+              openCardCd_ = input.readInt32();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000200;
+              isWatch_ = input.readInt32();
+              break;
+            }
+            case 89: {
+              bitField0_ |= 0x00000400;
+              totalAlreadyBet_ = input.readDouble();
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000800;
+              tableState_ = input.readUInt32();
+              break;
+            }
+            case 104: {
+              bitField0_ |= 0x00001000;
+              betRoundId_ = input.readUInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return JoloProtobuf.RoomSvr.JoloRoom.internal_static_JoloProtobuf_RoomSvr_JoloGame_Table_Info_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return JoloProtobuf.RoomSvr.JoloRoom.internal_static_JoloProtobuf_RoomSvr_JoloGame_Table_Info_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.class, JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int TABLEID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object tableId_;
+    /**
+     * <pre>
+     *桌子ID
+     * </pre>
+     *
+     * <code>required string TableId = 1;</code>
+     */
+    public boolean hasTableId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <pre>
+     *桌子ID
+     * </pre>
+     *
+     * <code>required string TableId = 1;</code>
+     */
+    public java.lang.String getTableId() {
+      java.lang.Object ref = tableId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          tableId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *桌子ID
+     * </pre>
+     *
+     * <code>required string TableId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTableIdBytes() {
+      java.lang.Object ref = tableId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tableId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PLAYERNUM_FIELD_NUMBER = 2;
+    private int playerNum_;
+    /**
+     * <pre>
+     *玩家人数
+     * </pre>
+     *
+     * <code>required int32 PlayerNum = 2;</code>
+     */
+    public boolean hasPlayerNum() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <pre>
+     *玩家人数
+     * </pre>
+     *
+     * <code>required int32 PlayerNum = 2;</code>
+     */
+    public int getPlayerNum() {
+      return playerNum_;
+    }
+
+    public static final int BASEBETSCORE_FIELD_NUMBER = 3;
+    private int baseBetScore_;
+    /**
+     * <pre>
+     *当前基础下注值
+     * </pre>
+     *
+     * <code>required int32 BaseBetScore = 3;</code>
+     */
+    public boolean hasBaseBetScore() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <pre>
+     *当前基础下注值
+     * </pre>
+     *
+     * <code>required int32 BaseBetScore = 3;</code>
+     */
+    public int getBaseBetScore() {
+      return baseBetScore_;
+    }
+
+    public static final int BETMAXSCORE_FIELD_NUMBER = 4;
+    private int betMaxScore_;
+    /**
+     * <pre>
+     *下注积分上限
+     * </pre>
+     *
+     * <code>required int32 BetMaxScore = 4;</code>
+     */
+    public boolean hasBetMaxScore() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <pre>
+     *下注积分上限
+     * </pre>
+     *
+     * <code>required int32 BetMaxScore = 4;</code>
+     */
+    public int getBetMaxScore() {
+      return betMaxScore_;
+    }
+
+    public static final int GAMENUM_FIELD_NUMBER = 5;
+    private int gameNum_;
+    /**
+     * <pre>
+     *游戏局数
+     * </pre>
+     *
+     * <code>required int32 GameNum = 5;</code>
+     */
+    public boolean hasGameNum() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <pre>
+     *游戏局数
+     * </pre>
+     *
+     * <code>required int32 GameNum = 5;</code>
+     */
+    public int getGameNum() {
+      return gameNum_;
+    }
+
+    public static final int CURRGAMENUM_FIELD_NUMBER = 6;
+    private int currGameNum_;
+    /**
+     * <pre>
+     *当前进行的游戏局数
+     * </pre>
+     *
+     * <code>required int32 CurrGameNum = 6;</code>
+     */
+    public boolean hasCurrGameNum() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <pre>
+     *当前进行的游戏局数
+     * </pre>
+     *
+     * <code>required int32 CurrGameNum = 6;</code>
+     */
+    public int getCurrGameNum() {
+      return currGameNum_;
+    }
+
+    public static final int READYCD_FIELD_NUMBER = 7;
+    private int readyCd_;
+    /**
+     * <pre>
+     *准备cd
+     * </pre>
+     *
+     * <code>optional int32 ReadyCd = 7;</code>
+     */
+    public boolean hasReadyCd() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <pre>
+     *准备cd
+     * </pre>
+     *
+     * <code>optional int32 ReadyCd = 7;</code>
+     */
+    public int getReadyCd() {
+      return readyCd_;
+    }
+
+    public static final int BETCD_FIELD_NUMBER = 8;
+    private int betCd_;
+    /**
+     * <pre>
+     *下注cd（超时则弃牌）
+     * </pre>
+     *
+     * <code>optional int32 BetCd = 8;</code>
+     */
+    public boolean hasBetCd() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <pre>
+     *下注cd（超时则弃牌）
+     * </pre>
+     *
+     * <code>optional int32 BetCd = 8;</code>
+     */
+    public int getBetCd() {
+      return betCd_;
+    }
+
+    public static final int OPENCARDCD_FIELD_NUMBER = 9;
+    private int openCardCd_;
+    /**
+     * <pre>
+     *亮牌cd
+     * </pre>
+     *
+     * <code>optional int32 OpenCardCd = 9;</code>
+     */
+    public boolean hasOpenCardCd() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <pre>
+     *亮牌cd
+     * </pre>
+     *
+     * <code>optional int32 OpenCardCd = 9;</code>
+     */
+    public int getOpenCardCd() {
+      return openCardCd_;
+    }
+
+    public static final int ISWATCH_FIELD_NUMBER = 10;
+    private int isWatch_;
+    /**
+     * <pre>
+     *是否可以观战
+     * </pre>
+     *
+     * <code>optional int32 IsWatch = 10;</code>
+     */
+    public boolean hasIsWatch() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <pre>
+     *是否可以观战
+     * </pre>
+     *
+     * <code>optional int32 IsWatch = 10;</code>
+     */
+    public int getIsWatch() {
+      return isWatch_;
+    }
+
+    public static final int TOTALALREADYBET_FIELD_NUMBER = 11;
+    private double totalAlreadyBet_;
+    /**
+     * <pre>
+     *牌桌目前总的下注金额
+     * </pre>
+     *
+     * <code>optional double totalAlreadyBet = 11;</code>
+     */
+    public boolean hasTotalAlreadyBet() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <pre>
+     *牌桌目前总的下注金额
+     * </pre>
+     *
+     * <code>optional double totalAlreadyBet = 11;</code>
+     */
+    public double getTotalAlreadyBet() {
+      return totalAlreadyBet_;
+    }
+
+    public static final int TABLESTATE_FIELD_NUMBER = 12;
+    private int tableState_;
+    /**
+     * <pre>
+     *桌子目前的状态值
+     * </pre>
+     *
+     * <code>optional uint32 TableState = 12;</code>
+     */
+    public boolean hasTableState() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <pre>
+     *桌子目前的状态值
+     * </pre>
+     *
+     * <code>optional uint32 TableState = 12;</code>
+     */
+    public int getTableState() {
+      return tableState_;
+    }
+
+    public static final int BETROUNDID_FIELD_NUMBER = 13;
+    private int betRoundId_;
+    /**
+     * <pre>
+     *下注轮次ID
+     * </pre>
+     *
+     * <code>optional uint32 BetRoundId = 13;</code>
+     */
+    public boolean hasBetRoundId() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <pre>
+     *下注轮次ID
+     * </pre>
+     *
+     * <code>optional uint32 BetRoundId = 13;</code>
+     */
+    public int getBetRoundId() {
+      return betRoundId_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasTableId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPlayerNum()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBaseBetScore()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBetMaxScore()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasGameNum()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCurrGameNum()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, tableId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, playerNum_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, baseBetScore_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, betMaxScore_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, gameNum_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, currGameNum_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, readyCd_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(8, betCd_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeInt32(9, openCardCd_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(10, isWatch_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeDouble(11, totalAlreadyBet_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeUInt32(12, tableState_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeUInt32(13, betRoundId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, tableId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, playerNum_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, baseBetScore_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, betMaxScore_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, gameNum_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, currGameNum_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, readyCd_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, betCd_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, openCardCd_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, isWatch_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(11, totalAlreadyBet_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(12, tableState_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(13, betRoundId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info)) {
+        return super.equals(obj);
+      }
+      JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info other = (JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info) obj;
+
+      boolean result = true;
+      result = result && (hasTableId() == other.hasTableId());
+      if (hasTableId()) {
+        result = result && getTableId()
+            .equals(other.getTableId());
+      }
+      result = result && (hasPlayerNum() == other.hasPlayerNum());
+      if (hasPlayerNum()) {
+        result = result && (getPlayerNum()
+            == other.getPlayerNum());
+      }
+      result = result && (hasBaseBetScore() == other.hasBaseBetScore());
+      if (hasBaseBetScore()) {
+        result = result && (getBaseBetScore()
+            == other.getBaseBetScore());
+      }
+      result = result && (hasBetMaxScore() == other.hasBetMaxScore());
+      if (hasBetMaxScore()) {
+        result = result && (getBetMaxScore()
+            == other.getBetMaxScore());
+      }
+      result = result && (hasGameNum() == other.hasGameNum());
+      if (hasGameNum()) {
+        result = result && (getGameNum()
+            == other.getGameNum());
+      }
+      result = result && (hasCurrGameNum() == other.hasCurrGameNum());
+      if (hasCurrGameNum()) {
+        result = result && (getCurrGameNum()
+            == other.getCurrGameNum());
+      }
+      result = result && (hasReadyCd() == other.hasReadyCd());
+      if (hasReadyCd()) {
+        result = result && (getReadyCd()
+            == other.getReadyCd());
+      }
+      result = result && (hasBetCd() == other.hasBetCd());
+      if (hasBetCd()) {
+        result = result && (getBetCd()
+            == other.getBetCd());
+      }
+      result = result && (hasOpenCardCd() == other.hasOpenCardCd());
+      if (hasOpenCardCd()) {
+        result = result && (getOpenCardCd()
+            == other.getOpenCardCd());
+      }
+      result = result && (hasIsWatch() == other.hasIsWatch());
+      if (hasIsWatch()) {
+        result = result && (getIsWatch()
+            == other.getIsWatch());
+      }
+      result = result && (hasTotalAlreadyBet() == other.hasTotalAlreadyBet());
+      if (hasTotalAlreadyBet()) {
+        result = result && (
+            java.lang.Double.doubleToLongBits(getTotalAlreadyBet())
+            == java.lang.Double.doubleToLongBits(
+                other.getTotalAlreadyBet()));
+      }
+      result = result && (hasTableState() == other.hasTableState());
+      if (hasTableState()) {
+        result = result && (getTableState()
+            == other.getTableState());
+      }
+      result = result && (hasBetRoundId() == other.hasBetRoundId());
+      if (hasBetRoundId()) {
+        result = result && (getBetRoundId()
+            == other.getBetRoundId());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasTableId()) {
+        hash = (37 * hash) + TABLEID_FIELD_NUMBER;
+        hash = (53 * hash) + getTableId().hashCode();
+      }
+      if (hasPlayerNum()) {
+        hash = (37 * hash) + PLAYERNUM_FIELD_NUMBER;
+        hash = (53 * hash) + getPlayerNum();
+      }
+      if (hasBaseBetScore()) {
+        hash = (37 * hash) + BASEBETSCORE_FIELD_NUMBER;
+        hash = (53 * hash) + getBaseBetScore();
+      }
+      if (hasBetMaxScore()) {
+        hash = (37 * hash) + BETMAXSCORE_FIELD_NUMBER;
+        hash = (53 * hash) + getBetMaxScore();
+      }
+      if (hasGameNum()) {
+        hash = (37 * hash) + GAMENUM_FIELD_NUMBER;
+        hash = (53 * hash) + getGameNum();
+      }
+      if (hasCurrGameNum()) {
+        hash = (37 * hash) + CURRGAMENUM_FIELD_NUMBER;
+        hash = (53 * hash) + getCurrGameNum();
+      }
+      if (hasReadyCd()) {
+        hash = (37 * hash) + READYCD_FIELD_NUMBER;
+        hash = (53 * hash) + getReadyCd();
+      }
+      if (hasBetCd()) {
+        hash = (37 * hash) + BETCD_FIELD_NUMBER;
+        hash = (53 * hash) + getBetCd();
+      }
+      if (hasOpenCardCd()) {
+        hash = (37 * hash) + OPENCARDCD_FIELD_NUMBER;
+        hash = (53 * hash) + getOpenCardCd();
+      }
+      if (hasIsWatch()) {
+        hash = (37 * hash) + ISWATCH_FIELD_NUMBER;
+        hash = (53 * hash) + getIsWatch();
+      }
+      if (hasTotalAlreadyBet()) {
+        hash = (37 * hash) + TOTALALREADYBET_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            java.lang.Double.doubleToLongBits(getTotalAlreadyBet()));
+      }
+      if (hasTableState()) {
+        hash = (37 * hash) + TABLESTATE_FIELD_NUMBER;
+        hash = (53 * hash) + getTableState();
+      }
+      if (hasBetRoundId()) {
+        hash = (37 * hash) + BETROUNDID_FIELD_NUMBER;
+        hash = (53 * hash) + getBetRoundId();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *当前桌子信息
+     * </pre>
+     *
+     * Protobuf type {@code JoloProtobuf.RoomSvr.JoloGame_Table_Info}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:JoloProtobuf.RoomSvr.JoloGame_Table_Info)
+        JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_InfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return JoloProtobuf.RoomSvr.JoloRoom.internal_static_JoloProtobuf_RoomSvr_JoloGame_Table_Info_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return JoloProtobuf.RoomSvr.JoloRoom.internal_static_JoloProtobuf_RoomSvr_JoloGame_Table_Info_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.class, JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.Builder.class);
+      }
+
+      // Construct using JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        tableId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        playerNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        baseBetScore_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        betMaxScore_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        gameNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        currGameNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        readyCd_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        betCd_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        openCardCd_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        isWatch_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        totalAlreadyBet_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        tableState_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000800);
+        betRoundId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00001000);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return JoloProtobuf.RoomSvr.JoloRoom.internal_static_JoloProtobuf_RoomSvr_JoloGame_Table_Info_descriptor;
+      }
+
+      public JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info getDefaultInstanceForType() {
+        return JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.getDefaultInstance();
+      }
+
+      public JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info build() {
+        JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info buildPartial() {
+        JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info result = new JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.tableId_ = tableId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.playerNum_ = playerNum_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.baseBetScore_ = baseBetScore_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.betMaxScore_ = betMaxScore_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.gameNum_ = gameNum_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.currGameNum_ = currGameNum_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.readyCd_ = readyCd_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.betCd_ = betCd_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.openCardCd_ = openCardCd_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.isWatch_ = isWatch_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.totalAlreadyBet_ = totalAlreadyBet_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.tableState_ = tableState_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.betRoundId_ = betRoundId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info) {
+          return mergeFrom((JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info other) {
+        if (other == JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info.getDefaultInstance()) return this;
+        if (other.hasTableId()) {
+          bitField0_ |= 0x00000001;
+          tableId_ = other.tableId_;
+          onChanged();
+        }
+        if (other.hasPlayerNum()) {
+          setPlayerNum(other.getPlayerNum());
+        }
+        if (other.hasBaseBetScore()) {
+          setBaseBetScore(other.getBaseBetScore());
+        }
+        if (other.hasBetMaxScore()) {
+          setBetMaxScore(other.getBetMaxScore());
+        }
+        if (other.hasGameNum()) {
+          setGameNum(other.getGameNum());
+        }
+        if (other.hasCurrGameNum()) {
+          setCurrGameNum(other.getCurrGameNum());
+        }
+        if (other.hasReadyCd()) {
+          setReadyCd(other.getReadyCd());
+        }
+        if (other.hasBetCd()) {
+          setBetCd(other.getBetCd());
+        }
+        if (other.hasOpenCardCd()) {
+          setOpenCardCd(other.getOpenCardCd());
+        }
+        if (other.hasIsWatch()) {
+          setIsWatch(other.getIsWatch());
+        }
+        if (other.hasTotalAlreadyBet()) {
+          setTotalAlreadyBet(other.getTotalAlreadyBet());
+        }
+        if (other.hasTableState()) {
+          setTableState(other.getTableState());
+        }
+        if (other.hasBetRoundId()) {
+          setBetRoundId(other.getBetRoundId());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasTableId()) {
+          return false;
+        }
+        if (!hasPlayerNum()) {
+          return false;
+        }
+        if (!hasBaseBetScore()) {
+          return false;
+        }
+        if (!hasBetMaxScore()) {
+          return false;
+        }
+        if (!hasGameNum()) {
+          return false;
+        }
+        if (!hasCurrGameNum()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object tableId_ = "";
+      /**
+       * <pre>
+       *桌子ID
+       * </pre>
+       *
+       * <code>required string TableId = 1;</code>
+       */
+      public boolean hasTableId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <pre>
+       *桌子ID
+       * </pre>
+       *
+       * <code>required string TableId = 1;</code>
+       */
+      public java.lang.String getTableId() {
+        java.lang.Object ref = tableId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            tableId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *桌子ID
+       * </pre>
+       *
+       * <code>required string TableId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTableIdBytes() {
+        java.lang.Object ref = tableId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tableId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *桌子ID
+       * </pre>
+       *
+       * <code>required string TableId = 1;</code>
+       */
+      public Builder setTableId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        tableId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *桌子ID
+       * </pre>
+       *
+       * <code>required string TableId = 1;</code>
+       */
+      public Builder clearTableId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        tableId_ = getDefaultInstance().getTableId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *桌子ID
+       * </pre>
+       *
+       * <code>required string TableId = 1;</code>
+       */
+      public Builder setTableIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        tableId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int playerNum_ ;
+      /**
+       * <pre>
+       *玩家人数
+       * </pre>
+       *
+       * <code>required int32 PlayerNum = 2;</code>
+       */
+      public boolean hasPlayerNum() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <pre>
+       *玩家人数
+       * </pre>
+       *
+       * <code>required int32 PlayerNum = 2;</code>
+       */
+      public int getPlayerNum() {
+        return playerNum_;
+      }
+      /**
+       * <pre>
+       *玩家人数
+       * </pre>
+       *
+       * <code>required int32 PlayerNum = 2;</code>
+       */
+      public Builder setPlayerNum(int value) {
+        bitField0_ |= 0x00000002;
+        playerNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家人数
+       * </pre>
+       *
+       * <code>required int32 PlayerNum = 2;</code>
+       */
+      public Builder clearPlayerNum() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        playerNum_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int baseBetScore_ ;
+      /**
+       * <pre>
+       *当前基础下注值
+       * </pre>
+       *
+       * <code>required int32 BaseBetScore = 3;</code>
+       */
+      public boolean hasBaseBetScore() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <pre>
+       *当前基础下注值
+       * </pre>
+       *
+       * <code>required int32 BaseBetScore = 3;</code>
+       */
+      public int getBaseBetScore() {
+        return baseBetScore_;
+      }
+      /**
+       * <pre>
+       *当前基础下注值
+       * </pre>
+       *
+       * <code>required int32 BaseBetScore = 3;</code>
+       */
+      public Builder setBaseBetScore(int value) {
+        bitField0_ |= 0x00000004;
+        baseBetScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *当前基础下注值
+       * </pre>
+       *
+       * <code>required int32 BaseBetScore = 3;</code>
+       */
+      public Builder clearBaseBetScore() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        baseBetScore_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int betMaxScore_ ;
+      /**
+       * <pre>
+       *下注积分上限
+       * </pre>
+       *
+       * <code>required int32 BetMaxScore = 4;</code>
+       */
+      public boolean hasBetMaxScore() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <pre>
+       *下注积分上限
+       * </pre>
+       *
+       * <code>required int32 BetMaxScore = 4;</code>
+       */
+      public int getBetMaxScore() {
+        return betMaxScore_;
+      }
+      /**
+       * <pre>
+       *下注积分上限
+       * </pre>
+       *
+       * <code>required int32 BetMaxScore = 4;</code>
+       */
+      public Builder setBetMaxScore(int value) {
+        bitField0_ |= 0x00000008;
+        betMaxScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *下注积分上限
+       * </pre>
+       *
+       * <code>required int32 BetMaxScore = 4;</code>
+       */
+      public Builder clearBetMaxScore() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        betMaxScore_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int gameNum_ ;
+      /**
+       * <pre>
+       *游戏局数
+       * </pre>
+       *
+       * <code>required int32 GameNum = 5;</code>
+       */
+      public boolean hasGameNum() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <pre>
+       *游戏局数
+       * </pre>
+       *
+       * <code>required int32 GameNum = 5;</code>
+       */
+      public int getGameNum() {
+        return gameNum_;
+      }
+      /**
+       * <pre>
+       *游戏局数
+       * </pre>
+       *
+       * <code>required int32 GameNum = 5;</code>
+       */
+      public Builder setGameNum(int value) {
+        bitField0_ |= 0x00000010;
+        gameNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *游戏局数
+       * </pre>
+       *
+       * <code>required int32 GameNum = 5;</code>
+       */
+      public Builder clearGameNum() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        gameNum_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int currGameNum_ ;
+      /**
+       * <pre>
+       *当前进行的游戏局数
+       * </pre>
+       *
+       * <code>required int32 CurrGameNum = 6;</code>
+       */
+      public boolean hasCurrGameNum() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <pre>
+       *当前进行的游戏局数
+       * </pre>
+       *
+       * <code>required int32 CurrGameNum = 6;</code>
+       */
+      public int getCurrGameNum() {
+        return currGameNum_;
+      }
+      /**
+       * <pre>
+       *当前进行的游戏局数
+       * </pre>
+       *
+       * <code>required int32 CurrGameNum = 6;</code>
+       */
+      public Builder setCurrGameNum(int value) {
+        bitField0_ |= 0x00000020;
+        currGameNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *当前进行的游戏局数
+       * </pre>
+       *
+       * <code>required int32 CurrGameNum = 6;</code>
+       */
+      public Builder clearCurrGameNum() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        currGameNum_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int readyCd_ ;
+      /**
+       * <pre>
+       *准备cd
+       * </pre>
+       *
+       * <code>optional int32 ReadyCd = 7;</code>
+       */
+      public boolean hasReadyCd() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <pre>
+       *准备cd
+       * </pre>
+       *
+       * <code>optional int32 ReadyCd = 7;</code>
+       */
+      public int getReadyCd() {
+        return readyCd_;
+      }
+      /**
+       * <pre>
+       *准备cd
+       * </pre>
+       *
+       * <code>optional int32 ReadyCd = 7;</code>
+       */
+      public Builder setReadyCd(int value) {
+        bitField0_ |= 0x00000040;
+        readyCd_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *准备cd
+       * </pre>
+       *
+       * <code>optional int32 ReadyCd = 7;</code>
+       */
+      public Builder clearReadyCd() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        readyCd_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int betCd_ ;
+      /**
+       * <pre>
+       *下注cd（超时则弃牌）
+       * </pre>
+       *
+       * <code>optional int32 BetCd = 8;</code>
+       */
+      public boolean hasBetCd() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <pre>
+       *下注cd（超时则弃牌）
+       * </pre>
+       *
+       * <code>optional int32 BetCd = 8;</code>
+       */
+      public int getBetCd() {
+        return betCd_;
+      }
+      /**
+       * <pre>
+       *下注cd（超时则弃牌）
+       * </pre>
+       *
+       * <code>optional int32 BetCd = 8;</code>
+       */
+      public Builder setBetCd(int value) {
+        bitField0_ |= 0x00000080;
+        betCd_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *下注cd（超时则弃牌）
+       * </pre>
+       *
+       * <code>optional int32 BetCd = 8;</code>
+       */
+      public Builder clearBetCd() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        betCd_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int openCardCd_ ;
+      /**
+       * <pre>
+       *亮牌cd
+       * </pre>
+       *
+       * <code>optional int32 OpenCardCd = 9;</code>
+       */
+      public boolean hasOpenCardCd() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <pre>
+       *亮牌cd
+       * </pre>
+       *
+       * <code>optional int32 OpenCardCd = 9;</code>
+       */
+      public int getOpenCardCd() {
+        return openCardCd_;
+      }
+      /**
+       * <pre>
+       *亮牌cd
+       * </pre>
+       *
+       * <code>optional int32 OpenCardCd = 9;</code>
+       */
+      public Builder setOpenCardCd(int value) {
+        bitField0_ |= 0x00000100;
+        openCardCd_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *亮牌cd
+       * </pre>
+       *
+       * <code>optional int32 OpenCardCd = 9;</code>
+       */
+      public Builder clearOpenCardCd() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        openCardCd_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int isWatch_ ;
+      /**
+       * <pre>
+       *是否可以观战
+       * </pre>
+       *
+       * <code>optional int32 IsWatch = 10;</code>
+       */
+      public boolean hasIsWatch() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <pre>
+       *是否可以观战
+       * </pre>
+       *
+       * <code>optional int32 IsWatch = 10;</code>
+       */
+      public int getIsWatch() {
+        return isWatch_;
+      }
+      /**
+       * <pre>
+       *是否可以观战
+       * </pre>
+       *
+       * <code>optional int32 IsWatch = 10;</code>
+       */
+      public Builder setIsWatch(int value) {
+        bitField0_ |= 0x00000200;
+        isWatch_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *是否可以观战
+       * </pre>
+       *
+       * <code>optional int32 IsWatch = 10;</code>
+       */
+      public Builder clearIsWatch() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        isWatch_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private double totalAlreadyBet_ ;
+      /**
+       * <pre>
+       *牌桌目前总的下注金额
+       * </pre>
+       *
+       * <code>optional double totalAlreadyBet = 11;</code>
+       */
+      public boolean hasTotalAlreadyBet() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <pre>
+       *牌桌目前总的下注金额
+       * </pre>
+       *
+       * <code>optional double totalAlreadyBet = 11;</code>
+       */
+      public double getTotalAlreadyBet() {
+        return totalAlreadyBet_;
+      }
+      /**
+       * <pre>
+       *牌桌目前总的下注金额
+       * </pre>
+       *
+       * <code>optional double totalAlreadyBet = 11;</code>
+       */
+      public Builder setTotalAlreadyBet(double value) {
+        bitField0_ |= 0x00000400;
+        totalAlreadyBet_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *牌桌目前总的下注金额
+       * </pre>
+       *
+       * <code>optional double totalAlreadyBet = 11;</code>
+       */
+      public Builder clearTotalAlreadyBet() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        totalAlreadyBet_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private int tableState_ ;
+      /**
+       * <pre>
+       *桌子目前的状态值
+       * </pre>
+       *
+       * <code>optional uint32 TableState = 12;</code>
+       */
+      public boolean hasTableState() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <pre>
+       *桌子目前的状态值
+       * </pre>
+       *
+       * <code>optional uint32 TableState = 12;</code>
+       */
+      public int getTableState() {
+        return tableState_;
+      }
+      /**
+       * <pre>
+       *桌子目前的状态值
+       * </pre>
+       *
+       * <code>optional uint32 TableState = 12;</code>
+       */
+      public Builder setTableState(int value) {
+        bitField0_ |= 0x00000800;
+        tableState_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *桌子目前的状态值
+       * </pre>
+       *
+       * <code>optional uint32 TableState = 12;</code>
+       */
+      public Builder clearTableState() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        tableState_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int betRoundId_ ;
+      /**
+       * <pre>
+       *下注轮次ID
+       * </pre>
+       *
+       * <code>optional uint32 BetRoundId = 13;</code>
+       */
+      public boolean hasBetRoundId() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <pre>
+       *下注轮次ID
+       * </pre>
+       *
+       * <code>optional uint32 BetRoundId = 13;</code>
+       */
+      public int getBetRoundId() {
+        return betRoundId_;
+      }
+      /**
+       * <pre>
+       *下注轮次ID
+       * </pre>
+       *
+       * <code>optional uint32 BetRoundId = 13;</code>
+       */
+      public Builder setBetRoundId(int value) {
+        bitField0_ |= 0x00001000;
+        betRoundId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *下注轮次ID
+       * </pre>
+       *
+       * <code>optional uint32 BetRoundId = 13;</code>
+       */
+      public Builder clearBetRoundId() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        betRoundId_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:JoloProtobuf.RoomSvr.JoloGame_Table_Info)
+    }
+
+    // @@protoc_insertion_point(class_scope:JoloProtobuf.RoomSvr.JoloGame_Table_Info)
+    private static final JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info();
+    }
+
+    public static JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<JoloGame_Table_Info>
+        PARSER = new com.google.protobuf.AbstractParser<JoloGame_Table_Info>() {
+      public JoloGame_Table_Info parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new JoloGame_Table_Info(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<JoloGame_Table_Info> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<JoloGame_Table_Info> getParserForType() {
+      return PARSER;
+    }
+
+    public JoloProtobuf.RoomSvr.JoloRoom.JoloGame_Table_Info getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -25740,6 +33746,16 @@ public final class JoloRoom {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyJoinTableAck_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_JoloProtobuf_RoomSvr_JoloRoom_TablePlay_PlayerInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_JoloProtobuf_RoomSvr_JoloRoom_TablePlay_PlayerInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_JoloProtobuf_RoomSvr_JoloGame_Table_Info_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_JoloProtobuf_RoomSvr_JoloGame_Table_Info_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyJoinTableRobotReq_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -25802,30 +33818,58 @@ public final class JoloRoom {
       "oomId\030\003 \002(\t\022\017\n\007TableId\030\004 \001(\t\022\016\n\006Result\030\005" +
       " \002(\005\022\021\n\tResultMsg\030\006 \001(\t\022C\n\nStatusInfo\030\007 " +
       "\002(\0132/.JoloProtobuf.RoomSvr.JoloRoom_Tabl" +
-      "e_StatusInfo\"L\n\032JoloRoom_ApplyJoinTableR" +
-      "eq\022\016\n\006UserId\030\001 \002(\t\022\016\n\006GameId\030\002 \002(\t\022\016\n\006Ro" +
-      "omId\030\003 \002(\t\"\220\002\n\032JoloRoom_ApplyJoinTableAc" +
-      "k\022\016\n\006UserId\030\001 \002(\t\022\016\n\006GameId\030\002 \002(\t\022\016\n\006Roo" +
-      "mId\030\003 \002(\t\022\017\n\007TableId\030\004 \002(\t\022\016\n\006SeatId\030\005 \002" +
-      "(\t\022\016\n\006Result\030\006 \002(\005\022\021\n\tResultMsg\030\007 \001(\t\022\025\n" +
-      "\rJoinGameSvrId\030\010 \001(\t\022\022\n\nBootAmount\030\t \001(\001" +
-      "\022\r\n\005BetCd\030\n \001(\005\022\023\n\013GameStartCd\030\013 \001(\005\022\031\n\021" +
-      "minJoinTableScore\030\014 \001(\005\022\024\n\014reconnection\030" +
-      "\r \001(\005\"b\n\037JoloRoom_ApplyJoinTableRobotReq" +
-      "\022\016\n\006UserId\030\001 \002(\t\022\016\n\006GameId\030\002 \002(\t\022\016\n\006Room" +
-      "Id\030\003 \002(\t\022\017\n\007TableId\030\004 \002(\t\"_\n\034JoloRoom_Ap" +
-      "plyChangeTableReq\022\016\n\006UserId\030\001 \002(\t\022\016\n\006Gam" +
-      "eId\030\002 \002(\t\022\016\n\006RoomId\030\003 \002(\t\022\017\n\007TableId\030\004 \002" +
-      "(\t\"\373\002\n\034JoloRoom_ApplyChangeTableAck\022\016\n\006U" +
-      "serId\030\001 \002(\t\022\016\n\006GameId\030\002 \002(\t\022\016\n\006RoomId\030\003 " +
-      "\002(\t\022\017\n\007TableId\030\004 \002(\t\022\016\n\006SeatId\030\005 \002(\t\022\016\n\006" +
-      "Result\030\006 \002(\005\022\021\n\tResultMsg\030\007 \001(\t\022\025\n\rJoinG" +
-      "ameSvrId\030\010 \001(\t\022\022\n\nBootAmount\030\t \001(\001\022\021\n\tMa" +
-      "xBlinds\030\n \001(\005\022\022\n\nChaalLimit\030\013 \001(\001\022\020\n\010Pot" +
-      "Limit\030\014 \001(\001\022\024\n\014IsChangeCard\030\r \001(\005\022\025\n\rCha" +
-      "ngeCardFee\030\016 \001(\005\022\027\n\017AllowSideshowCd\030\017 \001(" +
-      "\005\022\r\n\005BetCd\030\020 \001(\005\022\023\n\013GameStartCd\030\021 \001(\005\022\031\n" +
-      "\021minJoinTableScore\030\022 \001(\005B\nB\010JoloRoom"
+      "e_StatusInfo\"\257\002\n\032JoloRoom_ApplyJoinTable" +
+      "Req\022\016\n\006UserId\030\001 \002(\t\022\016\n\006GameId\030\002 \002(\t\022\016\n\006R" +
+      "oomId\030\003 \002(\t\022\017\n\007TableId\030\005 \001(\t\022\021\n\tPlayerNu" +
+      "m\030\006 \002(\005\022\024\n\014BaseBetScore\030\007 \002(\005\022\017\n\007ReadyCd" +
+      "\030\010 \001(\005\022\r\n\005BetCd\030\t \001(\005\022\022\n\nOpenCardCd\030\n \001(" +
+      "\005\022\023\n\013BetMaxScore\030\013 \002(\005\022\017\n\007GameNum\030\014 \002(\005\022" +
+      "\017\n\007IsWatch\030\r \001(\005\022\023\n\013BetMultiple\030\016 \002(\t\022\025\n" +
+      "\rHeadSculpture\030\017 \001(\005\022\020\n\010CardSkin\030\020 \001(\005\"\221" +
+      "\003\n\032JoloRoom_ApplyJoinTableAck\022\016\n\006UserId\030" +
+      "\001 \002(\t\022\016\n\006GameId\030\002 \002(\t\022\016\n\006RoomId\030\003 \002(\t\022\017\n" +
+      "\007TableId\030\004 \002(\t\022\016\n\006SeatId\030\006 \001(\t\022K\n\016Player" +
+      "InfoList\030\007 \003(\01323.JoloProtobuf.RoomSvr.Jo" +
+      "loRoom_TablePlay_PlayerInfo\022<\n\tTableInfo" +
+      "\030\010 \002(\0132).JoloProtobuf.RoomSvr.JoloGame_T" +
+      "able_Info\022\016\n\006Result\030\t \002(\005\022\021\n\tResultMsg\030\n" +
+      " \001(\t\022\025\n\rJoinGameSvrId\030\013 \001(\t\022\024\n\014reconnect" +
+      "ion\030\014 \001(\005\022\021\n\tNotInGame\030\r \001(\r\022\020\n\010PlayType" +
+      "\030\016 \001(\t\022\023\n\013BetMultiple\030\017 \002(\t\022\r\n\005money\030\020 \001" +
+      "(\005\"\320\003\n\035JoloRoom_TablePlay_PlayerInfo\022\016\n\006" +
+      "UserId\030\001 \002(\t\022\020\n\010NickName\030\002 \002(\t\022\016\n\006Icourl" +
+      "\030\003 \002(\t\022\026\n\016PlayScoreStore\030\004 \002(\001\022\021\n\tHandCa" +
+      "rds\030\005 \003(\r\022\r\n\005State\030\006 \002(\r\022\017\n\007SeatNum\030\007 \001(" +
+      "\r\022\024\n\014IsCurrAction\030\010 \001(\r\022\035\n\025CurrActionSur" +
+      "plusTime\030\t \001(\005\022\027\n\017AlreadyBetScore\030\n \001(\001\022" +
+      "\020\n\010IsDealer\030\013 \001(\r\022\023\n\013InTableTime\030\014 \001(\004\022\023" +
+      "\n\013SitDownTime\030\r \001(\004\022\026\n\016LastActionTime\030\016 " +
+      "\001(\004\022\021\n\tNotInGame\030\017 \001(\r\022\030\n\020PreviousBetSco" +
+      "re\030\021 \001(\005\022\017\n\007BetMode\030\022 \001(\005\022\020\n\010BetScore\030\023 " +
+      "\001(\005\022\025\n\rHeadSculpture\030\024 \001(\005\022\020\n\010CardSkin\030\025" +
+      " \001(\005\022\027\n\017SpecialFunction\030\026 \001(\005\"\220\002\n\023JoloGa" +
+      "me_Table_Info\022\017\n\007TableId\030\001 \002(\t\022\021\n\tPlayer" +
+      "Num\030\002 \002(\005\022\024\n\014BaseBetScore\030\003 \002(\005\022\023\n\013BetMa" +
+      "xScore\030\004 \002(\005\022\017\n\007GameNum\030\005 \002(\005\022\023\n\013CurrGam" +
+      "eNum\030\006 \002(\005\022\017\n\007ReadyCd\030\007 \001(\005\022\r\n\005BetCd\030\010 \001" +
+      "(\005\022\022\n\nOpenCardCd\030\t \001(\005\022\017\n\007IsWatch\030\n \001(\005\022" +
+      "\027\n\017totalAlreadyBet\030\013 \001(\001\022\022\n\nTableState\030\014" +
+      " \001(\r\022\022\n\nBetRoundId\030\r \001(\r\"b\n\037JoloRoom_App" +
+      "lyJoinTableRobotReq\022\016\n\006UserId\030\001 \002(\t\022\016\n\006G" +
+      "ameId\030\002 \002(\t\022\016\n\006RoomId\030\003 \002(\t\022\017\n\007TableId\030\004" +
+      " \002(\t\"_\n\034JoloRoom_ApplyChangeTableReq\022\016\n\006" +
+      "UserId\030\001 \002(\t\022\016\n\006GameId\030\002 \002(\t\022\016\n\006RoomId\030\003" +
+      " \002(\t\022\017\n\007TableId\030\004 \002(\t\"\373\002\n\034JoloRoom_Apply" +
+      "ChangeTableAck\022\016\n\006UserId\030\001 \002(\t\022\016\n\006GameId" +
+      "\030\002 \002(\t\022\016\n\006RoomId\030\003 \002(\t\022\017\n\007TableId\030\004 \002(\t\022" +
+      "\016\n\006SeatId\030\005 \002(\t\022\016\n\006Result\030\006 \002(\005\022\021\n\tResul" +
+      "tMsg\030\007 \001(\t\022\025\n\rJoinGameSvrId\030\010 \001(\t\022\022\n\nBoo" +
+      "tAmount\030\t \001(\001\022\021\n\tMaxBlinds\030\n \001(\005\022\022\n\nChaa" +
+      "lLimit\030\013 \001(\001\022\020\n\010PotLimit\030\014 \001(\001\022\024\n\014IsChan" +
+      "geCard\030\r \001(\005\022\025\n\rChangeCardFee\030\016 \001(\005\022\027\n\017A" +
+      "llowSideshowCd\030\017 \001(\005\022\r\n\005BetCd\030\020 \001(\005\022\023\n\013G" +
+      "ameStartCd\030\021 \001(\005\022\031\n\021minJoinTableScore\030\022 " +
+      "\001(\005B\nB\010JoloRoom"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -25904,27 +33948,39 @@ public final class JoloRoom {
     internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyJoinTableReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyJoinTableReq_descriptor,
-        new java.lang.String[] { "UserId", "GameId", "RoomId", });
+        new java.lang.String[] { "UserId", "GameId", "RoomId", "TableId", "PlayerNum", "BaseBetScore", "ReadyCd", "BetCd", "OpenCardCd", "BetMaxScore", "GameNum", "IsWatch", "BetMultiple", "HeadSculpture", "CardSkin", });
     internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyJoinTableAck_descriptor =
       getDescriptor().getMessageTypes().get(11);
     internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyJoinTableAck_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyJoinTableAck_descriptor,
-        new java.lang.String[] { "UserId", "GameId", "RoomId", "TableId", "SeatId", "Result", "ResultMsg", "JoinGameSvrId", "BootAmount", "BetCd", "GameStartCd", "MinJoinTableScore", "Reconnection", });
-    internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyJoinTableRobotReq_descriptor =
+        new java.lang.String[] { "UserId", "GameId", "RoomId", "TableId", "SeatId", "PlayerInfoList", "TableInfo", "Result", "ResultMsg", "JoinGameSvrId", "Reconnection", "NotInGame", "PlayType", "BetMultiple", "Money", });
+    internal_static_JoloProtobuf_RoomSvr_JoloRoom_TablePlay_PlayerInfo_descriptor =
       getDescriptor().getMessageTypes().get(12);
+    internal_static_JoloProtobuf_RoomSvr_JoloRoom_TablePlay_PlayerInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_JoloProtobuf_RoomSvr_JoloRoom_TablePlay_PlayerInfo_descriptor,
+        new java.lang.String[] { "UserId", "NickName", "Icourl", "PlayScoreStore", "HandCards", "State", "SeatNum", "IsCurrAction", "CurrActionSurplusTime", "AlreadyBetScore", "IsDealer", "InTableTime", "SitDownTime", "LastActionTime", "NotInGame", "PreviousBetScore", "BetMode", "BetScore", "HeadSculpture", "CardSkin", "SpecialFunction", });
+    internal_static_JoloProtobuf_RoomSvr_JoloGame_Table_Info_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_JoloProtobuf_RoomSvr_JoloGame_Table_Info_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_JoloProtobuf_RoomSvr_JoloGame_Table_Info_descriptor,
+        new java.lang.String[] { "TableId", "PlayerNum", "BaseBetScore", "BetMaxScore", "GameNum", "CurrGameNum", "ReadyCd", "BetCd", "OpenCardCd", "IsWatch", "TotalAlreadyBet", "TableState", "BetRoundId", });
+    internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyJoinTableRobotReq_descriptor =
+      getDescriptor().getMessageTypes().get(14);
     internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyJoinTableRobotReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyJoinTableRobotReq_descriptor,
         new java.lang.String[] { "UserId", "GameId", "RoomId", "TableId", });
     internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyChangeTableReq_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyChangeTableReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyChangeTableReq_descriptor,
         new java.lang.String[] { "UserId", "GameId", "RoomId", "TableId", });
     internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyChangeTableAck_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyChangeTableAck_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyChangeTableAck_descriptor,

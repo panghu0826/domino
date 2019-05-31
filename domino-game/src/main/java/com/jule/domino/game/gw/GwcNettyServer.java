@@ -1,7 +1,7 @@
 package com.jule.domino.game.gw;
 
 import com.jule.domino.game.gw.netty.GwcIoHandler;
-import com.jule.domino.game.gw.netty.GwcRegisterService;
+//import com.jule.domino.game.gw.netty.GwcRegisterService;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -72,8 +72,8 @@ public class GwcNettyServer {
                         }
                     });
 
-            server.bind(hosts, port)
-                  .addListener((ChannelFutureListener) future -> GwcRegisterService.OBJ.checkChannel());
+//            server.bind(hosts, port).addListener((ChannelFutureListener) future -> GwcRegisterService.OBJ.checkChannel());
+            server.bind(hosts, port).sync();
 
             log.info("启动netty服务器完成,绑定{}：{}", hosts, port);
         }catch (Exception ex){

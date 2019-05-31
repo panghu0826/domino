@@ -4,15 +4,18 @@
 <generatorConfiguration>
     <!-- 驱动包路径！ 慎用此功能，，会覆盖掉手动添加代码，，若使用请先备份文件，最好一次只生成一个表的，，否则后果很严重 -->
     <classPathEntry
-            location="D:\all_tools\apache-maven-3.5.3\maven-repository\mysql\mysql-connector-java\5.1.20\mysql-connector-java-5.1.20.jar"/>
+            location="D:\application\apache-maven-3.5.2\mysql-connector-java\mysql-connector-java-5.1.20.jar"/>
     <context id="MysqlTables" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <property name="mergeable" value="true"></property>
         <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true"/>
+            <!--生成的注释包含时间戳-->
+            <property name="suppressDate" value="false"/>
         </commentGenerator>
         <!-- jdbc url地址 ！ -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.0.14:3306/poker_niuniu?generateSimpleParameterMetadata=true"
+                        connectionURL="jdbc:mysql://192.168.0.14:3306/domino?generateSimpleParameterMetadata=true"
                         userId="root" password="root">
         </jdbcConnection>
         <javaTypeResolver>
@@ -20,20 +23,21 @@
         </javaTypeResolver>
         <!-- targetPackage 生成后的路径 ，targetProject 绝对路径  该配置生成java代码  -->
         <javaModelGenerator targetPackage="com.jule.domino.game.dao.bean"
-                            targetProject="D:\ws\svn\Product_Code\Niuniu\3_SourceCode\Server\trunk\niuniu-game\src\main\java">
+                            targetProject="D:\domino\domino-game\src\main\java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!-- 该配置生成 mybatis 映射文件   -->
         <sqlMapGenerator targetPackage="com.jule.domino.game.dao.mapper"
-                         targetProject="D:\ws\svn\Product_Code\Niuniu\3_SourceCode\Server\trunk\niuniu-game\src\main\resources">
+                         targetProject="D:\domino\domino-game\src\main\resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- 生成 java 接口代码  -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.jule.domino.game.dao.mapper"
-                             targetProject="D:\ws\svn\Product_Code\Niuniu\3_SourceCode\Server\trunk\niuniu-game\src\main\java">
+                             targetProject="D:\domino\domino-game\src\main\java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
+
 
         <!--&lt;!&ndash;需要修改：schema：数据库名(oracle需要去掉该值) tableName：表名 domainObjectName：entity名&ndash;&gt;-->
         <!--<table schema="jule_common" tableName="user" domainObjectName="User" enableCountByExample="false"-->
@@ -42,22 +46,18 @@
         <!--<property name="useActualColumnNames" value="true"/>-->
         <!--</table>-->
         <!--需要修改：schema：数据库名(oracle需要去掉该值) tableName：表名 domainObjectName：entity名-->
-        <!--<table schema="jule_common" tableName="payment" domainObjectName="Payment" enableCountByExample="false"-->
-        <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true"-->
-        <!--selectByExampleQueryId="false">-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--</table>-->
-        <table schema="poker_niuniu" tableName="cardtype_multiple" domainObjectName="CardTypeMultipleModel" enableCountByExample="false"
+        <table schema="domino" tableName="user_item" domainObjectName="UserItemModel"
+               enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true"
                selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="true"/>
             <property name="selectAllOrderByClause" value="id asc"/><!--asc正序 desc倒序-->
         </table>
         <!--<table schema="teen_patti_gold" tableName="room_config" domainObjectName="RoomConfigModel" enableCountByExample="false"-->
-               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="false">-->
-            <!--<property name="useActualColumnNames" value="true"/>-->
-            <!--<property name="selectAllOrderByClause" value="pid asc"/>&lt;!&ndash;asc正序 desc倒序&ndash;&gt;-->
+        <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--selectByExampleQueryId="false">-->
+        <!--<property name="useActualColumnNames" value="true"/>-->
+        <!--<property name="selectAllOrderByClause" value="pid asc"/>&lt;!&ndash;asc正序 desc倒序&ndash;&gt;-->
         <!--</table>-->
     </context>
 </generatorConfiguration>

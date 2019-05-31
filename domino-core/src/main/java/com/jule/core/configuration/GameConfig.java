@@ -12,6 +12,7 @@ import java.util.Map;
 public class GameConfig {
 	
 	private Map<String, String> tableClassNameMap = new HashMap<>();
+
 	private static GameConfig instant;
 
 	private static String md5val = "";

@@ -102,6 +102,16 @@ message JoloRoom_ApplyJoinTableReq { //40001
     required string UserId = 1; //用户ID
     required string GameId = 2; //游戏ID
     required string RoomId = 3; //房间ID
+	optional string TableId = 5; //桌子ID
+	required int32 PlayerNum = 6; //玩家人数
+    required int32 BaseBetScore = 7; //当前基础下注值
+    optional int32 ReadyCd = 8; //准备cd
+    optional int32 BetCd = 9; //下注cd（超时则弃牌）
+    optional int32 OpenCardCd = 10; //亮牌cd
+    required int32 BetMaxScore = 11; //下注积分上限
+    required int32 GameNum = 12; //游戏局数
+    optional int32 IsWatch = 13; //是否可以观战
+	required string BetMultiple = 14; //桌子加注倍数
 }
 
 message JoloRoom_ApplyJoinTableAck {
@@ -109,16 +119,53 @@ message JoloRoom_ApplyJoinTableAck {
     required string GameId = 2; //游戏ID
     required string RoomId = 3; //房间ID
     required string TableId = 4; //桌子ID
-    required string SeatId = 5; //座位ID
-    required int32 Result = 6; //结果,成功或失败
-    optional string ResultMsg = 7; //失败信息
-    optional string JoinGameSvrId = 8; //客户端可通过此ID调用GateSvr实现与GameSvr的交互
-    optional double BootAmount = 9; //底注
-    optional int32 BetCd = 10; //下注倒计时 and 选择用户比牌
-    optional int32 GameStartCd = 11; //游戏开始倒计时（发牌前倒计时）
-    optional int32 minJoinTableScore = 12;//最小入桌积分(所有房间)
-    optional int32 reconnection = 13;//是否断线重连1是0不是
+    optional string SeatId = 5; //座位ID
+	repeated JoloRoom_TablePlay_PlayerInfo PlayerInfoList = 6; //正在桌子上玩牌的玩家打牌状态信息
+    required JoloGame_Table_Info TableInfo = 7; //桌子信息
+	required int32 Result = 9; //结果,成功或失败
+    optional string ResultMsg = 10; //失败信息
+    optional string JoinGameSvrId = 11; //客户端可通过此ID调用GateSvr实现与GameSvr的交互
+    optional int32 reconnection = 12;//是否断线重连1是0不是
+    optional uint32 NotInGame = 13; //玩家不在游戏中（存在并且不在游戏中1）
+    optional string PlayType = 14;//选定的玩法
+	required string BetMultiple = 15; //桌子加注倍数
 }
+
+//正在座位玩牌的玩家信息
+message JoloRoom_TablePlay_PlayerInfo {
+    required string UserId = 1; //用户ID
+    required string NickName = 2; //显示的昵称
+    required double PlayScoreStore = 3; //玩家牌桌上的积分量
+	repeated uint32 HandCards = 4; //牌数组下标
+	required uint32 State = 5; //玩家状态
+    optional uint32 SeatNum = 6; //玩家座位号
+    optional uint32 IsCurrAction = 7; //是否是当前行动者
+    optional int32  CurrActionSurplusTime = 8;//当前行动者剩余操作时间 
+    optional double AlreadyBetScore = 9; //已经下注的积分量（用于客户端在展现牌桌信息时，将已下注玩家的积分量显示在牌桌上）
+    optional uint32 IsDealer = 10; //是否庄家
+    optional uint64 InTableTime = 11; //入桌时间
+    optional uint64 SitDownTime = 12; //坐下时间
+    optional uint64 LastActionTime = 13; //最后一次行动时间
+    optional uint32 NotInGame = 14; //玩家不在游戏中为0在游戏中，1不在游戏
+}
+
+//当前桌子信息
+message JoloGame_Table_Info {
+    required string TableId = 1; //桌子ID
+	required int32 PlayerNum = 2; //玩家人数
+    required int32 BaseBetScore = 3; //当前基础下注值
+	required int32 BetMaxScore = 4; //下注积分上限
+    required int32 GameNum = 5; //游戏局数
+	required int32 CurrGameNum = 6; //当前进行的游戏局数
+    optional int32 ReadyCd = 7; //准备cd
+    optional int32 BetCd = 8; //下注cd（超时则弃牌）
+    optional int32 OpenCardCd = 9; //亮牌cd
+    optional int32 IsWatch = 10; //是否可以观战
+	optional double totalAlreadyBet = 11; //牌桌目前总的下注金额
+	optional uint32 TableState = 12; //桌子目前的状态值
+	optional uint32 BetRoundId = 13; //下注轮次ID
+}
+
 
 //同步：申请入桌返回40001
 message JoloRoom_ApplyJoinTableRobotReq { //40003

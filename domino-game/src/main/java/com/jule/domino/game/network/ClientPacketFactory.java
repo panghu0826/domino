@@ -2,6 +2,7 @@ package com.jule.domino.game.network;
 
 import com.jule.domino.base.service.holder.FunctionIdsHolder;
 import com.jule.domino.game.network.protocol.ClientReq;
+import com.jule.domino.game.network.protocol.acks.JoloGame_GiftsListAck_50051;
 import com.jule.domino.game.network.protocol.reqs.*;
 import com.jule.domino.game.notice.network.protocol.reqs.JoloNotice_SendGamePlayMsgReq_10001;
 import com.jule.domino.game.notice.network.protocol.reqs.JoloNotice_SendNormalMsgReq_10000;
@@ -30,17 +31,18 @@ public class ClientPacketFactory {
         CLIENT_PACKET_HOLDER.addPacketPrototype(new GatePingReq_01(1));//网关心跳
         CLIENT_PACKET_HOLDER.addPacketPrototype(new GateUserLogoutReq_02(2));//通知服务器玩家下线
 
-
-
         CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_ApplySitDownReq_50001(FunctionIdHolder.Game_REQ_ApplySiteDown));//申请入座
         CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_ApplyStandUpReq_50002(FunctionIdHolder.Game_REQ_ApplyStandUp));
-        CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_ApplyLeaveReq_50003(FunctionIdHolder.Game_REQ_ApplyLeave));
         CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_ApplyBetReq_50005(FunctionIdHolder.Game_REQ_ApplyBet));
+        CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_ApplyFoldReq_50012(FunctionIdHolder.Game_REQ_ApplyFold));
         CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_ReadyReq_50018(FunctionIdHolder.Game_REQ_ReadyType));
-
+        CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_SpecialFunctionReq_50015(FunctionIdHolder.Game_REQ_SpecialFunction));
+        CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_ApplyLeaveReq_50003(FunctionIdHolder.Game_REQ_ApplyLeave));
         CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_OtherPlayerInfoReq_50014(FunctionIdHolder.Game_REQ_OtherUserInfo));
         CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_ReconnectReq_50016(FunctionIdHolder.Game_REQ_Reconnect));
+        CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_GiveGiftsReq_50051(FunctionIdHolder.Game_REQ_ChatMesgSend));
         CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_PlayRecordsReq_50063(FunctionIdHolder.Game_REQ_GameRecords));
+        CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_UnlockReq_50055(FunctionIdHolder.Game_REQ_Item));
 
         //新加room消息要放到这里
         CLIENT_PACKET_HOLDER.addPacketPrototype(new DummyReq_01(01));
@@ -56,7 +58,6 @@ public class ClientPacketFactory {
     }
 
     public ClientReq getClientReq(int functionId, ChannelHandlerContext channelHandlerContext) {
-//        logger.debug("getClientReq");
         return CLIENT_PACKET_HOLDER.getPacket(functionId, channelHandlerContext);
     }
 

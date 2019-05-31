@@ -47,7 +47,8 @@ public class TimerService {
                     }
                 }
                 //TableInfo
-                TableService.getInstance().timeOutLeaveTable();
+                //离桌倒计时
+//                TableService.getInstance().timeOutLeaveTable();
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
             } finally {

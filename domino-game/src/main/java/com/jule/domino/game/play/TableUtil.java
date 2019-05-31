@@ -1,6 +1,7 @@
 package com.jule.domino.game.play;
 
 import JoloProtobuf.GameSvr.JoloGame;
+import com.google.common.primitives.Ints;
 import com.jule.core.jedis.StoredObjManager;
 import com.jule.domino.game.config.Config;
 import com.jule.domino.game.dao.bean.RoomConfigModel;
@@ -72,7 +73,6 @@ public class TableUtil {
                     + ", isOffLine = " + player.isOffLine()
                     + System.getProperty("line.separator"));
         }
-
         return sb.toString();
     }
 
@@ -208,34 +208,29 @@ public class TableUtil {
         return list;
     }
 
-    public static List<JoloGame.JoloGame_TablePlay_PlayerInfo> getPlayersInTable(AbstractTable table) {
+    public static List<JoloGame.JoloGame_TablePlay_PlayerInfo> getPlayersInTable(AbstractTable table, String currPlayerId) {
         List<JoloGame.JoloGame_TablePlay_PlayerInfo> list = new ArrayList<>();
         for (PlayerInfo player : table.getInGamePlayers().values()) {
             if (player != null) {
-                JoloGame.JoloGame_TablePlay_PlayerInfo.Builder playerInfo = JoloGame.JoloGame_TablePlay_PlayerInfo.newBuilder()
+                JoloGame.JoloGame_TablePlay_PlayerInfo.Builder tablePlay = JoloGame.JoloGame_TablePlay_PlayerInfo.newBuilder()
                         .setUserId(player.getPlayerId())
                         .setNickName(player.getNickName())
-                        .setIcon(player.getIcon())
                         .setPlayScoreStore(player.getPlayScoreStore())
                         .setSeatNum(player.getSeatNum())
-                        .setAlreadyBetScore(player.getAlreadyBetScore4Round())
-                        .setIsDealer(player.getIsDealer())
+                        .setIsCurrAction(player.getWinLoseScore4Hand() == table.getBetMaxScore() ? 0 : player.getIsCurrActive())
+                        .setCurrActionSurplusTime(table.getBetCd())
+                        .setIsDealer(0)
                         .setState(player.getState().getValue())
-                        .setIsBlind(player.getIsBlind())
-                        .setNotInGame(player.getState().getValue() > 1 ? 0 : 1);
-                if (player.getState() == PlayerStateEnum.beting) {
-                    playerInfo.setIsCurrAction(1);
-                    playerInfo.setCurrActionSurplusTime(TimerService.getInstance().getLeftCountDown(table.getRoomTableRelation()));
-                } else {
-                    playerInfo.setIsCurrAction(0);
-                }
-                int[] handCards = player.getHandCards();
-                if (null != handCards && handCards.length > 0) {
-                    for (int card : handCards) {
-                        playerInfo.addHandCards(card);
+                        .setIsBlind(0)
+                        .addAllHandCards(Ints.asList(player.getHandCards()));
+                if (table.getSeeHandCardsPlayerId() == null || !currPlayerId.equals(table.getSeeHandCardsPlayerId())) {
+                    //广播里自己的手牌齐全，其他人的前两张张为0
+                    if (!player.getPlayerId().equals(currPlayerId)) {
+                        tablePlay.setHandCards(0, 0);
+                        tablePlay.setHandCards(1, 0);
                     }
                 }
-                list.add(playerInfo.build());
+                list.add(tablePlay.build());
             }
         }
         return list;
@@ -258,6 +253,7 @@ public class TableUtil {
 
     /**
      * 计算下注倍数
+     *
      * @param table
      */
     public static void calculateBetMultiple(AbstractTable table) {

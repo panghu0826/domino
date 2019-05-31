@@ -73,7 +73,7 @@ public class GameDiscoveService {
                return;
             }
             int _gameSvrId = Integer.parseInt(gameSvrRelationModel.getGameSvrId());
-            logger.debug(RedisConst.GAME_SVR_LIST + "--------------------------------------------服务器注册的gamesvrId：" + _gameSvrId);
+            logger.debug("服务器注册的gamesvrId：" + _gameSvrId);
             String address = gameSvrRelationModel.getAddress();
             if (!CACHED_GAMESERVER_TABLE.containsKey(address)) {
                 CACHED_GAMESERVER_TABLE.put(address, _gameSvrId);

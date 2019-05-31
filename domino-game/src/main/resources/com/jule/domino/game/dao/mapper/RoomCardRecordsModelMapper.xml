@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.game.dao.mapper.RoomCardRecordsModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.game.dao.bean.RoomCardRecordsModel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createNickName" jdbcType="VARCHAR" property="createNickName" />
+    <result column="createIcoUrl" jdbcType="VARCHAR" property="createIcoUrl" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="moneyToken" jdbcType="VARCHAR" property="moneyToken" />
+    <result column="money" jdbcType="INTEGER" property="money" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="receiveUserId" jdbcType="VARCHAR" property="receiveUserId" />
+    <result column="receiveNickName" jdbcType="VARCHAR" property="receiveNickName" />
+    <result column="receiveIcoUrl" jdbcType="VARCHAR" property="receiveIcoUrl" />
+    <result column="receiveTime" jdbcType="TIMESTAMP" property="receiveTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from room_card_records
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.game.dao.bean.RoomCardRecordsModel">
+    insert into room_card_records (id, createUserId, createNickName, 
+      createIcoUrl, createTime, moneyToken, 
+      money, state, receiveUserId, 
+      receiveNickName, receiveIcoUrl, receiveTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{createUserId,jdbcType=VARCHAR}, #{createNickName,jdbcType=VARCHAR}, 
+      #{createIcoUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{moneyToken,jdbcType=VARCHAR}, 
+      #{money,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{receiveUserId,jdbcType=VARCHAR}, 
+      #{receiveNickName,jdbcType=VARCHAR}, #{receiveIcoUrl,jdbcType=VARCHAR}, #{receiveTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.game.dao.bean.RoomCardRecordsModel">
+    update room_card_records
+    set createUserId = #{createUserId,jdbcType=VARCHAR},
+      createNickName = #{createNickName,jdbcType=VARCHAR},
+      createIcoUrl = #{createIcoUrl,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      moneyToken = #{moneyToken,jdbcType=VARCHAR},
+      money = #{money,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      receiveUserId = #{receiveUserId,jdbcType=VARCHAR},
+      receiveNickName = #{receiveNickName,jdbcType=VARCHAR},
+      receiveIcoUrl = #{receiveIcoUrl,jdbcType=VARCHAR},
+      receiveTime = #{receiveTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, createUserId, createNickName, createIcoUrl, createTime, moneyToken, money, 
+    state, receiveUserId, receiveNickName, receiveIcoUrl, receiveTime
+    from room_card_records
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectRoomCardByMoneyToken" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, createUserId, createNickName, createIcoUrl, createTime, moneyToken, money,
+    state, receiveUserId, receiveNickName, receiveIcoUrl, receiveTime
+    from room_card_records
+    where moneyToken = #{moneyToken,jdbcType=VARCHAR}
+  </select>
+  <select id="selectRoomCardByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, createUserId, createNickName, createIcoUrl, createTime, moneyToken, money,
+    state, receiveUserId, receiveNickName, receiveIcoUrl, receiveTime
+    from room_card_records
+    where createUserId = #{userId,jdbcType=VARCHAR} or receiveUserId = #{userId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, createUserId, createNickName, createIcoUrl, createTime, moneyToken, money, 
+    state, receiveUserId, receiveNickName, receiveIcoUrl, receiveTime
+    from room_card_records
+    order by id asc
+  </select>
+</mapper>

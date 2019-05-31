@@ -53,7 +53,7 @@ public class IOServer {
 
 
 
-            bootstrap.bind(Config.BIND_IP, Config.NOTICE_FORWARD_PORT.getPort()).sync();
+            bootstrap.bind(Config.BIND_IP,Config.NOTICE_FORWARD_PORT.getPort()).sync();
             logger.info("notice service bind port " + Config.NOTICE_FORWARD_PORT.getPort());
         } catch (Exception e) {
             logger.error("", e);

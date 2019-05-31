@@ -19,23 +19,24 @@
     <result column="android_id" jdbcType="VARCHAR" property="android_id" />
     <result column="mei_code" jdbcType="VARCHAR" property="mei_code" />
     <result column="sub_channel_id" jdbcType="VARCHAR" property="sub_channel_id" />
-
+    <result column="total_game_num" jdbcType="INTEGER" property="total_game_num" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from user
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+  <!--此处由于微信昵称存在特殊字符串，所以数据库nick_name字段对应user里的encodeNickName-->
   <insert id="insert" parameterType="com.jule.domino.base.dao.bean.User">
-    insert into user (id, nick_name, ico_url, 
+    insert into user (id, nick_name, ico_url,
       money,registration_time, last_login,last_offline, client_version,
       channel_id, user_ip, platform, down_platform,
-      device_num,user_defined_head,android_id,mei_code,sub_channel_id)
-    values (#{id,jdbcType=VARCHAR}, #{nick_name,jdbcType=VARCHAR}, #{ico_url,jdbcType=VARCHAR}, 
-      #{money,jdbcType=DECIMAL},#{registration_time,jdbcType=TIMESTAMP}, #{last_login,jdbcType=TIMESTAMP},#{last_offline,jdbcType=TIMESTAMP},
-       #{client_version,jdbcType=VARCHAR},
-      #{channel_id,jdbcType=VARCHAR}, #{user_ip,jdbcType=VARCHAR}, #{platform,jdbcType=INTEGER}, #{down_platform,jdbcType=VARCHAR},
+      device_num,user_defined_head,android_id,mei_code,sub_channel_id,total_game_num)
+    values (#{id,jdbcType=VARCHAR}, #{nick_name,jdbcType=VARCHAR}, #{ico_url,jdbcType=VARCHAR},
+      #{money,jdbcType=DECIMAL},#{registration_time,jdbcType=TIMESTAMP}, #{last_login,jdbcType=TIMESTAMP},
+      #{last_offline,jdbcType=TIMESTAMP},#{client_version,jdbcType=VARCHAR},#{channel_id,jdbcType=VARCHAR},
+       #{user_ip,jdbcType=VARCHAR}, #{platform,jdbcType=INTEGER}, #{down_platform,jdbcType=VARCHAR},
       #{device_num,jdbcType=VARCHAR}, #{user_defined_head,jdbcType=VARCHAR}, #{android_id,jdbcType=VARCHAR}
-      , #{mei_code,jdbcType=VARCHAR}, #{sub_channel_id,jdbcType=VARCHAR})
+      , #{mei_code,jdbcType=VARCHAR}, #{sub_channel_id,jdbcType=VARCHAR},#{total_game_num,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.jule.domino.base.dao.bean.User">
     update user
@@ -54,24 +55,36 @@
       user_defined_head = #{user_defined_head,jdbcType=VARCHAR},
       android_id = #{android_id,jdbcType=VARCHAR},
       mei_code = #{mei_code,jdbcType=VARCHAR},
-      sub_channel_id = #{sub_channel_id,jdbcType=VARCHAR}
+      sub_channel_id = #{sub_channel_id,jdbcType=VARCHAR},
+      total_game_num = #{total_game_num,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select id, nick_name, ico_url, money,registration_time, last_login,last_offline, client_version, channel_id, user_ip,
-    platform, down_platform,device_num,user_defined_head, android_id,mei_code,sub_channel_id
+    platform, down_platform,device_num,user_defined_head, android_id,mei_code,sub_channel_id,total_game_num
     from user
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="selectBySubChannelId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, nick_name, ico_url, money,registration_time, last_login,last_offline, client_version, channel_id, user_ip,
+    platform, down_platform,device_num,user_defined_head, android_id,mei_code,sub_channel_id,total_game_num
+    from user
+    where sub_channel_id = #{sub_channel_id,jdbcType=VARCHAR}
+  </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select id, nick_name, ico_url, money, registration_time, last_login,last_offline, client_version, channel_id, user_ip,
-    platform, down_platform,device_num,user_defined_head, android_id , mei_code, sub_channel_id
+    platform, down_platform,device_num,user_defined_head, android_id , mei_code, sub_channel_id,total_game_num
     from user
   </select>
   <select id="selectUserByOpenId" resultMap="BaseResultMap">
     select id, nick_name, ico_url, money, registration_time, last_login,last_offline, client_version, channel_id, user_ip,
-    platform, down_platform,device_num,user_defined_head, android_id , mei_code,package_name, sub_channel_id
+    platform, down_platform,device_num,user_defined_head, android_id , mei_code,package_name, sub_channel_id,total_game_num
     from user
     where android_id = #{android_id,jdbcType=VARCHAR}
   </select>
+  <update id="accumulationNumberOfGames" parameterType="java.lang.String">
+    update user
+    set total_game_num = total_game_num + 1
+    where id = #{userId,jdbcType=VARCHAR}
+  </update>
 </mapper>

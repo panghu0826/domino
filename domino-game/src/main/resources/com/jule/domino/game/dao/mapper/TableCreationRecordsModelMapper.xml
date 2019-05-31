@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.game.dao.mapper.TableCreationRecordsModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.game.dao.bean.TableCreationRecordsModel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="tableId" jdbcType="VARCHAR" property="tableId" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="playerNum" jdbcType="INTEGER" property="playerNum" />
+    <result column="baseScore" jdbcType="INTEGER" property="baseScore" />
+    <result column="readyCd" jdbcType="INTEGER" property="readyCd" />
+    <result column="betCd" jdbcType="INTEGER" property="betCd" />
+    <result column="openCardCd" jdbcType="INTEGER" property="openCardCd" />
+    <result column="betMaxScore" jdbcType="INTEGER" property="betMaxScore" />
+    <result column="gameNum" jdbcType="INTEGER" property="gameNum" />
+    <result column="betMultiple" jdbcType="VARCHAR" property="betMultiple" />
+    <result column="isWatch" jdbcType="INTEGER" property="isWatch" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="tableState" jdbcType="INTEGER" property="tableState" />
+    <result column="gameId" jdbcType="VARCHAR" property="gameId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from table_creation_records
+    where tableId = #{tableId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.game.dao.bean.TableCreationRecordsModel">
+    insert into table_creation_records (id, tableId, createTime, 
+      playerNum, baseScore, readyCd, 
+      betCd, openCardCd, betMaxScore, 
+      gameNum,betMultiple, isWatch, createUserId, tableState,gameId)
+    values (#{id,jdbcType=INTEGER}, #{tableId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{playerNum,jdbcType=INTEGER}, #{baseScore,jdbcType=INTEGER}, #{readyCd,jdbcType=INTEGER}, 
+      #{betCd,jdbcType=INTEGER}, #{openCardCd,jdbcType=INTEGER}, #{betMaxScore,jdbcType=INTEGER}, 
+      #{gameNum,jdbcType=INTEGER},#{betMultiple,jdbcType=VARCHAR}, #{isWatch,jdbcType=INTEGER},
+      #{createUserId,jdbcType=VARCHAR}, #{tableState,jdbcType=INTEGER},#{gameId,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.game.dao.bean.TableCreationRecordsModel">
+    update table_creation_records
+    set createTime = #{createTime,jdbcType=TIMESTAMP},
+      playerNum = #{playerNum,jdbcType=INTEGER},
+      baseScore = #{baseScore,jdbcType=INTEGER},
+      readyCd = #{readyCd,jdbcType=INTEGER},
+      betCd = #{betCd,jdbcType=INTEGER},
+      openCardCd = #{openCardCd,jdbcType=INTEGER},
+      betMaxScore = #{betMaxScore,jdbcType=INTEGER},
+      gameNum = #{gameNum,jdbcType=INTEGER},
+      betMultiple = #{betMultiple,jdbcType=VARCHAR},
+      isWatch = #{isWatch,jdbcType=INTEGER},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      tableState = #{tableState,jdbcType=INTEGER},
+      gameId = #{gameId,jdbcType=VARCHAR},
+    where tableId = #{tableId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select id, tableId, createTime, playerNum, baseScore, readyCd, betCd, openCardCd, 
+    betMaxScore, gameNum,betMultiple, isWatch, createUserId, tableState,gameId
+    from table_creation_records
+    where tableId = #{tableId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectTableCreateByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, tableId, createTime, playerNum, baseScore, readyCd, betCd, openCardCd,
+    betMaxScore, gameNum,betMultiple, isWatch, createUserId, tableState,gameId
+    from table_creation_records
+    where createUserId = #{createUserId,jdbcType=VARCHAR}
+    order by id desc
+  </select>
+  <select id="selectLastId" resultType="java.lang.Integer">
+   SELECT id FROM table_creation_records
+   ORDER BY id DESC
+   limit 1
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, tableId, createTime, playerNum, baseScore, readyCd, betCd, openCardCd, 
+    betMaxScore, gameNum,betMultiple, isWatch, createUserId, tableState,gameId
+    from table_creation_records
+    order by id asc
+  </select>
+</mapper>

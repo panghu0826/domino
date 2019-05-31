@@ -11,9 +11,13 @@ public interface UserMapper {
 
     User selectByPrimaryKey(String id);
 
+    User selectBySubChannelId(String sub_channel_id);
+
     List<User> selectAll();
 
     int updateByPrimaryKey(User record);
 
     List<User> selectUserByOpenId(String android_id);
+
+    int accumulationNumberOfGames(String userId);
 }

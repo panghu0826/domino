@@ -27,7 +27,7 @@ public class RestfulServer {
     private String _serverIP = "192.168.0.14";
 
     /** 服务器端口 */
-    private int _port = 8003;
+    private int _port = 8000;
 
     /**
      * constructor

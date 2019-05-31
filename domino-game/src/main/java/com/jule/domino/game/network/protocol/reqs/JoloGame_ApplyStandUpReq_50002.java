@@ -42,11 +42,13 @@ public class JoloGame_ApplyStandUpReq_50002 extends ClientReq {
     @Override
     public void processImpl() throws Exception {
         log.debug("收到消息-> " + functionId + ", reqNum-> " + header.reqNum + ", req->" + req.toString());
-        String userId = this.userId;
+        String userId = req.getUserId();
         String roomId = req.getRoomId();
         String tableId = req.getTableId();
         AbstractTable table = getTable();
         PlayerInfo player = table.getPlayer(userId);
+        //记录桌子最后操作时间
+        table.setLastActionTime(System.currentTimeMillis());
         JoloGame.JoloGame_ApplyStandUpAck.Builder ack = JoloGame.JoloGame_ApplyStandUpAck.newBuilder();
 
         try {
@@ -55,16 +57,16 @@ public class JoloGame_ApplyStandUpReq_50002 extends ClientReq {
             ack.setTableId(tableId);
             ack.setResult(1);
 
-            if (table.getTableStateEnum().equals(TableStateEnum.IDEL) ||
-                    table.getTableStateEnum().equals(TableStateEnum.GAME_READY) ||
-                    table.getTableStateEnum().equals(TableStateEnum.SETTLE_ANIMATION)) {
-
-            } else {
-                log.error("请在本局结束后操作 state:" + table.getTableStateEnum());
-                ack.setResult(-1).setResultMsg("请在本局结束后操作");
-                ctx.writeAndFlush(new JoloGame_ApplyStandUpAck_50002(ack.build(), header));
-                return;
-            }
+//            if (table.getTableStateEnum().equals(TableStateEnum.IDEL) ||
+//                    table.getTableStateEnum().equals(TableStateEnum.GAME_READY) ||
+//                    table.getTableStateEnum().equals(TableStateEnum.SETTLE_ANIMATION)) {
+//
+//            } else {
+//                log.error("请在本局结束后操作 state:" + table.getTableStateEnum());
+//                ack.setResult(-1).setResultMsg("请在本局结束后操作");
+//                ctx.writeAndFlush(new JoloGame_ApplyStandUpAck_50002(ack.build(), header));
+//                return;
+//            }
             if (null == player) {
                 log.error("can't found player info, playerId->" + userId);
                 ack.setResult(-1).setResultMsg(ErrorCodeEnum.GAME_50050_2.getCode());
@@ -72,12 +74,12 @@ public class JoloGame_ApplyStandUpReq_50002 extends ClientReq {
                 return;
             }
 
-            if (player.getState().getValue() == PlayerStateEnum.spectator.getValue()) {
-                log.error("player is a spectator, playerId->" + userId);
-                ack.setResult(-2).setResultMsg(ErrorCodeEnum.GAME_50014_1.getCode());
-                ctx.writeAndFlush(new JoloGame_ApplyStandUpAck_50002(ack.build(), header));
-                return;
-            }
+//            if (player.getState().getValue() == PlayerStateEnum.spectator.getValue()) {
+//                log.error("player is a spectator, playerId->" + userId);
+//                ack.setResult(-2).setResultMsg(ErrorCodeEnum.GAME_50014_1.getCode());
+//                ctx.writeAndFlush(new JoloGame_ApplyStandUpAck_50002(ack.build(), header));
+//                return;
+//            }
 
             if (player != null && player.getState().getValue() >= PlayerStateEnum.siteDown.getValue()) {
                 if (table.standUp(player.getSeatNum(), player.getPlayerId(), "standUpReq")) {

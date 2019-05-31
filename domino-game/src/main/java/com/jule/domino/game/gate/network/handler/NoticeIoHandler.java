@@ -74,7 +74,8 @@ public class NoticeIoHandler extends SimpleChannelInboundHandler<ByteBuf> {
             String userId = joloNotice2Gate_msgReq.getUserId();
 
             JoloNotice.JoloNotice_PayLoad payLoad = JoloNotice.JoloNotice_PayLoad.parseFrom(joloNotice2Gate_msgReq.getContent());
-            logger.info("received notice msg functionId-> " + functionId + " reqNum->" + reqNum + " 外壳payLoad->" + joloNotice2Gate_msgReq.toString() + " 内容payLoad-> " + payLoad);
+//            logger.info("received notice msg functionId-> " + functionId + " reqNum->" + reqNum + " 外壳payLoad->" + joloNotice2Gate_msgReq.toString() + " 内容payLoad-> " + payLoad);
+            logger.info("游戏广播 -> functionId：{}，userId：{}，gameId：{}，gameSvrId：{}",payLoad.getFunctionId(),joloNotice2Gate_msgReq.getUserId(),payLoad.getGameId(),payLoad.getGameSvrId());
 
             UserService.getInstance().sendNoticeMsg(userId, payLoad);
         } else {

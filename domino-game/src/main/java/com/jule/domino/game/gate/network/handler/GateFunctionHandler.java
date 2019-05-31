@@ -27,9 +27,9 @@ public class GateFunctionHandler extends SimpleChannelInboundHandler<Req> {
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         //ClientConnectManager.getInstance().delConnect(ctx);
-        log.error("消息通道 channelInactive");
-        ChannelManageCenter.getInstance().removeTempSession(ctx);
-        UserService.getInstance().onUserBreak(ctx,false);
+//        log.error("消息通道 channelInactive");
+//        ChannelManageCenter.getInstance().removeTempSession(ctx);
+//        UserService.getInstance().onUserBreak(ctx,false);
     }
 
     @Override
@@ -45,6 +45,14 @@ public class GateFunctionHandler extends SimpleChannelInboundHandler<Req> {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         log.error("消息通道 exceptionCaught");
         //ClientConnectManager.getInstance().delConnect(ctx);
+//        ChannelManageCenter.getInstance().removeTempSession(ctx);
+//        UserService.getInstance().onUserBreak(ctx,true);
+    }
+
+
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx){
+        logger.info("收到玩家断开链接请求！！！");
         ChannelManageCenter.getInstance().removeTempSession(ctx);
         UserService.getInstance().onUserBreak(ctx,true);
     }

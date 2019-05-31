@@ -7,7 +7,6 @@
     "91001005": "com.jule.domino.game.play.impl.BlindTable",
     "91001006": "com.jule.domino.game.play.impl.DealerTable",
     "86001001": "com.jule.domino.game.play.impl.NiuNiuTable",
-    "71001001": "com.jule.domino.game.play.impl.DominoTable"
-
+    "1": "com.jule.domino.game.play.impl.DominoTable"
   }
 }

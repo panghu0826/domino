@@ -7,9 +7,7 @@ import com.jule.domino.base.enums.RedisConst;
 import com.jule.domino.base.enums.TableStateEnum;
 import com.jule.domino.base.model.RoomTableRelationModel;
 import com.jule.domino.game.config.Config;
-import com.jule.domino.game.dao.bean.RoomConfigModel;
 import com.jule.domino.game.play.AbstractTable;
-import com.jule.domino.game.service.holder.RoomConfigHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,31 +56,27 @@ public class TableService {
      * 初始化游戏内存
      */
     public void init() {
-        Map<String, RoomConfigModel> map = RoomConfigHolder.getInstance().getAllConfig();
-
-        logger.debug("tableService:" + map.toString());
-        String[] gameIds = Config.GAME_IDS.split(":");
-        logger.error("init table cnt = {}", Config.ROOM_INIT_DESK_NUM);
-
-        map.forEach((s, roomConfig) -> {
-            String roomId = roomConfig.getRoomId();
-            for (String gameId : gameIds) {
-                //每个room初始创建4张桌子
-                for (int i = 0; i < Config.ROOM_INIT_DESK_NUM; i++) {
-                    try {
-                        AbstractTable tableInfo = createNewTable(gameId, roomId, false);
-                        if (tableInfo == null) {
-                            break;
-                        }
-                    } catch (Exception e) {
-                        logger.error("init room ERROR, create table ERROR。", e);
-                    }
-                }
-                logger.info("初始化桌子->gameId:" + gameId + " roomId:" + s);
-            }
-
-        });
-
+//        Map<String, RoomConfigModel> map = RoomConfigHolder.getInstance().getAllConfig();
+//        logger.debug("tableService:" + map.toString());
+//        String[] gameIds = Config.GAME_IDS.split(":");
+//        logger.error("init table cnt = {}", Config.ROOM_INIT_DESK_NUM);
+//        map.forEach((s, roomConfig) -> {
+//            String roomId = roomConfig.getRoomId();
+//            for (String gameId : gameIds) {
+//                //每个room初始创建4张桌子
+//                for (int i = 0; i < Config.ROOM_INIT_DESK_NUM; i++) {
+//                    try {
+//                        AbstractTable tableInfo = createNewTable(gameId, roomId, false);
+//                        if (tableInfo == null) {
+//                            break;
+//                        }
+//                    } catch (Exception e) {
+//                        logger.error("init room ERROR, create table ERROR。", e);
+//                    }
+//                }
+//                logger.info("初始化桌子->gameId:" + gameId + " roomId:" + s);
+//            }
+//        });
         logger.debug("初始化结束---：");
     }
 
@@ -92,14 +86,14 @@ public class TableService {
      *
      * @return
      */
-    public AbstractTable createNewTable(String gameId, String roomId, boolean force) throws Exception {
+    public AbstractTable createNewTable(String gameId, String roomId, boolean force,int playerNum) throws Exception {
         if (force == false) {
             Map<String, RoomTableRelationModel> map = StoredObjManager.getStoredObjsInMap(RoomTableRelationModel.class, RedisConst.TABLE_INSTANCE.getProfix() + gameId + roomId);
             if (map != null && map.size() >= Config.ROOM_INIT_DESK_NUM) {
                 Iterator<RoomTableRelationModel> iterator = map.values().iterator();
                 while (iterator.hasNext()) {
                     RoomTableRelationModel model = iterator.next();
-                    AbstractTable tableInfo = new AbstractTable(gameId, model.getRoomId(), model.getTableId());
+                    AbstractTable tableInfo = new AbstractTable(gameId, model.getRoomId(), model.getTableId(),playerNum);
                     addTableInAllTableMap(gameId, roomId, tableInfo);
                     addCanJoinTable(gameId, roomId, model.getTableId());
                 }
@@ -107,13 +101,12 @@ public class TableService {
             }
         }
         String tableId = getNewTableId(gameId, roomId) + "";
-        AbstractTable tableInfo = new AbstractTable(gameId, roomId, tableId);
+        AbstractTable tableInfo = new AbstractTable(gameId, roomId, tableId,playerNum);
         addTableInAllTableMap(gameId, roomId, tableInfo);
         addCanJoinTable(gameId, roomId, tableId);
         //存入Redis
         addRedis(gameId, roomId, tableId);
         RoomOprService.OBJ.createTableHandler(gameId, roomId, tableId);
-
         return tableInfo;
     }
 
@@ -196,7 +189,7 @@ public class TableService {
             //当没有空闲桌子可用时，创建一个新桌子
             try {
                 for (int i = 0; i < 5; i++) {
-                    createNewTable(gameId, roomId, true);
+                    createNewTable(gameId, roomId, true,0);
                 }
             } catch (Exception e) {
                 logger.error("getRandomTable ERROR while create a new table.", e);
@@ -278,6 +271,7 @@ public class TableService {
         }
         tableMap.put(tableInfo.getTableId(), tableInfo);
         ROOM_TABLE_MAP.put(gameId + roomId, tableMap);
+        logger.info("room新增加桌子：roomId {},  tableId {}",ROOM_TABLE_MAP.keySet().toString(),tableInfo.getTableId());
         return true;
     }
 

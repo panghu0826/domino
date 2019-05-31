@@ -370,16 +370,19 @@ message JoloCommon_AdInfoAck {
     required double money = 3;  //玩家当前货币数	
     optional string resultMsg = 4;
 }
+
 //80007 最近N条牌局记录
 message JoloCommon_PlayRecordsReq {
 	required string UserId = 1; //用户ID
 	required string GameId = 2; //玩法ID
+	optional string TableId = 3; //桌子ID
 }
 message JoloCommon_PlayRecordsAck {
 	required string UserId = 1; //用户ID
 	required int32  Result = 2; //结果,成功或失败
 	optional string ResultMsg = 3; //失败信息 
-	repeated JoloAuth_GameRecordsInfo Records = 4; //牌局记录
+	repeated JoloAuth_UserGameRecords UserRecords = 4; //牌局记录
+	optional JoloAuth_TableGameParameter TableRecords = 5;//桌子记录(详细牌局记录)
 }
 
 ///////////////////////////////// 数据对象 start //////////////////////////////////
@@ -435,13 +438,41 @@ message JoloAuth_ItemStatusInfo {
     required int32 Num = 3; //拥有物品数量
 }
 
-//牌局记录
-message JoloAuth_GameRecordsInfo {
-	required string GameOrderId = 1; //牌局编号
-	required string RoomId = 2;  //房间
-	required string TableId = 3; //桌子
-	required int32 isWin = 4;    //0胜1负
-	required double Wins = 5;     //净胜
-	required string Time = 6;    //时间如2018-9-12 13:46:10
+//玩家牌局记录
+message JoloAuth_UserGameRecords {
+	required string GameId = 1; //游戏id
+	required string TableId = 2;  //桌子id
+	required int32 TotalWinLose = 3; //玩家总输赢
+	required string Time = 4;    //时间如2018-9-12 13:46:10
+	required int32 isWinner = 5;    //1.胜 2.负
+}
+
+//桌子参数及详细记录
+message JoloAuth_TableGameParameter {
+	required string TableId = 1; //玩家人数
+	required int32 PlayerNum = 2; //玩家人数
+    required int32 BaseBetScore = 3; //当前基础下注值
+    optional int32 ReadyCd = 4; //准备cd
+    optional int32 BetCd = 5; //下注cd（超时则弃牌）
+    optional int32 OpenCardCd = 6; //亮牌cd
+    required int32 BetMaxScore = 7; //下注积分上限
+    required int32 GameNum = 8; //游戏局数
+    optional int32 IsWatch = 9; //是否可以观战
+	required string BetMultiple = 10; //桌子加注倍数
+	repeated JoloAuth_TableGameRecords GameRecords = 11;//桌子牌局详细记录
+}
+
+//桌子牌局记录
+message JoloAuth_TableGameRecords {
+	required int32 CurrGameNum = 1; //当前局数
+	required string UserId = 2;  //玩家id
+	required string NickName = 3; //玩家昵称
+	required int32 CardType = 4;    //牌型
+	required string HandCards = 5;    //手牌
+	required int32 BetScore = 6; //下注积分
+	required int32 WinLoseScore = 7;  //输赢积分
+	required int32 PlayerCurrScore = 8; //玩家当前积分
+	required string StartTime = 9;    //牌局开始时间
+	required string EndTime = 10;    //牌局结束时间
 }
 ///////////////////////////////// 数据对象 end //////////////////////////////////

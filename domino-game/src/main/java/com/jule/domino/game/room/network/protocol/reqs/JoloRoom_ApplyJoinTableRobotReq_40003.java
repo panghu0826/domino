@@ -43,7 +43,7 @@ public class JoloRoom_ApplyJoinTableRobotReq_40003 extends ClientReq {
 
     @Override
     public void processImpl() throws Exception {
-        logger.debug("收到消息-> " + functionId + " reqNum-> " + header.reqNum + " " + req.toString());
+        logger.info("收到消息-> " + functionId + " reqNum-> " + header.reqNum + " " + req.toString());
         try {
             String userId = req.getUserId();
             String gameId = req.getGameId();
@@ -97,7 +97,6 @@ public class JoloRoom_ApplyJoinTableRobotReq_40003 extends ClientReq {
                 return;
             }
 
-            ack.setBootAmount(roomConfig.getAnte());
             String gameSvrId = UtilsService.getInstance().getGameSvr(table,gameId);
             if (!StringUtil.isNullOrEmpty(gameSvrId)) {
                 ack.setJoinGameSvrId(gameSvrId);//没有时前端提示 "服务器爆满"

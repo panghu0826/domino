@@ -9,12 +9,12 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <modules>
-		<module>domino-core</module>
+        <module>domino-core</module>
         <module>domino-base</module>
         <module>domino-log</module>
         <module>domino-game</module>
         <module>domino-database</module>
-        <module>domino-robot</module>
+<!--        <module>domino-robot</module>-->
 
         <!--
         <module>domino-room</module>
@@ -30,4 +30,5 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+
 </project>

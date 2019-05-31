@@ -16,10 +16,8 @@ import java.util.List;
 public class RequestDecoder extends MessageToMessageDecoder<ByteBuf> {
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) {
-//        logger.debug("do a message decode");
         try {
             int functionId = byteBuf.readInt();
-//            logger.debug("decode a functionId = "+functionId);
             ClientReq request = ClientPacketFactory.getInstance().getClientReq(functionId, channelHandlerContext);
 
             if (request != null && request.readPayLoad(byteBuf)) {

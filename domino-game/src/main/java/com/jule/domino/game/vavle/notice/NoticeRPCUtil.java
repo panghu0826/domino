@@ -16,16 +16,17 @@ import java.util.List;
  */
 public class NoticeRPCUtil {
     private final static Logger logger = LoggerFactory.getLogger(NoticeMsgHandler.class);
+
     /**
      * 推单个消息
      *
      * @param userId
      * @param content
      */
-    public static void sendSingMsg(int gameId,String userId, int functionId, MessageLite content) {
+    public static void sendSingMsg(int gameId, String userId, int functionId, MessageLite content) {
         int length = content.toByteString().toByteArray().length;
         JoloNotice.JoloNotice_PayLoad payLoad = JoloNotice.JoloNotice_PayLoad.newBuilder().setLength(28 + length).setFunctionId(functionId).setGameId(gameId).setGameSvrId(RegisterService.GAME_SERVER_ID).setIsAsync(1).setReqNum((int) System.currentTimeMillis() / 1000).setResver1(0).setResver2(0).setPayLopad(content.toByteString()).build();
-        NoticeConnectPool.getInstance().getConnection().writeAndFlush(new SingleMsgReq(gameId,JoloNotice.JoloNotice_SendNormalMsgReq.newBuilder().setUserId(userId).setContent(payLoad.toByteString()).build()));
+        NoticeConnectPool.getInstance().getConnection().writeAndFlush(new SingleMsgReq(gameId, JoloNotice.JoloNotice_SendNormalMsgReq.newBuilder().setUserId(userId).setContent(payLoad.toByteString()).build()));
     }
 
     /**
@@ -35,14 +36,13 @@ public class NoticeRPCUtil {
      * @param userId
      * @param message
      */
-    public static void senMuliMsg(int gameId,String tableId, List<String> userId, int functionId, MessageLite message) {
+    public static void senMuliMsg(int gameId, String tableId, List<String> userId, int functionId, MessageLite message) {
         int length = message.toByteString().toByteArray().length;
         JoloNotice.JoloNotice_PayLoad payLoad = JoloNotice.JoloNotice_PayLoad.newBuilder().setLength(28 + length).setFunctionId(functionId).setGameId(gameId).setGameSvrId(RegisterService.GAME_SERVER_ID).setIsAsync(1).setReqNum((int) System.currentTimeMillis() / 1000).setResver1(0).setResver2(0).setPayLopad(message.toByteString()).build();
-        ChannelHandlerContext chc =  NoticeConnectPool.getInstance().getConnection();
-        logger.info("senMuliMsg get Connection?"+(chc==null?"No":"Yes"));
-        if(chc==null){
+        ChannelHandlerContext chc = NoticeConnectPool.getInstance().getConnection();
+        if (chc == null) {
             logger.error("senMuliMsg() chc is null");
-        }else {
+        } else {
             chc.writeAndFlush(new MuliMsgReq(gameId, JoloNotice.JoloNotice_SendGamePlayMsgReq.newBuilder()
                     .setTableId(tableId)
                     .addAllUserIds(userId)

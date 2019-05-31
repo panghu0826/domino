@@ -2,7 +2,6 @@ package com.jule.domino.game.network.protocol.reqs;
 
 import JoloProtobuf.GameSvr.JoloGame;
 import com.jule.domino.base.enums.ErrorCodeEnum;
-import com.jule.domino.base.service.PlayerRecordService;
 import com.jule.domino.game.log.producer.RabbitMqSender;
 import com.jule.domino.game.network.protocol.ClientReq;
 import com.jule.domino.game.network.protocol.acks.JoloGame_PlayRecordsAck_50063;
@@ -38,7 +37,7 @@ public class JoloGame_PlayRecordsReq_50063 extends ClientReq{
     public void processImpl() throws Exception {
 
         log.info("收到消息functionId = {}, 消息体body={}",functionId,req.toString());
-        String userId = this.userId;
+        String userId = req.getUserId();
 
         //返回消息体
         JoloGame.JoloGame_PlayRecordsAck.Builder ack = JoloGame.JoloGame_PlayRecordsAck.newBuilder();

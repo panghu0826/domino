@@ -1,18 +1,22 @@
 package com.jule.domino.game.service.holder;
 
 public class FunctionIdHolder {
-    public final static int Game_REQ_ApplyJoinTable = 50000;
     public final static int Game_REQ_ApplySiteDown = 50001;
     public final static int Game_REQ_ApplyStandUp = 50002;
-    public final static int Game_REQ_ApplyLeave = 50003;
-    public final static int Game_REQ_ApplyBuyIn = 50004;
     public final static int Game_REQ_ApplyBet = 50005;
-
-    public final static int Game_REQ_OtherUserInfo = 50014;
-    public final static int Game_REQ_Reconnect = 50016;
+    public final static int Game_REQ_ApplyFold = 50012;
     //准备
     public final static int Game_REQ_ReadyType = 50018;
+
+    public final static int Game_REQ_OtherUserInfo = 50014;
+    public final static int Game_REQ_SpecialFunction = 50015;
+    public final static int Game_REQ_Reconnect = 50016;
+    public final static int Game_REQ_ApplyLeave = 50003;
+    public final static int Game_REQ_ApplyBuyIn = 50004;
+    public final static int Game_REQ_ApplyJoinTable = 50000;
+    public final static int  Game_REQ_ChatMesgSend = 50051;
     public final static int  Game_REQ_GameRecords = 50063;
+    public final static int  Game_REQ_Item = 50055;
 
     /**
      * 聊天
@@ -25,13 +29,17 @@ public class FunctionIdHolder {
     public final static int Game_ACK_ApplyLeave = Game_REQ_ApplyLeave | 0x08000000;
     public final static int Game_ACK_ApplyBuyIn = Game_REQ_ApplyBuyIn | 0x08000000;
     public final static int Game_ACK_ApplyBet = Game_REQ_ApplyBet | 0x08000000;
-
+    public final static int Game_Ack_ApplyFold = Game_REQ_ApplyFold | 0x08000000;
+    public final static int Game_Ack_SpecialFunction = Game_REQ_SpecialFunction | 0x08000000;
     public final static int Game_ACK_CHAT = Game_REQ_CHAT | 0x08000000;
     public final static int Game_ACK_OtherUserInfo = Game_REQ_OtherUserInfo | 0x08000000;
     public final static int Game_ACK_Reconnect = Game_REQ_Reconnect | 0x08000000;
     public final static int Game_ACK_ReadyType = Game_REQ_ReadyType | 0x08000000;
     public final static int Game_ACK_GameRecords = Game_REQ_GameRecords | 0x08000000;
+    public final static int Game_ACK_ChatMesgSend = Game_REQ_ChatMesgSend | 0x08000000;
+    public final static int Game_ACK_Item = Game_REQ_Item | 0x08000000;
 
+    public final static int Game_Notice_JoinTable = 41001;
     public final static int Game_Notice_SiteDown = 51001;
     public final static int Game_Notice_StandUp = 51002;
     public final static int Game_Notice_BuyIn = 51003;
@@ -39,15 +47,18 @@ public class FunctionIdHolder {
     public final static int Game_Notice_GiveCardRound_Start = 51005;
     public final static int Game_Notice_BetRound_WaitBet = 51006;
     public final static int Game_Notice_BetRound_DoBet = 51007;
+    public final static int Game_Notice_OpenCard = 51008;
     public final static int Game_Notice_SideShow_ApplySideShow = 51009;
     public final static int Game_Notice_SideShow_SideShowResult = 51012;
+    public final static int Game_Notice_BetRound_Fold = 51017;
+    public final static int Game_Notice_OpenCardCd = 51032;
+    public final static int Game_Notice_GiveCardCd = 51034;
     //结算结果
     public final static int Game_Notice_SettleRound_SettleResult = 51013;
     public final static int Game_Notice_SettleRound_History = 51014;
     public final static int Game_Notice_SideShow_CompleteChooseUser = 51015;
-    //
     public final static int Game_Notice2Client_leavel = 51023;
-    //开牌
+    //准备
     public final static int Game_Notice2Client_ReadyType = 51029;
     //下注前信息
     public final static int Game_Notice2Client_HandCardListType = 51033;
@@ -57,11 +68,15 @@ public class FunctionIdHolder {
     public final static int Game_Notice2Client_BetMultipleInfoType = 51038;
     //玩家入座
     public final static int Game_Notice2Client_PlayersIn = 51039;
+    //玩家使用道具
+    public final static int Game_Notice2Client_Item = 51055;
 
     //打赏荷官广播
     public final static int Game_Notice_RewardCroupier = 51050;
     //送礼物广播
     public final static int Game_Notice_GiveGift = 51051;
+    //聊天广播
+    public final static int Game_Notice_ChatMesgSend = 51052;
 
     public final static int Game_Notice_TaskProg = 51061;
 

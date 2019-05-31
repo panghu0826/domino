@@ -1,6 +1,5 @@
 package com.jule.domino.game.gw.msg;
 
-import JoloProtobuf.GW.Gwc;
 import com.jule.core.jedis.StoredObjManager;
 import com.jule.domino.base.dao.bean.User;
 import com.jule.domino.base.enums.RedisConst;
@@ -30,13 +29,13 @@ public class NotifyCloseReq_5 extends AbstractGwcHander {
 
     @Override
     public void process(ChannelHandlerContext ctx, GwcMsg msg) throws Exception {
-        Gwc.NotifyClose req = Gwc.NotifyClose.parseFrom(msg.getBody());
-        log.debug("收到玩家断开通知msgId = {}, msg={}", msg.getCmd(), req.toString());
-
-        //平台ID
-        String openId = req.getUid();
-
-        fixpool.submit(() -> closeCtx(openId) );
+//        Gwc.NotifyClose req = Gwc.NotifyClose.parseFrom(msg.getBody());
+        log.debug("收到玩家断开通知}");
+//
+//        //平台ID
+//        String openId = req.getUid();
+//
+//        fixpool.submit(() -> closeCtx(openId) );
     }
 
     private void closeCtx (String openId){
@@ -58,7 +57,7 @@ public class NotifyCloseReq_5 extends AbstractGwcHander {
             }
 
             //通知gate断开
-            GateChannelService.OBJ.handlerDestoryUserChannel(user.getId());
+//            GateChannelService.OBJ.handlerDestoryUserChannel(user.getId());
         }catch (Exception ex){
             log.error("玩家下线失败openid={}",openId);
         }

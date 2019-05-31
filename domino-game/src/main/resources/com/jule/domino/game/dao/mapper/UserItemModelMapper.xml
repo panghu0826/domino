@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.game.dao.mapper.UserItemModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.game.dao.bean.UserItemModel">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="itemId" jdbcType="VARCHAR" property="itemId" />
+    <result column="dueTime" jdbcType="TIMESTAMP" property="dueTime" />
+  </resultMap>
+  <delete id="deleteByItemId" parameterType="java.lang.String">
+    delete from user_item
+    where itemId = #{itemId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insertItem" parameterType="com.jule.domino.game.dao.bean.UserItemModel">
+    insert into user_item (id, userId, itemId, 
+      dueTime)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, 
+      #{dueTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByItemId" parameterType="com.jule.domino.game.dao.bean.UserItemModel">
+    update user_item
+    set userId = #{userId,jdbcType=VARCHAR},
+      itemId = #{itemId,jdbcType=VARCHAR},
+      dueTime = #{dueTime,jdbcType=TIMESTAMP}
+    where itemId = #{itemId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByUserIdItem" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, userId, itemId, dueTime
+    from user_item
+    where userId = #{userId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, userId, itemId, dueTime
+    from user_item
+    order by id asc
+  </select>
+</mapper>

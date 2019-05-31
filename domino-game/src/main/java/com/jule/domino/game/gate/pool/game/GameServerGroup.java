@@ -32,6 +32,7 @@ public class GameServerGroup {
     public synchronized void registerGameServerGroup(GameConnectPool gameConnectPool) {
         if (!GAME_CONNECT_POOL_MAP.containsKey(gameConnectPool.getGameServerId())) {
             GAME_CONNECT_POOL_MAP.put(gameConnectPool.getGameServerId(), gameConnectPool);
+            logger.debug("现在的游戏服务器id：{}",gameConnectPool.getGameServerId());
             this.gameConnectPool = gameConnectPool;
         }
     }

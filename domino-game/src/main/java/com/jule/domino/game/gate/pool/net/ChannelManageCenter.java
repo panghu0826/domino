@@ -183,14 +183,12 @@ public class ChannelManageCenter {
 
 
     public ChannelHandlerContext getChannel(Long sessionId) {
-        StringBuilder sb = new StringBuilder();
         ChannelHandlerContext channelHandlerContext = null;
-        sb.append("getChannel");
         if (gateSvrPool.containsKey(sessionId)) {
             channelHandlerContext = gateSvrPool.get(sessionId);
-            sb.append("success");
+        }else {
+            log.error("找不到该session -> sessionId：{}",sessionId);
         }
-        log.info(sb.toString());
         return channelHandlerContext;
     }
 

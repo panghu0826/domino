@@ -4,8 +4,12 @@ import com.jule.core.jedis.StoredObj;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.commons.codec.binary.Base64;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.regex.Pattern;
+
 @Setter@Getter@ToString
 public class User extends StoredObj{
     private String id;
@@ -45,4 +49,50 @@ public class User extends StoredObj{
     /**包名*/
     private String package_name;
 
+    private int total_game_num;
+//    private String encodeNickName;
+//
+//    public String getEncodeNickName() {
+//        if(!isBase64(nick_name)) {
+//            try {
+//                nick_name = Base64.encodeBase64String(nick_name.getBytes("utf-8"));
+//            } catch (UnsupportedEncodingException e) {
+//                System.out.println("玩家昵称转码异常：" + nick_name);
+//            }
+//        }
+//        return nick_name;
+//    }
+//
+//    public String getNick_name() {
+//        String nickName = null;
+//        if(isBase64(nick_name)){
+//            try {
+//                nickName = new String(Base64.decodeBase64(nick_name.getBytes()), "utf-8");
+//            } catch (UnsupportedEncodingException e) {
+//                System.out.println("玩家昵称解码异常："+nickName);
+//            }
+//        }
+//        return nickName == null ? nick_name : nickName;
+//    }
+
+//    public void setNick_name(String nick_name) {
+//        try {
+//            nick_name = Base64.encodeBase64String(nick_name.getBytes("utf-8"));
+//        } catch (UnsupportedEncodingException e) {
+//            System.out.println("玩家昵称转码异常："+nick_name);
+//        }
+//        this.nick_name = nick_name;
+//    }
+
+    public static boolean isBase64(String str) {
+        String base64Pattern = "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$";
+        return Pattern.matches(base64Pattern, str);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "nick_name='" + nick_name + '\'' +
+                '}';
+    }
 }

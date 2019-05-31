@@ -52,7 +52,7 @@ public class JoloGame_ReconnectReq_50016 extends ClientReq {
         JoloGame.JoloGame_ReconnectAck.Builder ack = JoloGame.JoloGame_ReconnectAck.newBuilder();
         AbstractTable table = null;
 
-        String userId = this.userId;
+        String userId = req.getUserId();
         String roomId = req.getRoomId();
         String tableId = req.getTableId();
         int seatNum = req.getSeatNum();
@@ -66,7 +66,7 @@ public class JoloGame_ReconnectReq_50016 extends ClientReq {
         ack.setBetRoundId(0);
         try {
             //缓存玩家使用的服务器IP、负载时使用
-            JedisPoolWrap.getInstance().set(RedisConst.USER_LOGIN_GAME_URL.getProfix(), Config.REST_IP + ":" + Config.REST_PORT, -1);
+//            JedisPoolWrap.getInstance().set(RedisConst.USER_LOGIN_GAME_URL.getProfix(), Config.REST_IP + ":" + Config.REST_PORT, -1);
 
             RoomTableRelationModel roomTable = RoomStateService.getInstance().getExistTable("" + header.gameId, roomId, tableId);
 
@@ -178,7 +178,7 @@ public class JoloGame_ReconnectReq_50016 extends ClientReq {
 
             //保存所在桌内位置信息
             //判断：如果在座玩家超过两人并且桌子状态为空闲状态
-            TableService.getInstance().playGame(table); //开始游戏
+//            TableService.getInstance().playGame(table); //开始游戏
             PlayerService.getInstance().onPlayerLogin(userId);
 
             long timeMillis = System.currentTimeMillis() - time;

@@ -3,6 +3,7 @@ package com.jule.domino.game.network.protocol.reqs;
 import com.jule.domino.game.dao.DBUtil;
 import com.jule.domino.game.model.PlayerInfo;
 import com.jule.domino.base.enums.PlayerStateEnum;
+import com.jule.domino.game.network.protocol.logic.LeaveTableLogic;
 import com.jule.domino.game.play.AbstractTable;
 import com.jule.domino.game.service.*;
 import com.jule.domino.game.vavle.notice.NoticeBroadcastMessages;
@@ -47,8 +48,24 @@ public class GateUserLogoutReq_02 extends ClientReq {
 
     @Override
     public void processImpl() {
-        logger.debug("Req logout functionId-> " + functionId + ", reqNum-> " + header.reqNum + ", userId->" + getUserId());
+        logger.info("玩家离线不做退出！！！");
+        logger.info("Req logout functionId-> " + functionId + ", reqNum-> " + header.reqNum + ", userId->" + getUserId());
         AbstractTable table = getTable();
+        if (table != null) {
+            PlayerInfo player = table.getPlayer(userId + "");
+            if(player.getTotalAlreadyBetScore4Hand() == 0) {
+                //处理玩家离桌的redis信息
+                LeaveTableLogic.getInstance().logic(player, table);
+            }
+            NoticeBroadcastMessages.sendPlayerLeaveNotice(table, player);//玩家离桌广播
+        }
+
+        if(true){
+            return;
+        }
+        //后续操作暂时用不到所以直接return
+
+
         if (table != null) {
             logger.info("处理退出用户状态之前->" + table.toString());
             PlayerInfo currentPlayer = table.getPlayer(userId + "");

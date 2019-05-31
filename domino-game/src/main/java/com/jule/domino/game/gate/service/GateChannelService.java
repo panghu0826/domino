@@ -44,7 +44,7 @@ public class GateChannelService {
         }
 
         //正常下线流程
-        UserService.getInstance().onUserBreak(ctx,false);
+//        UserService.getInstance().onUserBreak(ctx,false);
     }
 
 }
