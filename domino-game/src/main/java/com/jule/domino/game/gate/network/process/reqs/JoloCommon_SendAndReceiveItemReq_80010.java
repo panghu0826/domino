@@ -59,20 +59,13 @@ public class JoloCommon_SendAndReceiveItemReq_80010 extends Req {
                 int itemArgs = req.getItemTime();
                 int itemPrice = ItemConfig.getItemParameter(itemId, itemArgs);
                 if (req.getIsMe() == 1) { //购买道具或领取道具
-                    if (itemArgs != 3) { //不是通过局数领取，则需要花费房卡
-                        if (user.getMoney() < itemPrice) {
-                            sendResponse(functionId | 0x08000000, ack.setMoney((int) user.getMoney()).setResult(-2).setResultMsg("房卡不足").build().toByteArray());
-                            return;
-                        }
-                        user.setMoney(user.getMoney() - itemPrice);
-                        DBUtil.updateByPrimaryKey(user);
-                        insertItemInfo(itemId, itemArgs);//插入道具信息
-                    } else {
-                        //局数大于道具要求  则永久拥有
-                        if (user.getTotal_game_num() >= itemPrice) {
-                            insertItemInfo(itemId, 2);
-                        }
+                    if (user.getMoney() < itemPrice) {
+                        sendResponse(functionId | 0x08000000, ack.setMoney((int) user.getMoney()).setResult(-2).setResultMsg("房卡不足").build().toByteArray());
+                        return;
                     }
+                    user.setMoney(user.getMoney() - itemPrice);
+                    DBUtil.updateByPrimaryKey(user);
+                    insertItemInfo(itemId, itemArgs);//插入道具信息
                 } else {//赠送道具
                     String token = MD5Security.EncodeMD5Hex(String.valueOf(System.currentTimeMillis()));
                     user.setMoney(user.getMoney() - itemPrice);
@@ -110,20 +103,22 @@ public class JoloCommon_SendAndReceiveItemReq_80010 extends Req {
         }
     }
 
-    private Date insertItemInfo(int itemId, int itemArgs){
+    private Date insertItemInfo(int itemId, int itemArgs) {
         UserItemModel uim = new UserItemModel();
         try {
             uim.setUserId(userId);
             uim.setItemId(String.valueOf(itemId));
-            if (itemArgs == 2) {//永久
-                uim.setDueTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2016-02-19 00:00:00"));
+            if (itemArgs == 2) {//一个月
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.MONTH, 1);
+                uim.setDueTime(calendar.getTime());
             } else {//七天
                 Calendar calendar = Calendar.getInstance();
                 calendar.add(Calendar.DATE, 7);
                 uim.setDueTime(calendar.getTime());
             }
             DBUtil.insertItem(uim);
-        } catch (ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return uim.getDueTime();

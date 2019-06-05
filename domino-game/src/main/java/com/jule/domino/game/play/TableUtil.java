@@ -7,7 +7,6 @@ import com.jule.domino.game.config.Config;
 import com.jule.domino.game.dao.bean.RoomConfigModel;
 import com.jule.domino.game.model.PlayerInfo;
 import com.jule.domino.base.enums.PlayerStateEnum;
-import com.jule.domino.game.service.CardTypeMultipleService;
 import com.jule.domino.game.service.TimerService;
 import com.jule.domino.base.enums.AlarmEnum;
 import com.jule.domino.base.enums.RedisConst;
@@ -199,7 +198,6 @@ public class TableUtil {
                     for (int card : handCards) {
                         playerInfo.addHandCards(card);
                     }
-
                     playerInfo.setIsDealer(CardComparator.OBJ.isSpecialCard(handCards));
                 }
                 list.add(playerInfo.build());
@@ -283,7 +281,7 @@ public class TableUtil {
         Iterator<PlayerInfo> iter = table.getInGamePlayers().values().iterator();
         int playerSize = table.getInGamePlayers().size();
         long ante = table.getRoomConfig().getAnte();
-        int maxMultiple = CardTypeMultipleService.getInstance().getMaxMultiple();
+        int maxMultiple = 0;
         double d = 1.00;
 
         while (iter.hasNext()) {

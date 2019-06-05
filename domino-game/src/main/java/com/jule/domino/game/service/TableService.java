@@ -135,7 +135,15 @@ public class TableService {
      * @return
      */
     public synchronized AbstractTable addNewTable(String gameId, String roomId, String tableId) throws Exception {
-        return getTableFromAllTableMap(gameId, roomId, tableId);
+        AbstractTable tableA = getTableFromAllTableMap(gameId, roomId, tableId);
+        if(tableA != null){
+            return tableA;
+        }
+        AbstractTable tableB = getTableFromAllTableMap("2", roomId, tableId);
+        if(tableB != null){
+            return tableB;
+        }
+        return null;
     }
 
 //    /**

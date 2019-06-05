@@ -47,10 +47,14 @@ public class JoloGame_UnlockReq_50055 extends ClientReq {
                             .setRoomId(req.getRoomId())
                             .setTableId(req.getTableId())
                             .setResult(1).build(), header));
-            PlayerInfo player = table.getPlayer(req.getUserId());
-            player.setHeadSculpture(req.getHeadSculpture());
-            player.setCardSkin(req.getCardSkin());
-            NoticeBroadcastMessages.useItem(table,req.getUserId(),req.getHeadSculpture(),req.getCardSkin());
+            if(table != null) {
+                PlayerInfo player = table.getPlayer(req.getUserId());
+                player.setHeadSculpture(req.getHeadSculpture());
+                player.setCardSkin(req.getCardSkin());
+                NoticeBroadcastMessages.useItem(table,req.getUserId(),req.getHeadSculpture(),req.getCardSkin());
+            }else {
+                log.error("找不到该玩家：{}",req.getUserId());
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }finally {

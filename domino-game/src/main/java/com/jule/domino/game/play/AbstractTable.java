@@ -63,10 +63,6 @@ public class AbstractTable implements ITable {
      */
     private CommonConfigModel commonConfig = null;
     private RoomConfigModel roomConfig = null;
-    /**
-     * 当前庄家座位号
-     */
-    private int currDealerSeatNum;
     //房间所有人 key：userId
     protected final Map<String, PlayerInfo> allPlayers = new ConcurrentHashMap<>();
 
@@ -108,26 +104,35 @@ public class AbstractTable implements ITable {
     private List<String> loseUserIds = new ArrayList<>();
     private ConcurrentLinkedQueue<Integer> nullSeatList = new ConcurrentLinkedQueue<>(); //可用的空座位列表
     private long lastActionTime = 0;//上次本桌操作时间
-
+    protected String firstReadyPlayer;//第一个准备的人 非抢庄模式的庄家
+    //港式五张
     protected boolean everyoneCanJoinIn;//桌子是否所有人可加入(玩家是否开启了好友功能)
     protected String createTableUserId;//创建桌子的userId
     protected String controlCardTypePlayerId;//控制牌型的玩家id
     protected String seeHandCardsPlayerId;//可看全部人底牌的玩家id
     protected Set<Integer> equalScore = new HashSet<>();//判断房间所有人下注积分是否相等
     protected int roundTableScore;//当前轮次桌内下注额(根据下注最大的人变化)
-    protected int playerNum;//人数（房间座位数）
     protected long currBaseBetScore;//当前基础下注值
-    protected int readyCd;//准备cd
-    protected int betCd;//下注cd（超时则弃牌）
-    protected int openCardCd;//亮牌cd
     protected int betMaxScore;//下注积分上限
-    protected int gameNum;//游戏局数
-    protected String betMultiple;//桌子加注倍数
-    protected int currGameNum; //桌子当前进行的游戏局数
     protected boolean isWatch;//是否可以观战
     protected int tableAlreadyBetScore; //桌子当前牌局累积已下注金额
     protected int tableTotalAlreadyBetScore; //桌子所有牌局累积已下注金额
     protected Date startTime;//牌局开始时间
+    //牛牛
+    protected int bankerType;//1明牌抢庄,2自由抢庄,3轮流庄,4固定庄,5牛牛上庄
+    protected int wildCard;//1无,2王癞子,3,随机癞子,4王+随机癞子
+    protected int doubleRule;//翻倍规则:1牛牛四倍2:牛牛三倍
+    protected List<Integer> specialCardType;//特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
+    protected int bankerCd;//抢庄cd
+    protected String currDealerPlayerId;  //当前庄家id
+    //公用
+    protected int playerNum;//人数（房间座位数）
+    protected String betMultiple;//桌子下注倍数
+    protected int gameNum;//游戏局数
+    protected int currGameNum; //桌子当前进行的游戏局数
+    protected int readyCd;//准备cd
+    protected int betCd;//下注cd（超时则弃牌）
+    protected int openCardCd;//亮牌cd
 
     public AbstractTable() {}
 
@@ -560,8 +565,9 @@ public class AbstractTable implements ITable {
         }
 
         log.debug("message functionId:" + functionId + "push player:" + list + ",getPlayType:" + getPlayType() + ", functionId: " + functionId);
-        NoticeRPCUtil.senMuliMsg(getPlayType(), tableId, list, functionId, messageLite);
-        RabbitMqSender.me.producer(functionId, messageLite.toString());
+//        NoticeRPCUtil.senMuliMsg(getPlayType(), tableId, list, functionId, messageLite);
+        NoticeRPCUtil.senMuliMsg(1, tableId, list, functionId, messageLite);
+//        RabbitMqSender.me.producer(functionId, messageLite.toString());
     }
 
     /**

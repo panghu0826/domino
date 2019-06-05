@@ -82,6 +82,7 @@ public class PlayerInfo {
     private WinLoseRecord handsWon = new WinLoseRecord();
     private boolean isWinner;//是否是本局赢家
     private int cardType;//玩家目前的牌型
+    private String cardTypeName;//玩家目前的牌型(日志输出)
     /**
      * 旁观次数累计(连续超过三局自动离桌)
      */
@@ -91,13 +92,15 @@ public class PlayerInfo {
     private boolean sideshowOvertime;
     private RoleType roleType;
     //计算出的手牌类型
-    private int type;
+    private CardType type;
     // 抢庄倍数(注意结算时为0时要记得是乘1)
     private int multiple = 0;
     // 下注倍数
     private int betMultiple = 1;
     //当前局的分数
     private double curScore;
+    //前三张牌
+    private List<Byte> threeCards = new ArrayList<>();
     //玩家开始行动时间
     private long startActionTime;
 
@@ -167,7 +170,7 @@ public class PlayerInfo {
         this.sideshowOvertime = false;
     }
 
-    public void addCurScore(long score) {
+    public void addCurScore(double score) {
         this.curScore += score;
     }
 
@@ -176,7 +179,7 @@ public class PlayerInfo {
      */
     public void resetGameingInfo() {
         //如果玩家不是自动弃牌则重置数据
-        type = 0;
+        type = null;
         this.betMultiple = 1;
         this.multiple = 0;
         this.curScore = 0;

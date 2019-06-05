@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 请求房卡记录
+ * 请求道具记录
  */
 public class JoloCommon_ItemRecordsReq_80011 extends Req {
 

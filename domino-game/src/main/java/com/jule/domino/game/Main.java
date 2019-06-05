@@ -57,7 +57,7 @@ public class Main {
 
             /**加载礼物配置*/
             ProductionService.getInstance();
-            CardTypeMultipleService.getInstance();
+//            CardTypeMultipleService.getInstance();
             CommonConfigHolder.getInstance();
             RoomConfigHolder.getInstance();
             TimerService.getInstance();

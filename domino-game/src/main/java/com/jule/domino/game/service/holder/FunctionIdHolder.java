@@ -5,9 +5,8 @@ public class FunctionIdHolder {
     public final static int Game_REQ_ApplyStandUp = 50002;
     public final static int Game_REQ_ApplyBet = 50005;
     public final static int Game_REQ_ApplyFold = 50012;
-    //准备
-    public final static int Game_REQ_ReadyType = 50018;
-
+    public final static int Game_REQ_ReadyType = 50018;//准备
+    public final static int Game_REQ_RobDealer = 50019;//抢庄
     public final static int Game_REQ_OtherUserInfo = 50014;
     public final static int Game_REQ_SpecialFunction = 50015;
     public final static int Game_REQ_Reconnect = 50016;
@@ -35,6 +34,7 @@ public class FunctionIdHolder {
     public final static int Game_ACK_OtherUserInfo = Game_REQ_OtherUserInfo | 0x08000000;
     public final static int Game_ACK_Reconnect = Game_REQ_Reconnect | 0x08000000;
     public final static int Game_ACK_ReadyType = Game_REQ_ReadyType | 0x08000000;
+    public final static int Game_ACK_RobDealer = Game_REQ_RobDealer | 0x08000000;
     public final static int Game_ACK_GameRecords = Game_REQ_GameRecords | 0x08000000;
     public final static int Game_ACK_ChatMesgSend = Game_REQ_ChatMesgSend | 0x08000000;
     public final static int Game_ACK_Item = Game_REQ_Item | 0x08000000;
@@ -44,7 +44,7 @@ public class FunctionIdHolder {
     public final static int Game_Notice_StandUp = 51002;
     public final static int Game_Notice_BuyIn = 51003;
     public final static int Game_Notice_GameStart = 51004;
-    public final static int Game_Notice_GiveCardRound_Start = 51005;
+    public final static int Game_Notice_GiveCardRound_Start = 51005;//发牌广播
     public final static int Game_Notice_BetRound_WaitBet = 51006;
     public final static int Game_Notice_BetRound_DoBet = 51007;
     public final static int Game_Notice_OpenCard = 51008;
@@ -53,25 +53,42 @@ public class FunctionIdHolder {
     public final static int Game_Notice_BetRound_Fold = 51017;
     public final static int Game_Notice_OpenCardCd = 51032;
     public final static int Game_Notice_GiveCardCd = 51034;
-    //结算结果
-    public final static int Game_Notice_SettleRound_SettleResult = 51013;
+    public final static int Game_Notice_SettleRound_SettleResult = 51013;//结算结果
     public final static int Game_Notice_SettleRound_History = 51014;
     public final static int Game_Notice_SideShow_CompleteChooseUser = 51015;
     public final static int Game_Notice2Client_leavel = 51023;
-    //准备
-    public final static int Game_Notice2Client_ReadyType = 51029;
-    //下注前信息
-    public final static int Game_Notice2Client_HandCardListType = 51033;
-    //广播下注结果
-    public final static int Game_Notice2Client_BetResultType = 51035;
-    //特殊功能开关提示(仅限于vip单人)
-    public final static int Game_SpecialFunction_Msg = 51037;
+    public final static int Game_Notice2Client_ReadyType = 51029;//准备
+    public final static int Game_Notice2Client_HandCardListType = 51033;//手牌广播
+    public final static int Game_Notice2Client_BetResultType = 51035;//广播下注结果
+    public final static int Game_SpecialFunction_Msg = 51037;//特殊功能开关提示(仅限于vip单人)
+    public final static int Game_Notice2Client_PlayersIn = 51039;//玩家入座
+    public final static int Game_Notice2Client_Item = 51055;  //玩家使用道具
+    public final static int Game_Notice2Client_BetInfoType = 51032;  //下注前信息
+    //广播抢庄结果
+    public final static int Game_Notice2Client_RobDealerResultType = 51080;
+    //广播抢庄倍数
+    public final static int Game_Notice2Client_RobMultipleInfoType = 51081;
+    //定庄广播
+    public final static int Game_Notice2Client_FixDealerType = 51082;
     //广播下注倍数
-    public final static int Game_Notice2Client_BetMultipleInfoType = 51038;
-    //玩家入座
-    public final static int Game_Notice2Client_PlayersIn = 51039;
-    //玩家使用道具
-    public final static int Game_Notice2Client_Item = 51055;
+    public final static int Game_Notice2Client_BetMultipleInfoType = 51083;
+
+
+//    //定庄广播
+//    public final static int Game_Notice2Client_FixDealerType = 52031;
+//    //广播玩家手上牌
+//    public final static int Game_Notice2Client_HandCardListType = 51033;
+//    //广播抢庄结果
+//    public final static int Game_Notice2Client_RobDealerResultType = 51034;
+//    //广播下注结果
+//    public final static int Game_Notice2Client_BetResultType = 51035;
+//    //广播牌型结果
+//    public final static int Game_Notice2Client_ShowCardTypeType = 51036;
+//    //广播抢庄倍数
+//    public final static int Game_Notice2Client_RobMultipleInfoType = 51037;
+//    //广播下注倍数
+//    public final static int Game_Notice2Client_BetMultipleInfoType = 51038;
+
 
     //打赏荷官广播
     public final static int Game_Notice_RewardCroupier = 51050;

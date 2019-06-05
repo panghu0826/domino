@@ -1,112 +1,74 @@
 [
   {
+    "2": {
+      "sevendays": 8,
+      "onemonth": 29
+    }
+  },
+  {
     "3": {
       "sevendays": 8,
-      "permanent": 69
+      "onemonth": 29
     }
   },
   {
     "4": {
       "sevendays": 8,
-      "permanent": 69
+      "onemonth": 29
     }
   },
   {
     "5": {
       "sevendays": 8,
-      "permanent": 69
+      "onemonth": 29
     }
   },
   {
     "6": {
       "sevendays": 8,
-      "permanent": 69
+      "onemonth": 29
     }
   },
   {
     "7": {
       "sevendays": 8,
-      "permanent": 69
+      "onemonth": 29
     }
   },
   {
     "8": {
       "sevendays": 8,
-      "permanent": 69
-    }
-  },
-  {
-    "9": {
-      "sevendays": 8,
-      "permanent": 69
+      "onemonth": 29
     }
   },
   {
     "10": {
-      "sevendays": 8,
-      "permanent": 69
+      "sevendays": 16,
+      "onemonth": 59
     }
   },
   {
     "11": {
-      "sevendays": 29,
-      "permanent": 289
+      "sevendays": 16,
+      "onemonth": 59
     }
   },
   {
     "12": {
-      "sevendays": 29,
-      "permanent": 289
+      "sevendays": 16,
+      "onemonth": 59
+    }
+  },
+  {
+    "13": {
+      "sevendays": 8,
+      "onemonth": 29
     }
   },
   {
     "14": {
-      "numberofgames": 1
-    }
-  },
-  {
-    "15": {
-      "numberofgames": 100
-    }
-  },
-  {
-    "16": {
-      "numberofgames": 2000
-    }
-  },
-  {
-    "17": {
-      "numberofgames": 5000
-    }
-  },
-  {
-    "18": {
-      "numberofgames": 10000
-    }
-  },
-  {
-    "19": {
-      "permanent": 39
-    }
-  },
-  {
-    "20": {
-      "permanent": 59
-    }
-  },
-  {
-    "21": {
-      "permanent": 59
-    }
-  },
-  {
-    "22": {
-      "permanent": 59
-    }
-  },
-  {
-    "23": {
-      "permanent": 59
+      "sevendays": 8,
+      "onemonth": 29
     }
   }
 ]

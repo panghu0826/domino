@@ -61,7 +61,7 @@ public class JoloRoom_ApplyJoinTableReq_40001 extends ClientReq {
         String gameId = req.getGameId();
         String roomId = req.getRoomId();
         String tableId = "";
-        int playerNum = req.getPlayerNum();
+        int playerNum = req.getTableInfo().getPlayerNum();
         AbstractTable table = null;
 
         ack.setUserId(userId).setGameId(gameId).setRoomId(roomId).setTableId(tableId);
@@ -86,7 +86,7 @@ public class JoloRoom_ApplyJoinTableReq_40001 extends ClientReq {
             //创建房间扣除相应房卡
 //            if(!req.hasTableId() && gameRoomTableSeatRelationModel == null) {
             if (!req.hasTableId()) {
-                int money = req.getGameNum() / 5;
+                int money = req.getTableInfo().getGameNum() / 5;
                 if (user.getMoney() >= money) {
                     user.setMoney(user.getMoney() - money);
                     DBUtil.updateByPrimaryKey(user);
@@ -177,7 +177,7 @@ public class JoloRoom_ApplyJoinTableReq_40001 extends ClientReq {
             }
 
             //从redis获取桌子的信息
-            RoomTableRelationModel roomTable = RoomStateService.getInstance().getExistTable(gameId, roomId, tableId);
+            RoomTableRelationModel roomTable = RoomStateService.getInstance().getExistTable(tableId);
 //            String icon = StringUtils.isEmpty(user.getUser_defined_head()) ? user.getIco_url() : user.getUser_defined_head();
             String icon = user.getIco_url();
             PlayerInfo player = table.getPlayer(userId);
@@ -227,16 +227,31 @@ public class JoloRoom_ApplyJoinTableReq_40001 extends ClientReq {
 
     //初始化桌子参数
     private void initTable(AbstractTable table, String createTableUserId) {
-        table.setPlayerNum(req.getPlayerNum());
-        table.setCurrBaseBetScore(req.getBaseBetScore());
-        table.setReadyCd(req.hasReadyCd() ? req.getReadyCd() : 8);
-        table.setBetCd(req.hasBetCd() ? req.getBetCd() : 15);
-        table.setOpenCardCd(req.hasOpenCardCd() ? req.getOpenCardCd() : 5);
-        table.setWatch(req.hasIsWatch());
-        table.setBetMaxScore(req.getBetMaxScore());
-        table.setGameNum(req.getGameNum());
-        table.setBetMultiple(req.getBetMultiple());
-        table.setCreateTableUserId(createTableUserId);
+        JoloRoom.JoloGame_Table_Info tableInfo = req.getTableInfo();
+        if(table.getPlayType() == 1) {
+            table.setPlayerNum(tableInfo.getPlayerNum());
+            table.setCurrBaseBetScore(tableInfo.getBaseBetScore());
+            table.setReadyCd(tableInfo.hasReadyCd() ? tableInfo.getReadyCd() : 8);
+            table.setBetCd(tableInfo.hasBetCd() ? tableInfo.getBetCd() : 15);
+            table.setOpenCardCd(tableInfo.hasOpenCardCd() ? tableInfo.getOpenCardCd() : 5);
+            table.setWatch(tableInfo.hasIsWatch());
+            table.setBetMaxScore(tableInfo.getBetMaxScore());
+            table.setGameNum(tableInfo.getGameNum());
+            table.setBetMultiple(req.getBetMultiple());
+            table.setCreateTableUserId(createTableUserId);
+        }else if(table.getPlayType() == 2){
+            table.setBankerType(tableInfo.getBankerType());
+            table.setPlayerNum(tableInfo.getPlayerNum());
+            table.setWildCard(tableInfo.getWildCard());
+            table.setBetMultiple(req.getBetMultiple());
+            table.setDoubleRule(tableInfo.getDoubleRule());
+            table.setSpecialCardType(tableInfo.getSpecialCardTypeList());
+            table.setReadyCd(tableInfo.getReadyCd());
+            table.setBankerCd(tableInfo.getBankerCd());
+            table.setBetCd(tableInfo.getBetCd());
+            table.setOpenCardCd(tableInfo.getOpenCardCd());
+            table.setGameNum(tableInfo.getGameNum());
+        }
         log.debug("新建桌子参数：{}", table.toString());
     }
 
@@ -318,162 +333,4 @@ public class JoloRoom_ApplyJoinTableReq_40001 extends ClientReq {
         }
         return list;
     }
-
-
-//    @Override
-//    public void processImpl() {
-//        JoloRoom.JoloRoom_ApplyJoinTableAck.Builder ack = JoloRoom.JoloRoom_ApplyJoinTableAck.newBuilder();
-//        try {
-//
-//            log.debug("收到消息-> " + functionId + " reqNum-> " + header.reqNum + " " + req.toString());
-//            String userId = req.getUserId();
-//            String gameId = req.getGameId();
-//            String roomId = req.getRoomId();
-//            String tableId = "";
-//            int playerNum = req.getPlayerNum();
-//
-//
-//            //首先查看自己有没有在游戏内
-//            GameRoomTableSeatRelationModel gameRoomTableSeatRelationModel = StoredObjManager.getStoredObjInMap(
-//                    GameRoomTableSeatRelationModel.class,
-//                    RedisConst.USER_TABLE_SEAT.getProfix(),
-//                    RedisConst.USER_TABLE_SEAT.getField() + userId
-//            );
-//
-//            if (GameMaintentService.OBJ.isDefense()) {
-//                log.error("游戏进入维护状态，无法入桌");
-//                ctx.writeAndFlush(new JoloRoom_ApplyJoinTableAck_40001(ack.setResult(-1).setResultMsg("游戏进入维护状态,无法入桌").build(), header));
-//                return;
-//            }
-//
-//            //用户信息：从缓存获取
-//            User user = StoredObjManager.hget(RedisConst.USER_INFO.getProfix(), RedisConst.USER_INFO.getField() + userId, User.class);
-//            if (user == null) {
-//                log.info("缓存中没有user信息");
-//                return;
-//            }
-//            ack.setResult(1).setUserId(userId).setGameId(gameId).setRoomId(roomId);
-//
-//            //如果参数中没有指定roomId，那么由系统自动分配一个房间(分配规则以入场积分限制为准)
-//
-//            double currScoreStore = user.getMoney(); //玩家当前积分库存
-//            if (gameRoomTableSeatRelationModel == null && !RoomConfigHolder.getInstance().canFindSuuitableRoom(currScoreStore)) {
-//                ack.setTableId("")
-//                        .setSeatId("")
-//                        .setJoinGameSvrId("")
-//                        .setBootAmount(0)
-//                        .setResult(-1).setResultMsg(ErrorCodeEnum.ROOM_40001_1.getCode());
-//                ctx.writeAndFlush(new JoloRoom_ApplyJoinTableAck_40001(ack.build(), header));
-//                return;
-//            }
-//
-////            RoomConfigModel roomConfig;
-////            CommonConfigModel commonConfig;
-////            if (gameRoomTableSeatRelationModel == null) {
-////                roomConfig = RoomConfigHolder.getInstance().getRoomConfig(roomId);
-////                commonConfig = CommonConfigHolder.getInstance().getCommonConfig(Integer.parseInt(gameId));
-////            } else {
-////                roomConfig = RoomConfigHolder.getInstance().getRoomConfig(gameRoomTableSeatRelationModel.getRoomId());
-////                commonConfig = CommonConfigHolder.getInstance().getCommonConfig(
-////                        Integer.parseInt(gameRoomTableSeatRelationModel.getGameId()));
-////            }
-////            if (null == roomConfig || commonConfig == null) {
-////                ack.setTableId("")
-////                        .setSeatId("")
-////                        .setJoinGameSvrId("")
-////                        .setBootAmount(0)
-////                        .setResult(-1).setResultMsg(ErrorCodeEnum.ROOM_40001_2.getCode());
-////                log.error("can't found suitable Room. userScoreStore->" + currScoreStore);
-////                ctx.writeAndFlush(new JoloRoom_ApplyJoinTableAck_40001(ack.build(), header));
-////                return;
-////            }
-////            roomId = roomConfig.getRoomId();
-//            AbstractTable table = null;
-//            //玩家在在游戏中走断线重连，否则新创建桌子
-////            if (gameRoomTableSeatRelationModel != null) {
-////                log.info("gameRoomTableSeatRelationModel:" + gameRoomTableSeatRelationModel.toString());
-////                if (gameRoomTableSeatRelationModel.getSeat() >= 0) {//在座位上或旁观
-////                    ack.setSeatId(gameRoomTableSeatRelationModel.getSeat() + "");
-////                    ack.setReconnection(1);
-////                }
-////                table = TableService.getInstance().addExitTable(gameRoomTableSeatRelationModel.getGameId(),
-////                        gameRoomTableSeatRelationModel.getRoomId(), gameRoomTableSeatRelationModel.getTableId());
-////            } else {
-////
-////            }
-//            if(!req.hasTableId()) {
-//                table = TableService.getInstance().createNewTable(gameId, roomId, true, playerNum);
-//                initTable(table);//初始化桌子参数
-//                ack.setReconnection(0);
-//                tableId = table.getTableId();
-//            }else{
-//                tableId = req.getTableId();
-//                //如果有桌子则加入，否则创建
-////                table = TableService.getInstance().addExitTable(gameId, roomId, tableId);
-//                table = TableService.getInstance().addNewTable(gameId, roomId, tableId);
-//                log.debug("玩家根据房间号加入房间：tableId {}",tableId);
-//            }
-//
-//
-//
-//            //从redis获取桌子的信息
-//            RoomTableRelationModel roomTable = RoomStateService.getInstance().getExistTable(gameId, roomId, tableId);
-//
-//            String icon = StringUtils.isEmpty(user.getUser_defined_head()) ? user.getIco_url() : user.getUser_defined_head();
-//
-//            PlayerInfo player = table.getPlayer(userId);
-//
-//            //修改相关map内容，增加新玩家进入房间状态
-//            if (player == null) {
-//                player = new PlayerInfo(roomTable, userId, user.getNick_name(), icon, RoleType.getRoleType(user.getChannel_id()),user);
-//            }
-//
-//            PlayerInfo playerInfo = table.joinRoom(player);
-//            log.info("-----------------桌子信息：{}",table.toString());
-//
-////            String res = StoredObjManager.hget(RedisConst.TABLE_USERS.getProfix() + header.gameId + player.getRoomId() + player.getTableId(),
-////                    RedisConst.TABLE_USERS.getField() + player.getPlayerId());
-////            log.info("res" + res);
-////            if (Strings.isNullOrEmpty(res)) {
-////                log.debug("桌子的redis缓存找不到此人, userId->" + userId + ", roomId->" + roomId + ",tableId->" + tableId);
-////            }
-////            if (res.equals("" + PlayerStateEnum.siteDown.getValue())) {
-////                log.error("Failed to sit down many times");
-////                return;
-////            }
-//
-//            log.info("房间人数：{} -------- {}",table.getAllPlayers().size(),table.hashCode());
-//            List<String> list = StoredObjManager.hvals(RedisConst.TABLE_SEAT.getProfix() + gameId + roomId + tableId);
-////            log.debug("选座成功useId={}, tableid={},players={}", userId, tableId, TableUtil.toStringInGamePlayers(table));
-//            log.debug("选座成功useId={}, tableid={},list={}", userId, tableId, list.toString());
-//
-//            ack.setTableId(tableId);
-//            if (!ack.hasSeatId()) {
-//                ack.setSeatId("");
-//            }
-//            if (gameRoomTableSeatRelationModel != null && !roomId.equals(gameRoomTableSeatRelationModel.getRoomId())) {
-//                //TODO 需前端一起配合做跳转提示
-//                ack.setResult(1);
-//                ack.setResultMsg("返回原来所在桌");
-//            }
-////            ack.setBootAmount(roomConfig.getAnte());
-////            ack.setBetCd(commonConfig.getBetCountDownSec());
-////            ack.setGameStartCd(commonConfig.getGameStartCountDownSec());
-//            ack.setMinJoinTableScore((int) RoomConfigHolder.getInstance().getMinJoinTableScore());
-//
-//            String gameSvrId = /*UtilsService.getInstance().getGameSvr(table, gameId)*/Config.GAME_SERID;
-//            if (!StringUtil.isNullOrEmpty(gameSvrId)) {
-//                ack.setJoinGameSvrId(gameSvrId);//没有时前端提示 "服务器爆满"
-//            }
-//
-//            //通知有玩家入桌
-//            NoticeBroadcastMessages.playerJoinTable(table,userId,0);
-//            //缓存玩法
-//            JedisPoolWrap.getInstance().set(GameConst.CACHE_PLAY_TYPE + userId, gameId, -1);
-//            ctx.writeAndFlush(new JoloRoom_ApplyJoinTableAck_40001(ack.build(), header));
-//            log.info("40001 builder ack 成功->: {}",ack.toString());
-//        } catch (Exception e) {
-//            log.error(e.getMessage(), e);
-//        }
-//    }
 }

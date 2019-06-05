@@ -8,6 +8,7 @@ import com.jule.domino.base.model.RoomTableRelationModel;
 import com.jule.domino.game.gameUtil.DealCardForTable;
 import com.jule.domino.game.gameUtil.GameLogic;
 import com.jule.domino.game.gameUtil.GameOrderIdGenerator;
+import com.jule.domino.game.gameUtil.NNGameLogic;
 import com.jule.domino.game.log.producer.RabbitMqSender;
 import com.jule.domino.game.model.PlayerInfo;
 import com.jule.domino.game.network.protocol.ClientReq;
@@ -69,19 +70,27 @@ public class JoloGame_ReadyReq_50018 extends ClientReq {
                 ctx.writeAndFlush(new JoloGame_ReadyAck_50018(ack.setResult(1).build(), header));
                 //玩家准备，并放进游戏中集合里
                 playerInfo.setState(PlayerStateEnum.game_ready);
+                if(table.getFirstReadyPlayer() == null) table.setFirstReadyPlayer(playerInfo.getPlayerId());
                 table.getInGamePlayers().put(seatNum, playerInfo);
                 boolean flags = table.getInGamePlayers().size() >= 2 && table.getInGamePlayers().size() >= table.getInGamePlayersBySeatNum().size();
                 if (!flags) {
                     NoticeBroadcastMessages.readyStatus(table, playerInfo);
                 }
                 log.info("桌子目前得状态：{}，是否全部准备{}", table.getTableStateEnum(), (table.getInGamePlayers().size() >= table.getInGamePlayersBySeatNum().size()));
-                if(flags){
-                    GameLogic.gameStart(table);
-                }else if(table.getTableStateEnum() == TableStateEnum.IDEL && table.getInGamePlayers().size() >= 2){
-                    //游戏准备cd广播
-                    NoticeBroadcastMessages.gameStart(table);
-                    //游戏准备cd
-                    GameLogic.gameReady(table);
+                if(table.getPlayType() == 1) { //港式五张
+                    if (flags) {
+                        GameLogic.gameStart(table);
+                    } else if (table.getTableStateEnum() == TableStateEnum.IDEL && table.getInGamePlayers().size() >= 2) {
+                        //游戏准备cd广播
+                        NoticeBroadcastMessages.gameStart(table);
+                        //游戏准备cd
+                        GameLogic.gameReady(table);
+                    }
+                }else if(table.getPlayType() == 2){ //牛牛
+                    boolean start = table.getInGamePlayers().size() >= table.getInGamePlayersBySeatNum().size();
+                    if(start){
+                        NNGameLogic.gameStart(table);
+                    }
                 }
                 //判断游戏是否能开始
 //                TableService.getInstance().playGame(table);

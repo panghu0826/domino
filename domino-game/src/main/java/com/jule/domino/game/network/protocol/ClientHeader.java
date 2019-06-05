@@ -2,8 +2,6 @@ package com.jule.domino.game.network.protocol;
 
 public final class ClientHeader {
     public final static ClientHeader DEFAULT_HEADER = new ClientHeader(0, 0, 0, true, 0, 0);
-
-
     public final int functionId;
     public final int gameId;
     public final int gameServerId;

@@ -18,6 +18,7 @@ public class ServerOps {
         opcodes.put(JoloGame_ApplyBetAck_50005.class, FunctionIdHolder.Game_ACK_ApplyBet);
         opcodes.put(JoloGame_ApplyFoldAck_50012.class, FunctionIdHolder.Game_Ack_ApplyFold);
         opcodes.put(JoloGame_ReadyAck_50018.class, FunctionIdHolder.Game_ACK_ReadyType);
+        opcodes.put(JoloGame_Rob_DealerAck_50019.class, FunctionIdHolder.Game_ACK_ReadyType);
 
 
         opcodes.put(JoloGame_ApplyJoinTableAck_50000.class, FunctionIdHolder.Game_ACK_ApplyJoinTable);

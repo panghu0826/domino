@@ -6,7 +6,7 @@ package com.jule.domino.base.enums;
 public enum TableStateEnum {
     IDEL(0),//空闲状态
     GAME_READY(1), //游戏准备
-    PLAYER_ROB(2),
+    PLAYER_ROB(2),//抢庄中
     BET(3),//下注状态
     OPEN_CARD(4),//比牌状态
     SETTLE_ANIMATION(5),//结算动画状态

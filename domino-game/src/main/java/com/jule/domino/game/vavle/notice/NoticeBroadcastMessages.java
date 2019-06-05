@@ -343,7 +343,21 @@ public class NoticeBroadcastMessages {
         }
     }
 
-    //TODO：通知全部客户端->发牌轮->开始 51005
+    //TODO：通知全部客户端->发牌轮->开始 51005 牛牛
+    public static void giveCardBoardcast(AbstractTable table) {
+        try {
+            JoloGame.JoloGame_Notice2Client_GiveCardRound_StartReq.Builder reqBuilder = JoloGame.JoloGame_Notice2Client_GiveCardRound_StartReq.newBuilder();
+            reqBuilder.setRoomId(table.getRoomId())
+                    .setTableId(table.getTableId())
+                    .setGameOrderId(table.getCurrGameOrderId())
+                    .addAllPlayerInfoList(TableUtil.getPlayers(table));
+            table.boardcastMessage(table.getTableId(), reqBuilder.build(), FunctionIdHolder.Game_Notice_GiveCardRound_Start);
+        } catch (Exception ex) {
+            log.error(ex.getMessage(), ex);
+        }
+    }
+
+    //TODO：通知全部客户端->发牌轮->开始 51005 港式五张
     public static void giveCardBoardcast(AbstractTable table, boolean isGameStart, int firstGiveCard) {
         try {
             for (PlayerInfo player : table.getAllPlayers().values()) {
@@ -475,8 +489,7 @@ public class NoticeBroadcastMessages {
                     .setTableId(table.getTableId())
                     .setGameOrderId(table.getCurrGameOrderId())
                     .setCountDownSec(table.getCommonConfig().getBetCountDownSec());
-
-            //table.boardcastMessage(table.getTableId(), notice.build(), FunctionIdHolder.Game_Notice2Client_BetInfoType);
+            table.boardcastMessage(table.getTableId(), notice.build(), FunctionIdHolder.Game_Notice2Client_BetInfoType);
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
         }
@@ -504,131 +517,6 @@ public class NoticeBroadcastMessages {
         }
 
     }
-
-
-    private static void fillHandCardsInfo(AbstractTable table, List<JoloGame.JoloGame_HandCardsInfo> handCardsInfos) {
-        try {
-            //判断策略值
-            int initKillPool = Integer.parseInt(StoredObjManager.get(RedisConst.ROBOT_INIT_KILL_POOL.getProfix()));
-            int initRobotPool = Integer.parseInt(StoredObjManager.get(RedisConst.ROBOT_INIT_ROBOT_POOL.getProfix()));
-            ;
-
-            double x = Double.parseDouble(StoredObjManager.get(RedisConst.ROBOT_POOL_CURRENT_MONEY.getProfix())) + initRobotPool;
-
-            double z = Double.parseDouble(StoredObjManager.get(RedisConst.GAME_KILL_AMOUNT_POOL.getProfix())) + initKillPool;
-
-            List<PlayerInfo> robots = new ArrayList<>();
-
-            double max = table.getCommonConfig().getStrategyMaxPct();
-            double min = table.getCommonConfig().getStrategyMinPct();
-
-            log.debug("AI配置initKillPool={}，initRobotPool={}", initKillPool, initRobotPool);
-            log.debug("AI机器人策略比值x={},z={}", String.valueOf(x), String.valueOf(z));
-            /*if (x > max * z ){
-                //机器人输
-                log.debug("AI机器人策略 x > {}*z ,机器人应该输", max);
-                doExchangeCard(false,robots,table);
-            }else */
-            if (x < min * z) {
-                //机器人赢
-                log.debug("AI机器人策略 x < {}*z ,机器人应该赢", min);
-                doExchangeCard(true, robots, table);
-            } else {
-                log.debug("AI机器人策略正常发牌、不做操作");
-            }
-        } catch (Exception ex) {
-            log.error("机器人验证异常 ex = {}", ex);
-        }
-
-
-        Iterator<PlayerInfo> iter = table.getInGamePlayers().values().iterator();
-        while (iter.hasNext()) {
-            PlayerInfo playerInfo = iter.next();
-            List<Integer> cards = NumUtils.ConvertByte2IntArr(playerInfo.getCards());
-            JoloGame.JoloGame_HandCardsInfo.Builder handCards = JoloGame.JoloGame_HandCardsInfo.newBuilder();
-            handCards.setUserId(playerInfo.getPlayerId())
-                    .addAllHandCards(cards)
-                    .setCardType(playerInfo.getType());
-            handCardsInfos.add(handCards.build());
-            playerInfo.setIsBlind(2);
-        }
-    }
-
-    private static void doExchangeCard(boolean robotWin, List<PlayerInfo> robots, AbstractTable table) {
-        Map<String, Integer> winners = CardComparator.OBJ.getWinner(table.getInGamePlayers());
-
-        //牌型列表
-        List<int[]> winnerCards = new ArrayList<>();
-        List<int[]> loserCards = new ArrayList<>();
-
-        //玩家列表
-        List<PlayerInfo> players = new ArrayList<>();
-
-        boolean needChange = false;
-        for (Integer seat : table.getInGamePlayers().keySet()) {
-            PlayerInfo player = table.getInGamePlayers().get(seat);
-
-            //玩家分类
-            if (player.getRoleType() == RoleType.ROBOT) {
-                robots.add(player);
-            } else {
-                players.add(player);
-            }
-
-            //牌型分类
-            if (winners.containsKey(player.getPlayerId())) {
-                //赢家牌型
-                winnerCards.add(player.getHandCards());
-                if (player.getRoleType() == RoleType.ROBOT) {
-                    if (!robotWin) {
-                        needChange = true;
-                    }
-                } else {
-                    if (robotWin) {
-                        needChange = true;
-                    }
-                }
-            } else {
-                //输家牌型
-                loserCards.add(player.getHandCards());
-            }
-        }
-
-        //不需要换牌
-        if (!needChange) {
-            return;
-        }
-
-        //执行换牌
-        List<int[]> sortedCard = new ArrayList<>();
-        sortedCard.addAll(winnerCards);
-        sortedCard.addAll(loserCards);
-
-        for (Integer seat : table.getInGamePlayers().keySet()) {
-            PlayerInfo player = table.getInGamePlayers().get(seat);
-            int[] arrHandCards = null;
-
-            int index = 0;
-            if (player.getRoleType() == RoleType.ROBOT) {
-                if (!robotWin) {
-                    index = sortedCard.size() - 1;
-                }
-            } else {
-                if (robotWin) {
-                    index = sortedCard.size() - 1;
-                }
-            }
-
-            arrHandCards = sortedCard.get(index);
-            sortedCard.remove(index);
-
-            player.setHandCards(arrHandCards); //玩家看牌后则为手牌赋值
-            player.setCards(NumUtils.ConvertInt2ByteArr(arrHandCards));
-            player.setType(CardComparator.OBJ.isSpecialCard(arrHandCards));
-        }
-
-    }
-
     /**
      * 发牌
      *
@@ -638,18 +526,13 @@ public class NoticeBroadcastMessages {
         try {
             JoloGame.JoloGame_Notice2Client_HandCardsListReq.Builder
                     notice = JoloGame.JoloGame_Notice2Client_HandCardsListReq.newBuilder();
-
             notice.setCountDownSec(table.getCommonConfig().getOpenCardsCD())
                     .setGameOrderId(table.getCurrGameOrderId())
                     .setRoomId(table.getRoomId())
                     .setTableId(table.getTableId());
-
             List<JoloGame.JoloGame_HandCardsInfo> handCardsInfos = new ArrayList<>();
-//            fillHandCardsInfo(table, handCardsInfos);
             notice.addAllHandCardsList(handCardsInfos);
-
-            table.boardcastMessage(table.getTableId(),
-                    notice.build(), FunctionIdHolder.Game_Notice2Client_HandCardListType);
+            table.boardcastMessage(table.getTableId(),notice.build(), FunctionIdHolder.Game_Notice2Client_HandCardListType);
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
         }
@@ -657,36 +540,13 @@ public class NoticeBroadcastMessages {
 
 
     //TODO:通知全部客户端->结算动画 51013
-    public static void settleAnimationBroadcast(AbstractTable table) {
+    public static void settleAnimationBroadcast(AbstractTable table,List<JoloGame.JoloGame_TablePlay_PlayerSettleInfo> settleInfoList) {
         try {
             JoloGame.JoloGame_Notice2Client_SettleRound_SettleReq.Builder reqBuilder = JoloGame.JoloGame_Notice2Client_SettleRound_SettleReq.newBuilder();
             reqBuilder.setRoomId(table.getRoomId())
                     .setTableId(table.getTableId())
-                    .setGameOrderId(table.getCurrGameOrderId());
-            List<JoloGame.JoloGame_TablePlay_PlayerSettleInfo> settleInfoList = new ArrayList<>();
-            for (PlayerInfo player : table.getInGamePlayersBySeatNum().values()) {
-//            for (PlayerInfo player : table.getInGamePlayers().values()) {
-//                if (player.getState().getValue() < PlayerStateEnum.beting.getValue()
-//                        || player.getHandCards() == null) {
-//                    continue;
-//                }
-                JoloGame.JoloGame_TablePlay_PlayerSettleInfo.Builder playerSettleInfo = JoloGame.JoloGame_TablePlay_PlayerSettleInfo.newBuilder();
-                int winScore = table.getTableAlreadyBetScore() - (int) player.getWinLoseScore4Hand();
-                if (player.isWinner()) {
-                    player.setPlayScoreStore(player.getPlayScoreStore() + winScore);
-                } else {
-                    player.setPlayScoreStore(player.getPlayScoreStore() - player.getWinLoseScore4Hand());
-                }
-                playerSettleInfo.setUserId(player.getPlayerId())
-                        .setSeatNum(player.getSeatNum())
-                        .setWinLose(player.isWinner() ? 1 : 0)
-                        .setWinLoseScore(player.isWinner() ? winScore : player.getWinLoseScore4Hand())
-                        .setPlayScoreStore(player.getPlayScoreStore())
-                        .addAllHandCards(player.getHandCards() == null ? new ArrayList<>() : Ints.asList(player.getHandCards()))
-                        .setCardType(player.getCardType());
-                settleInfoList.add(playerSettleInfo.build());
-            }
-            reqBuilder.addAllSettleInfoList(settleInfoList);
+                    .setGameOrderId(table.getCurrGameOrderId())
+                    .addAllSettleInfoList(settleInfoList);
             table.boardcastMessage(table.getTableId(), reqBuilder.build(), FunctionIdHolder.Game_Notice_SettleRound_SettleResult);
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
@@ -823,5 +683,33 @@ public class NoticeBroadcastMessages {
                         .setTableId(table.getTableId())
                         .setGameOrderId(msg).build(),
                 FunctionIdHolder.Game_SpecialFunction_Msg);
+    }
+
+    //广播抢庄倍数 51027
+    public static void robMultiple(AbstractTable table,PlayerInfo player) {
+        table.boardcastMessage(table.getTableId(),
+                JoloGame.JoloGame_Notice2Client_RobDealerReq.newBuilder()
+                        .setUserId(player.getPlayerId())
+                        .setRoomId(table.getRoomId())
+                        .setTableId(table.getTableId())
+                        .setGameOrderId(table.getCurrGameOrderId())
+                        .setMultiple(player.getMultiple()).build(),
+                FunctionIdHolder.Game_Notice2Client_FixDealerType);
+    }
+
+    //广播庄家是谁 51082
+    public static void dealerFinish(AbstractTable table) {
+        try {
+            PlayerInfo player = table.getPlayer(table.getCurrDealerPlayerId());
+            table.boardcastMessage(table.getTableId(),
+                    JoloGame.JoloGame_Fix_Dealer_FinishReq.newBuilder()
+                            .setUserId(player.getPlayerId())
+                            .setRoomId(table.getRoomId())
+                            .setTableId(table.getTableId())
+                            .setSeatNum(player.getSeatNum()).build(),
+                    FunctionIdHolder.Game_Notice2Client_FixDealerType);
+        } catch (Exception ex) {
+            log.error("发送消息失败 exception={}", ex);
+        }
     }
 }

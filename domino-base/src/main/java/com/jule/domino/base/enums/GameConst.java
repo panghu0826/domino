@@ -64,8 +64,8 @@ public class GameConst {
     public static final String GOODS_GOLD = "money";
     public static final String GOODS_ITEM = "item";
     public static final int COST_TIME = 1000;
-    //6:无牛至牛牛 8四炸9五花10五小牛11四花
-    public static List<String> wanFa = Arrays.asList("6","8","9","10","11");
+    //特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
+    public static List<String> wanFa = Arrays.asList("1","2","3","4","5","6","7","8");
     public static boolean isTest = false;
 
 }

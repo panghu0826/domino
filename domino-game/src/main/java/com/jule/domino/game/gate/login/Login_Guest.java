@@ -136,9 +136,9 @@ public class Login_Guest extends AbstractLogin {
             for (UserItemModel uim : list) {
                 long currTime = System.currentTimeMillis();
                 long itemTime = uim.getDueTime().getTime();
-                long permanentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2016-02-19 00:00:00").getTime();
-                boolean flags = (permanentTime == itemTime);
-                if (!flags && currTime > itemTime) {
+//                long permanentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2016-02-19 00:00:00").getTime();
+//                boolean flags = (permanentTime == itemTime);
+                if (currTime > itemTime) {
                     int in = DBUtil.deleteByItemId(uim.getItemId());
                     log.info("当前时间：{}，道具到期时间：{}，删除结果：{}",
                             new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(currTime),
@@ -148,7 +148,7 @@ public class Login_Guest extends AbstractLogin {
                 }
                 array.add(JoloAuth.JoloCommon_HaveItem.newBuilder()
                         .setItemId(Integer.parseInt(uim.getItemId()))
-                        .setDueTime(flags ? "永久" : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(uim.getDueTime())).build());
+                        .setDueTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(uim.getDueTime())).build());
             }
         } catch (Exception e) {
             e.printStackTrace();

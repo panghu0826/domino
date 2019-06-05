@@ -18,8 +18,6 @@ public class RoomTableRelationModel extends StoredObj {
     private int tableStatus=0;
 
     public RoomTableRelationModel(String gameId, String roomId, String tableId,int tableStatus) {
-        this.gameId = gameId;
-        this.roomId = roomId;
         this.tableId = tableId;
         this.tableStatus = tableStatus;
     }

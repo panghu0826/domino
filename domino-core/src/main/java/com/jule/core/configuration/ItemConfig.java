@@ -82,7 +82,7 @@ public class ItemConfig {
 
     public static int getItemParameter(int itemId, int itemTime) {
         //七天(sevendays)或永久(permanent)或局数(numberofgames)
-        String key = itemTime == 1 ? "sevendays" : itemTime == 2 ? "permanent" : "numberofgames";
+        String key = itemTime == 1 ? "sevendays" : "onemonth";
         return itemConfig.get(String.valueOf(itemId)).get(key);
     }
 

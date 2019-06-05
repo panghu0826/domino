@@ -32,8 +32,8 @@ public class Login_wx extends AbstractLogin {
     private static final String _script = "wx";
 
     private static final String WX_EMPOWER = "https://api.weixin.qq.com/sns/oauth2/access_token" +
-            "?appid=wx0bae7e311e9b6bd3" +
-            "&secret=0eb2908cab62e6ae6c2be240fbf35e50" +
+            "?appid=wxaba17fce182f8efe" +
+            "&secret=80508ba7e8a78b5932bb4bb856216c2b" +
             "&grant_type=authorization_code" +
             "&code=";
 
@@ -68,7 +68,7 @@ public class Login_wx extends AbstractLogin {
         JSONObject user_wx = JSONObject.fromObject(str2);
         String nikeName = user_wx.getString("nickname");
         String icoUrl = user_wx.getString("headimgurl");
-        String unionid = user_wx.getString("unionid");
+        String unionid = user_wx.getString("openid");
 
         User user = null;
         if (!Strings.isNullOrEmpty(unionid)) {

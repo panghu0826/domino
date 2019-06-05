@@ -44,7 +44,6 @@ public class DealCardForTable {
             cardsList.remove(new Integer(i));
         }
         arrCards = cardsList.stream().mapToInt(i -> i).toArray();
-
         return arrHandCards;
     }
 

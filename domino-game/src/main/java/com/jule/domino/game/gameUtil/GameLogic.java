@@ -1,5 +1,6 @@
 package com.jule.domino.game.gameUtil;
 
+import JoloProtobuf.GameSvr.JoloGame;
 import com.google.common.primitives.Ints;
 import com.jule.core.jedis.StoredObjManager;
 import com.jule.domino.base.dao.bean.User;
@@ -23,9 +24,7 @@ import com.jule.domino.game.service.holder.CardOfTableHolder;
 import com.jule.domino.game.vavle.notice.NoticeBroadcastMessages;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -178,25 +177,10 @@ public class GameLogic {
             TimerService.getInstance().delTimerTask(table.getRoomTableRelation());
             table.setTableStateEnum(TableStateEnum.SETTLE_ANIMATION);
             table.setTableStatus();
-            //比较玩家牌型大小
-            PlayerInfo winner = null; //获胜的用户
-            for (PlayerInfo player : table.getInGamePlayers().values()) {
-                if (winner == null) {
-                    winner = player;
-                } else {//此处有多余操作new和set
-                    TexasPoker texasA = new TexasPoker(winner.getHandCards());
-                    TexasPoker texasB = new TexasPoker(player.getHandCards());
-                    winner.setCardType(texasA.getTypeCompareValue());
-                    if (texasA.compareTo(texasB) == -1) {
-                        winner = player;
-                    }
-                    player.setCardType(texasB.getTypeCompareValue());
-                }
-            }
-            winner.setWinner(true);
-            log.info("本局游戏赢家的信息：{}", winner.toSitDownString());
-            //广播结算动画 && 结算51013
-            NoticeBroadcastMessages.settleAnimationBroadcast(table);
+            //玩家积分计算
+            List<JoloGame.JoloGame_TablePlay_PlayerSettleInfo> settleInfoList = scoreCalculation(table);
+            //广播结算51013
+            NoticeBroadcastMessages.settleAnimationBroadcast(table,settleInfoList);
             //重置玩家的部分信息
             Iterator<PlayerInfo> iter = table.getInGamePlayersBySeatNum().values().iterator();
             while (iter.hasNext()) {
@@ -230,6 +214,50 @@ public class GameLogic {
 
         }
     }
+
+    /**
+     * 分数计算
+     * @param table
+     */
+    public static List<JoloGame.JoloGame_TablePlay_PlayerSettleInfo> scoreCalculation(final AbstractTable table) {
+        //比较玩家牌型大小
+        PlayerInfo winner = null; //获胜的用户
+        for (PlayerInfo player : table.getInGamePlayers().values()) {
+            if (winner == null) {
+                winner = player;
+            } else {//此处有多余操作new和set
+                TexasPoker texasA = new TexasPoker(winner.getHandCards());
+                TexasPoker texasB = new TexasPoker(player.getHandCards());
+                winner.setCardType(texasA.getTypeCompareValue());
+                if (texasA.compareTo(texasB) == -1) {
+                    winner = player;
+                }
+                player.setCardType(texasB.getTypeCompareValue());
+            }
+        }
+        winner.setWinner(true);
+        log.info("本局游戏赢家的信息：{}", winner.toSitDownString());
+        List<JoloGame.JoloGame_TablePlay_PlayerSettleInfo> settleInfoList = new ArrayList<>();
+        for (PlayerInfo player : table.getInGamePlayersBySeatNum().values()) {
+            JoloGame.JoloGame_TablePlay_PlayerSettleInfo.Builder playerSettleInfo = JoloGame.JoloGame_TablePlay_PlayerSettleInfo.newBuilder();
+            int winScore = table.getTableAlreadyBetScore() - (int) player.getWinLoseScore4Hand();
+            if (player.isWinner()) {
+                player.setPlayScoreStore(player.getPlayScoreStore() + winScore);
+            } else {
+                player.setPlayScoreStore(player.getPlayScoreStore() - player.getWinLoseScore4Hand());
+            }
+            playerSettleInfo.setUserId(player.getPlayerId())
+                    .setSeatNum(player.getSeatNum())
+                    .setWinLose(player.isWinner() ? 1 : 0)
+                    .setWinLoseScore(player.isWinner() ? winScore : player.getWinLoseScore4Hand())
+                    .setPlayScoreStore(player.getPlayScoreStore())
+                    .addAllHandCards(player.getHandCards() == null ? new ArrayList<>() : Ints.asList(player.getHandCards()))
+                    .setCardType(player.getCardType());
+            settleInfoList.add(playerSettleInfo.build());
+        }
+        return settleInfoList;
+    }
+
 
     public static void playerFold(AbstractTable table, PlayerInfo playerInfo) {
         //如果游戏中只有两个人以下，那么进入结算逻辑
