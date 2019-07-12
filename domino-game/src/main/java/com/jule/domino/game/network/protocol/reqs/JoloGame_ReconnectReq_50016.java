@@ -68,7 +68,7 @@ public class JoloGame_ReconnectReq_50016 extends ClientReq {
             //缓存玩家使用的服务器IP、负载时使用
 //            JedisPoolWrap.getInstance().set(RedisConst.USER_LOGIN_GAME_URL.getProfix(), Config.REST_IP + ":" + Config.REST_PORT, -1);
 
-            RoomTableRelationModel roomTable = RoomStateService.getInstance().getExistTable("" + header.gameId, roomId, tableId);
+            RoomTableRelationModel roomTable = RoomStateService.getInstance().getExistTable(table.getPlayType()+"", roomId, tableId);
 
             if (roomTable == null) {
                 log.error("can't found table, gameId:{},roomId:{},tableId:{}", header.gameId, roomId, tableId);

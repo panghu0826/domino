@@ -722,11 +722,11 @@ public class DBUtil {
         return count;
     }
 
-    public static List<FriendTableModel> selectFriendByUserId(String userId) {
+    public static List<FriendTableModel> selectFriendByClubId(String clubId) {
         SqlSession sqlSession = DatabaseFactory.getInstance().getSqlSession();
         List<FriendTableModel>  rcrm = null;
         try {
-            rcrm = sqlSession.getMapper(FriendTableModelMapper.class).selectFriendByUserId(userId);
+            rcrm = sqlSession.getMapper(FriendTableModelMapper.class).selectFriendByUserId(clubId);
             sqlSession.commit();
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -909,5 +909,165 @@ public class DBUtil {
             sqlSession.close();
         }
         return count;
+    }
+
+
+    /**
+     * 俱乐部操作
+     * @return
+     */
+    public static int insertClub(ClubModel clubModel) {
+        SqlSession sqlSession = DatabaseFactory.getInstance().getSqlSession();
+        int count = 0;
+        try {
+            count = sqlSession.getMapper(ClubModelMapper.class).insert(clubModel);
+            sqlSession.commit();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            sqlSession.rollback();
+        } finally {
+            sqlSession.close();
+        }
+        return count;
+    }
+
+    public static int updateByClub(ClubModel clubModel) {
+        SqlSession sqlSession = DatabaseFactory.getInstance().getSqlSession();
+        int count = 0;
+        try {
+            count = sqlSession.getMapper(ClubModelMapper.class).updateByPrimaryKey(clubModel);
+            sqlSession.commit();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            sqlSession.rollback();
+        } finally {
+            sqlSession.close();
+        }
+        return count;
+    }
+
+    public static ClubModel selectLastData(String userId) {
+        SqlSession sqlSession = DatabaseFactory.getInstance().getSqlSession();
+        ClubModel  rcrm = null;
+        try {
+            rcrm = sqlSession.getMapper(ClubModelMapper.class).selectLastData(userId);
+            sqlSession.commit();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            sqlSession.rollback();
+        } finally {
+            sqlSession.close();
+        }
+        return rcrm;
+    }
+
+    public static ClubModel selectByClubId(int clubId) {
+        SqlSession sqlSession = DatabaseFactory.getInstance().getSqlSession();
+        ClubModel  rcrm = null;
+        try {
+            rcrm = sqlSession.getMapper(ClubModelMapper.class).selectByPrimaryKey(clubId);
+            sqlSession.commit();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            sqlSession.rollback();
+        } finally {
+            sqlSession.close();
+        }
+        return rcrm;
+    }
+
+    public static List<ClubModel> selectByClubId(String userId) {
+        SqlSession sqlSession = DatabaseFactory.getInstance().getSqlSession();
+        List<ClubModel>  rcrm = null;
+        try {
+            rcrm = sqlSession.getMapper(ClubModelMapper.class).selectByUserId(userId);
+            sqlSession.commit();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            sqlSession.rollback();
+        } finally {
+            sqlSession.close();
+        }
+        return rcrm;
+    }
+
+    public static int deleteByClubId(int clubId) {
+        SqlSession sqlSession = DatabaseFactory.getInstance().getSqlSession();
+        int count = 0;
+        try {
+            count = sqlSession.getMapper(ClubModelMapper.class).deleteByPrimaryKey(clubId);
+            sqlSession.commit();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            sqlSession.rollback();
+        } finally {
+            sqlSession.close();
+        }
+        return count;
+    }
+
+
+    /**
+     * 俱乐部成员备注
+     * @return
+     */
+    public static int insertClubNote(ClubNoteModel clubNoteModel) {
+        SqlSession sqlSession = DatabaseFactory.getInstance().getSqlSession();
+        int count = 0;
+        try {
+            count = sqlSession.getMapper(ClubNoteModelMapper.class).insert(clubNoteModel);
+            sqlSession.commit();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            sqlSession.rollback();
+        } finally {
+            sqlSession.close();
+        }
+        return count;
+    }
+
+    public static int updateByClubNote(ClubNoteModel clubNoteModel) {
+        SqlSession sqlSession = DatabaseFactory.getInstance().getSqlSession();
+        int count = 0;
+        try {
+            count = sqlSession.getMapper(ClubNoteModelMapper.class).updateByPrimaryKey(clubNoteModel);
+            sqlSession.commit();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            sqlSession.rollback();
+        } finally {
+            sqlSession.close();
+        }
+        return count;
+    }
+
+    public static ClubNoteModel selectByClubNote(int clubId,String userA,String userB) {
+        SqlSession sqlSession = DatabaseFactory.getInstance().getSqlSession();
+        ClubNoteModel  rcrm = null;
+        try {
+            rcrm = sqlSession.getMapper(ClubNoteModelMapper.class).selectByPrimaryKey(clubId,userA,userB);
+            sqlSession.commit();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            sqlSession.rollback();
+        } finally {
+            sqlSession.close();
+        }
+        return rcrm;
+    }
+
+    public static List<ClubNoteModel> selectByClubIdAndUserId(int clubId,String userId) {
+        SqlSession sqlSession = DatabaseFactory.getInstance().getSqlSession();
+        List<ClubNoteModel>  rcrm = null;
+        try {
+            rcrm = sqlSession.getMapper(ClubNoteModelMapper.class).selectByClubIdAndUserId(clubId,userId);
+            sqlSession.commit();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            sqlSession.rollback();
+        } finally {
+            sqlSession.close();
+        }
+        return rcrm;
     }
 }

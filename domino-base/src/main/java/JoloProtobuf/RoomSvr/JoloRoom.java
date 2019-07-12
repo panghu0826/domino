@@ -16470,29 +16470,34 @@ public final class JoloRoom {
     int getDoubleRule();
 
     /**
-     * <pre>
-     *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
-     * </pre>
-     *
      * <code>repeated sint32 SpecialCardType = 18;</code>
      */
     java.util.List<java.lang.Integer> getSpecialCardTypeList();
     /**
-     * <pre>
-     *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
-     * </pre>
-     *
      * <code>repeated sint32 SpecialCardType = 18;</code>
      */
     int getSpecialCardTypeCount();
+    /**
+     * <code>repeated sint32 SpecialCardType = 18;</code>
+     */
+    int getSpecialCardType(int index);
+
     /**
      * <pre>
      *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
      * </pre>
      *
-     * <code>repeated sint32 SpecialCardType = 18;</code>
+     * <code>optional sint32 ClubId = 19;</code>
      */
-    int getSpecialCardType(int index);
+    boolean hasClubId();
+    /**
+     * <pre>
+     *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
+     * </pre>
+     *
+     * <code>optional sint32 ClubId = 19;</code>
+     */
+    int getClubId();
   }
   /**
    * <pre>
@@ -16529,6 +16534,7 @@ public final class JoloRoom {
       wildCard_ = 0;
       doubleRule_ = 0;
       specialCardType_ = java.util.Collections.emptyList();
+      clubId_ = 0;
     }
 
     @java.lang.Override
@@ -16667,6 +16673,11 @@ public final class JoloRoom {
                 specialCardType_.add(input.readSInt32());
               }
               input.popLimit(limit);
+              break;
+            }
+            case 152: {
+              bitField0_ |= 0x00020000;
+              clubId_ = input.readSInt32();
               break;
             }
           }
@@ -17122,10 +17133,6 @@ public final class JoloRoom {
     public static final int SPECIALCARDTYPE_FIELD_NUMBER = 18;
     private java.util.List<java.lang.Integer> specialCardType_;
     /**
-     * <pre>
-     *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
-     * </pre>
-     *
      * <code>repeated sint32 SpecialCardType = 18;</code>
      */
     public java.util.List<java.lang.Integer>
@@ -17133,24 +17140,39 @@ public final class JoloRoom {
       return specialCardType_;
     }
     /**
-     * <pre>
-     *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
-     * </pre>
-     *
      * <code>repeated sint32 SpecialCardType = 18;</code>
      */
     public int getSpecialCardTypeCount() {
       return specialCardType_.size();
     }
     /**
-     * <pre>
-     *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
-     * </pre>
-     *
      * <code>repeated sint32 SpecialCardType = 18;</code>
      */
     public int getSpecialCardType(int index) {
       return specialCardType_.get(index);
+    }
+
+    public static final int CLUBID_FIELD_NUMBER = 19;
+    private int clubId_;
+    /**
+     * <pre>
+     *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
+     * </pre>
+     *
+     * <code>optional sint32 ClubId = 19;</code>
+     */
+    public boolean hasClubId() {
+      return ((bitField0_ & 0x00020000) == 0x00020000);
+    }
+    /**
+     * <pre>
+     *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
+     * </pre>
+     *
+     * <code>optional sint32 ClubId = 19;</code>
+     */
+    public int getClubId() {
+      return clubId_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -17243,6 +17265,9 @@ public final class JoloRoom {
       for (int i = 0; i < specialCardType_.size(); i++) {
         output.writeSInt32(18, specialCardType_.get(i));
       }
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        output.writeSInt32(19, clubId_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -17326,6 +17351,10 @@ public final class JoloRoom {
         }
         size += dataSize;
         size += 2 * getSpecialCardTypeList().size();
+      }
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt32Size(19, clubId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -17432,6 +17461,11 @@ public final class JoloRoom {
       }
       result = result && getSpecialCardTypeList()
           .equals(other.getSpecialCardTypeList());
+      result = result && (hasClubId() == other.hasClubId());
+      if (hasClubId()) {
+        result = result && (getClubId()
+            == other.getClubId());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -17515,6 +17549,10 @@ public final class JoloRoom {
       if (getSpecialCardTypeCount() > 0) {
         hash = (37 * hash) + SPECIALCARDTYPE_FIELD_NUMBER;
         hash = (53 * hash) + getSpecialCardTypeList().hashCode();
+      }
+      if (hasClubId()) {
+        hash = (37 * hash) + CLUBID_FIELD_NUMBER;
+        hash = (53 * hash) + getClubId();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -17685,6 +17723,8 @@ public final class JoloRoom {
         bitField0_ = (bitField0_ & ~0x00010000);
         specialCardType_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00020000);
+        clubId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00040000);
         return this;
       }
 
@@ -17782,6 +17822,10 @@ public final class JoloRoom {
           bitField0_ = (bitField0_ & ~0x00020000);
         }
         result.specialCardType_ = specialCardType_;
+        if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+          to_bitField0_ |= 0x00020000;
+        }
+        result.clubId_ = clubId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -17886,6 +17930,9 @@ public final class JoloRoom {
             specialCardType_.addAll(other.specialCardType_);
           }
           onChanged();
+        }
+        if (other.hasClubId()) {
+          setClubId(other.getClubId());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -18809,10 +18856,6 @@ public final class JoloRoom {
          }
       }
       /**
-       * <pre>
-       *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
-       * </pre>
-       *
        * <code>repeated sint32 SpecialCardType = 18;</code>
        */
       public java.util.List<java.lang.Integer>
@@ -18820,30 +18863,18 @@ public final class JoloRoom {
         return java.util.Collections.unmodifiableList(specialCardType_);
       }
       /**
-       * <pre>
-       *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
-       * </pre>
-       *
        * <code>repeated sint32 SpecialCardType = 18;</code>
        */
       public int getSpecialCardTypeCount() {
         return specialCardType_.size();
       }
       /**
-       * <pre>
-       *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
-       * </pre>
-       *
        * <code>repeated sint32 SpecialCardType = 18;</code>
        */
       public int getSpecialCardType(int index) {
         return specialCardType_.get(index);
       }
       /**
-       * <pre>
-       *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
-       * </pre>
-       *
        * <code>repeated sint32 SpecialCardType = 18;</code>
        */
       public Builder setSpecialCardType(
@@ -18854,10 +18885,6 @@ public final class JoloRoom {
         return this;
       }
       /**
-       * <pre>
-       *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
-       * </pre>
-       *
        * <code>repeated sint32 SpecialCardType = 18;</code>
        */
       public Builder addSpecialCardType(int value) {
@@ -18867,10 +18894,6 @@ public final class JoloRoom {
         return this;
       }
       /**
-       * <pre>
-       *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
-       * </pre>
-       *
        * <code>repeated sint32 SpecialCardType = 18;</code>
        */
       public Builder addAllSpecialCardType(
@@ -18882,15 +18905,59 @@ public final class JoloRoom {
         return this;
       }
       /**
-       * <pre>
-       *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
-       * </pre>
-       *
        * <code>repeated sint32 SpecialCardType = 18;</code>
        */
       public Builder clearSpecialCardType() {
         specialCardType_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00020000);
+        onChanged();
+        return this;
+      }
+
+      private int clubId_ ;
+      /**
+       * <pre>
+       *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
+       * </pre>
+       *
+       * <code>optional sint32 ClubId = 19;</code>
+       */
+      public boolean hasClubId() {
+        return ((bitField0_ & 0x00040000) == 0x00040000);
+      }
+      /**
+       * <pre>
+       *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
+       * </pre>
+       *
+       * <code>optional sint32 ClubId = 19;</code>
+       */
+      public int getClubId() {
+        return clubId_;
+      }
+      /**
+       * <pre>
+       *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
+       * </pre>
+       *
+       * <code>optional sint32 ClubId = 19;</code>
+       */
+      public Builder setClubId(int value) {
+        bitField0_ |= 0x00040000;
+        clubId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *特殊牌型:1.对子4,2.顺子5,3.五花5,4.同花6,5.葫芦7,6.炸弹8,7.五小9,8.顺金10
+       * </pre>
+       *
+       * <code>optional sint32 ClubId = 19;</code>
+       */
+      public Builder clearClubId() {
+        bitField0_ = (bitField0_ & ~0x00040000);
+        clubId_ = 0;
         onChanged();
         return this;
       }
@@ -33743,7 +33810,7 @@ public final class JoloRoom {
       "oomId\030\003 \002(\t\022\017\n\007TableId\030\004 \001(\t\022\016\n\006Result\030\005" +
       " \002(\005\022\021\n\tResultMsg\030\006 \001(\t\022C\n\nStatusInfo\030\007 " +
       "\002(\0132/.JoloProtobuf.RoomSvr.JoloRoom_Tabl" +
-      "e_StatusInfo\"\365\002\n\023JoloGame_Table_Info\022\017\n\007" +
+      "e_StatusInfo\"\205\003\n\023JoloGame_Table_Info\022\017\n\007" +
       "TableId\030\001 \002(\t\022\021\n\tPlayerNum\030\002 \002(\005\022\024\n\014Base" +
       "BetScore\030\003 \002(\005\022\023\n\013BetMaxScore\030\004 \002(\005\022\017\n\007G" +
       "ameNum\030\005 \002(\005\022\023\n\013CurrGameNum\030\006 \002(\005\022\017\n\007Rea" +
@@ -33752,49 +33819,50 @@ public final class JoloRoom {
       "\022\027\n\017totalAlreadyBet\030\014 \001(\001\022\022\n\nTableState\030" +
       "\r \001(\r\022\022\n\nBetRoundId\030\016 \001(\r\022\022\n\nBankerType\030" +
       "\017 \001(\021\022\020\n\010WildCard\030\020 \001(\021\022\022\n\nDoubleRule\030\021 " +
-      "\001(\021\022\027\n\017SpecialCardType\030\022 \003(\021\"\331\001\n\032JoloRoo" +
-      "m_ApplyJoinTableReq\022\016\n\006UserId\030\001 \002(\t\022\016\n\006G" +
-      "ameId\030\002 \002(\t\022\016\n\006RoomId\030\003 \002(\t\022\017\n\007TableId\030\005" +
-      " \001(\t\022\023\n\013BetMultiple\030\006 \002(\t\022\025\n\rHeadSculptu" +
-      "re\030\007 \001(\005\022\020\n\010CardSkin\030\010 \001(\005\022<\n\tTableInfo\030" +
-      "\t \001(\0132).JoloProtobuf.RoomSvr.JoloGame_Ta" +
-      "ble_Info\"\221\003\n\032JoloRoom_ApplyJoinTableAck\022" +
-      "\016\n\006UserId\030\001 \002(\t\022\016\n\006GameId\030\002 \002(\t\022\016\n\006RoomI" +
-      "d\030\003 \002(\t\022\017\n\007TableId\030\004 \002(\t\022\016\n\006SeatId\030\006 \001(\t" +
-      "\022K\n\016PlayerInfoList\030\007 \003(\01323.JoloProtobuf." +
-      "RoomSvr.JoloRoom_TablePlay_PlayerInfo\022<\n" +
-      "\tTableInfo\030\010 \002(\0132).JoloProtobuf.RoomSvr." +
-      "JoloGame_Table_Info\022\016\n\006Result\030\t \002(\005\022\021\n\tR" +
-      "esultMsg\030\n \001(\t\022\025\n\rJoinGameSvrId\030\013 \001(\t\022\024\n" +
-      "\014reconnection\030\014 \001(\005\022\021\n\tNotInGame\030\r \001(\r\022\020" +
-      "\n\010PlayType\030\016 \001(\t\022\023\n\013BetMultiple\030\017 \002(\t\022\r\n" +
-      "\005money\030\020 \001(\005\"\320\003\n\035JoloRoom_TablePlay_Play" +
-      "erInfo\022\016\n\006UserId\030\001 \002(\t\022\020\n\010NickName\030\002 \002(\t" +
-      "\022\016\n\006Icourl\030\003 \002(\t\022\026\n\016PlayScoreStore\030\004 \002(\001" +
-      "\022\021\n\tHandCards\030\005 \003(\r\022\r\n\005State\030\006 \002(\r\022\017\n\007Se" +
-      "atNum\030\007 \001(\r\022\024\n\014IsCurrAction\030\010 \001(\r\022\035\n\025Cur" +
-      "rActionSurplusTime\030\t \001(\005\022\027\n\017AlreadyBetSc" +
-      "ore\030\n \001(\001\022\020\n\010IsDealer\030\013 \001(\r\022\023\n\013InTableTi" +
-      "me\030\014 \001(\004\022\023\n\013SitDownTime\030\r \001(\004\022\026\n\016LastAct" +
-      "ionTime\030\016 \001(\004\022\021\n\tNotInGame\030\017 \001(\r\022\030\n\020Prev" +
-      "iousBetScore\030\021 \001(\005\022\017\n\007BetMode\030\022 \001(\005\022\020\n\010B" +
-      "etScore\030\023 \001(\005\022\025\n\rHeadSculpture\030\024 \001(\005\022\020\n\010" +
-      "CardSkin\030\025 \001(\005\022\027\n\017SpecialFunction\030\026 \001(\005\"" +
-      "b\n\037JoloRoom_ApplyJoinTableRobotReq\022\016\n\006Us" +
-      "erId\030\001 \002(\t\022\016\n\006GameId\030\002 \002(\t\022\016\n\006RoomId\030\003 \002" +
-      "(\t\022\017\n\007TableId\030\004 \002(\t\"_\n\034JoloRoom_ApplyCha" +
-      "ngeTableReq\022\016\n\006UserId\030\001 \002(\t\022\016\n\006GameId\030\002 " +
-      "\002(\t\022\016\n\006RoomId\030\003 \002(\t\022\017\n\007TableId\030\004 \002(\t\"\373\002\n" +
-      "\034JoloRoom_ApplyChangeTableAck\022\016\n\006UserId\030" +
-      "\001 \002(\t\022\016\n\006GameId\030\002 \002(\t\022\016\n\006RoomId\030\003 \002(\t\022\017\n" +
-      "\007TableId\030\004 \002(\t\022\016\n\006SeatId\030\005 \002(\t\022\016\n\006Result" +
-      "\030\006 \002(\005\022\021\n\tResultMsg\030\007 \001(\t\022\025\n\rJoinGameSvr" +
-      "Id\030\010 \001(\t\022\022\n\nBootAmount\030\t \001(\001\022\021\n\tMaxBlind" +
-      "s\030\n \001(\005\022\022\n\nChaalLimit\030\013 \001(\001\022\020\n\010PotLimit\030" +
-      "\014 \001(\001\022\024\n\014IsChangeCard\030\r \001(\005\022\025\n\rChangeCar" +
-      "dFee\030\016 \001(\005\022\027\n\017AllowSideshowCd\030\017 \001(\005\022\r\n\005B" +
-      "etCd\030\020 \001(\005\022\023\n\013GameStartCd\030\021 \001(\005\022\031\n\021minJo" +
-      "inTableScore\030\022 \001(\005B\nB\010JoloRoom"
+      "\001(\021\022\027\n\017SpecialCardType\030\022 \003(\021\022\016\n\006ClubId\030\023" +
+      " \001(\021\"\331\001\n\032JoloRoom_ApplyJoinTableReq\022\016\n\006U" +
+      "serId\030\001 \002(\t\022\016\n\006GameId\030\002 \002(\t\022\016\n\006RoomId\030\003 " +
+      "\002(\t\022\017\n\007TableId\030\005 \001(\t\022\023\n\013BetMultiple\030\006 \002(" +
+      "\t\022\025\n\rHeadSculpture\030\007 \001(\005\022\020\n\010CardSkin\030\010 \001" +
+      "(\005\022<\n\tTableInfo\030\t \001(\0132).JoloProtobuf.Roo" +
+      "mSvr.JoloGame_Table_Info\"\221\003\n\032JoloRoom_Ap" +
+      "plyJoinTableAck\022\016\n\006UserId\030\001 \002(\t\022\016\n\006GameI" +
+      "d\030\002 \002(\t\022\016\n\006RoomId\030\003 \002(\t\022\017\n\007TableId\030\004 \002(\t" +
+      "\022\016\n\006SeatId\030\006 \001(\t\022K\n\016PlayerInfoList\030\007 \003(\013" +
+      "23.JoloProtobuf.RoomSvr.JoloRoom_TablePl" +
+      "ay_PlayerInfo\022<\n\tTableInfo\030\010 \002(\0132).JoloP" +
+      "rotobuf.RoomSvr.JoloGame_Table_Info\022\016\n\006R" +
+      "esult\030\t \002(\005\022\021\n\tResultMsg\030\n \001(\t\022\025\n\rJoinGa" +
+      "meSvrId\030\013 \001(\t\022\024\n\014reconnection\030\014 \001(\005\022\021\n\tN" +
+      "otInGame\030\r \001(\r\022\020\n\010PlayType\030\016 \001(\t\022\023\n\013BetM" +
+      "ultiple\030\017 \002(\t\022\r\n\005money\030\020 \001(\005\"\320\003\n\035JoloRoo" +
+      "m_TablePlay_PlayerInfo\022\016\n\006UserId\030\001 \002(\t\022\020" +
+      "\n\010NickName\030\002 \002(\t\022\016\n\006Icourl\030\003 \002(\t\022\026\n\016Play" +
+      "ScoreStore\030\004 \002(\001\022\021\n\tHandCards\030\005 \003(\r\022\r\n\005S" +
+      "tate\030\006 \002(\r\022\017\n\007SeatNum\030\007 \001(\r\022\024\n\014IsCurrAct" +
+      "ion\030\010 \001(\r\022\035\n\025CurrActionSurplusTime\030\t \001(\005" +
+      "\022\027\n\017AlreadyBetScore\030\n \001(\001\022\020\n\010IsDealer\030\013 " +
+      "\001(\r\022\023\n\013InTableTime\030\014 \001(\004\022\023\n\013SitDownTime\030" +
+      "\r \001(\004\022\026\n\016LastActionTime\030\016 \001(\004\022\021\n\tNotInGa" +
+      "me\030\017 \001(\r\022\030\n\020PreviousBetScore\030\021 \001(\005\022\017\n\007Be" +
+      "tMode\030\022 \001(\005\022\020\n\010BetScore\030\023 \001(\005\022\025\n\rHeadScu" +
+      "lpture\030\024 \001(\005\022\020\n\010CardSkin\030\025 \001(\005\022\027\n\017Specia" +
+      "lFunction\030\026 \001(\005\"b\n\037JoloRoom_ApplyJoinTab" +
+      "leRobotReq\022\016\n\006UserId\030\001 \002(\t\022\016\n\006GameId\030\002 \002" +
+      "(\t\022\016\n\006RoomId\030\003 \002(\t\022\017\n\007TableId\030\004 \002(\t\"_\n\034J" +
+      "oloRoom_ApplyChangeTableReq\022\016\n\006UserId\030\001 " +
+      "\002(\t\022\016\n\006GameId\030\002 \002(\t\022\016\n\006RoomId\030\003 \002(\t\022\017\n\007T" +
+      "ableId\030\004 \002(\t\"\373\002\n\034JoloRoom_ApplyChangeTab" +
+      "leAck\022\016\n\006UserId\030\001 \002(\t\022\016\n\006GameId\030\002 \002(\t\022\016\n" +
+      "\006RoomId\030\003 \002(\t\022\017\n\007TableId\030\004 \002(\t\022\016\n\006SeatId" +
+      "\030\005 \002(\t\022\016\n\006Result\030\006 \002(\005\022\021\n\tResultMsg\030\007 \001(" +
+      "\t\022\025\n\rJoinGameSvrId\030\010 \001(\t\022\022\n\nBootAmount\030\t" +
+      " \001(\001\022\021\n\tMaxBlinds\030\n \001(\005\022\022\n\nChaalLimit\030\013 " +
+      "\001(\001\022\020\n\010PotLimit\030\014 \001(\001\022\024\n\014IsChangeCard\030\r " +
+      "\001(\005\022\025\n\rChangeCardFee\030\016 \001(\005\022\027\n\017AllowSides" +
+      "howCd\030\017 \001(\005\022\r\n\005BetCd\030\020 \001(\005\022\023\n\013GameStartC" +
+      "d\030\021 \001(\005\022\031\n\021minJoinTableScore\030\022 \001(\005B\nB\010Jo" +
+      "loRoom"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -33873,7 +33941,7 @@ public final class JoloRoom {
     internal_static_JoloProtobuf_RoomSvr_JoloGame_Table_Info_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_RoomSvr_JoloGame_Table_Info_descriptor,
-        new java.lang.String[] { "TableId", "PlayerNum", "BaseBetScore", "BetMaxScore", "GameNum", "CurrGameNum", "ReadyCd", "BetCd", "OpenCardCd", "BankerCd", "IsWatch", "TotalAlreadyBet", "TableState", "BetRoundId", "BankerType", "WildCard", "DoubleRule", "SpecialCardType", });
+        new java.lang.String[] { "TableId", "PlayerNum", "BaseBetScore", "BetMaxScore", "GameNum", "CurrGameNum", "ReadyCd", "BetCd", "OpenCardCd", "BankerCd", "IsWatch", "TotalAlreadyBet", "TableState", "BetRoundId", "BankerType", "WildCard", "DoubleRule", "SpecialCardType", "ClubId", });
     internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyJoinTableReq_descriptor =
       getDescriptor().getMessageTypes().get(11);
     internal_static_JoloProtobuf_RoomSvr_JoloRoom_ApplyJoinTableReq_fieldAccessorTable = new

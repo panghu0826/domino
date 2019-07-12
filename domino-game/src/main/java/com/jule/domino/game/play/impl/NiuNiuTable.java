@@ -19,8 +19,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class NiuNiuTable extends AbstractTable {
+
     public NiuNiuTable(String gameId, String roomId, String tableId,int playerNum) {
-        setPlayType(Integer.parseInt(gameId));
+        setPlayType(1);
+        setGameType(Integer.parseInt(gameId));
         setRoomId(roomId);
         setTableId(tableId);
         roomTableRelation = new RoomTableRelationModel(gameId, roomId, tableId, TableStateEnum.IDEL.getValue());

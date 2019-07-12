@@ -18,6 +18,7 @@ import com.jule.domino.game.service.LogService;
 import com.jule.domino.game.service.NoticePlatformSerivce;
 import com.jule.domino.log.service.LogReasons;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.util.internal.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONObject;
 
@@ -126,6 +127,7 @@ public class Login_Guest extends AbstractLogin {
                 .setFriendFunction("true".equals(user.getMei_code()) ? 1 : 0)
                 .setNumberOfGames(user.getTotal_game_num())
                 .addAllHaveItem(setItemArgs(user.getId()))
+                .setAntiFake(StringUtil.isNullOrEmpty(user.getDown_platform()) ? "" : user.getDown_platform())
                 .setResult(1);
     }
 

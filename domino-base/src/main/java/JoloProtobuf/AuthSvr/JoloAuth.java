@@ -3071,6 +3071,32 @@ public final class JoloAuth {
      * <code>optional int32 NumberOfGames = 16;</code>
      */
     int getNumberOfGames();
+
+    /**
+     * <pre>
+     *防伪字符串
+     * </pre>
+     *
+     * <code>optional string AntiFake = 17;</code>
+     */
+    boolean hasAntiFake();
+    /**
+     * <pre>
+     *防伪字符串
+     * </pre>
+     *
+     * <code>optional string AntiFake = 17;</code>
+     */
+    java.lang.String getAntiFake();
+    /**
+     * <pre>
+     *防伪字符串
+     * </pre>
+     *
+     * <code>optional string AntiFake = 17;</code>
+     */
+    com.google.protobuf.ByteString
+        getAntiFakeBytes();
   }
   /**
    * <pre>
@@ -3105,6 +3131,7 @@ public final class JoloAuth {
       specialFunction_ = 0;
       haveItem_ = java.util.Collections.emptyList();
       numberOfGames_ = 0;
+      antiFake_ = "";
     }
 
     @java.lang.Override
@@ -3231,6 +3258,12 @@ public final class JoloAuth {
             case 128: {
               bitField0_ |= 0x00002000;
               numberOfGames_ = input.readInt32();
+              break;
+            }
+            case 138: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00004000;
+              antiFake_ = bs;
               break;
             }
           }
@@ -3893,6 +3926,60 @@ public final class JoloAuth {
       return numberOfGames_;
     }
 
+    public static final int ANTIFAKE_FIELD_NUMBER = 17;
+    private volatile java.lang.Object antiFake_;
+    /**
+     * <pre>
+     *防伪字符串
+     * </pre>
+     *
+     * <code>optional string AntiFake = 17;</code>
+     */
+    public boolean hasAntiFake() {
+      return ((bitField0_ & 0x00004000) == 0x00004000);
+    }
+    /**
+     * <pre>
+     *防伪字符串
+     * </pre>
+     *
+     * <code>optional string AntiFake = 17;</code>
+     */
+    public java.lang.String getAntiFake() {
+      java.lang.Object ref = antiFake_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          antiFake_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *防伪字符串
+     * </pre>
+     *
+     * <code>optional string AntiFake = 17;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAntiFakeBytes() {
+      java.lang.Object ref = antiFake_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        antiFake_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -3973,6 +4060,9 @@ public final class JoloAuth {
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         output.writeInt32(16, numberOfGames_);
       }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 17, antiFake_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -4037,6 +4127,9 @@ public final class JoloAuth {
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(16, numberOfGames_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(17, antiFake_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4130,6 +4223,11 @@ public final class JoloAuth {
         result = result && (getNumberOfGames()
             == other.getNumberOfGames());
       }
+      result = result && (hasAntiFake() == other.hasAntiFake());
+      if (hasAntiFake()) {
+        result = result && getAntiFake()
+            .equals(other.getAntiFake());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -4206,6 +4304,10 @@ public final class JoloAuth {
       if (hasNumberOfGames()) {
         hash = (37 * hash) + NUMBEROFGAMES_FIELD_NUMBER;
         hash = (53 * hash) + getNumberOfGames();
+      }
+      if (hasAntiFake()) {
+        hash = (37 * hash) + ANTIFAKE_FIELD_NUMBER;
+        hash = (53 * hash) + getAntiFake().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -4382,6 +4484,8 @@ public final class JoloAuth {
         }
         numberOfGames_ = 0;
         bitField0_ = (bitField0_ & ~0x00008000);
+        antiFake_ = "";
+        bitField0_ = (bitField0_ & ~0x00010000);
         return this;
       }
 
@@ -4480,6 +4584,10 @@ public final class JoloAuth {
           to_bitField0_ |= 0x00002000;
         }
         result.numberOfGames_ = numberOfGames_;
+        if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        result.antiFake_ = antiFake_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4629,6 +4737,11 @@ public final class JoloAuth {
         }
         if (other.hasNumberOfGames()) {
           setNumberOfGames(other.getNumberOfGames());
+        }
+        if (other.hasAntiFake()) {
+          bitField0_ |= 0x00010000;
+          antiFake_ = other.antiFake_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -6258,6 +6371,106 @@ public final class JoloAuth {
       public Builder clearNumberOfGames() {
         bitField0_ = (bitField0_ & ~0x00008000);
         numberOfGames_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object antiFake_ = "";
+      /**
+       * <pre>
+       *防伪字符串
+       * </pre>
+       *
+       * <code>optional string AntiFake = 17;</code>
+       */
+      public boolean hasAntiFake() {
+        return ((bitField0_ & 0x00010000) == 0x00010000);
+      }
+      /**
+       * <pre>
+       *防伪字符串
+       * </pre>
+       *
+       * <code>optional string AntiFake = 17;</code>
+       */
+      public java.lang.String getAntiFake() {
+        java.lang.Object ref = antiFake_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            antiFake_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *防伪字符串
+       * </pre>
+       *
+       * <code>optional string AntiFake = 17;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAntiFakeBytes() {
+        java.lang.Object ref = antiFake_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          antiFake_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *防伪字符串
+       * </pre>
+       *
+       * <code>optional string AntiFake = 17;</code>
+       */
+      public Builder setAntiFake(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00010000;
+        antiFake_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *防伪字符串
+       * </pre>
+       *
+       * <code>optional string AntiFake = 17;</code>
+       */
+      public Builder clearAntiFake() {
+        bitField0_ = (bitField0_ & ~0x00010000);
+        antiFake_ = getDefaultInstance().getAntiFake();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *防伪字符串
+       * </pre>
+       *
+       * <code>optional string AntiFake = 17;</code>
+       */
+      public Builder setAntiFakeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00010000;
+        antiFake_ = value;
         onChanged();
         return this;
       }
@@ -61227,59 +61440,102 @@ public final class JoloAuth {
      *用户ID
      * </pre>
      *
-     * <code>required string MeUserId = 1;</code>
+     * <code>required string UserId = 1;</code>
      */
-    boolean hasMeUserId();
+    boolean hasUserId();
     /**
      * <pre>
      *用户ID
      * </pre>
      *
-     * <code>required string MeUserId = 1;</code>
+     * <code>required string UserId = 1;</code>
      */
-    java.lang.String getMeUserId();
+    java.lang.String getUserId();
     /**
      * <pre>
      *用户ID
      * </pre>
      *
-     * <code>required string MeUserId = 1;</code>
+     * <code>required string UserId = 1;</code>
      */
     com.google.protobuf.ByteString
-        getMeUserIdBytes();
+        getUserIdBytes();
 
     /**
      * <pre>
-     *对方Id
+     *俱乐部ID
      * </pre>
      *
-     * <code>optional string YouUserId = 2;</code>
+     * <code>optional int32 ClubId = 2;</code>
      */
-    boolean hasYouUserId();
+    boolean hasClubId();
     /**
      * <pre>
-     *对方Id
+     *俱乐部ID
      * </pre>
      *
-     * <code>optional string YouUserId = 2;</code>
+     * <code>optional int32 ClubId = 2;</code>
      */
-    java.lang.String getYouUserId();
+    int getClubId();
+
     /**
      * <pre>
-     *对方Id
+     *俱乐部名称
      * </pre>
      *
-     * <code>optional string YouUserId = 2;</code>
+     * <code>optional string ClubName = 3;</code>
+     */
+    boolean hasClubName();
+    /**
+     * <pre>
+     *俱乐部名称
+     * </pre>
+     *
+     * <code>optional string ClubName = 3;</code>
+     */
+    java.lang.String getClubName();
+    /**
+     * <pre>
+     *俱乐部名称
+     * </pre>
+     *
+     * <code>optional string ClubName = 3;</code>
      */
     com.google.protobuf.ByteString
-        getYouUserIdBytes();
+        getClubNameBytes();
+
+    /**
+     * <pre>
+     *玩家备注
+     * </pre>
+     *
+     * <code>optional string UserName = 4;</code>
+     */
+    boolean hasUserName();
+    /**
+     * <pre>
+     *玩家备注
+     * </pre>
+     *
+     * <code>optional string UserName = 4;</code>
+     */
+    java.lang.String getUserName();
+    /**
+     * <pre>
+     *玩家备注
+     * </pre>
+     *
+     * <code>optional string UserName = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserNameBytes();
 
     /**
      * <pre>
      *请求方式
      * </pre>
      *
-     * <code>required int32 Args = 3;</code>
+     * <code>required int32 Args = 5;</code>
      */
     boolean hasArgs();
     /**
@@ -61287,13 +61543,13 @@ public final class JoloAuth {
      *请求方式
      * </pre>
      *
-     * <code>required int32 Args = 3;</code>
+     * <code>required int32 Args = 5;</code>
      */
     int getArgs();
   }
   /**
    * <pre>
-   *80008 好友：1.开启功能 2.关闭功能 3.好友列表 4.请求好友 5.同意好友 6.移除好友 7.查看是否好友
+   *80008 好友：1.开启功能 2.关闭功能 3.成员列表 4.请求加入 5.同意加入 6.移除成员 7.查看房间列表 8.改俱乐部名称 9.改成员备注 10.俱乐部列表
    * </pre>
    *
    * Protobuf type {@code JoloProtobuf.AuthSvr.JoloCommon_FriendReq}
@@ -61308,8 +61564,10 @@ public final class JoloAuth {
       super(builder);
     }
     private JoloCommon_FriendReq() {
-      meUserId_ = "";
-      youUserId_ = "";
+      userId_ = "";
+      clubId_ = 0;
+      clubName_ = "";
+      userName_ = "";
       args_ = 0;
     }
 
@@ -61347,17 +61605,28 @@ public final class JoloAuth {
             case 10: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              meUserId_ = bs;
+              userId_ = bs;
               break;
             }
-            case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 16: {
               bitField0_ |= 0x00000002;
-              youUserId_ = bs;
+              clubId_ = input.readInt32();
               break;
             }
-            case 24: {
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
+              clubName_ = bs;
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              userName_ = bs;
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
               args_ = input.readInt32();
               break;
             }
@@ -61386,16 +61655,16 @@ public final class JoloAuth {
     }
 
     private int bitField0_;
-    public static final int MEUSERID_FIELD_NUMBER = 1;
-    private volatile java.lang.Object meUserId_;
+    public static final int USERID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object userId_;
     /**
      * <pre>
      *用户ID
      * </pre>
      *
-     * <code>required string MeUserId = 1;</code>
+     * <code>required string UserId = 1;</code>
      */
-    public boolean hasMeUserId() {
+    public boolean hasUserId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
@@ -61403,10 +61672,10 @@ public final class JoloAuth {
      *用户ID
      * </pre>
      *
-     * <code>required string MeUserId = 1;</code>
+     * <code>required string UserId = 1;</code>
      */
-    public java.lang.String getMeUserId() {
-      java.lang.Object ref = meUserId_;
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -61414,7 +61683,7 @@ public final class JoloAuth {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          meUserId_ = s;
+          userId_ = s;
         }
         return s;
       }
@@ -61424,43 +61693,66 @@ public final class JoloAuth {
      *用户ID
      * </pre>
      *
-     * <code>required string MeUserId = 1;</code>
+     * <code>required string UserId = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getMeUserIdBytes() {
-      java.lang.Object ref = meUserId_;
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        meUserId_ = b;
+        userId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int YOUUSERID_FIELD_NUMBER = 2;
-    private volatile java.lang.Object youUserId_;
+    public static final int CLUBID_FIELD_NUMBER = 2;
+    private int clubId_;
     /**
      * <pre>
-     *对方Id
+     *俱乐部ID
      * </pre>
      *
-     * <code>optional string YouUserId = 2;</code>
+     * <code>optional int32 ClubId = 2;</code>
      */
-    public boolean hasYouUserId() {
+    public boolean hasClubId() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <pre>
-     *对方Id
+     *俱乐部ID
      * </pre>
      *
-     * <code>optional string YouUserId = 2;</code>
+     * <code>optional int32 ClubId = 2;</code>
      */
-    public java.lang.String getYouUserId() {
-      java.lang.Object ref = youUserId_;
+    public int getClubId() {
+      return clubId_;
+    }
+
+    public static final int CLUBNAME_FIELD_NUMBER = 3;
+    private volatile java.lang.Object clubName_;
+    /**
+     * <pre>
+     *俱乐部名称
+     * </pre>
+     *
+     * <code>optional string ClubName = 3;</code>
+     */
+    public boolean hasClubName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <pre>
+     *俱乐部名称
+     * </pre>
+     *
+     * <code>optional string ClubName = 3;</code>
+     */
+    public java.lang.String getClubName() {
+      java.lang.Object ref = clubName_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -61468,50 +61760,104 @@ public final class JoloAuth {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          youUserId_ = s;
+          clubName_ = s;
         }
         return s;
       }
     }
     /**
      * <pre>
-     *对方Id
+     *俱乐部名称
      * </pre>
      *
-     * <code>optional string YouUserId = 2;</code>
+     * <code>optional string ClubName = 3;</code>
      */
     public com.google.protobuf.ByteString
-        getYouUserIdBytes() {
-      java.lang.Object ref = youUserId_;
+        getClubNameBytes() {
+      java.lang.Object ref = clubName_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        youUserId_ = b;
+        clubName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int ARGS_FIELD_NUMBER = 3;
+    public static final int USERNAME_FIELD_NUMBER = 4;
+    private volatile java.lang.Object userName_;
+    /**
+     * <pre>
+     *玩家备注
+     * </pre>
+     *
+     * <code>optional string UserName = 4;</code>
+     */
+    public boolean hasUserName() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <pre>
+     *玩家备注
+     * </pre>
+     *
+     * <code>optional string UserName = 4;</code>
+     */
+    public java.lang.String getUserName() {
+      java.lang.Object ref = userName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *玩家备注
+     * </pre>
+     *
+     * <code>optional string UserName = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserNameBytes() {
+      java.lang.Object ref = userName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ARGS_FIELD_NUMBER = 5;
     private int args_;
     /**
      * <pre>
      *请求方式
      * </pre>
      *
-     * <code>required int32 Args = 3;</code>
+     * <code>required int32 Args = 5;</code>
      */
     public boolean hasArgs() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <pre>
      *请求方式
      * </pre>
      *
-     * <code>required int32 Args = 3;</code>
+     * <code>required int32 Args = 5;</code>
      */
     public int getArgs() {
       return args_;
@@ -61523,7 +61869,7 @@ public final class JoloAuth {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasMeUserId()) {
+      if (!hasUserId()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -61538,13 +61884,19 @@ public final class JoloAuth {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, meUserId_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, userId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, youUserId_);
+        output.writeInt32(2, clubId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, args_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, clubName_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, userName_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, args_);
       }
       unknownFields.writeTo(output);
     }
@@ -61555,14 +61907,21 @@ public final class JoloAuth {
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, meUserId_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, userId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, youUserId_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, clubId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, clubName_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, userName_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, args_);
+          .computeInt32Size(5, args_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -61580,15 +61939,25 @@ public final class JoloAuth {
       JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_FriendReq other = (JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_FriendReq) obj;
 
       boolean result = true;
-      result = result && (hasMeUserId() == other.hasMeUserId());
-      if (hasMeUserId()) {
-        result = result && getMeUserId()
-            .equals(other.getMeUserId());
+      result = result && (hasUserId() == other.hasUserId());
+      if (hasUserId()) {
+        result = result && getUserId()
+            .equals(other.getUserId());
       }
-      result = result && (hasYouUserId() == other.hasYouUserId());
-      if (hasYouUserId()) {
-        result = result && getYouUserId()
-            .equals(other.getYouUserId());
+      result = result && (hasClubId() == other.hasClubId());
+      if (hasClubId()) {
+        result = result && (getClubId()
+            == other.getClubId());
+      }
+      result = result && (hasClubName() == other.hasClubName());
+      if (hasClubName()) {
+        result = result && getClubName()
+            .equals(other.getClubName());
+      }
+      result = result && (hasUserName() == other.hasUserName());
+      if (hasUserName()) {
+        result = result && getUserName()
+            .equals(other.getUserName());
       }
       result = result && (hasArgs() == other.hasArgs());
       if (hasArgs()) {
@@ -61606,13 +61975,21 @@ public final class JoloAuth {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasMeUserId()) {
-        hash = (37 * hash) + MEUSERID_FIELD_NUMBER;
-        hash = (53 * hash) + getMeUserId().hashCode();
+      if (hasUserId()) {
+        hash = (37 * hash) + USERID_FIELD_NUMBER;
+        hash = (53 * hash) + getUserId().hashCode();
       }
-      if (hasYouUserId()) {
-        hash = (37 * hash) + YOUUSERID_FIELD_NUMBER;
-        hash = (53 * hash) + getYouUserId().hashCode();
+      if (hasClubId()) {
+        hash = (37 * hash) + CLUBID_FIELD_NUMBER;
+        hash = (53 * hash) + getClubId();
+      }
+      if (hasClubName()) {
+        hash = (37 * hash) + CLUBNAME_FIELD_NUMBER;
+        hash = (53 * hash) + getClubName().hashCode();
+      }
+      if (hasUserName()) {
+        hash = (37 * hash) + USERNAME_FIELD_NUMBER;
+        hash = (53 * hash) + getUserName().hashCode();
       }
       if (hasArgs()) {
         hash = (37 * hash) + ARGS_FIELD_NUMBER;
@@ -61713,7 +62090,7 @@ public final class JoloAuth {
     }
     /**
      * <pre>
-     *80008 好友：1.开启功能 2.关闭功能 3.好友列表 4.请求好友 5.同意好友 6.移除好友 7.查看是否好友
+     *80008 好友：1.开启功能 2.关闭功能 3.成员列表 4.请求加入 5.同意加入 6.移除成员 7.查看房间列表 8.改俱乐部名称 9.改成员备注 10.俱乐部列表
      * </pre>
      *
      * Protobuf type {@code JoloProtobuf.AuthSvr.JoloCommon_FriendReq}
@@ -61751,12 +62128,16 @@ public final class JoloAuth {
       }
       public Builder clear() {
         super.clear();
-        meUserId_ = "";
+        userId_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        youUserId_ = "";
+        clubId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        args_ = 0;
+        clubName_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
+        userName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        args_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -61784,13 +62165,21 @@ public final class JoloAuth {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.meUserId_ = meUserId_;
+        result.userId_ = userId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.youUserId_ = youUserId_;
+        result.clubId_ = clubId_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
+        }
+        result.clubName_ = clubName_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.userName_ = userName_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
         }
         result.args_ = args_;
         result.bitField0_ = to_bitField0_;
@@ -61835,14 +62224,22 @@ public final class JoloAuth {
 
       public Builder mergeFrom(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_FriendReq other) {
         if (other == JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_FriendReq.getDefaultInstance()) return this;
-        if (other.hasMeUserId()) {
+        if (other.hasUserId()) {
           bitField0_ |= 0x00000001;
-          meUserId_ = other.meUserId_;
+          userId_ = other.userId_;
           onChanged();
         }
-        if (other.hasYouUserId()) {
-          bitField0_ |= 0x00000002;
-          youUserId_ = other.youUserId_;
+        if (other.hasClubId()) {
+          setClubId(other.getClubId());
+        }
+        if (other.hasClubName()) {
+          bitField0_ |= 0x00000004;
+          clubName_ = other.clubName_;
+          onChanged();
+        }
+        if (other.hasUserName()) {
+          bitField0_ |= 0x00000008;
+          userName_ = other.userName_;
           onChanged();
         }
         if (other.hasArgs()) {
@@ -61854,7 +62251,7 @@ public final class JoloAuth {
       }
 
       public final boolean isInitialized() {
-        if (!hasMeUserId()) {
+        if (!hasUserId()) {
           return false;
         }
         if (!hasArgs()) {
@@ -61882,15 +62279,15 @@ public final class JoloAuth {
       }
       private int bitField0_;
 
-      private java.lang.Object meUserId_ = "";
+      private java.lang.Object userId_ = "";
       /**
        * <pre>
        *用户ID
        * </pre>
        *
-       * <code>required string MeUserId = 1;</code>
+       * <code>required string UserId = 1;</code>
        */
-      public boolean hasMeUserId() {
+      public boolean hasUserId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
@@ -61898,16 +62295,16 @@ public final class JoloAuth {
        *用户ID
        * </pre>
        *
-       * <code>required string MeUserId = 1;</code>
+       * <code>required string UserId = 1;</code>
        */
-      public java.lang.String getMeUserId() {
-        java.lang.Object ref = meUserId_;
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            meUserId_ = s;
+            userId_ = s;
           }
           return s;
         } else {
@@ -61919,16 +62316,16 @@ public final class JoloAuth {
        *用户ID
        * </pre>
        *
-       * <code>required string MeUserId = 1;</code>
+       * <code>required string UserId = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getMeUserIdBytes() {
-        java.lang.Object ref = meUserId_;
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          meUserId_ = b;
+          userId_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
@@ -61939,15 +62336,15 @@ public final class JoloAuth {
        *用户ID
        * </pre>
        *
-       * <code>required string MeUserId = 1;</code>
+       * <code>required string UserId = 1;</code>
        */
-      public Builder setMeUserId(
+      public Builder setUserId(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        meUserId_ = value;
+        userId_ = value;
         onChanged();
         return this;
       }
@@ -61956,11 +62353,11 @@ public final class JoloAuth {
        *用户ID
        * </pre>
        *
-       * <code>required string MeUserId = 1;</code>
+       * <code>required string UserId = 1;</code>
        */
-      public Builder clearMeUserId() {
+      public Builder clearUserId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        meUserId_ = getDefaultInstance().getMeUserId();
+        userId_ = getDefaultInstance().getUserId();
         onChanged();
         return this;
       }
@@ -61969,45 +62366,93 @@ public final class JoloAuth {
        *用户ID
        * </pre>
        *
-       * <code>required string MeUserId = 1;</code>
+       * <code>required string UserId = 1;</code>
        */
-      public Builder setMeUserIdBytes(
+      public Builder setUserIdBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        meUserId_ = value;
+        userId_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object youUserId_ = "";
+      private int clubId_ ;
       /**
        * <pre>
-       *对方Id
+       *俱乐部ID
        * </pre>
        *
-       * <code>optional string YouUserId = 2;</code>
+       * <code>optional int32 ClubId = 2;</code>
        */
-      public boolean hasYouUserId() {
+      public boolean hasClubId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
        * <pre>
-       *对方Id
+       *俱乐部ID
        * </pre>
        *
-       * <code>optional string YouUserId = 2;</code>
+       * <code>optional int32 ClubId = 2;</code>
        */
-      public java.lang.String getYouUserId() {
-        java.lang.Object ref = youUserId_;
+      public int getClubId() {
+        return clubId_;
+      }
+      /**
+       * <pre>
+       *俱乐部ID
+       * </pre>
+       *
+       * <code>optional int32 ClubId = 2;</code>
+       */
+      public Builder setClubId(int value) {
+        bitField0_ |= 0x00000002;
+        clubId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部ID
+       * </pre>
+       *
+       * <code>optional int32 ClubId = 2;</code>
+       */
+      public Builder clearClubId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        clubId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object clubName_ = "";
+      /**
+       * <pre>
+       *俱乐部名称
+       * </pre>
+       *
+       * <code>optional string ClubName = 3;</code>
+       */
+      public boolean hasClubName() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <pre>
+       *俱乐部名称
+       * </pre>
+       *
+       * <code>optional string ClubName = 3;</code>
+       */
+      public java.lang.String getClubName() {
+        java.lang.Object ref = clubName_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            youUserId_ = s;
+            clubName_ = s;
           }
           return s;
         } else {
@@ -62016,19 +62461,19 @@ public final class JoloAuth {
       }
       /**
        * <pre>
-       *对方Id
+       *俱乐部名称
        * </pre>
        *
-       * <code>optional string YouUserId = 2;</code>
+       * <code>optional string ClubName = 3;</code>
        */
       public com.google.protobuf.ByteString
-          getYouUserIdBytes() {
-        java.lang.Object ref = youUserId_;
+          getClubNameBytes() {
+        java.lang.Object ref = clubName_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          youUserId_ = b;
+          clubName_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
@@ -62036,48 +62481,148 @@ public final class JoloAuth {
       }
       /**
        * <pre>
-       *对方Id
+       *俱乐部名称
        * </pre>
        *
-       * <code>optional string YouUserId = 2;</code>
+       * <code>optional string ClubName = 3;</code>
        */
-      public Builder setYouUserId(
+      public Builder setClubName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
-        youUserId_ = value;
+  bitField0_ |= 0x00000004;
+        clubName_ = value;
         onChanged();
         return this;
       }
       /**
        * <pre>
-       *对方Id
+       *俱乐部名称
        * </pre>
        *
-       * <code>optional string YouUserId = 2;</code>
+       * <code>optional string ClubName = 3;</code>
        */
-      public Builder clearYouUserId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        youUserId_ = getDefaultInstance().getYouUserId();
+      public Builder clearClubName() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        clubName_ = getDefaultInstance().getClubName();
         onChanged();
         return this;
       }
       /**
        * <pre>
-       *对方Id
+       *俱乐部名称
        * </pre>
        *
-       * <code>optional string YouUserId = 2;</code>
+       * <code>optional string ClubName = 3;</code>
        */
-      public Builder setYouUserIdBytes(
+      public Builder setClubNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
-        youUserId_ = value;
+  bitField0_ |= 0x00000004;
+        clubName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object userName_ = "";
+      /**
+       * <pre>
+       *玩家备注
+       * </pre>
+       *
+       * <code>optional string UserName = 4;</code>
+       */
+      public boolean hasUserName() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <pre>
+       *玩家备注
+       * </pre>
+       *
+       * <code>optional string UserName = 4;</code>
+       */
+      public java.lang.String getUserName() {
+        java.lang.Object ref = userName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *玩家备注
+       * </pre>
+       *
+       * <code>optional string UserName = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserNameBytes() {
+        java.lang.Object ref = userName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *玩家备注
+       * </pre>
+       *
+       * <code>optional string UserName = 4;</code>
+       */
+      public Builder setUserName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        userName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家备注
+       * </pre>
+       *
+       * <code>optional string UserName = 4;</code>
+       */
+      public Builder clearUserName() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        userName_ = getDefaultInstance().getUserName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家备注
+       * </pre>
+       *
+       * <code>optional string UserName = 4;</code>
+       */
+      public Builder setUserNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        userName_ = value;
         onChanged();
         return this;
       }
@@ -62088,17 +62633,17 @@ public final class JoloAuth {
        *请求方式
        * </pre>
        *
-       * <code>required int32 Args = 3;</code>
+       * <code>required int32 Args = 5;</code>
        */
       public boolean hasArgs() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <pre>
        *请求方式
        * </pre>
        *
-       * <code>required int32 Args = 3;</code>
+       * <code>required int32 Args = 5;</code>
        */
       public int getArgs() {
         return args_;
@@ -62108,10 +62653,10 @@ public final class JoloAuth {
        *请求方式
        * </pre>
        *
-       * <code>required int32 Args = 3;</code>
+       * <code>required int32 Args = 5;</code>
        */
       public Builder setArgs(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000010;
         args_ = value;
         onChanged();
         return this;
@@ -62121,10 +62666,10 @@ public final class JoloAuth {
        *请求方式
        * </pre>
        *
-       * <code>required int32 Args = 3;</code>
+       * <code>required int32 Args = 5;</code>
        */
       public Builder clearArgs() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000010);
         args_ = 0;
         onChanged();
         return this;
@@ -62213,7 +62758,7 @@ public final class JoloAuth {
      *请求方式
      * </pre>
      *
-     * <code>required int32 Args = 2;</code>
+     * <code>required int32 Args = 3;</code>
      */
     boolean hasArgs();
     /**
@@ -62221,42 +62766,16 @@ public final class JoloAuth {
      *请求方式
      * </pre>
      *
-     * <code>required int32 Args = 2;</code>
+     * <code>required int32 Args = 3;</code>
      */
     int getArgs();
-
-    /**
-     * <pre>
-     *对方Id
-     * </pre>
-     *
-     * <code>optional string YouUserId = 3;</code>
-     */
-    boolean hasYouUserId();
-    /**
-     * <pre>
-     *对方Id
-     * </pre>
-     *
-     * <code>optional string YouUserId = 3;</code>
-     */
-    java.lang.String getYouUserId();
-    /**
-     * <pre>
-     *对方Id
-     * </pre>
-     *
-     * <code>optional string YouUserId = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getYouUserIdBytes();
 
     /**
      * <pre>
      *结果,成功或失败
      * </pre>
      *
-     * <code>required int32 Result = 4;</code>
+     * <code>required int32 Result = 5;</code>
      */
     boolean hasResult();
     /**
@@ -62264,7 +62783,7 @@ public final class JoloAuth {
      *结果,成功或失败
      * </pre>
      *
-     * <code>required int32 Result = 4;</code>
+     * <code>required int32 Result = 5;</code>
      */
     int getResult();
 
@@ -62273,7 +62792,7 @@ public final class JoloAuth {
      *失败信息 
      * </pre>
      *
-     * <code>optional string ResultMsg = 5;</code>
+     * <code>optional string ResultMsg = 6;</code>
      */
     boolean hasResultMsg();
     /**
@@ -62281,7 +62800,7 @@ public final class JoloAuth {
      *失败信息 
      * </pre>
      *
-     * <code>optional string ResultMsg = 5;</code>
+     * <code>optional string ResultMsg = 6;</code>
      */
     java.lang.String getResultMsg();
     /**
@@ -62289,53 +62808,122 @@ public final class JoloAuth {
      *失败信息 
      * </pre>
      *
-     * <code>optional string ResultMsg = 5;</code>
+     * <code>optional string ResultMsg = 6;</code>
      */
     com.google.protobuf.ByteString
         getResultMsgBytes();
 
     /**
      * <pre>
-     *好友列表
+     *俱乐部成员信息
      * </pre>
      *
-     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+     * <code>optional .JoloProtobuf.AuthSvr.JoloCommon_ClubUsers ClubUsers = 7;</code>
      */
-    java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos> 
-        getUserInfosList();
+    boolean hasClubUsers();
     /**
      * <pre>
-     *好友列表
+     *俱乐部成员信息
      * </pre>
      *
-     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+     * <code>optional .JoloProtobuf.AuthSvr.JoloCommon_ClubUsers ClubUsers = 7;</code>
      */
-    JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos getUserInfos(int index);
+    JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers getClubUsers();
     /**
      * <pre>
-     *好友列表
+     *俱乐部成员信息
      * </pre>
      *
-     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+     * <code>optional .JoloProtobuf.AuthSvr.JoloCommon_ClubUsers ClubUsers = 7;</code>
      */
-    int getUserInfosCount();
+    JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsersOrBuilder getClubUsersOrBuilder();
+
     /**
      * <pre>
-     *好友列表
+     *房间列表
      * </pre>
      *
-     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
      */
-    java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder> 
-        getUserInfosOrBuilderList();
+    java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos> 
+        getRoomInfosList();
     /**
      * <pre>
-     *好友列表
+     *房间列表
      * </pre>
      *
-     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
      */
-    JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder getUserInfosOrBuilder(
+    JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos getRoomInfos(int index);
+    /**
+     * <pre>
+     *房间列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
+     */
+    int getRoomInfosCount();
+    /**
+     * <pre>
+     *房间列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
+     */
+    java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfosOrBuilder> 
+        getRoomInfosOrBuilderList();
+    /**
+     * <pre>
+     *房间列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
+     */
+    JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfosOrBuilder getRoomInfosOrBuilder(
+        int index);
+
+    /**
+     * <pre>
+     *俱乐部列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+     */
+    java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos> 
+        getClubInfosList();
+    /**
+     * <pre>
+     *俱乐部列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+     */
+    JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos getClubInfos(int index);
+    /**
+     * <pre>
+     *俱乐部列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+     */
+    int getClubInfosCount();
+    /**
+     * <pre>
+     *俱乐部列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+     */
+    java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfosOrBuilder> 
+        getClubInfosOrBuilderList();
+    /**
+     * <pre>
+     *俱乐部列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+     */
+    JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfosOrBuilder getClubInfosOrBuilder(
         int index);
   }
   /**
@@ -62353,10 +62941,10 @@ public final class JoloAuth {
     private JoloCommon_FriendAck() {
       userId_ = "";
       args_ = 0;
-      youUserId_ = "";
       result_ = 0;
       resultMsg_ = "";
-      userInfos_ = java.util.Collections.emptyList();
+      roomInfos_ = java.util.Collections.emptyList();
+      clubInfos_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -62396,35 +62984,51 @@ public final class JoloAuth {
               userId_ = bs;
               break;
             }
-            case 16: {
+            case 24: {
               bitField0_ |= 0x00000002;
               args_ = input.readInt32();
               break;
             }
-            case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 40: {
               bitField0_ |= 0x00000004;
-              youUserId_ = bs;
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
               result_ = input.readInt32();
               break;
             }
-            case 42: {
+            case 50: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000008;
               resultMsg_ = bs;
               break;
             }
-            case 50: {
+            case 58: {
+              JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000010) == 0x00000010)) {
+                subBuilder = clubUsers_.toBuilder();
+              }
+              clubUsers_ = input.readMessage(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(clubUsers_);
+                clubUsers_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000010;
+              break;
+            }
+            case 66: {
               if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-                userInfos_ = new java.util.ArrayList<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos>();
+                roomInfos_ = new java.util.ArrayList<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos>();
                 mutable_bitField0_ |= 0x00000020;
               }
-              userInfos_.add(
-                  input.readMessage(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.PARSER, extensionRegistry));
+              roomInfos_.add(
+                  input.readMessage(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.PARSER, extensionRegistry));
+              break;
+            }
+            case 74: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                clubInfos_ = new java.util.ArrayList<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos>();
+                mutable_bitField0_ |= 0x00000040;
+              }
+              clubInfos_.add(
+                  input.readMessage(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.PARSER, extensionRegistry));
               break;
             }
           }
@@ -62436,7 +63040,10 @@ public final class JoloAuth {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-          userInfos_ = java.util.Collections.unmodifiableList(userInfos_);
+          roomInfos_ = java.util.Collections.unmodifiableList(roomInfos_);
+        }
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+          clubInfos_ = java.util.Collections.unmodifiableList(clubInfos_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -62509,14 +63116,14 @@ public final class JoloAuth {
       }
     }
 
-    public static final int ARGS_FIELD_NUMBER = 2;
+    public static final int ARGS_FIELD_NUMBER = 3;
     private int args_;
     /**
      * <pre>
      *请求方式
      * </pre>
      *
-     * <code>required int32 Args = 2;</code>
+     * <code>required int32 Args = 3;</code>
      */
     public boolean hasArgs() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
@@ -62526,107 +63133,53 @@ public final class JoloAuth {
      *请求方式
      * </pre>
      *
-     * <code>required int32 Args = 2;</code>
+     * <code>required int32 Args = 3;</code>
      */
     public int getArgs() {
       return args_;
     }
 
-    public static final int YOUUSERID_FIELD_NUMBER = 3;
-    private volatile java.lang.Object youUserId_;
-    /**
-     * <pre>
-     *对方Id
-     * </pre>
-     *
-     * <code>optional string YouUserId = 3;</code>
-     */
-    public boolean hasYouUserId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <pre>
-     *对方Id
-     * </pre>
-     *
-     * <code>optional string YouUserId = 3;</code>
-     */
-    public java.lang.String getYouUserId() {
-      java.lang.Object ref = youUserId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          youUserId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     *对方Id
-     * </pre>
-     *
-     * <code>optional string YouUserId = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getYouUserIdBytes() {
-      java.lang.Object ref = youUserId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        youUserId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int RESULT_FIELD_NUMBER = 4;
+    public static final int RESULT_FIELD_NUMBER = 5;
     private int result_;
     /**
      * <pre>
      *结果,成功或失败
      * </pre>
      *
-     * <code>required int32 Result = 4;</code>
+     * <code>required int32 Result = 5;</code>
      */
     public boolean hasResult() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <pre>
      *结果,成功或失败
      * </pre>
      *
-     * <code>required int32 Result = 4;</code>
+     * <code>required int32 Result = 5;</code>
      */
     public int getResult() {
       return result_;
     }
 
-    public static final int RESULTMSG_FIELD_NUMBER = 5;
+    public static final int RESULTMSG_FIELD_NUMBER = 6;
     private volatile java.lang.Object resultMsg_;
     /**
      * <pre>
      *失败信息 
      * </pre>
      *
-     * <code>optional string ResultMsg = 5;</code>
+     * <code>optional string ResultMsg = 6;</code>
      */
     public boolean hasResultMsg() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <pre>
      *失败信息 
      * </pre>
      *
-     * <code>optional string ResultMsg = 5;</code>
+     * <code>optional string ResultMsg = 6;</code>
      */
     public java.lang.String getResultMsg() {
       java.lang.Object ref = resultMsg_;
@@ -62647,7 +63200,7 @@ public final class JoloAuth {
      *失败信息 
      * </pre>
      *
-     * <code>optional string ResultMsg = 5;</code>
+     * <code>optional string ResultMsg = 6;</code>
      */
     public com.google.protobuf.ByteString
         getResultMsgBytes() {
@@ -62663,59 +63216,147 @@ public final class JoloAuth {
       }
     }
 
-    public static final int USERINFOS_FIELD_NUMBER = 6;
-    private java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos> userInfos_;
+    public static final int CLUBUSERS_FIELD_NUMBER = 7;
+    private JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers clubUsers_;
     /**
      * <pre>
-     *好友列表
+     *俱乐部成员信息
      * </pre>
      *
-     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+     * <code>optional .JoloProtobuf.AuthSvr.JoloCommon_ClubUsers ClubUsers = 7;</code>
      */
-    public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos> getUserInfosList() {
-      return userInfos_;
+    public boolean hasClubUsers() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <pre>
-     *好友列表
+     *俱乐部成员信息
      * </pre>
      *
-     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+     * <code>optional .JoloProtobuf.AuthSvr.JoloCommon_ClubUsers ClubUsers = 7;</code>
      */
-    public java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder> 
-        getUserInfosOrBuilderList() {
-      return userInfos_;
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers getClubUsers() {
+      return clubUsers_ == null ? JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.getDefaultInstance() : clubUsers_;
     }
     /**
      * <pre>
-     *好友列表
+     *俱乐部成员信息
      * </pre>
      *
-     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+     * <code>optional .JoloProtobuf.AuthSvr.JoloCommon_ClubUsers ClubUsers = 7;</code>
      */
-    public int getUserInfosCount() {
-      return userInfos_.size();
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsersOrBuilder getClubUsersOrBuilder() {
+      return clubUsers_ == null ? JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.getDefaultInstance() : clubUsers_;
+    }
+
+    public static final int ROOMINFOS_FIELD_NUMBER = 8;
+    private java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos> roomInfos_;
+    /**
+     * <pre>
+     *房间列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
+     */
+    public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos> getRoomInfosList() {
+      return roomInfos_;
     }
     /**
      * <pre>
-     *好友列表
+     *房间列表
      * </pre>
      *
-     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
      */
-    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos getUserInfos(int index) {
-      return userInfos_.get(index);
+    public java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfosOrBuilder> 
+        getRoomInfosOrBuilderList() {
+      return roomInfos_;
     }
     /**
      * <pre>
-     *好友列表
+     *房间列表
      * </pre>
      *
-     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
      */
-    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder getUserInfosOrBuilder(
+    public int getRoomInfosCount() {
+      return roomInfos_.size();
+    }
+    /**
+     * <pre>
+     *房间列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
+     */
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos getRoomInfos(int index) {
+      return roomInfos_.get(index);
+    }
+    /**
+     * <pre>
+     *房间列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
+     */
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfosOrBuilder getRoomInfosOrBuilder(
         int index) {
-      return userInfos_.get(index);
+      return roomInfos_.get(index);
+    }
+
+    public static final int CLUBINFOS_FIELD_NUMBER = 9;
+    private java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos> clubInfos_;
+    /**
+     * <pre>
+     *俱乐部列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+     */
+    public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos> getClubInfosList() {
+      return clubInfos_;
+    }
+    /**
+     * <pre>
+     *俱乐部列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+     */
+    public java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfosOrBuilder> 
+        getClubInfosOrBuilderList() {
+      return clubInfos_;
+    }
+    /**
+     * <pre>
+     *俱乐部列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+     */
+    public int getClubInfosCount() {
+      return clubInfos_.size();
+    }
+    /**
+     * <pre>
+     *俱乐部列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+     */
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos getClubInfos(int index) {
+      return clubInfos_.get(index);
+    }
+    /**
+     * <pre>
+     *俱乐部列表
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+     */
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfosOrBuilder getClubInfosOrBuilder(
+        int index) {
+      return clubInfos_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -62736,8 +63377,20 @@ public final class JoloAuth {
         memoizedIsInitialized = 0;
         return false;
       }
-      for (int i = 0; i < getUserInfosCount(); i++) {
-        if (!getUserInfos(i).isInitialized()) {
+      if (hasClubUsers()) {
+        if (!getClubUsers().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      for (int i = 0; i < getRoomInfosCount(); i++) {
+        if (!getRoomInfos(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      for (int i = 0; i < getClubInfosCount(); i++) {
+        if (!getClubInfos(i).isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -62752,19 +63405,22 @@ public final class JoloAuth {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, userId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, args_);
+        output.writeInt32(3, args_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, youUserId_);
+        output.writeInt32(5, result_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, result_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, resultMsg_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, resultMsg_);
+        output.writeMessage(7, getClubUsers());
       }
-      for (int i = 0; i < userInfos_.size(); i++) {
-        output.writeMessage(6, userInfos_.get(i));
+      for (int i = 0; i < roomInfos_.size(); i++) {
+        output.writeMessage(8, roomInfos_.get(i));
+      }
+      for (int i = 0; i < clubInfos_.size(); i++) {
+        output.writeMessage(9, clubInfos_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -62779,21 +63435,26 @@ public final class JoloAuth {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, args_);
+          .computeInt32Size(3, args_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, youUserId_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, result_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, result_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, resultMsg_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, resultMsg_);
-      }
-      for (int i = 0; i < userInfos_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, userInfos_.get(i));
+          .computeMessageSize(7, getClubUsers());
+      }
+      for (int i = 0; i < roomInfos_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, roomInfos_.get(i));
+      }
+      for (int i = 0; i < clubInfos_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, clubInfos_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -62821,11 +63482,6 @@ public final class JoloAuth {
         result = result && (getArgs()
             == other.getArgs());
       }
-      result = result && (hasYouUserId() == other.hasYouUserId());
-      if (hasYouUserId()) {
-        result = result && getYouUserId()
-            .equals(other.getYouUserId());
-      }
       result = result && (hasResult() == other.hasResult());
       if (hasResult()) {
         result = result && (getResult()
@@ -62836,8 +63492,15 @@ public final class JoloAuth {
         result = result && getResultMsg()
             .equals(other.getResultMsg());
       }
-      result = result && getUserInfosList()
-          .equals(other.getUserInfosList());
+      result = result && (hasClubUsers() == other.hasClubUsers());
+      if (hasClubUsers()) {
+        result = result && getClubUsers()
+            .equals(other.getClubUsers());
+      }
+      result = result && getRoomInfosList()
+          .equals(other.getRoomInfosList());
+      result = result && getClubInfosList()
+          .equals(other.getClubInfosList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -62857,10 +63520,6 @@ public final class JoloAuth {
         hash = (37 * hash) + ARGS_FIELD_NUMBER;
         hash = (53 * hash) + getArgs();
       }
-      if (hasYouUserId()) {
-        hash = (37 * hash) + YOUUSERID_FIELD_NUMBER;
-        hash = (53 * hash) + getYouUserId().hashCode();
-      }
       if (hasResult()) {
         hash = (37 * hash) + RESULT_FIELD_NUMBER;
         hash = (53 * hash) + getResult();
@@ -62869,9 +63528,17 @@ public final class JoloAuth {
         hash = (37 * hash) + RESULTMSG_FIELD_NUMBER;
         hash = (53 * hash) + getResultMsg().hashCode();
       }
-      if (getUserInfosCount() > 0) {
-        hash = (37 * hash) + USERINFOS_FIELD_NUMBER;
-        hash = (53 * hash) + getUserInfosList().hashCode();
+      if (hasClubUsers()) {
+        hash = (37 * hash) + CLUBUSERS_FIELD_NUMBER;
+        hash = (53 * hash) + getClubUsers().hashCode();
+      }
+      if (getRoomInfosCount() > 0) {
+        hash = (37 * hash) + ROOMINFOS_FIELD_NUMBER;
+        hash = (53 * hash) + getRoomInfosList().hashCode();
+      }
+      if (getClubInfosCount() > 0) {
+        hash = (37 * hash) + CLUBINFOS_FIELD_NUMBER;
+        hash = (53 * hash) + getClubInfosList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -62998,7 +63665,9 @@ public final class JoloAuth {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getUserInfosFieldBuilder();
+          getClubUsersFieldBuilder();
+          getRoomInfosFieldBuilder();
+          getClubInfosFieldBuilder();
         }
       }
       public Builder clear() {
@@ -63007,17 +63676,27 @@ public final class JoloAuth {
         bitField0_ = (bitField0_ & ~0x00000001);
         args_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        youUserId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
         result_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         resultMsg_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        if (clubUsersBuilder_ == null) {
+          clubUsers_ = null;
+        } else {
+          clubUsersBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000010);
-        if (userInfosBuilder_ == null) {
-          userInfos_ = java.util.Collections.emptyList();
+        if (roomInfosBuilder_ == null) {
+          roomInfos_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000020);
         } else {
-          userInfosBuilder_.clear();
+          roomInfosBuilder_.clear();
+        }
+        if (clubInfosBuilder_ == null) {
+          clubInfos_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000040);
+        } else {
+          clubInfosBuilder_.clear();
         }
         return this;
       }
@@ -63054,23 +63733,36 @@ public final class JoloAuth {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.youUserId_ = youUserId_;
+        result.result_ = result_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.result_ = result_;
+        result.resultMsg_ = resultMsg_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.resultMsg_ = resultMsg_;
-        if (userInfosBuilder_ == null) {
+        if (clubUsersBuilder_ == null) {
+          result.clubUsers_ = clubUsers_;
+        } else {
+          result.clubUsers_ = clubUsersBuilder_.build();
+        }
+        if (roomInfosBuilder_ == null) {
           if (((bitField0_ & 0x00000020) == 0x00000020)) {
-            userInfos_ = java.util.Collections.unmodifiableList(userInfos_);
+            roomInfos_ = java.util.Collections.unmodifiableList(roomInfos_);
             bitField0_ = (bitField0_ & ~0x00000020);
           }
-          result.userInfos_ = userInfos_;
+          result.roomInfos_ = roomInfos_;
         } else {
-          result.userInfos_ = userInfosBuilder_.build();
+          result.roomInfos_ = roomInfosBuilder_.build();
+        }
+        if (clubInfosBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
+            clubInfos_ = java.util.Collections.unmodifiableList(clubInfos_);
+            bitField0_ = (bitField0_ & ~0x00000040);
+          }
+          result.clubInfos_ = clubInfos_;
+        } else {
+          result.clubInfos_ = clubInfosBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -63122,42 +63814,66 @@ public final class JoloAuth {
         if (other.hasArgs()) {
           setArgs(other.getArgs());
         }
-        if (other.hasYouUserId()) {
-          bitField0_ |= 0x00000004;
-          youUserId_ = other.youUserId_;
-          onChanged();
-        }
         if (other.hasResult()) {
           setResult(other.getResult());
         }
         if (other.hasResultMsg()) {
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000008;
           resultMsg_ = other.resultMsg_;
           onChanged();
         }
-        if (userInfosBuilder_ == null) {
-          if (!other.userInfos_.isEmpty()) {
-            if (userInfos_.isEmpty()) {
-              userInfos_ = other.userInfos_;
+        if (other.hasClubUsers()) {
+          mergeClubUsers(other.getClubUsers());
+        }
+        if (roomInfosBuilder_ == null) {
+          if (!other.roomInfos_.isEmpty()) {
+            if (roomInfos_.isEmpty()) {
+              roomInfos_ = other.roomInfos_;
               bitField0_ = (bitField0_ & ~0x00000020);
             } else {
-              ensureUserInfosIsMutable();
-              userInfos_.addAll(other.userInfos_);
+              ensureRoomInfosIsMutable();
+              roomInfos_.addAll(other.roomInfos_);
             }
             onChanged();
           }
         } else {
-          if (!other.userInfos_.isEmpty()) {
-            if (userInfosBuilder_.isEmpty()) {
-              userInfosBuilder_.dispose();
-              userInfosBuilder_ = null;
-              userInfos_ = other.userInfos_;
+          if (!other.roomInfos_.isEmpty()) {
+            if (roomInfosBuilder_.isEmpty()) {
+              roomInfosBuilder_.dispose();
+              roomInfosBuilder_ = null;
+              roomInfos_ = other.roomInfos_;
               bitField0_ = (bitField0_ & ~0x00000020);
-              userInfosBuilder_ = 
+              roomInfosBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getUserInfosFieldBuilder() : null;
+                   getRoomInfosFieldBuilder() : null;
             } else {
-              userInfosBuilder_.addAllMessages(other.userInfos_);
+              roomInfosBuilder_.addAllMessages(other.roomInfos_);
+            }
+          }
+        }
+        if (clubInfosBuilder_ == null) {
+          if (!other.clubInfos_.isEmpty()) {
+            if (clubInfos_.isEmpty()) {
+              clubInfos_ = other.clubInfos_;
+              bitField0_ = (bitField0_ & ~0x00000040);
+            } else {
+              ensureClubInfosIsMutable();
+              clubInfos_.addAll(other.clubInfos_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.clubInfos_.isEmpty()) {
+            if (clubInfosBuilder_.isEmpty()) {
+              clubInfosBuilder_.dispose();
+              clubInfosBuilder_ = null;
+              clubInfos_ = other.clubInfos_;
+              bitField0_ = (bitField0_ & ~0x00000040);
+              clubInfosBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getClubInfosFieldBuilder() : null;
+            } else {
+              clubInfosBuilder_.addAllMessages(other.clubInfos_);
             }
           }
         }
@@ -63176,8 +63892,18 @@ public final class JoloAuth {
         if (!hasResult()) {
           return false;
         }
-        for (int i = 0; i < getUserInfosCount(); i++) {
-          if (!getUserInfos(i).isInitialized()) {
+        if (hasClubUsers()) {
+          if (!getClubUsers().isInitialized()) {
+            return false;
+          }
+        }
+        for (int i = 0; i < getRoomInfosCount(); i++) {
+          if (!getRoomInfos(i).isInitialized()) {
+            return false;
+          }
+        }
+        for (int i = 0; i < getClubInfosCount(); i++) {
+          if (!getClubInfos(i).isInitialized()) {
             return false;
           }
         }
@@ -63309,7 +64035,7 @@ public final class JoloAuth {
        *请求方式
        * </pre>
        *
-       * <code>required int32 Args = 2;</code>
+       * <code>required int32 Args = 3;</code>
        */
       public boolean hasArgs() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
@@ -63319,7 +64045,7 @@ public final class JoloAuth {
        *请求方式
        * </pre>
        *
-       * <code>required int32 Args = 2;</code>
+       * <code>required int32 Args = 3;</code>
        */
       public int getArgs() {
         return args_;
@@ -63329,7 +64055,7 @@ public final class JoloAuth {
        *请求方式
        * </pre>
        *
-       * <code>required int32 Args = 2;</code>
+       * <code>required int32 Args = 3;</code>
        */
       public Builder setArgs(int value) {
         bitField0_ |= 0x00000002;
@@ -63342,111 +64068,11 @@ public final class JoloAuth {
        *请求方式
        * </pre>
        *
-       * <code>required int32 Args = 2;</code>
+       * <code>required int32 Args = 3;</code>
        */
       public Builder clearArgs() {
         bitField0_ = (bitField0_ & ~0x00000002);
         args_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object youUserId_ = "";
-      /**
-       * <pre>
-       *对方Id
-       * </pre>
-       *
-       * <code>optional string YouUserId = 3;</code>
-       */
-      public boolean hasYouUserId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <pre>
-       *对方Id
-       * </pre>
-       *
-       * <code>optional string YouUserId = 3;</code>
-       */
-      public java.lang.String getYouUserId() {
-        java.lang.Object ref = youUserId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            youUserId_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       *对方Id
-       * </pre>
-       *
-       * <code>optional string YouUserId = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getYouUserIdBytes() {
-        java.lang.Object ref = youUserId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          youUserId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       *对方Id
-       * </pre>
-       *
-       * <code>optional string YouUserId = 3;</code>
-       */
-      public Builder setYouUserId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        youUserId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *对方Id
-       * </pre>
-       *
-       * <code>optional string YouUserId = 3;</code>
-       */
-      public Builder clearYouUserId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        youUserId_ = getDefaultInstance().getYouUserId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *对方Id
-       * </pre>
-       *
-       * <code>optional string YouUserId = 3;</code>
-       */
-      public Builder setYouUserIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        youUserId_ = value;
         onChanged();
         return this;
       }
@@ -63457,17 +64083,17 @@ public final class JoloAuth {
        *结果,成功或失败
        * </pre>
        *
-       * <code>required int32 Result = 4;</code>
+       * <code>required int32 Result = 5;</code>
        */
       public boolean hasResult() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <pre>
        *结果,成功或失败
        * </pre>
        *
-       * <code>required int32 Result = 4;</code>
+       * <code>required int32 Result = 5;</code>
        */
       public int getResult() {
         return result_;
@@ -63477,10 +64103,10 @@ public final class JoloAuth {
        *结果,成功或失败
        * </pre>
        *
-       * <code>required int32 Result = 4;</code>
+       * <code>required int32 Result = 5;</code>
        */
       public Builder setResult(int value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         result_ = value;
         onChanged();
         return this;
@@ -63490,10 +64116,10 @@ public final class JoloAuth {
        *结果,成功或失败
        * </pre>
        *
-       * <code>required int32 Result = 4;</code>
+       * <code>required int32 Result = 5;</code>
        */
       public Builder clearResult() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         result_ = 0;
         onChanged();
         return this;
@@ -63505,17 +64131,17 @@ public final class JoloAuth {
        *失败信息 
        * </pre>
        *
-       * <code>optional string ResultMsg = 5;</code>
+       * <code>optional string ResultMsg = 6;</code>
        */
       public boolean hasResultMsg() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <pre>
        *失败信息 
        * </pre>
        *
-       * <code>optional string ResultMsg = 5;</code>
+       * <code>optional string ResultMsg = 6;</code>
        */
       public java.lang.String getResultMsg() {
         java.lang.Object ref = resultMsg_;
@@ -63536,7 +64162,7 @@ public final class JoloAuth {
        *失败信息 
        * </pre>
        *
-       * <code>optional string ResultMsg = 5;</code>
+       * <code>optional string ResultMsg = 6;</code>
        */
       public com.google.protobuf.ByteString
           getResultMsgBytes() {
@@ -63556,14 +64182,14 @@ public final class JoloAuth {
        *失败信息 
        * </pre>
        *
-       * <code>optional string ResultMsg = 5;</code>
+       * <code>optional string ResultMsg = 6;</code>
        */
       public Builder setResultMsg(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000008;
         resultMsg_ = value;
         onChanged();
         return this;
@@ -63573,10 +64199,10 @@ public final class JoloAuth {
        *失败信息 
        * </pre>
        *
-       * <code>optional string ResultMsg = 5;</code>
+       * <code>optional string ResultMsg = 6;</code>
        */
       public Builder clearResultMsg() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         resultMsg_ = getDefaultInstance().getResultMsg();
         onChanged();
         return this;
@@ -63586,329 +64212,795 @@ public final class JoloAuth {
        *失败信息 
        * </pre>
        *
-       * <code>optional string ResultMsg = 5;</code>
+       * <code>optional string ResultMsg = 6;</code>
        */
       public Builder setResultMsgBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000008;
         resultMsg_ = value;
         onChanged();
         return this;
       }
 
-      private java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos> userInfos_ =
+      private JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers clubUsers_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsersOrBuilder> clubUsersBuilder_;
+      /**
+       * <pre>
+       *俱乐部成员信息
+       * </pre>
+       *
+       * <code>optional .JoloProtobuf.AuthSvr.JoloCommon_ClubUsers ClubUsers = 7;</code>
+       */
+      public boolean hasClubUsers() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <pre>
+       *俱乐部成员信息
+       * </pre>
+       *
+       * <code>optional .JoloProtobuf.AuthSvr.JoloCommon_ClubUsers ClubUsers = 7;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers getClubUsers() {
+        if (clubUsersBuilder_ == null) {
+          return clubUsers_ == null ? JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.getDefaultInstance() : clubUsers_;
+        } else {
+          return clubUsersBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       *俱乐部成员信息
+       * </pre>
+       *
+       * <code>optional .JoloProtobuf.AuthSvr.JoloCommon_ClubUsers ClubUsers = 7;</code>
+       */
+      public Builder setClubUsers(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers value) {
+        if (clubUsersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          clubUsers_ = value;
+          onChanged();
+        } else {
+          clubUsersBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部成员信息
+       * </pre>
+       *
+       * <code>optional .JoloProtobuf.AuthSvr.JoloCommon_ClubUsers ClubUsers = 7;</code>
+       */
+      public Builder setClubUsers(
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.Builder builderForValue) {
+        if (clubUsersBuilder_ == null) {
+          clubUsers_ = builderForValue.build();
+          onChanged();
+        } else {
+          clubUsersBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部成员信息
+       * </pre>
+       *
+       * <code>optional .JoloProtobuf.AuthSvr.JoloCommon_ClubUsers ClubUsers = 7;</code>
+       */
+      public Builder mergeClubUsers(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers value) {
+        if (clubUsersBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+              clubUsers_ != null &&
+              clubUsers_ != JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.getDefaultInstance()) {
+            clubUsers_ =
+              JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.newBuilder(clubUsers_).mergeFrom(value).buildPartial();
+          } else {
+            clubUsers_ = value;
+          }
+          onChanged();
+        } else {
+          clubUsersBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部成员信息
+       * </pre>
+       *
+       * <code>optional .JoloProtobuf.AuthSvr.JoloCommon_ClubUsers ClubUsers = 7;</code>
+       */
+      public Builder clearClubUsers() {
+        if (clubUsersBuilder_ == null) {
+          clubUsers_ = null;
+          onChanged();
+        } else {
+          clubUsersBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部成员信息
+       * </pre>
+       *
+       * <code>optional .JoloProtobuf.AuthSvr.JoloCommon_ClubUsers ClubUsers = 7;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.Builder getClubUsersBuilder() {
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return getClubUsersFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       *俱乐部成员信息
+       * </pre>
+       *
+       * <code>optional .JoloProtobuf.AuthSvr.JoloCommon_ClubUsers ClubUsers = 7;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsersOrBuilder getClubUsersOrBuilder() {
+        if (clubUsersBuilder_ != null) {
+          return clubUsersBuilder_.getMessageOrBuilder();
+        } else {
+          return clubUsers_ == null ?
+              JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.getDefaultInstance() : clubUsers_;
+        }
+      }
+      /**
+       * <pre>
+       *俱乐部成员信息
+       * </pre>
+       *
+       * <code>optional .JoloProtobuf.AuthSvr.JoloCommon_ClubUsers ClubUsers = 7;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsersOrBuilder> 
+          getClubUsersFieldBuilder() {
+        if (clubUsersBuilder_ == null) {
+          clubUsersBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsersOrBuilder>(
+                  getClubUsers(),
+                  getParentForChildren(),
+                  isClean());
+          clubUsers_ = null;
+        }
+        return clubUsersBuilder_;
+      }
+
+      private java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos> roomInfos_ =
         java.util.Collections.emptyList();
-      private void ensureUserInfosIsMutable() {
+      private void ensureRoomInfosIsMutable() {
         if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-          userInfos_ = new java.util.ArrayList<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos>(userInfos_);
+          roomInfos_ = new java.util.ArrayList<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos>(roomInfos_);
           bitField0_ |= 0x00000020;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder> userInfosBuilder_;
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfosOrBuilder> roomInfosBuilder_;
 
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos> getUserInfosList() {
-        if (userInfosBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(userInfos_);
+      public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos> getRoomInfosList() {
+        if (roomInfosBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(roomInfos_);
         } else {
-          return userInfosBuilder_.getMessageList();
+          return roomInfosBuilder_.getMessageList();
         }
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public int getUserInfosCount() {
-        if (userInfosBuilder_ == null) {
-          return userInfos_.size();
+      public int getRoomInfosCount() {
+        if (roomInfosBuilder_ == null) {
+          return roomInfos_.size();
         } else {
-          return userInfosBuilder_.getCount();
+          return roomInfosBuilder_.getCount();
         }
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos getUserInfos(int index) {
-        if (userInfosBuilder_ == null) {
-          return userInfos_.get(index);
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos getRoomInfos(int index) {
+        if (roomInfosBuilder_ == null) {
+          return roomInfos_.get(index);
         } else {
-          return userInfosBuilder_.getMessage(index);
+          return roomInfosBuilder_.getMessage(index);
         }
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public Builder setUserInfos(
-          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos value) {
-        if (userInfosBuilder_ == null) {
+      public Builder setRoomInfos(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos value) {
+        if (roomInfosBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUserInfosIsMutable();
-          userInfos_.set(index, value);
+          ensureRoomInfosIsMutable();
+          roomInfos_.set(index, value);
           onChanged();
         } else {
-          userInfosBuilder_.setMessage(index, value);
+          roomInfosBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public Builder setUserInfos(
-          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder builderForValue) {
-        if (userInfosBuilder_ == null) {
-          ensureUserInfosIsMutable();
-          userInfos_.set(index, builderForValue.build());
+      public Builder setRoomInfos(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.Builder builderForValue) {
+        if (roomInfosBuilder_ == null) {
+          ensureRoomInfosIsMutable();
+          roomInfos_.set(index, builderForValue.build());
           onChanged();
         } else {
-          userInfosBuilder_.setMessage(index, builderForValue.build());
+          roomInfosBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public Builder addUserInfos(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos value) {
-        if (userInfosBuilder_ == null) {
+      public Builder addRoomInfos(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos value) {
+        if (roomInfosBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUserInfosIsMutable();
-          userInfos_.add(value);
+          ensureRoomInfosIsMutable();
+          roomInfos_.add(value);
           onChanged();
         } else {
-          userInfosBuilder_.addMessage(value);
+          roomInfosBuilder_.addMessage(value);
         }
         return this;
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public Builder addUserInfos(
-          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos value) {
-        if (userInfosBuilder_ == null) {
+      public Builder addRoomInfos(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos value) {
+        if (roomInfosBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUserInfosIsMutable();
-          userInfos_.add(index, value);
+          ensureRoomInfosIsMutable();
+          roomInfos_.add(index, value);
           onChanged();
         } else {
-          userInfosBuilder_.addMessage(index, value);
+          roomInfosBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public Builder addUserInfos(
-          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder builderForValue) {
-        if (userInfosBuilder_ == null) {
-          ensureUserInfosIsMutable();
-          userInfos_.add(builderForValue.build());
+      public Builder addRoomInfos(
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.Builder builderForValue) {
+        if (roomInfosBuilder_ == null) {
+          ensureRoomInfosIsMutable();
+          roomInfos_.add(builderForValue.build());
           onChanged();
         } else {
-          userInfosBuilder_.addMessage(builderForValue.build());
+          roomInfosBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public Builder addUserInfos(
-          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder builderForValue) {
-        if (userInfosBuilder_ == null) {
-          ensureUserInfosIsMutable();
-          userInfos_.add(index, builderForValue.build());
+      public Builder addRoomInfos(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.Builder builderForValue) {
+        if (roomInfosBuilder_ == null) {
+          ensureRoomInfosIsMutable();
+          roomInfos_.add(index, builderForValue.build());
           onChanged();
         } else {
-          userInfosBuilder_.addMessage(index, builderForValue.build());
+          roomInfosBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public Builder addAllUserInfos(
-          java.lang.Iterable<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos> values) {
-        if (userInfosBuilder_ == null) {
-          ensureUserInfosIsMutable();
+      public Builder addAllRoomInfos(
+          java.lang.Iterable<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos> values) {
+        if (roomInfosBuilder_ == null) {
+          ensureRoomInfosIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, userInfos_);
+              values, roomInfos_);
           onChanged();
         } else {
-          userInfosBuilder_.addAllMessages(values);
+          roomInfosBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public Builder clearUserInfos() {
-        if (userInfosBuilder_ == null) {
-          userInfos_ = java.util.Collections.emptyList();
+      public Builder clearRoomInfos() {
+        if (roomInfosBuilder_ == null) {
+          roomInfos_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000020);
           onChanged();
         } else {
-          userInfosBuilder_.clear();
+          roomInfosBuilder_.clear();
         }
         return this;
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public Builder removeUserInfos(int index) {
-        if (userInfosBuilder_ == null) {
-          ensureUserInfosIsMutable();
-          userInfos_.remove(index);
+      public Builder removeRoomInfos(int index) {
+        if (roomInfosBuilder_ == null) {
+          ensureRoomInfosIsMutable();
+          roomInfos_.remove(index);
           onChanged();
         } else {
-          userInfosBuilder_.remove(index);
+          roomInfosBuilder_.remove(index);
         }
         return this;
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder getUserInfosBuilder(
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.Builder getRoomInfosBuilder(
           int index) {
-        return getUserInfosFieldBuilder().getBuilder(index);
+        return getRoomInfosFieldBuilder().getBuilder(index);
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder getUserInfosOrBuilder(
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfosOrBuilder getRoomInfosOrBuilder(
           int index) {
-        if (userInfosBuilder_ == null) {
-          return userInfos_.get(index);  } else {
-          return userInfosBuilder_.getMessageOrBuilder(index);
+        if (roomInfosBuilder_ == null) {
+          return roomInfos_.get(index);  } else {
+          return roomInfosBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder> 
-           getUserInfosOrBuilderList() {
-        if (userInfosBuilder_ != null) {
-          return userInfosBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfosOrBuilder> 
+           getRoomInfosOrBuilderList() {
+        if (roomInfosBuilder_ != null) {
+          return roomInfosBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(userInfos_);
+          return java.util.Collections.unmodifiableList(roomInfos_);
         }
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder addUserInfosBuilder() {
-        return getUserInfosFieldBuilder().addBuilder(
-            JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.getDefaultInstance());
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.Builder addRoomInfosBuilder() {
+        return getRoomInfosFieldBuilder().addBuilder(
+            JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.getDefaultInstance());
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder addUserInfosBuilder(
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.Builder addRoomInfosBuilder(
           int index) {
-        return getUserInfosFieldBuilder().addBuilder(
-            index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.getDefaultInstance());
+        return getRoomInfosFieldBuilder().addBuilder(
+            index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.getDefaultInstance());
       }
       /**
        * <pre>
-       *好友列表
+       *房间列表
        * </pre>
        *
-       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos UserInfos = 6;</code>
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_RoomInfos RoomInfos = 8;</code>
        */
-      public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder> 
-           getUserInfosBuilderList() {
-        return getUserInfosFieldBuilder().getBuilderList();
+      public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.Builder> 
+           getRoomInfosBuilderList() {
+        return getRoomInfosFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder> 
-          getUserInfosFieldBuilder() {
-        if (userInfosBuilder_ == null) {
-          userInfosBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder>(
-                  userInfos_,
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfosOrBuilder> 
+          getRoomInfosFieldBuilder() {
+        if (roomInfosBuilder_ == null) {
+          roomInfosBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfosOrBuilder>(
+                  roomInfos_,
                   ((bitField0_ & 0x00000020) == 0x00000020),
                   getParentForChildren(),
                   isClean());
-          userInfos_ = null;
+          roomInfos_ = null;
         }
-        return userInfosBuilder_;
+        return roomInfosBuilder_;
+      }
+
+      private java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos> clubInfos_ =
+        java.util.Collections.emptyList();
+      private void ensureClubInfosIsMutable() {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+          clubInfos_ = new java.util.ArrayList<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos>(clubInfos_);
+          bitField0_ |= 0x00000040;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfosOrBuilder> clubInfosBuilder_;
+
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos> getClubInfosList() {
+        if (clubInfosBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(clubInfos_);
+        } else {
+          return clubInfosBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public int getClubInfosCount() {
+        if (clubInfosBuilder_ == null) {
+          return clubInfos_.size();
+        } else {
+          return clubInfosBuilder_.getCount();
+        }
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos getClubInfos(int index) {
+        if (clubInfosBuilder_ == null) {
+          return clubInfos_.get(index);
+        } else {
+          return clubInfosBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public Builder setClubInfos(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos value) {
+        if (clubInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClubInfosIsMutable();
+          clubInfos_.set(index, value);
+          onChanged();
+        } else {
+          clubInfosBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public Builder setClubInfos(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.Builder builderForValue) {
+        if (clubInfosBuilder_ == null) {
+          ensureClubInfosIsMutable();
+          clubInfos_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          clubInfosBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public Builder addClubInfos(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos value) {
+        if (clubInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClubInfosIsMutable();
+          clubInfos_.add(value);
+          onChanged();
+        } else {
+          clubInfosBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public Builder addClubInfos(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos value) {
+        if (clubInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClubInfosIsMutable();
+          clubInfos_.add(index, value);
+          onChanged();
+        } else {
+          clubInfosBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public Builder addClubInfos(
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.Builder builderForValue) {
+        if (clubInfosBuilder_ == null) {
+          ensureClubInfosIsMutable();
+          clubInfos_.add(builderForValue.build());
+          onChanged();
+        } else {
+          clubInfosBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public Builder addClubInfos(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.Builder builderForValue) {
+        if (clubInfosBuilder_ == null) {
+          ensureClubInfosIsMutable();
+          clubInfos_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          clubInfosBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public Builder addAllClubInfos(
+          java.lang.Iterable<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos> values) {
+        if (clubInfosBuilder_ == null) {
+          ensureClubInfosIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, clubInfos_);
+          onChanged();
+        } else {
+          clubInfosBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public Builder clearClubInfos() {
+        if (clubInfosBuilder_ == null) {
+          clubInfos_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000040);
+          onChanged();
+        } else {
+          clubInfosBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public Builder removeClubInfos(int index) {
+        if (clubInfosBuilder_ == null) {
+          ensureClubInfosIsMutable();
+          clubInfos_.remove(index);
+          onChanged();
+        } else {
+          clubInfosBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.Builder getClubInfosBuilder(
+          int index) {
+        return getClubInfosFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfosOrBuilder getClubInfosOrBuilder(
+          int index) {
+        if (clubInfosBuilder_ == null) {
+          return clubInfos_.get(index);  } else {
+          return clubInfosBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfosOrBuilder> 
+           getClubInfosOrBuilderList() {
+        if (clubInfosBuilder_ != null) {
+          return clubInfosBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(clubInfos_);
+        }
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.Builder addClubInfosBuilder() {
+        return getClubInfosFieldBuilder().addBuilder(
+            JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.Builder addClubInfosBuilder(
+          int index) {
+        return getClubInfosFieldBuilder().addBuilder(
+            index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       *俱乐部列表
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_ClubInfos ClubInfos = 9;</code>
+       */
+      public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.Builder> 
+           getClubInfosBuilderList() {
+        return getClubInfosFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfosOrBuilder> 
+          getClubInfosFieldBuilder() {
+        if (clubInfosBuilder_ == null) {
+          clubInfosBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfosOrBuilder>(
+                  clubInfos_,
+                  ((bitField0_ & 0x00000040) == 0x00000040),
+                  getParentForChildren(),
+                  isClean());
+          clubInfos_ = null;
+        }
+        return clubInfosBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -63991,7 +65083,7 @@ public final class JoloAuth {
   }
   /**
    * <pre>
-   *签到请求消息	80009
+   *签到请求消息	
    * </pre>
    *
    * Protobuf type {@code JoloProtobuf.AuthSvr.JoloAuth_CreateTableRecordsReq}
@@ -64286,7 +65378,7 @@ public final class JoloAuth {
     }
     /**
      * <pre>
-     *签到请求消息	80009
+     *签到请求消息	
      * </pre>
      *
      * Protobuf type {@code JoloProtobuf.AuthSvr.JoloAuth_CreateTableRecordsReq}
@@ -69558,7 +70650,7 @@ public final class JoloAuth {
   }
   /**
    * <pre>
-   *好友信息
+   *房间信息
    * </pre>
    *
    * Protobuf type {@code JoloProtobuf.AuthSvr.JoloAuth_CreateTableRecords}
@@ -70125,7 +71217,7 @@ public final class JoloAuth {
     }
     /**
      * <pre>
-     *好友信息
+     *房间信息
      * </pre>
      *
      * Protobuf type {@code JoloProtobuf.AuthSvr.JoloAuth_CreateTableRecords}
@@ -70770,6 +71862,1160 @@ public final class JoloAuth {
 
   }
 
+  public interface JoloCommon_ClubUsersOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:JoloProtobuf.AuthSvr.JoloCommon_ClubUsers)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+     */
+    java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos> 
+        getUserInfosList();
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+     */
+    JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos getUserInfos(int index);
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+     */
+    int getUserInfosCount();
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+     */
+    java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder> 
+        getUserInfosOrBuilderList();
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+     */
+    JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder getUserInfosOrBuilder(
+        int index);
+
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+     */
+    java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes> 
+        getUserNotesList();
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+     */
+    JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes getUserNotes(int index);
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+     */
+    int getUserNotesCount();
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+     */
+    java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotesOrBuilder> 
+        getUserNotesOrBuilderList();
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+     */
+    JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotesOrBuilder getUserNotesOrBuilder(
+        int index);
+  }
+  /**
+   * <pre>
+   *俱乐部成员信息
+   * </pre>
+   *
+   * Protobuf type {@code JoloProtobuf.AuthSvr.JoloCommon_ClubUsers}
+   */
+  public  static final class JoloCommon_ClubUsers extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:JoloProtobuf.AuthSvr.JoloCommon_ClubUsers)
+      JoloCommon_ClubUsersOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use JoloCommon_ClubUsers.newBuilder() to construct.
+    private JoloCommon_ClubUsers(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private JoloCommon_ClubUsers() {
+      userInfos_ = java.util.Collections.emptyList();
+      userNotes_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private JoloCommon_ClubUsers(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                userInfos_ = new java.util.ArrayList<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              userInfos_.add(
+                  input.readMessage(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.PARSER, extensionRegistry));
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                userNotes_ = new java.util.ArrayList<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              userNotes_.add(
+                  input.readMessage(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          userInfos_ = java.util.Collections.unmodifiableList(userInfos_);
+        }
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          userNotes_ = java.util.Collections.unmodifiableList(userNotes_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubUsers_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubUsers_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.class, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.Builder.class);
+    }
+
+    public static final int USERINFOS_FIELD_NUMBER = 1;
+    private java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos> userInfos_;
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+     */
+    public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos> getUserInfosList() {
+      return userInfos_;
+    }
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+     */
+    public java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder> 
+        getUserInfosOrBuilderList() {
+      return userInfos_;
+    }
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+     */
+    public int getUserInfosCount() {
+      return userInfos_.size();
+    }
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+     */
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos getUserInfos(int index) {
+      return userInfos_.get(index);
+    }
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+     */
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder getUserInfosOrBuilder(
+        int index) {
+      return userInfos_.get(index);
+    }
+
+    public static final int USERNOTES_FIELD_NUMBER = 2;
+    private java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes> userNotes_;
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+     */
+    public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes> getUserNotesList() {
+      return userNotes_;
+    }
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+     */
+    public java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotesOrBuilder> 
+        getUserNotesOrBuilderList() {
+      return userNotes_;
+    }
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+     */
+    public int getUserNotesCount() {
+      return userNotes_.size();
+    }
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+     */
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes getUserNotes(int index) {
+      return userNotes_.get(index);
+    }
+    /**
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+     */
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotesOrBuilder getUserNotesOrBuilder(
+        int index) {
+      return userNotes_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      for (int i = 0; i < getUserInfosCount(); i++) {
+        if (!getUserInfos(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      for (int i = 0; i < getUserNotesCount(); i++) {
+        if (!getUserNotes(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < userInfos_.size(); i++) {
+        output.writeMessage(1, userInfos_.get(i));
+      }
+      for (int i = 0; i < userNotes_.size(); i++) {
+        output.writeMessage(2, userNotes_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < userInfos_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, userInfos_.get(i));
+      }
+      for (int i = 0; i < userNotes_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, userNotes_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers)) {
+        return super.equals(obj);
+      }
+      JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers other = (JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers) obj;
+
+      boolean result = true;
+      result = result && getUserInfosList()
+          .equals(other.getUserInfosList());
+      result = result && getUserNotesList()
+          .equals(other.getUserNotesList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getUserInfosCount() > 0) {
+        hash = (37 * hash) + USERINFOS_FIELD_NUMBER;
+        hash = (53 * hash) + getUserInfosList().hashCode();
+      }
+      if (getUserNotesCount() > 0) {
+        hash = (37 * hash) + USERNOTES_FIELD_NUMBER;
+        hash = (53 * hash) + getUserNotesList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *俱乐部成员信息
+     * </pre>
+     *
+     * Protobuf type {@code JoloProtobuf.AuthSvr.JoloCommon_ClubUsers}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:JoloProtobuf.AuthSvr.JoloCommon_ClubUsers)
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsersOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubUsers_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubUsers_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.class, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.Builder.class);
+      }
+
+      // Construct using JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getUserInfosFieldBuilder();
+          getUserNotesFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        if (userInfosBuilder_ == null) {
+          userInfos_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          userInfosBuilder_.clear();
+        }
+        if (userNotesBuilder_ == null) {
+          userNotes_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          userNotesBuilder_.clear();
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubUsers_descriptor;
+      }
+
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers getDefaultInstanceForType() {
+        return JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.getDefaultInstance();
+      }
+
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers build() {
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers buildPartial() {
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers result = new JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers(this);
+        int from_bitField0_ = bitField0_;
+        if (userInfosBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            userInfos_ = java.util.Collections.unmodifiableList(userInfos_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.userInfos_ = userInfos_;
+        } else {
+          result.userInfos_ = userInfosBuilder_.build();
+        }
+        if (userNotesBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            userNotes_ = java.util.Collections.unmodifiableList(userNotes_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.userNotes_ = userNotes_;
+        } else {
+          result.userNotes_ = userNotesBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers) {
+          return mergeFrom((JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers other) {
+        if (other == JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers.getDefaultInstance()) return this;
+        if (userInfosBuilder_ == null) {
+          if (!other.userInfos_.isEmpty()) {
+            if (userInfos_.isEmpty()) {
+              userInfos_ = other.userInfos_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureUserInfosIsMutable();
+              userInfos_.addAll(other.userInfos_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.userInfos_.isEmpty()) {
+            if (userInfosBuilder_.isEmpty()) {
+              userInfosBuilder_.dispose();
+              userInfosBuilder_ = null;
+              userInfos_ = other.userInfos_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              userInfosBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getUserInfosFieldBuilder() : null;
+            } else {
+              userInfosBuilder_.addAllMessages(other.userInfos_);
+            }
+          }
+        }
+        if (userNotesBuilder_ == null) {
+          if (!other.userNotes_.isEmpty()) {
+            if (userNotes_.isEmpty()) {
+              userNotes_ = other.userNotes_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureUserNotesIsMutable();
+              userNotes_.addAll(other.userNotes_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.userNotes_.isEmpty()) {
+            if (userNotesBuilder_.isEmpty()) {
+              userNotesBuilder_.dispose();
+              userNotesBuilder_ = null;
+              userNotes_ = other.userNotes_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              userNotesBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getUserNotesFieldBuilder() : null;
+            } else {
+              userNotesBuilder_.addAllMessages(other.userNotes_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        for (int i = 0; i < getUserInfosCount(); i++) {
+          if (!getUserInfos(i).isInitialized()) {
+            return false;
+          }
+        }
+        for (int i = 0; i < getUserNotesCount(); i++) {
+          if (!getUserNotes(i).isInitialized()) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos> userInfos_ =
+        java.util.Collections.emptyList();
+      private void ensureUserInfosIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          userInfos_ = new java.util.ArrayList<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos>(userInfos_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder> userInfosBuilder_;
+
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos> getUserInfosList() {
+        if (userInfosBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(userInfos_);
+        } else {
+          return userInfosBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public int getUserInfosCount() {
+        if (userInfosBuilder_ == null) {
+          return userInfos_.size();
+        } else {
+          return userInfosBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos getUserInfos(int index) {
+        if (userInfosBuilder_ == null) {
+          return userInfos_.get(index);
+        } else {
+          return userInfosBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public Builder setUserInfos(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos value) {
+        if (userInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserInfosIsMutable();
+          userInfos_.set(index, value);
+          onChanged();
+        } else {
+          userInfosBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public Builder setUserInfos(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder builderForValue) {
+        if (userInfosBuilder_ == null) {
+          ensureUserInfosIsMutable();
+          userInfos_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          userInfosBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public Builder addUserInfos(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos value) {
+        if (userInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserInfosIsMutable();
+          userInfos_.add(value);
+          onChanged();
+        } else {
+          userInfosBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public Builder addUserInfos(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos value) {
+        if (userInfosBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserInfosIsMutable();
+          userInfos_.add(index, value);
+          onChanged();
+        } else {
+          userInfosBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public Builder addUserInfos(
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder builderForValue) {
+        if (userInfosBuilder_ == null) {
+          ensureUserInfosIsMutable();
+          userInfos_.add(builderForValue.build());
+          onChanged();
+        } else {
+          userInfosBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public Builder addUserInfos(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder builderForValue) {
+        if (userInfosBuilder_ == null) {
+          ensureUserInfosIsMutable();
+          userInfos_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          userInfosBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public Builder addAllUserInfos(
+          java.lang.Iterable<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos> values) {
+        if (userInfosBuilder_ == null) {
+          ensureUserInfosIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, userInfos_);
+          onChanged();
+        } else {
+          userInfosBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public Builder clearUserInfos() {
+        if (userInfosBuilder_ == null) {
+          userInfos_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          userInfosBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public Builder removeUserInfos(int index) {
+        if (userInfosBuilder_ == null) {
+          ensureUserInfosIsMutable();
+          userInfos_.remove(index);
+          onChanged();
+        } else {
+          userInfosBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder getUserInfosBuilder(
+          int index) {
+        return getUserInfosFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder getUserInfosOrBuilder(
+          int index) {
+        if (userInfosBuilder_ == null) {
+          return userInfos_.get(index);  } else {
+          return userInfosBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder> 
+           getUserInfosOrBuilderList() {
+        if (userInfosBuilder_ != null) {
+          return userInfosBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(userInfos_);
+        }
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder addUserInfosBuilder() {
+        return getUserInfosFieldBuilder().addBuilder(
+            JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder addUserInfosBuilder(
+          int index) {
+        return getUserInfosFieldBuilder().addBuilder(
+            index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserInfos userInfos = 1;</code>
+       */
+      public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder> 
+           getUserInfosBuilderList() {
+        return getUserInfosFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder> 
+          getUserInfosFieldBuilder() {
+        if (userInfosBuilder_ == null) {
+          userInfosBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfosOrBuilder>(
+                  userInfos_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          userInfos_ = null;
+        }
+        return userInfosBuilder_;
+      }
+
+      private java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes> userNotes_ =
+        java.util.Collections.emptyList();
+      private void ensureUserNotesIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          userNotes_ = new java.util.ArrayList<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes>(userNotes_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotesOrBuilder> userNotesBuilder_;
+
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes> getUserNotesList() {
+        if (userNotesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(userNotes_);
+        } else {
+          return userNotesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public int getUserNotesCount() {
+        if (userNotesBuilder_ == null) {
+          return userNotes_.size();
+        } else {
+          return userNotesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes getUserNotes(int index) {
+        if (userNotesBuilder_ == null) {
+          return userNotes_.get(index);
+        } else {
+          return userNotesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public Builder setUserNotes(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes value) {
+        if (userNotesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserNotesIsMutable();
+          userNotes_.set(index, value);
+          onChanged();
+        } else {
+          userNotesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public Builder setUserNotes(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.Builder builderForValue) {
+        if (userNotesBuilder_ == null) {
+          ensureUserNotesIsMutable();
+          userNotes_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          userNotesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public Builder addUserNotes(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes value) {
+        if (userNotesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserNotesIsMutable();
+          userNotes_.add(value);
+          onChanged();
+        } else {
+          userNotesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public Builder addUserNotes(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes value) {
+        if (userNotesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserNotesIsMutable();
+          userNotes_.add(index, value);
+          onChanged();
+        } else {
+          userNotesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public Builder addUserNotes(
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.Builder builderForValue) {
+        if (userNotesBuilder_ == null) {
+          ensureUserNotesIsMutable();
+          userNotes_.add(builderForValue.build());
+          onChanged();
+        } else {
+          userNotesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public Builder addUserNotes(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.Builder builderForValue) {
+        if (userNotesBuilder_ == null) {
+          ensureUserNotesIsMutable();
+          userNotes_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          userNotesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public Builder addAllUserNotes(
+          java.lang.Iterable<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes> values) {
+        if (userNotesBuilder_ == null) {
+          ensureUserNotesIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, userNotes_);
+          onChanged();
+        } else {
+          userNotesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public Builder clearUserNotes() {
+        if (userNotesBuilder_ == null) {
+          userNotes_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          userNotesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public Builder removeUserNotes(int index) {
+        if (userNotesBuilder_ == null) {
+          ensureUserNotesIsMutable();
+          userNotes_.remove(index);
+          onChanged();
+        } else {
+          userNotesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.Builder getUserNotesBuilder(
+          int index) {
+        return getUserNotesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotesOrBuilder getUserNotesOrBuilder(
+          int index) {
+        if (userNotesBuilder_ == null) {
+          return userNotes_.get(index);  } else {
+          return userNotesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotesOrBuilder> 
+           getUserNotesOrBuilderList() {
+        if (userNotesBuilder_ != null) {
+          return userNotesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(userNotes_);
+        }
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.Builder addUserNotesBuilder() {
+        return getUserNotesFieldBuilder().addBuilder(
+            JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.Builder addUserNotesBuilder(
+          int index) {
+        return getUserNotesFieldBuilder().addBuilder(
+            index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_UserNotes userNotes = 2;</code>
+       */
+      public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.Builder> 
+           getUserNotesBuilderList() {
+        return getUserNotesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotesOrBuilder> 
+          getUserNotesFieldBuilder() {
+        if (userNotesBuilder_ == null) {
+          userNotesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotesOrBuilder>(
+                  userNotes_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          userNotes_ = null;
+        }
+        return userNotesBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:JoloProtobuf.AuthSvr.JoloCommon_ClubUsers)
+    }
+
+    // @@protoc_insertion_point(class_scope:JoloProtobuf.AuthSvr.JoloCommon_ClubUsers)
+    private static final JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers();
+    }
+
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<JoloCommon_ClubUsers>
+        PARSER = new com.google.protobuf.AbstractParser<JoloCommon_ClubUsers>() {
+      public JoloCommon_ClubUsers parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new JoloCommon_ClubUsers(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<JoloCommon_ClubUsers> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<JoloCommon_ClubUsers> getParserForType() {
+      return PARSER;
+    }
+
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubUsers getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface JoloCommon_UserInfosOrBuilder extends
       // @@protoc_insertion_point(interface_extends:JoloProtobuf.AuthSvr.JoloCommon_UserInfos)
       com.google.protobuf.MessageOrBuilder {
@@ -70871,7 +73117,7 @@ public final class JoloAuth {
   }
   /**
    * <pre>
-   *好友信息
+   *成员信息
    * </pre>
    *
    * Protobuf type {@code JoloProtobuf.AuthSvr.JoloCommon_UserInfos}
@@ -71375,7 +73621,7 @@ public final class JoloAuth {
     }
     /**
      * <pre>
-     *好友信息
+     *成员信息
      * </pre>
      *
      * Protobuf type {@code JoloProtobuf.AuthSvr.JoloCommon_UserInfos}
@@ -71952,6 +74198,5292 @@ public final class JoloAuth {
     }
 
     public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserInfos getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface JoloCommon_UserNotesOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:JoloProtobuf.AuthSvr.JoloCommon_UserNotes)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     *备注用户id
+     * </pre>
+     *
+     * <code>required string NoteUserId = 1;</code>
+     */
+    boolean hasNoteUserId();
+    /**
+     * <pre>
+     *备注用户id
+     * </pre>
+     *
+     * <code>required string NoteUserId = 1;</code>
+     */
+    java.lang.String getNoteUserId();
+    /**
+     * <pre>
+     *备注用户id
+     * </pre>
+     *
+     * <code>required string NoteUserId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getNoteUserIdBytes();
+
+    /**
+     * <pre>
+     *备注用户昵称
+     * </pre>
+     *
+     * <code>required string NoteName = 2;</code>
+     */
+    boolean hasNoteName();
+    /**
+     * <pre>
+     *备注用户昵称
+     * </pre>
+     *
+     * <code>required string NoteName = 2;</code>
+     */
+    java.lang.String getNoteName();
+    /**
+     * <pre>
+     *备注用户昵称
+     * </pre>
+     *
+     * <code>required string NoteName = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getNoteNameBytes();
+  }
+  /**
+   * <pre>
+   *成员备注信息
+   * </pre>
+   *
+   * Protobuf type {@code JoloProtobuf.AuthSvr.JoloCommon_UserNotes}
+   */
+  public  static final class JoloCommon_UserNotes extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:JoloProtobuf.AuthSvr.JoloCommon_UserNotes)
+      JoloCommon_UserNotesOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use JoloCommon_UserNotes.newBuilder() to construct.
+    private JoloCommon_UserNotes(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private JoloCommon_UserNotes() {
+      noteUserId_ = "";
+      noteName_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private JoloCommon_UserNotes(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              noteUserId_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              noteName_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserNotes_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserNotes_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.class, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int NOTEUSERID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object noteUserId_;
+    /**
+     * <pre>
+     *备注用户id
+     * </pre>
+     *
+     * <code>required string NoteUserId = 1;</code>
+     */
+    public boolean hasNoteUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <pre>
+     *备注用户id
+     * </pre>
+     *
+     * <code>required string NoteUserId = 1;</code>
+     */
+    public java.lang.String getNoteUserId() {
+      java.lang.Object ref = noteUserId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          noteUserId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *备注用户id
+     * </pre>
+     *
+     * <code>required string NoteUserId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNoteUserIdBytes() {
+      java.lang.Object ref = noteUserId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        noteUserId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int NOTENAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object noteName_;
+    /**
+     * <pre>
+     *备注用户昵称
+     * </pre>
+     *
+     * <code>required string NoteName = 2;</code>
+     */
+    public boolean hasNoteName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <pre>
+     *备注用户昵称
+     * </pre>
+     *
+     * <code>required string NoteName = 2;</code>
+     */
+    public java.lang.String getNoteName() {
+      java.lang.Object ref = noteName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          noteName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *备注用户昵称
+     * </pre>
+     *
+     * <code>required string NoteName = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNoteNameBytes() {
+      java.lang.Object ref = noteName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        noteName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasNoteUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasNoteName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, noteUserId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, noteName_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, noteUserId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, noteName_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes)) {
+        return super.equals(obj);
+      }
+      JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes other = (JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes) obj;
+
+      boolean result = true;
+      result = result && (hasNoteUserId() == other.hasNoteUserId());
+      if (hasNoteUserId()) {
+        result = result && getNoteUserId()
+            .equals(other.getNoteUserId());
+      }
+      result = result && (hasNoteName() == other.hasNoteName());
+      if (hasNoteName()) {
+        result = result && getNoteName()
+            .equals(other.getNoteName());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasNoteUserId()) {
+        hash = (37 * hash) + NOTEUSERID_FIELD_NUMBER;
+        hash = (53 * hash) + getNoteUserId().hashCode();
+      }
+      if (hasNoteName()) {
+        hash = (37 * hash) + NOTENAME_FIELD_NUMBER;
+        hash = (53 * hash) + getNoteName().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *成员备注信息
+     * </pre>
+     *
+     * Protobuf type {@code JoloProtobuf.AuthSvr.JoloCommon_UserNotes}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:JoloProtobuf.AuthSvr.JoloCommon_UserNotes)
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotesOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserNotes_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserNotes_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.class, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.Builder.class);
+      }
+
+      // Construct using JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        noteUserId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        noteName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserNotes_descriptor;
+      }
+
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes getDefaultInstanceForType() {
+        return JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.getDefaultInstance();
+      }
+
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes build() {
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes buildPartial() {
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes result = new JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.noteUserId_ = noteUserId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.noteName_ = noteName_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes) {
+          return mergeFrom((JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes other) {
+        if (other == JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes.getDefaultInstance()) return this;
+        if (other.hasNoteUserId()) {
+          bitField0_ |= 0x00000001;
+          noteUserId_ = other.noteUserId_;
+          onChanged();
+        }
+        if (other.hasNoteName()) {
+          bitField0_ |= 0x00000002;
+          noteName_ = other.noteName_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasNoteUserId()) {
+          return false;
+        }
+        if (!hasNoteName()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object noteUserId_ = "";
+      /**
+       * <pre>
+       *备注用户id
+       * </pre>
+       *
+       * <code>required string NoteUserId = 1;</code>
+       */
+      public boolean hasNoteUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <pre>
+       *备注用户id
+       * </pre>
+       *
+       * <code>required string NoteUserId = 1;</code>
+       */
+      public java.lang.String getNoteUserId() {
+        java.lang.Object ref = noteUserId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            noteUserId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *备注用户id
+       * </pre>
+       *
+       * <code>required string NoteUserId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNoteUserIdBytes() {
+        java.lang.Object ref = noteUserId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          noteUserId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *备注用户id
+       * </pre>
+       *
+       * <code>required string NoteUserId = 1;</code>
+       */
+      public Builder setNoteUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        noteUserId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *备注用户id
+       * </pre>
+       *
+       * <code>required string NoteUserId = 1;</code>
+       */
+      public Builder clearNoteUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        noteUserId_ = getDefaultInstance().getNoteUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *备注用户id
+       * </pre>
+       *
+       * <code>required string NoteUserId = 1;</code>
+       */
+      public Builder setNoteUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        noteUserId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object noteName_ = "";
+      /**
+       * <pre>
+       *备注用户昵称
+       * </pre>
+       *
+       * <code>required string NoteName = 2;</code>
+       */
+      public boolean hasNoteName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <pre>
+       *备注用户昵称
+       * </pre>
+       *
+       * <code>required string NoteName = 2;</code>
+       */
+      public java.lang.String getNoteName() {
+        java.lang.Object ref = noteName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            noteName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *备注用户昵称
+       * </pre>
+       *
+       * <code>required string NoteName = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNoteNameBytes() {
+        java.lang.Object ref = noteName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          noteName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *备注用户昵称
+       * </pre>
+       *
+       * <code>required string NoteName = 2;</code>
+       */
+      public Builder setNoteName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        noteName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *备注用户昵称
+       * </pre>
+       *
+       * <code>required string NoteName = 2;</code>
+       */
+      public Builder clearNoteName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        noteName_ = getDefaultInstance().getNoteName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *备注用户昵称
+       * </pre>
+       *
+       * <code>required string NoteName = 2;</code>
+       */
+      public Builder setNoteNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        noteName_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:JoloProtobuf.AuthSvr.JoloCommon_UserNotes)
+    }
+
+    // @@protoc_insertion_point(class_scope:JoloProtobuf.AuthSvr.JoloCommon_UserNotes)
+    private static final JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes();
+    }
+
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<JoloCommon_UserNotes>
+        PARSER = new com.google.protobuf.AbstractParser<JoloCommon_UserNotes>() {
+      public JoloCommon_UserNotes parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new JoloCommon_UserNotes(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<JoloCommon_UserNotes> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<JoloCommon_UserNotes> getParserForType() {
+      return PARSER;
+    }
+
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_UserNotes getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface JoloCommon_RoomInfosOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:JoloProtobuf.AuthSvr.JoloCommon_RoomInfos)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     *游戏ID
+     * </pre>
+     *
+     * <code>required int32 GameId = 1;</code>
+     */
+    boolean hasGameId();
+    /**
+     * <pre>
+     *游戏ID
+     * </pre>
+     *
+     * <code>required int32 GameId = 1;</code>
+     */
+    int getGameId();
+
+    /**
+     * <pre>
+     *桌子id
+     * </pre>
+     *
+     * <code>required string TableId = 2;</code>
+     */
+    boolean hasTableId();
+    /**
+     * <pre>
+     *桌子id
+     * </pre>
+     *
+     * <code>required string TableId = 2;</code>
+     */
+    java.lang.String getTableId();
+    /**
+     * <pre>
+     *桌子id
+     * </pre>
+     *
+     * <code>required string TableId = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getTableIdBytes();
+
+    /**
+     * <pre>
+     *玩家人数
+     * </pre>
+     *
+     * <code>required int32 PlayerNum = 4;</code>
+     */
+    boolean hasPlayerNum();
+    /**
+     * <pre>
+     *玩家人数
+     * </pre>
+     *
+     * <code>required int32 PlayerNum = 4;</code>
+     */
+    int getPlayerNum();
+
+    /**
+     * <pre>
+     *游戏局数
+     * </pre>
+     *
+     * <code>required int32 GameNum = 5;</code>
+     */
+    boolean hasGameNum();
+    /**
+     * <pre>
+     *游戏局数
+     * </pre>
+     *
+     * <code>required int32 GameNum = 5;</code>
+     */
+    int getGameNum();
+
+    /**
+     * <pre>
+     *最大押注值
+     * </pre>
+     *
+     * <code>optional int32 MaxBet = 6;</code>
+     */
+    boolean hasMaxBet();
+    /**
+     * <pre>
+     *最大押注值
+     * </pre>
+     *
+     * <code>optional int32 MaxBet = 6;</code>
+     */
+    int getMaxBet();
+
+    /**
+     * <pre>
+     *当前进行的游戏局数
+     * </pre>
+     *
+     * <code>required int32 CurrGameNum = 7;</code>
+     */
+    boolean hasCurrGameNum();
+    /**
+     * <pre>
+     *当前进行的游戏局数
+     * </pre>
+     *
+     * <code>required int32 CurrGameNum = 7;</code>
+     */
+    int getCurrGameNum();
+
+    /**
+     * <pre>
+     *玩家信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+     */
+    java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos> 
+        getPlayerSList();
+    /**
+     * <pre>
+     *玩家信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+     */
+    JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos getPlayerS(int index);
+    /**
+     * <pre>
+     *玩家信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+     */
+    int getPlayerSCount();
+    /**
+     * <pre>
+     *玩家信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+     */
+    java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfosOrBuilder> 
+        getPlayerSOrBuilderList();
+    /**
+     * <pre>
+     *玩家信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+     */
+    JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfosOrBuilder getPlayerSOrBuilder(
+        int index);
+  }
+  /**
+   * <pre>
+   *桌子信息
+   * </pre>
+   *
+   * Protobuf type {@code JoloProtobuf.AuthSvr.JoloCommon_RoomInfos}
+   */
+  public  static final class JoloCommon_RoomInfos extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:JoloProtobuf.AuthSvr.JoloCommon_RoomInfos)
+      JoloCommon_RoomInfosOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use JoloCommon_RoomInfos.newBuilder() to construct.
+    private JoloCommon_RoomInfos(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private JoloCommon_RoomInfos() {
+      gameId_ = 0;
+      tableId_ = "";
+      playerNum_ = 0;
+      gameNum_ = 0;
+      maxBet_ = 0;
+      currGameNum_ = 0;
+      playerS_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private JoloCommon_RoomInfos(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              gameId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              tableId_ = bs;
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000004;
+              playerNum_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
+              gameNum_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000010;
+              maxBet_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000020;
+              currGameNum_ = input.readInt32();
+              break;
+            }
+            case 66: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+                playerS_ = new java.util.ArrayList<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos>();
+                mutable_bitField0_ |= 0x00000040;
+              }
+              playerS_.add(
+                  input.readMessage(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+          playerS_ = java.util.Collections.unmodifiableList(playerS_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_RoomInfos_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_RoomInfos_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.class, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int GAMEID_FIELD_NUMBER = 1;
+    private int gameId_;
+    /**
+     * <pre>
+     *游戏ID
+     * </pre>
+     *
+     * <code>required int32 GameId = 1;</code>
+     */
+    public boolean hasGameId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <pre>
+     *游戏ID
+     * </pre>
+     *
+     * <code>required int32 GameId = 1;</code>
+     */
+    public int getGameId() {
+      return gameId_;
+    }
+
+    public static final int TABLEID_FIELD_NUMBER = 2;
+    private volatile java.lang.Object tableId_;
+    /**
+     * <pre>
+     *桌子id
+     * </pre>
+     *
+     * <code>required string TableId = 2;</code>
+     */
+    public boolean hasTableId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <pre>
+     *桌子id
+     * </pre>
+     *
+     * <code>required string TableId = 2;</code>
+     */
+    public java.lang.String getTableId() {
+      java.lang.Object ref = tableId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          tableId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *桌子id
+     * </pre>
+     *
+     * <code>required string TableId = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTableIdBytes() {
+      java.lang.Object ref = tableId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        tableId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PLAYERNUM_FIELD_NUMBER = 4;
+    private int playerNum_;
+    /**
+     * <pre>
+     *玩家人数
+     * </pre>
+     *
+     * <code>required int32 PlayerNum = 4;</code>
+     */
+    public boolean hasPlayerNum() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <pre>
+     *玩家人数
+     * </pre>
+     *
+     * <code>required int32 PlayerNum = 4;</code>
+     */
+    public int getPlayerNum() {
+      return playerNum_;
+    }
+
+    public static final int GAMENUM_FIELD_NUMBER = 5;
+    private int gameNum_;
+    /**
+     * <pre>
+     *游戏局数
+     * </pre>
+     *
+     * <code>required int32 GameNum = 5;</code>
+     */
+    public boolean hasGameNum() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <pre>
+     *游戏局数
+     * </pre>
+     *
+     * <code>required int32 GameNum = 5;</code>
+     */
+    public int getGameNum() {
+      return gameNum_;
+    }
+
+    public static final int MAXBET_FIELD_NUMBER = 6;
+    private int maxBet_;
+    /**
+     * <pre>
+     *最大押注值
+     * </pre>
+     *
+     * <code>optional int32 MaxBet = 6;</code>
+     */
+    public boolean hasMaxBet() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <pre>
+     *最大押注值
+     * </pre>
+     *
+     * <code>optional int32 MaxBet = 6;</code>
+     */
+    public int getMaxBet() {
+      return maxBet_;
+    }
+
+    public static final int CURRGAMENUM_FIELD_NUMBER = 7;
+    private int currGameNum_;
+    /**
+     * <pre>
+     *当前进行的游戏局数
+     * </pre>
+     *
+     * <code>required int32 CurrGameNum = 7;</code>
+     */
+    public boolean hasCurrGameNum() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <pre>
+     *当前进行的游戏局数
+     * </pre>
+     *
+     * <code>required int32 CurrGameNum = 7;</code>
+     */
+    public int getCurrGameNum() {
+      return currGameNum_;
+    }
+
+    public static final int PLAYERS_FIELD_NUMBER = 8;
+    private java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos> playerS_;
+    /**
+     * <pre>
+     *玩家信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+     */
+    public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos> getPlayerSList() {
+      return playerS_;
+    }
+    /**
+     * <pre>
+     *玩家信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+     */
+    public java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfosOrBuilder> 
+        getPlayerSOrBuilderList() {
+      return playerS_;
+    }
+    /**
+     * <pre>
+     *玩家信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+     */
+    public int getPlayerSCount() {
+      return playerS_.size();
+    }
+    /**
+     * <pre>
+     *玩家信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+     */
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos getPlayerS(int index) {
+      return playerS_.get(index);
+    }
+    /**
+     * <pre>
+     *玩家信息
+     * </pre>
+     *
+     * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+     */
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfosOrBuilder getPlayerSOrBuilder(
+        int index) {
+      return playerS_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasGameId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTableId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPlayerNum()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasGameNum()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCurrGameNum()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getPlayerSCount(); i++) {
+        if (!getPlayerS(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, gameId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, tableId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(4, playerNum_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(5, gameNum_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(6, maxBet_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(7, currGameNum_);
+      }
+      for (int i = 0; i < playerS_.size(); i++) {
+        output.writeMessage(8, playerS_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, gameId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, tableId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, playerNum_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, gameNum_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, maxBet_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, currGameNum_);
+      }
+      for (int i = 0; i < playerS_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, playerS_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos)) {
+        return super.equals(obj);
+      }
+      JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos other = (JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos) obj;
+
+      boolean result = true;
+      result = result && (hasGameId() == other.hasGameId());
+      if (hasGameId()) {
+        result = result && (getGameId()
+            == other.getGameId());
+      }
+      result = result && (hasTableId() == other.hasTableId());
+      if (hasTableId()) {
+        result = result && getTableId()
+            .equals(other.getTableId());
+      }
+      result = result && (hasPlayerNum() == other.hasPlayerNum());
+      if (hasPlayerNum()) {
+        result = result && (getPlayerNum()
+            == other.getPlayerNum());
+      }
+      result = result && (hasGameNum() == other.hasGameNum());
+      if (hasGameNum()) {
+        result = result && (getGameNum()
+            == other.getGameNum());
+      }
+      result = result && (hasMaxBet() == other.hasMaxBet());
+      if (hasMaxBet()) {
+        result = result && (getMaxBet()
+            == other.getMaxBet());
+      }
+      result = result && (hasCurrGameNum() == other.hasCurrGameNum());
+      if (hasCurrGameNum()) {
+        result = result && (getCurrGameNum()
+            == other.getCurrGameNum());
+      }
+      result = result && getPlayerSList()
+          .equals(other.getPlayerSList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasGameId()) {
+        hash = (37 * hash) + GAMEID_FIELD_NUMBER;
+        hash = (53 * hash) + getGameId();
+      }
+      if (hasTableId()) {
+        hash = (37 * hash) + TABLEID_FIELD_NUMBER;
+        hash = (53 * hash) + getTableId().hashCode();
+      }
+      if (hasPlayerNum()) {
+        hash = (37 * hash) + PLAYERNUM_FIELD_NUMBER;
+        hash = (53 * hash) + getPlayerNum();
+      }
+      if (hasGameNum()) {
+        hash = (37 * hash) + GAMENUM_FIELD_NUMBER;
+        hash = (53 * hash) + getGameNum();
+      }
+      if (hasMaxBet()) {
+        hash = (37 * hash) + MAXBET_FIELD_NUMBER;
+        hash = (53 * hash) + getMaxBet();
+      }
+      if (hasCurrGameNum()) {
+        hash = (37 * hash) + CURRGAMENUM_FIELD_NUMBER;
+        hash = (53 * hash) + getCurrGameNum();
+      }
+      if (getPlayerSCount() > 0) {
+        hash = (37 * hash) + PLAYERS_FIELD_NUMBER;
+        hash = (53 * hash) + getPlayerSList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *桌子信息
+     * </pre>
+     *
+     * Protobuf type {@code JoloProtobuf.AuthSvr.JoloCommon_RoomInfos}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:JoloProtobuf.AuthSvr.JoloCommon_RoomInfos)
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfosOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_RoomInfos_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_RoomInfos_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.class, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.Builder.class);
+      }
+
+      // Construct using JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getPlayerSFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        gameId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        tableId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        playerNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        gameNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        maxBet_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        currGameNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        if (playerSBuilder_ == null) {
+          playerS_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000040);
+        } else {
+          playerSBuilder_.clear();
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_RoomInfos_descriptor;
+      }
+
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos getDefaultInstanceForType() {
+        return JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.getDefaultInstance();
+      }
+
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos build() {
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos buildPartial() {
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos result = new JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.gameId_ = gameId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.tableId_ = tableId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.playerNum_ = playerNum_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.gameNum_ = gameNum_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.maxBet_ = maxBet_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.currGameNum_ = currGameNum_;
+        if (playerSBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
+            playerS_ = java.util.Collections.unmodifiableList(playerS_);
+            bitField0_ = (bitField0_ & ~0x00000040);
+          }
+          result.playerS_ = playerS_;
+        } else {
+          result.playerS_ = playerSBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos) {
+          return mergeFrom((JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos other) {
+        if (other == JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos.getDefaultInstance()) return this;
+        if (other.hasGameId()) {
+          setGameId(other.getGameId());
+        }
+        if (other.hasTableId()) {
+          bitField0_ |= 0x00000002;
+          tableId_ = other.tableId_;
+          onChanged();
+        }
+        if (other.hasPlayerNum()) {
+          setPlayerNum(other.getPlayerNum());
+        }
+        if (other.hasGameNum()) {
+          setGameNum(other.getGameNum());
+        }
+        if (other.hasMaxBet()) {
+          setMaxBet(other.getMaxBet());
+        }
+        if (other.hasCurrGameNum()) {
+          setCurrGameNum(other.getCurrGameNum());
+        }
+        if (playerSBuilder_ == null) {
+          if (!other.playerS_.isEmpty()) {
+            if (playerS_.isEmpty()) {
+              playerS_ = other.playerS_;
+              bitField0_ = (bitField0_ & ~0x00000040);
+            } else {
+              ensurePlayerSIsMutable();
+              playerS_.addAll(other.playerS_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.playerS_.isEmpty()) {
+            if (playerSBuilder_.isEmpty()) {
+              playerSBuilder_.dispose();
+              playerSBuilder_ = null;
+              playerS_ = other.playerS_;
+              bitField0_ = (bitField0_ & ~0x00000040);
+              playerSBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getPlayerSFieldBuilder() : null;
+            } else {
+              playerSBuilder_.addAllMessages(other.playerS_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasGameId()) {
+          return false;
+        }
+        if (!hasTableId()) {
+          return false;
+        }
+        if (!hasPlayerNum()) {
+          return false;
+        }
+        if (!hasGameNum()) {
+          return false;
+        }
+        if (!hasCurrGameNum()) {
+          return false;
+        }
+        for (int i = 0; i < getPlayerSCount(); i++) {
+          if (!getPlayerS(i).isInitialized()) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int gameId_ ;
+      /**
+       * <pre>
+       *游戏ID
+       * </pre>
+       *
+       * <code>required int32 GameId = 1;</code>
+       */
+      public boolean hasGameId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <pre>
+       *游戏ID
+       * </pre>
+       *
+       * <code>required int32 GameId = 1;</code>
+       */
+      public int getGameId() {
+        return gameId_;
+      }
+      /**
+       * <pre>
+       *游戏ID
+       * </pre>
+       *
+       * <code>required int32 GameId = 1;</code>
+       */
+      public Builder setGameId(int value) {
+        bitField0_ |= 0x00000001;
+        gameId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *游戏ID
+       * </pre>
+       *
+       * <code>required int32 GameId = 1;</code>
+       */
+      public Builder clearGameId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        gameId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object tableId_ = "";
+      /**
+       * <pre>
+       *桌子id
+       * </pre>
+       *
+       * <code>required string TableId = 2;</code>
+       */
+      public boolean hasTableId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <pre>
+       *桌子id
+       * </pre>
+       *
+       * <code>required string TableId = 2;</code>
+       */
+      public java.lang.String getTableId() {
+        java.lang.Object ref = tableId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            tableId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *桌子id
+       * </pre>
+       *
+       * <code>required string TableId = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTableIdBytes() {
+        java.lang.Object ref = tableId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          tableId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *桌子id
+       * </pre>
+       *
+       * <code>required string TableId = 2;</code>
+       */
+      public Builder setTableId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        tableId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *桌子id
+       * </pre>
+       *
+       * <code>required string TableId = 2;</code>
+       */
+      public Builder clearTableId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        tableId_ = getDefaultInstance().getTableId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *桌子id
+       * </pre>
+       *
+       * <code>required string TableId = 2;</code>
+       */
+      public Builder setTableIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        tableId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int playerNum_ ;
+      /**
+       * <pre>
+       *玩家人数
+       * </pre>
+       *
+       * <code>required int32 PlayerNum = 4;</code>
+       */
+      public boolean hasPlayerNum() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <pre>
+       *玩家人数
+       * </pre>
+       *
+       * <code>required int32 PlayerNum = 4;</code>
+       */
+      public int getPlayerNum() {
+        return playerNum_;
+      }
+      /**
+       * <pre>
+       *玩家人数
+       * </pre>
+       *
+       * <code>required int32 PlayerNum = 4;</code>
+       */
+      public Builder setPlayerNum(int value) {
+        bitField0_ |= 0x00000004;
+        playerNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家人数
+       * </pre>
+       *
+       * <code>required int32 PlayerNum = 4;</code>
+       */
+      public Builder clearPlayerNum() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        playerNum_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int gameNum_ ;
+      /**
+       * <pre>
+       *游戏局数
+       * </pre>
+       *
+       * <code>required int32 GameNum = 5;</code>
+       */
+      public boolean hasGameNum() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <pre>
+       *游戏局数
+       * </pre>
+       *
+       * <code>required int32 GameNum = 5;</code>
+       */
+      public int getGameNum() {
+        return gameNum_;
+      }
+      /**
+       * <pre>
+       *游戏局数
+       * </pre>
+       *
+       * <code>required int32 GameNum = 5;</code>
+       */
+      public Builder setGameNum(int value) {
+        bitField0_ |= 0x00000008;
+        gameNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *游戏局数
+       * </pre>
+       *
+       * <code>required int32 GameNum = 5;</code>
+       */
+      public Builder clearGameNum() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        gameNum_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int maxBet_ ;
+      /**
+       * <pre>
+       *最大押注值
+       * </pre>
+       *
+       * <code>optional int32 MaxBet = 6;</code>
+       */
+      public boolean hasMaxBet() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <pre>
+       *最大押注值
+       * </pre>
+       *
+       * <code>optional int32 MaxBet = 6;</code>
+       */
+      public int getMaxBet() {
+        return maxBet_;
+      }
+      /**
+       * <pre>
+       *最大押注值
+       * </pre>
+       *
+       * <code>optional int32 MaxBet = 6;</code>
+       */
+      public Builder setMaxBet(int value) {
+        bitField0_ |= 0x00000010;
+        maxBet_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *最大押注值
+       * </pre>
+       *
+       * <code>optional int32 MaxBet = 6;</code>
+       */
+      public Builder clearMaxBet() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        maxBet_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int currGameNum_ ;
+      /**
+       * <pre>
+       *当前进行的游戏局数
+       * </pre>
+       *
+       * <code>required int32 CurrGameNum = 7;</code>
+       */
+      public boolean hasCurrGameNum() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <pre>
+       *当前进行的游戏局数
+       * </pre>
+       *
+       * <code>required int32 CurrGameNum = 7;</code>
+       */
+      public int getCurrGameNum() {
+        return currGameNum_;
+      }
+      /**
+       * <pre>
+       *当前进行的游戏局数
+       * </pre>
+       *
+       * <code>required int32 CurrGameNum = 7;</code>
+       */
+      public Builder setCurrGameNum(int value) {
+        bitField0_ |= 0x00000020;
+        currGameNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *当前进行的游戏局数
+       * </pre>
+       *
+       * <code>required int32 CurrGameNum = 7;</code>
+       */
+      public Builder clearCurrGameNum() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        currGameNum_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos> playerS_ =
+        java.util.Collections.emptyList();
+      private void ensurePlayerSIsMutable() {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+          playerS_ = new java.util.ArrayList<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos>(playerS_);
+          bitField0_ |= 0x00000040;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfosOrBuilder> playerSBuilder_;
+
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos> getPlayerSList() {
+        if (playerSBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(playerS_);
+        } else {
+          return playerSBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public int getPlayerSCount() {
+        if (playerSBuilder_ == null) {
+          return playerS_.size();
+        } else {
+          return playerSBuilder_.getCount();
+        }
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos getPlayerS(int index) {
+        if (playerSBuilder_ == null) {
+          return playerS_.get(index);
+        } else {
+          return playerSBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public Builder setPlayerS(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos value) {
+        if (playerSBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePlayerSIsMutable();
+          playerS_.set(index, value);
+          onChanged();
+        } else {
+          playerSBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public Builder setPlayerS(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.Builder builderForValue) {
+        if (playerSBuilder_ == null) {
+          ensurePlayerSIsMutable();
+          playerS_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          playerSBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public Builder addPlayerS(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos value) {
+        if (playerSBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePlayerSIsMutable();
+          playerS_.add(value);
+          onChanged();
+        } else {
+          playerSBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public Builder addPlayerS(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos value) {
+        if (playerSBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePlayerSIsMutable();
+          playerS_.add(index, value);
+          onChanged();
+        } else {
+          playerSBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public Builder addPlayerS(
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.Builder builderForValue) {
+        if (playerSBuilder_ == null) {
+          ensurePlayerSIsMutable();
+          playerS_.add(builderForValue.build());
+          onChanged();
+        } else {
+          playerSBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public Builder addPlayerS(
+          int index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.Builder builderForValue) {
+        if (playerSBuilder_ == null) {
+          ensurePlayerSIsMutable();
+          playerS_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          playerSBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public Builder addAllPlayerS(
+          java.lang.Iterable<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos> values) {
+        if (playerSBuilder_ == null) {
+          ensurePlayerSIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, playerS_);
+          onChanged();
+        } else {
+          playerSBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public Builder clearPlayerS() {
+        if (playerSBuilder_ == null) {
+          playerS_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000040);
+          onChanged();
+        } else {
+          playerSBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public Builder removePlayerS(int index) {
+        if (playerSBuilder_ == null) {
+          ensurePlayerSIsMutable();
+          playerS_.remove(index);
+          onChanged();
+        } else {
+          playerSBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.Builder getPlayerSBuilder(
+          int index) {
+        return getPlayerSFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfosOrBuilder getPlayerSOrBuilder(
+          int index) {
+        if (playerSBuilder_ == null) {
+          return playerS_.get(index);  } else {
+          return playerSBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public java.util.List<? extends JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfosOrBuilder> 
+           getPlayerSOrBuilderList() {
+        if (playerSBuilder_ != null) {
+          return playerSBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(playerS_);
+        }
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.Builder addPlayerSBuilder() {
+        return getPlayerSFieldBuilder().addBuilder(
+            JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.Builder addPlayerSBuilder(
+          int index) {
+        return getPlayerSFieldBuilder().addBuilder(
+            index, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       *玩家信息
+       * </pre>
+       *
+       * <code>repeated .JoloProtobuf.AuthSvr.JoloCommon_PlayInfos PlayerS = 8;</code>
+       */
+      public java.util.List<JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.Builder> 
+           getPlayerSBuilderList() {
+        return getPlayerSFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfosOrBuilder> 
+          getPlayerSFieldBuilder() {
+        if (playerSBuilder_ == null) {
+          playerSBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.Builder, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfosOrBuilder>(
+                  playerS_,
+                  ((bitField0_ & 0x00000040) == 0x00000040),
+                  getParentForChildren(),
+                  isClean());
+          playerS_ = null;
+        }
+        return playerSBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:JoloProtobuf.AuthSvr.JoloCommon_RoomInfos)
+    }
+
+    // @@protoc_insertion_point(class_scope:JoloProtobuf.AuthSvr.JoloCommon_RoomInfos)
+    private static final JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos();
+    }
+
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<JoloCommon_RoomInfos>
+        PARSER = new com.google.protobuf.AbstractParser<JoloCommon_RoomInfos>() {
+      public JoloCommon_RoomInfos parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new JoloCommon_RoomInfos(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<JoloCommon_RoomInfos> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<JoloCommon_RoomInfos> getParserForType() {
+      return PARSER;
+    }
+
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_RoomInfos getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface JoloCommon_PlayInfosOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:JoloProtobuf.AuthSvr.JoloCommon_PlayInfos)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     *用户id
+     * </pre>
+     *
+     * <code>required string UserId = 1;</code>
+     */
+    boolean hasUserId();
+    /**
+     * <pre>
+     *用户id
+     * </pre>
+     *
+     * <code>required string UserId = 1;</code>
+     */
+    java.lang.String getUserId();
+    /**
+     * <pre>
+     *用户id
+     * </pre>
+     *
+     * <code>required string UserId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+
+    /**
+     * <pre>
+     *用户昵称
+     * </pre>
+     *
+     * <code>required string NickName = 2;</code>
+     */
+    boolean hasNickName();
+    /**
+     * <pre>
+     *用户昵称
+     * </pre>
+     *
+     * <code>required string NickName = 2;</code>
+     */
+    java.lang.String getNickName();
+    /**
+     * <pre>
+     *用户昵称
+     * </pre>
+     *
+     * <code>required string NickName = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getNickNameBytes();
+
+    /**
+     * <pre>
+     *用户头像
+     * </pre>
+     *
+     * <code>required string IcoUrl = 3;</code>
+     */
+    boolean hasIcoUrl();
+    /**
+     * <pre>
+     *用户头像
+     * </pre>
+     *
+     * <code>required string IcoUrl = 3;</code>
+     */
+    java.lang.String getIcoUrl();
+    /**
+     * <pre>
+     *用户头像
+     * </pre>
+     *
+     * <code>required string IcoUrl = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getIcoUrlBytes();
+
+    /**
+     * <pre>
+     *座位号
+     * </pre>
+     *
+     * <code>optional sint32 SeatNum = 4;</code>
+     */
+    boolean hasSeatNum();
+    /**
+     * <pre>
+     *座位号
+     * </pre>
+     *
+     * <code>optional sint32 SeatNum = 4;</code>
+     */
+    int getSeatNum();
+  }
+  /**
+   * <pre>
+   *玩家信息
+   * </pre>
+   *
+   * Protobuf type {@code JoloProtobuf.AuthSvr.JoloCommon_PlayInfos}
+   */
+  public  static final class JoloCommon_PlayInfos extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:JoloProtobuf.AuthSvr.JoloCommon_PlayInfos)
+      JoloCommon_PlayInfosOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use JoloCommon_PlayInfos.newBuilder() to construct.
+    private JoloCommon_PlayInfos(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private JoloCommon_PlayInfos() {
+      userId_ = "";
+      nickName_ = "";
+      icoUrl_ = "";
+      seatNum_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private JoloCommon_PlayInfos(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              userId_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              nickName_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              icoUrl_ = bs;
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              seatNum_ = input.readSInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_PlayInfos_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_PlayInfos_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.class, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int USERID_FIELD_NUMBER = 1;
+    private volatile java.lang.Object userId_;
+    /**
+     * <pre>
+     *用户id
+     * </pre>
+     *
+     * <code>required string UserId = 1;</code>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <pre>
+     *用户id
+     * </pre>
+     *
+     * <code>required string UserId = 1;</code>
+     */
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *用户id
+     * </pre>
+     *
+     * <code>required string UserId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int NICKNAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object nickName_;
+    /**
+     * <pre>
+     *用户昵称
+     * </pre>
+     *
+     * <code>required string NickName = 2;</code>
+     */
+    public boolean hasNickName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <pre>
+     *用户昵称
+     * </pre>
+     *
+     * <code>required string NickName = 2;</code>
+     */
+    public java.lang.String getNickName() {
+      java.lang.Object ref = nickName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          nickName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *用户昵称
+     * </pre>
+     *
+     * <code>required string NickName = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNickNameBytes() {
+      java.lang.Object ref = nickName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        nickName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ICOURL_FIELD_NUMBER = 3;
+    private volatile java.lang.Object icoUrl_;
+    /**
+     * <pre>
+     *用户头像
+     * </pre>
+     *
+     * <code>required string IcoUrl = 3;</code>
+     */
+    public boolean hasIcoUrl() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <pre>
+     *用户头像
+     * </pre>
+     *
+     * <code>required string IcoUrl = 3;</code>
+     */
+    public java.lang.String getIcoUrl() {
+      java.lang.Object ref = icoUrl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          icoUrl_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *用户头像
+     * </pre>
+     *
+     * <code>required string IcoUrl = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIcoUrlBytes() {
+      java.lang.Object ref = icoUrl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        icoUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SEATNUM_FIELD_NUMBER = 4;
+    private int seatNum_;
+    /**
+     * <pre>
+     *座位号
+     * </pre>
+     *
+     * <code>optional sint32 SeatNum = 4;</code>
+     */
+    public boolean hasSeatNum() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <pre>
+     *座位号
+     * </pre>
+     *
+     * <code>optional sint32 SeatNum = 4;</code>
+     */
+    public int getSeatNum() {
+      return seatNum_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasNickName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasIcoUrl()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nickName_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, icoUrl_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeSInt32(4, seatNum_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nickName_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, icoUrl_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt32Size(4, seatNum_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos)) {
+        return super.equals(obj);
+      }
+      JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos other = (JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos) obj;
+
+      boolean result = true;
+      result = result && (hasUserId() == other.hasUserId());
+      if (hasUserId()) {
+        result = result && getUserId()
+            .equals(other.getUserId());
+      }
+      result = result && (hasNickName() == other.hasNickName());
+      if (hasNickName()) {
+        result = result && getNickName()
+            .equals(other.getNickName());
+      }
+      result = result && (hasIcoUrl() == other.hasIcoUrl());
+      if (hasIcoUrl()) {
+        result = result && getIcoUrl()
+            .equals(other.getIcoUrl());
+      }
+      result = result && (hasSeatNum() == other.hasSeatNum());
+      if (hasSeatNum()) {
+        result = result && (getSeatNum()
+            == other.getSeatNum());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasUserId()) {
+        hash = (37 * hash) + USERID_FIELD_NUMBER;
+        hash = (53 * hash) + getUserId().hashCode();
+      }
+      if (hasNickName()) {
+        hash = (37 * hash) + NICKNAME_FIELD_NUMBER;
+        hash = (53 * hash) + getNickName().hashCode();
+      }
+      if (hasIcoUrl()) {
+        hash = (37 * hash) + ICOURL_FIELD_NUMBER;
+        hash = (53 * hash) + getIcoUrl().hashCode();
+      }
+      if (hasSeatNum()) {
+        hash = (37 * hash) + SEATNUM_FIELD_NUMBER;
+        hash = (53 * hash) + getSeatNum();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *玩家信息
+     * </pre>
+     *
+     * Protobuf type {@code JoloProtobuf.AuthSvr.JoloCommon_PlayInfos}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:JoloProtobuf.AuthSvr.JoloCommon_PlayInfos)
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfosOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_PlayInfos_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_PlayInfos_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.class, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.Builder.class);
+      }
+
+      // Construct using JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        userId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        nickName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        icoUrl_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        seatNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_PlayInfos_descriptor;
+      }
+
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos getDefaultInstanceForType() {
+        return JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.getDefaultInstance();
+      }
+
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos build() {
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos buildPartial() {
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos result = new JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.nickName_ = nickName_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.icoUrl_ = icoUrl_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.seatNum_ = seatNum_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos) {
+          return mergeFrom((JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos other) {
+        if (other == JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          bitField0_ |= 0x00000001;
+          userId_ = other.userId_;
+          onChanged();
+        }
+        if (other.hasNickName()) {
+          bitField0_ |= 0x00000002;
+          nickName_ = other.nickName_;
+          onChanged();
+        }
+        if (other.hasIcoUrl()) {
+          bitField0_ |= 0x00000004;
+          icoUrl_ = other.icoUrl_;
+          onChanged();
+        }
+        if (other.hasSeatNum()) {
+          setSeatNum(other.getSeatNum());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          return false;
+        }
+        if (!hasNickName()) {
+          return false;
+        }
+        if (!hasIcoUrl()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object userId_ = "";
+      /**
+       * <pre>
+       *用户id
+       * </pre>
+       *
+       * <code>required string UserId = 1;</code>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <pre>
+       *用户id
+       * </pre>
+       *
+       * <code>required string UserId = 1;</code>
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *用户id
+       * </pre>
+       *
+       * <code>required string UserId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *用户id
+       * </pre>
+       *
+       * <code>required string UserId = 1;</code>
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *用户id
+       * </pre>
+       *
+       * <code>required string UserId = 1;</code>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *用户id
+       * </pre>
+       *
+       * <code>required string UserId = 1;</code>
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object nickName_ = "";
+      /**
+       * <pre>
+       *用户昵称
+       * </pre>
+       *
+       * <code>required string NickName = 2;</code>
+       */
+      public boolean hasNickName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <pre>
+       *用户昵称
+       * </pre>
+       *
+       * <code>required string NickName = 2;</code>
+       */
+      public java.lang.String getNickName() {
+        java.lang.Object ref = nickName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            nickName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *用户昵称
+       * </pre>
+       *
+       * <code>required string NickName = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNickNameBytes() {
+        java.lang.Object ref = nickName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          nickName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *用户昵称
+       * </pre>
+       *
+       * <code>required string NickName = 2;</code>
+       */
+      public Builder setNickName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        nickName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *用户昵称
+       * </pre>
+       *
+       * <code>required string NickName = 2;</code>
+       */
+      public Builder clearNickName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        nickName_ = getDefaultInstance().getNickName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *用户昵称
+       * </pre>
+       *
+       * <code>required string NickName = 2;</code>
+       */
+      public Builder setNickNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        nickName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object icoUrl_ = "";
+      /**
+       * <pre>
+       *用户头像
+       * </pre>
+       *
+       * <code>required string IcoUrl = 3;</code>
+       */
+      public boolean hasIcoUrl() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <pre>
+       *用户头像
+       * </pre>
+       *
+       * <code>required string IcoUrl = 3;</code>
+       */
+      public java.lang.String getIcoUrl() {
+        java.lang.Object ref = icoUrl_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            icoUrl_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *用户头像
+       * </pre>
+       *
+       * <code>required string IcoUrl = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIcoUrlBytes() {
+        java.lang.Object ref = icoUrl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          icoUrl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *用户头像
+       * </pre>
+       *
+       * <code>required string IcoUrl = 3;</code>
+       */
+      public Builder setIcoUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        icoUrl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *用户头像
+       * </pre>
+       *
+       * <code>required string IcoUrl = 3;</code>
+       */
+      public Builder clearIcoUrl() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        icoUrl_ = getDefaultInstance().getIcoUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *用户头像
+       * </pre>
+       *
+       * <code>required string IcoUrl = 3;</code>
+       */
+      public Builder setIcoUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        icoUrl_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int seatNum_ ;
+      /**
+       * <pre>
+       *座位号
+       * </pre>
+       *
+       * <code>optional sint32 SeatNum = 4;</code>
+       */
+      public boolean hasSeatNum() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <pre>
+       *座位号
+       * </pre>
+       *
+       * <code>optional sint32 SeatNum = 4;</code>
+       */
+      public int getSeatNum() {
+        return seatNum_;
+      }
+      /**
+       * <pre>
+       *座位号
+       * </pre>
+       *
+       * <code>optional sint32 SeatNum = 4;</code>
+       */
+      public Builder setSeatNum(int value) {
+        bitField0_ |= 0x00000008;
+        seatNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *座位号
+       * </pre>
+       *
+       * <code>optional sint32 SeatNum = 4;</code>
+       */
+      public Builder clearSeatNum() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        seatNum_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:JoloProtobuf.AuthSvr.JoloCommon_PlayInfos)
+    }
+
+    // @@protoc_insertion_point(class_scope:JoloProtobuf.AuthSvr.JoloCommon_PlayInfos)
+    private static final JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos();
+    }
+
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<JoloCommon_PlayInfos>
+        PARSER = new com.google.protobuf.AbstractParser<JoloCommon_PlayInfos>() {
+      public JoloCommon_PlayInfos parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new JoloCommon_PlayInfos(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<JoloCommon_PlayInfos> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<JoloCommon_PlayInfos> getParserForType() {
+      return PARSER;
+    }
+
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_PlayInfos getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface JoloCommon_ClubInfosOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:JoloProtobuf.AuthSvr.JoloCommon_ClubInfos)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     *俱乐部ID
+     * </pre>
+     *
+     * <code>required int32 ClubId = 1;</code>
+     */
+    boolean hasClubId();
+    /**
+     * <pre>
+     *俱乐部ID
+     * </pre>
+     *
+     * <code>required int32 ClubId = 1;</code>
+     */
+    int getClubId();
+
+    /**
+     * <pre>
+     *俱乐部名称
+     * </pre>
+     *
+     * <code>required string ClubName = 2;</code>
+     */
+    boolean hasClubName();
+    /**
+     * <pre>
+     *俱乐部名称
+     * </pre>
+     *
+     * <code>required string ClubName = 2;</code>
+     */
+    java.lang.String getClubName();
+    /**
+     * <pre>
+     *俱乐部名称
+     * </pre>
+     *
+     * <code>required string ClubName = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getClubNameBytes();
+
+    /**
+     * <pre>
+     *创建俱乐部的玩家
+     * </pre>
+     *
+     * <code>required string UserId = 3;</code>
+     */
+    boolean hasUserId();
+    /**
+     * <pre>
+     *创建俱乐部的玩家
+     * </pre>
+     *
+     * <code>required string UserId = 3;</code>
+     */
+    java.lang.String getUserId();
+    /**
+     * <pre>
+     *创建俱乐部的玩家
+     * </pre>
+     *
+     * <code>required string UserId = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+
+    /**
+     * <code>required string NickName = 4;</code>
+     */
+    boolean hasNickName();
+    /**
+     * <code>required string NickName = 4;</code>
+     */
+    java.lang.String getNickName();
+    /**
+     * <code>required string NickName = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getNickNameBytes();
+
+    /**
+     * <code>required string IcoUrl = 5;</code>
+     */
+    boolean hasIcoUrl();
+    /**
+     * <code>required string IcoUrl = 5;</code>
+     */
+    java.lang.String getIcoUrl();
+    /**
+     * <code>required string IcoUrl = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getIcoUrlBytes();
+
+    /**
+     * <pre>
+     *俱乐部创建时间
+     * </pre>
+     *
+     * <code>required string Time = 6;</code>
+     */
+    boolean hasTime();
+    /**
+     * <pre>
+     *俱乐部创建时间
+     * </pre>
+     *
+     * <code>required string Time = 6;</code>
+     */
+    java.lang.String getTime();
+    /**
+     * <pre>
+     *俱乐部创建时间
+     * </pre>
+     *
+     * <code>required string Time = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getTimeBytes();
+  }
+  /**
+   * <pre>
+   *俱乐部信息
+   * </pre>
+   *
+   * Protobuf type {@code JoloProtobuf.AuthSvr.JoloCommon_ClubInfos}
+   */
+  public  static final class JoloCommon_ClubInfos extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:JoloProtobuf.AuthSvr.JoloCommon_ClubInfos)
+      JoloCommon_ClubInfosOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use JoloCommon_ClubInfos.newBuilder() to construct.
+    private JoloCommon_ClubInfos(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private JoloCommon_ClubInfos() {
+      clubId_ = 0;
+      clubName_ = "";
+      userId_ = "";
+      nickName_ = "";
+      icoUrl_ = "";
+      time_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private JoloCommon_ClubInfos(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              clubId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              clubName_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              userId_ = bs;
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              nickName_ = bs;
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              icoUrl_ = bs;
+              break;
+            }
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              time_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubInfos_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubInfos_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.class, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int CLUBID_FIELD_NUMBER = 1;
+    private int clubId_;
+    /**
+     * <pre>
+     *俱乐部ID
+     * </pre>
+     *
+     * <code>required int32 ClubId = 1;</code>
+     */
+    public boolean hasClubId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <pre>
+     *俱乐部ID
+     * </pre>
+     *
+     * <code>required int32 ClubId = 1;</code>
+     */
+    public int getClubId() {
+      return clubId_;
+    }
+
+    public static final int CLUBNAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object clubName_;
+    /**
+     * <pre>
+     *俱乐部名称
+     * </pre>
+     *
+     * <code>required string ClubName = 2;</code>
+     */
+    public boolean hasClubName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <pre>
+     *俱乐部名称
+     * </pre>
+     *
+     * <code>required string ClubName = 2;</code>
+     */
+    public java.lang.String getClubName() {
+      java.lang.Object ref = clubName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          clubName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *俱乐部名称
+     * </pre>
+     *
+     * <code>required string ClubName = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getClubNameBytes() {
+      java.lang.Object ref = clubName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        clubName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int USERID_FIELD_NUMBER = 3;
+    private volatile java.lang.Object userId_;
+    /**
+     * <pre>
+     *创建俱乐部的玩家
+     * </pre>
+     *
+     * <code>required string UserId = 3;</code>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <pre>
+     *创建俱乐部的玩家
+     * </pre>
+     *
+     * <code>required string UserId = 3;</code>
+     */
+    public java.lang.String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *创建俱乐部的玩家
+     * </pre>
+     *
+     * <code>required string UserId = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int NICKNAME_FIELD_NUMBER = 4;
+    private volatile java.lang.Object nickName_;
+    /**
+     * <code>required string NickName = 4;</code>
+     */
+    public boolean hasNickName() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required string NickName = 4;</code>
+     */
+    public java.lang.String getNickName() {
+      java.lang.Object ref = nickName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          nickName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string NickName = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNickNameBytes() {
+      java.lang.Object ref = nickName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        nickName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ICOURL_FIELD_NUMBER = 5;
+    private volatile java.lang.Object icoUrl_;
+    /**
+     * <code>required string IcoUrl = 5;</code>
+     */
+    public boolean hasIcoUrl() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required string IcoUrl = 5;</code>
+     */
+    public java.lang.String getIcoUrl() {
+      java.lang.Object ref = icoUrl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          icoUrl_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string IcoUrl = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIcoUrlBytes() {
+      java.lang.Object ref = icoUrl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        icoUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TIME_FIELD_NUMBER = 6;
+    private volatile java.lang.Object time_;
+    /**
+     * <pre>
+     *俱乐部创建时间
+     * </pre>
+     *
+     * <code>required string Time = 6;</code>
+     */
+    public boolean hasTime() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <pre>
+     *俱乐部创建时间
+     * </pre>
+     *
+     * <code>required string Time = 6;</code>
+     */
+    public java.lang.String getTime() {
+      java.lang.Object ref = time_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          time_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *俱乐部创建时间
+     * </pre>
+     *
+     * <code>required string Time = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTimeBytes() {
+      java.lang.Object ref = time_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        time_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasClubId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasClubName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasNickName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasIcoUrl()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTime()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, clubId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, clubName_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, userId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, nickName_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, icoUrl_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, time_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, clubId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, clubName_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, userId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, nickName_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, icoUrl_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, time_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos)) {
+        return super.equals(obj);
+      }
+      JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos other = (JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos) obj;
+
+      boolean result = true;
+      result = result && (hasClubId() == other.hasClubId());
+      if (hasClubId()) {
+        result = result && (getClubId()
+            == other.getClubId());
+      }
+      result = result && (hasClubName() == other.hasClubName());
+      if (hasClubName()) {
+        result = result && getClubName()
+            .equals(other.getClubName());
+      }
+      result = result && (hasUserId() == other.hasUserId());
+      if (hasUserId()) {
+        result = result && getUserId()
+            .equals(other.getUserId());
+      }
+      result = result && (hasNickName() == other.hasNickName());
+      if (hasNickName()) {
+        result = result && getNickName()
+            .equals(other.getNickName());
+      }
+      result = result && (hasIcoUrl() == other.hasIcoUrl());
+      if (hasIcoUrl()) {
+        result = result && getIcoUrl()
+            .equals(other.getIcoUrl());
+      }
+      result = result && (hasTime() == other.hasTime());
+      if (hasTime()) {
+        result = result && getTime()
+            .equals(other.getTime());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasClubId()) {
+        hash = (37 * hash) + CLUBID_FIELD_NUMBER;
+        hash = (53 * hash) + getClubId();
+      }
+      if (hasClubName()) {
+        hash = (37 * hash) + CLUBNAME_FIELD_NUMBER;
+        hash = (53 * hash) + getClubName().hashCode();
+      }
+      if (hasUserId()) {
+        hash = (37 * hash) + USERID_FIELD_NUMBER;
+        hash = (53 * hash) + getUserId().hashCode();
+      }
+      if (hasNickName()) {
+        hash = (37 * hash) + NICKNAME_FIELD_NUMBER;
+        hash = (53 * hash) + getNickName().hashCode();
+      }
+      if (hasIcoUrl()) {
+        hash = (37 * hash) + ICOURL_FIELD_NUMBER;
+        hash = (53 * hash) + getIcoUrl().hashCode();
+      }
+      if (hasTime()) {
+        hash = (37 * hash) + TIME_FIELD_NUMBER;
+        hash = (53 * hash) + getTime().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *俱乐部信息
+     * </pre>
+     *
+     * Protobuf type {@code JoloProtobuf.AuthSvr.JoloCommon_ClubInfos}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:JoloProtobuf.AuthSvr.JoloCommon_ClubInfos)
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfosOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubInfos_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubInfos_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.class, JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.Builder.class);
+      }
+
+      // Construct using JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        clubId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        clubName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        nickName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        icoUrl_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        time_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return JoloProtobuf.AuthSvr.JoloAuth.internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubInfos_descriptor;
+      }
+
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos getDefaultInstanceForType() {
+        return JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.getDefaultInstance();
+      }
+
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos build() {
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos buildPartial() {
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos result = new JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.clubId_ = clubId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.clubName_ = clubName_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.nickName_ = nickName_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.icoUrl_ = icoUrl_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.time_ = time_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos) {
+          return mergeFrom((JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos other) {
+        if (other == JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos.getDefaultInstance()) return this;
+        if (other.hasClubId()) {
+          setClubId(other.getClubId());
+        }
+        if (other.hasClubName()) {
+          bitField0_ |= 0x00000002;
+          clubName_ = other.clubName_;
+          onChanged();
+        }
+        if (other.hasUserId()) {
+          bitField0_ |= 0x00000004;
+          userId_ = other.userId_;
+          onChanged();
+        }
+        if (other.hasNickName()) {
+          bitField0_ |= 0x00000008;
+          nickName_ = other.nickName_;
+          onChanged();
+        }
+        if (other.hasIcoUrl()) {
+          bitField0_ |= 0x00000010;
+          icoUrl_ = other.icoUrl_;
+          onChanged();
+        }
+        if (other.hasTime()) {
+          bitField0_ |= 0x00000020;
+          time_ = other.time_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasClubId()) {
+          return false;
+        }
+        if (!hasClubName()) {
+          return false;
+        }
+        if (!hasUserId()) {
+          return false;
+        }
+        if (!hasNickName()) {
+          return false;
+        }
+        if (!hasIcoUrl()) {
+          return false;
+        }
+        if (!hasTime()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int clubId_ ;
+      /**
+       * <pre>
+       *俱乐部ID
+       * </pre>
+       *
+       * <code>required int32 ClubId = 1;</code>
+       */
+      public boolean hasClubId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <pre>
+       *俱乐部ID
+       * </pre>
+       *
+       * <code>required int32 ClubId = 1;</code>
+       */
+      public int getClubId() {
+        return clubId_;
+      }
+      /**
+       * <pre>
+       *俱乐部ID
+       * </pre>
+       *
+       * <code>required int32 ClubId = 1;</code>
+       */
+      public Builder setClubId(int value) {
+        bitField0_ |= 0x00000001;
+        clubId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部ID
+       * </pre>
+       *
+       * <code>required int32 ClubId = 1;</code>
+       */
+      public Builder clearClubId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        clubId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object clubName_ = "";
+      /**
+       * <pre>
+       *俱乐部名称
+       * </pre>
+       *
+       * <code>required string ClubName = 2;</code>
+       */
+      public boolean hasClubName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <pre>
+       *俱乐部名称
+       * </pre>
+       *
+       * <code>required string ClubName = 2;</code>
+       */
+      public java.lang.String getClubName() {
+        java.lang.Object ref = clubName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            clubName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *俱乐部名称
+       * </pre>
+       *
+       * <code>required string ClubName = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getClubNameBytes() {
+        java.lang.Object ref = clubName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          clubName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *俱乐部名称
+       * </pre>
+       *
+       * <code>required string ClubName = 2;</code>
+       */
+      public Builder setClubName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        clubName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部名称
+       * </pre>
+       *
+       * <code>required string ClubName = 2;</code>
+       */
+      public Builder clearClubName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        clubName_ = getDefaultInstance().getClubName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部名称
+       * </pre>
+       *
+       * <code>required string ClubName = 2;</code>
+       */
+      public Builder setClubNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        clubName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object userId_ = "";
+      /**
+       * <pre>
+       *创建俱乐部的玩家
+       * </pre>
+       *
+       * <code>required string UserId = 3;</code>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <pre>
+       *创建俱乐部的玩家
+       * </pre>
+       *
+       * <code>required string UserId = 3;</code>
+       */
+      public java.lang.String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *创建俱乐部的玩家
+       * </pre>
+       *
+       * <code>required string UserId = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *创建俱乐部的玩家
+       * </pre>
+       *
+       * <code>required string UserId = 3;</code>
+       */
+      public Builder setUserId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *创建俱乐部的玩家
+       * </pre>
+       *
+       * <code>required string UserId = 3;</code>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *创建俱乐部的玩家
+       * </pre>
+       *
+       * <code>required string UserId = 3;</code>
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object nickName_ = "";
+      /**
+       * <code>required string NickName = 4;</code>
+       */
+      public boolean hasNickName() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required string NickName = 4;</code>
+       */
+      public java.lang.String getNickName() {
+        java.lang.Object ref = nickName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            nickName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string NickName = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNickNameBytes() {
+        java.lang.Object ref = nickName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          nickName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string NickName = 4;</code>
+       */
+      public Builder setNickName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        nickName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string NickName = 4;</code>
+       */
+      public Builder clearNickName() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        nickName_ = getDefaultInstance().getNickName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string NickName = 4;</code>
+       */
+      public Builder setNickNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        nickName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object icoUrl_ = "";
+      /**
+       * <code>required string IcoUrl = 5;</code>
+       */
+      public boolean hasIcoUrl() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required string IcoUrl = 5;</code>
+       */
+      public java.lang.String getIcoUrl() {
+        java.lang.Object ref = icoUrl_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            icoUrl_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string IcoUrl = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIcoUrlBytes() {
+        java.lang.Object ref = icoUrl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          icoUrl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string IcoUrl = 5;</code>
+       */
+      public Builder setIcoUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        icoUrl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string IcoUrl = 5;</code>
+       */
+      public Builder clearIcoUrl() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        icoUrl_ = getDefaultInstance().getIcoUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string IcoUrl = 5;</code>
+       */
+      public Builder setIcoUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        icoUrl_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object time_ = "";
+      /**
+       * <pre>
+       *俱乐部创建时间
+       * </pre>
+       *
+       * <code>required string Time = 6;</code>
+       */
+      public boolean hasTime() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <pre>
+       *俱乐部创建时间
+       * </pre>
+       *
+       * <code>required string Time = 6;</code>
+       */
+      public java.lang.String getTime() {
+        java.lang.Object ref = time_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            time_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *俱乐部创建时间
+       * </pre>
+       *
+       * <code>required string Time = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTimeBytes() {
+        java.lang.Object ref = time_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          time_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *俱乐部创建时间
+       * </pre>
+       *
+       * <code>required string Time = 6;</code>
+       */
+      public Builder setTime(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        time_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部创建时间
+       * </pre>
+       *
+       * <code>required string Time = 6;</code>
+       */
+      public Builder clearTime() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        time_ = getDefaultInstance().getTime();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *俱乐部创建时间
+       * </pre>
+       *
+       * <code>required string Time = 6;</code>
+       */
+      public Builder setTimeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        time_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:JoloProtobuf.AuthSvr.JoloCommon_ClubInfos)
+    }
+
+    // @@protoc_insertion_point(class_scope:JoloProtobuf.AuthSvr.JoloCommon_ClubInfos)
+    private static final JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos();
+    }
+
+    public static JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<JoloCommon_ClubInfos>
+        PARSER = new com.google.protobuf.AbstractParser<JoloCommon_ClubInfos>() {
+      public JoloCommon_ClubInfos parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new JoloCommon_ClubInfos(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<JoloCommon_ClubInfos> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<JoloCommon_ClubInfos> getParserForType() {
+      return PARSER;
+    }
+
+    public JoloProtobuf.AuthSvr.JoloAuth.JoloCommon_ClubInfos getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -92509,10 +100041,35 @@ public final class JoloAuth {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_JoloProtobuf_AuthSvr_JoloAuth_CreateTableRecords_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubUsers_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubUsers_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserInfos_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserInfos_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserNotes_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserNotes_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_RoomInfos_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_JoloProtobuf_AuthSvr_JoloCommon_RoomInfos_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_PlayInfos_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_JoloProtobuf_AuthSvr_JoloCommon_PlayInfos_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubInfos_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubInfos_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_JoloProtobuf_AuthSvr_JoloCommon_HaveItem_descriptor;
   private static final 
@@ -92588,7 +100145,7 @@ public final class JoloAuth {
       "ChannelId\030\004 \002(\t\022\016\n\006Verify\030\005 \002(\t\022\016\n\006UserI" +
       "p\030\006 \001(\t\022\020\n\010Platform\030\007 \001(\005\022\027\n\017PlatformVer" +
       "sion\030\010 \001(\t\022\021\n\tDeviceNum\030\t \001(\t\022\024\n\014DownPla" +
-      "tform\030\n \001(\t\022\020\n\010PackName\030\013 \001(\t\"\242\003\n\023JoloCo" +
+      "tform\030\n \001(\t\022\020\n\010PackName\030\013 \001(\t\"\264\003\n\023JoloCo" +
       "mmon_LoginAck\022\016\n\006UserId\030\001 \001(\t\022\022\n\ndefault" +
       "Ico\030\002 \001(\t\022\020\n\010nickName\030\003 \001(\t\022\016\n\006icoUrl\030\004 " +
       "\001(\t\022\r\n\005money\030\005 \001(\001\022\016\n\006Result\030\006 \002(\005\022\016\n\006Ve" +
@@ -92599,211 +100156,230 @@ public final class JoloAuth {
       "\016FriendFunction\030\r \001(\005\022\027\n\017SpecialFunction" +
       "\030\016 \001(\005\022;\n\010haveItem\030\017 \003(\0132).JoloProtobuf." +
       "AuthSvr.JoloCommon_HaveItem\022\025\n\rNumberOfG" +
-      "ames\030\020 \001(\005\"+\n\031JoLoCommon_CloseNoticeReq\022" +
-      "\016\n\006UserId\030\001 \002(\t\">\n\031JoLoCommon_CloseNotic" +
-      "eAck\022\016\n\006Result\030\001 \002(\005\022\021\n\tResultMsg\030\002 \001(\t\"" +
-      "A\n\025JoLoCommon_ServerInfo\022\016\n\006gameId\030\001 \002(\t" +
-      "\022\n\n\002ip\030\002 \002(\t\022\014\n\004port\030\003 \002(\r\"&\n\025JoLoCommon" +
-      "_ProductReq\022\r\n\005appId\030\001 \002(\t\"\214\001\n\025JoLoCommo" +
-      "n_ProductAck\022\r\n\005appId\030\001 \002(\t\022\016\n\006Result\030\002 " +
-      "\002(\005\022\021\n\tResultMsg\030\003 \001(\t\022A\n\014productInfos\030\004" +
-      " \003(\0132+.JoloProtobuf.AuthSvr.JoLoCommon_P" +
-      "rotocInfo\"\363\001\n\025JoLoCommon_ProtocInfo\022\013\n\003p" +
-      "id\030\001 \002(\t\022\r\n\005price\030\002 \002(\001\022\023\n\013totalReward\030\003" +
-      " \002(\r\022\022\n\nbaseReward\030\004 \002(\r\022\026\n\013extraReward\030" +
-      "\005 \001(\r:\0010\022\027\n\014extraPercent\030\006 \001(\r:\0010\022\r\n\003tag" +
-      "\030\007 \001(\t:\000\022\022\n\npayChannel\030\010 \001(\t\022\023\n\010icoCount" +
-      "\030\t \001(\r:\0010\022\013\n\003idx\030\n \001(\r\022\014\n\004type\030\013 \001(\t\022\021\n\t" +
-      "itemTmpId\030\014 \001(\r\"A\n\023JoloCommon_OrderReq\022\r" +
-      "\n\005appId\030\001 \002(\t\022\013\n\003pid\030\002 \002(\t\022\016\n\006userId\030\003 \002" +
-      "(\t\"J\n\022JoLoCmmon_OrderAck\022\021\n\tstatement\030\001 " +
-      "\001(\t\022\016\n\006Result\030\002 \002(\005\022\021\n\tResultMsg\030\003 \001(\t\"\242" +
-      "\001\n\032JoloCommon_GoogleVerifyReq\022\027\n\017googleS" +
-      "tatement\030\001 \002(\t\022\023\n\013packageName\030\002 \002(\t\022\021\n\tp" +
-      "roductId\030\003 \002(\t\022\020\n\010payToken\030\004 \002(\t\022\031\n\021inAp" +
-      "pPurchaseData\030\005 \002(\t\022\026\n\016inAppSignature\030\006 " +
-      "\002(\t\"\206\001\n\032JoloCommon_GoogleVerifyAck\022\016\n\006Re" +
-      "sult\030\001 \002(\005\022\021\n\tResultMsg\030\002 \001(\t\022\024\n\014current" +
-      "Money\030\003 \001(\001\022\014\n\004type\030\004 \001(\r\022\021\n\titemTmpId\030\005" +
-      " \001(\r\022\016\n\006userId\030\006 \001(\t\"7\n\025JoloAuth_ChangeI" +
-      "coReq\022\016\n\006UserId\030\001 \002(\t\022\016\n\006IcoUrl\030\002 \002(\t\":\n" +
-      "\025JoloAuth_ChangeIcoAck\022\016\n\006Result\030\001 \002(\005\022\021" +
-      "\n\tResultMsg\030\002 \001(\t\"M\n\023JoloAuth_VersionAck" +
-      "\022\016\n\006Result\030\001 \002(\005\022\021\n\tResultMsg\030\002 \001(\t\022\023\n\013D" +
-      "ownLoadUrl\030\003 \001(\t\"j\n\027JoloAuth_ItemsStatus" +
-      "Ack\022\016\n\006UserId\030\001 \002(\t\022\016\n\006ItemId\030\002 \002(\t\022\021\n\tC" +
-      "ountDown\030\003 \002(\004\022\013\n\003Num\030\004 \002(\005\022\017\n\007BigType\030\005" +
-      " \001(\005\"&\n\024JoloAuth_HeadListReq\022\016\n\006UserId\030\001" +
-      " \002(\t\"\310\001\n\024JoloAuth_HeadListAck\022\016\n\006UserId\030" +
-      "\001 \002(\t\022=\n\014ItemInfoList\030\002 \003(\0132\'.JoloProtob" +
-      "uf.AuthSvr.JoloAuth_ItemInfo\022\016\n\006Result\030\003" +
-      " \002(\005\022\021\n\tResultMsg\030\004 \001(\t\022>\n\rLimitItemList" +
-      "\030\005 \003(\0132\'.JoloProtobuf.AuthSvr.JoloAuth_I" +
-      "temInfo\"?\n\033JoloAuth_ItemsStatusListReq\022\016" +
-      "\n\006UserId\030\001 \002(\t\022\020\n\010ItemType\030\002 \002(\005\"\233\001\n\033Jol" +
-      "oAuth_ItemsStatusListAck\022\016\n\006UserId\030\001 \002(\t" +
-      "\022I\n\022ItemStatusInfoList\030\002 \003(\0132-.JoloProto" +
-      "buf.AuthSvr.JoloAuth_ItemStatusInfo\022\016\n\006R" +
-      "esult\030\003 \002(\005\022\021\n\tResultMsg\030\004 \001(\t\"D\n#JoloAu" +
-      "th_Notice2Client_PayResultReq\022\016\n\006userId\030" +
-      "\001 \002(\t\022\r\n\005money\030\002 \002(\001\"D\n JoloAuth_Notice2" +
-      "Client_PayAddReq\022\016\n\006userId\030\001 \002(\t\022\020\n\010addm" +
-      "oney\030\002 \002(\001\"A\n\034JoloCommon_LoginElsewhereA" +
-      "ck\022\016\n\006Result\030\001 \002(\005\022\021\n\tResultMsg\030\002 \001(\t\"\214\001" +
-      "\n\025JoloCommon_InTableAck\022\016\n\006Result\030\001 \002(\005\022" +
-      "\021\n\tResultMsg\030\002 \001(\t\022\016\n\006UserId\030\003 \001(\t\022\016\n\006Ga" +
-      "meId\030\004 \001(\t\022\016\n\006RoomId\030\005 \001(\t\022\017\n\007TableId\030\006 " +
-      "\001(\t\022\017\n\007SeatNum\030\007 \001(\r\"4\n\022JoloAuth_UnlockR" +
-      "eq\022\016\n\006UserId\030\001 \002(\t\022\016\n\006ItemId\030\002 \002(\t\"\222\001\n\022J" +
-      "oloAuth_UnlockAck\022\016\n\006UserId\030\001 \002(\t\022I\n\022Ite" +
-      "mStatusInfoList\030\004 \002(\0132-.JoloProtobuf.Aut" +
-      "hSvr.JoloAuth_ItemStatusInfo\022\016\n\006Result\030\005" +
-      " \002(\005\022\021\n\tResultMsg\030\006 \001(\t\"3\n\017JoloAuth_CMDR" +
-      "eq\022\017\n\007CMDType\030\001 \002(\t\022\017\n\007CMDArgs\030\002 \002(\t\"4\n\017" +
-      "JoloAuth_CMDAck\022\016\n\006Result\030\001 \002(\005\022\021\n\tResul" +
-      "tMsg\030\002 \001(\t\"$\n\022JoloAuth_RedDotReq\022\016\n\006User" +
-      "Id\030\001 \002(\t\"\203\001\n\022JoloAuth_RedDotAck\022\016\n\006UserI" +
-      "d\030\001 \002(\t\022\016\n\006result\030\002 \002(\005\022\021\n\tresultMsg\030\003 \001" +
-      "(\t\022:\n\007redDots\030\004 \003(\0132).JoloProtobuf.AuthS" +
-      "vr.JoloAuth_RedDotInfo\">\n\024JoloAuth_MailL" +
-      "istReq\022\016\n\006userId\030\001 \002(\t\022\026\n\016Forced2Refresh" +
-      "\030\002 \002(\r\"\204\001\n\024JoloAuth_MailListAck\022\016\n\006UserI" +
-      "d\030\001 \002(\t\022\016\n\006result\030\002 \002(\005\022\021\n\tresultMsg\030\003 \001" +
-      "(\t\0229\n\010mailItem\030\004 \003(\0132\'.JoloProtobuf.Auth" +
-      "Svr.JoloAuth_MailItem\"7\n\025JoloAuth_MailCh" +
-      "eckReq\022\016\n\006UserId\030\001 \002(\t\022\016\n\006mailId\030\002 \002(\004\"j" +
-      "\n\025JoloAuth_MailCheckAck\022\016\n\006UserId\030\001 \002(\t\022" +
-      "\016\n\006result\030\002 \002(\005\022\021\n\tresultMsg\030\003 \001(\t\022\016\n\006ma" +
-      "ilId\030\004 \002(\004\022\016\n\006isRead\030\005 \002(\r\"7\n\025JoloAuth_M" +
-      "ailAwardReq\022\016\n\006UserId\030\001 \002(\t\022\016\n\006mailId\030\002 " +
-      "\003(\004\"\236\001\n\025JoloAuth_MailAwardAck\022\016\n\006UserId\030" +
-      "\001 \002(\t\022\017\n\007mailIds\030\002 \003(\004\022\016\n\006result\030\003 \002(\005\022\021" +
-      "\n\tresultMsg\030\004 \001(\t\022A\n\013mailRewards\030\005 \003(\0132," +
-      ".JoloProtobuf.AuthSvr.JoloAuth_MailAward" +
-      "Info\"5\n\023JoloAuth_MailDelReq\022\016\n\006userId\030\001 " +
-      "\002(\t\022\016\n\006mailId\030\002 \003(\004\"X\n\023JoloAuth_MailDelA" +
-      "ck\022\016\n\006UserId\030\001 \002(\t\022\016\n\006result\030\002 \002(\005\022\021\n\tre" +
-      "sultMsg\030\003 \001(\t\022\016\n\006mailId\030\004 \003(\004\":\n\020JoloAut" +
-      "h_MailAck\022\016\n\006UserId\030\001 \002(\t\022\026\n\016Forced2Refr" +
-      "esh\030\002 \002(\r\"-\n\031JoloAuth_PlayerCheckInReq\022\020" +
-      "\n\010PlayerId\030\001 \002(\t\"\260\001\n\031JoloAuth_PlayerChec" +
-      "kInAck\022\031\n\021WhetherCheckInToo\030\001 \002(\r\022\032\n\022Cur" +
-      "rentCheckInDays\030\002 \001(\r\022\021\n\tLoginMode\030\003 \001(\r" +
-      "\022I\n\rCheckInReward\030\004 \003(\01322.JoloProtobuf.A" +
-      "uthSvr.JoloAuth_CheckInRewardObject\"0\n\034J" +
-      "oloAuth_PlayerSeeCheckInReq\022\020\n\010PlayerId\030" +
-      "\001 \002(\t\"\240\001\n\034JoloAuth_PlayerSeeCheckInAck\022\031" +
-      "\n\021WhetherCheckInToo\030\001 \002(\r\022\032\n\022CurrentChec" +
-      "kInDays\030\002 \001(\r\022I\n\rCheckInReward\030\005 \003(\01322.J" +
-      "oloProtobuf.AuthSvr.JoloAuth_CheckInRewa" +
-      "rdObject\")\n\025JoloAuth_SignReachReq\022\020\n\010Pla" +
-      "yerId\030\001 \002(\t\"\213\001\n\025JoloAuth_SignReachAck\022\016\n" +
-      "\006Result\030\001 \002(\r\022\r\n\005Money\030\002 \002(\001\022\021\n\tResultMs" +
-      "g\030\003 \001(\t\022\014\n\004Type\030\004 \001(\t\022\017\n\007ItemUrl\030\005 \001(\t\022\017" +
-      "\n\007ItemNum\030\006 \001(\r\022\020\n\010ItemType\030\007 \001(\r\"P\n\032Jol" +
-      "oCommon_onlineParamsReq\022\020\n\010packName\030\001 \002(" +
-      "\t\022\017\n\007channel\030\002 \002(\t\022\017\n\007version\030\003 \002(\t\"\301\001\n\032" +
-      "JoloCommon_onlineParamsAck\022\024\n\014showActivi" +
-      "ty\030\001 \002(\005\022\020\n\010showMail\030\002 \002(\005\022\027\n\017showAdvert" +
-      "ising\030\003 \002(\005\022\021\n\tplayTypes\030\004 \002(\t\022\017\n\007iconUr" +
-      "l\030\005 \001(\t\022\020\n\010jumpArgs\030\006 \001(\t\022\023\n\013playnowTurn" +
-      "\030\007 \001(\005\022\027\n\017exitAdvertising\030\010 \001(\005\"\'\n\025JoloC" +
-      "ommon_AdCountReq\022\016\n\006userid\030\001 \002(\t\"]\n\025Jolo" +
-      "Common_AdCountAck\022\016\n\006result\030\001 \002(\005\022\r\n\005tim" +
-      "es\030\002 \002(\005\022\022\n\nnextIntvel\030\003 \001(\004\022\021\n\tresultMs" +
-      "g\030\004 \001(\t\"C\n\024JoloCommon_AdInfoReq\022\016\n\006UserI" +
-      "d\030\001 \002(\t\022\r\n\005Money\030\002 \001(\005\022\014\n\004Sign\030\003 \001(\t\"f\n\024" +
-      "JoloCommon_AdInfoAck\022\016\n\006UserId\030\001 \002(\t\022\r\n\005" +
-      "money\030\002 \002(\005\022\016\n\006Result\030\003 \002(\005\022\021\n\tResultMsg" +
-      "\030\004 \001(\t\022\014\n\004Sign\030\005 \001(\t\"=\n\035JoloCommon_RoomC" +
-      "ardRecordsReq\022\016\n\006UserId\030\001 \002(\t\022\014\n\004Sign\030\002 " +
-      "\001(\t\"b\n\035JoloCommon_RoomCardRecordsAck\022A\n\007" +
-      "Records\030\001 \003(\01320.JoloProtobuf.AuthSvr.Jol" +
-      "oCommon_RoomCardRecords\"L\n\031JoloCommon_Pl" +
-      "ayRecordsReq\022\016\n\006UserId\030\001 \002(\t\022\016\n\006GameId\030\002" +
-      " \002(\t\022\017\n\007TableId\030\003 \001(\t\"\334\001\n\031JoloCommon_Pla" +
-      "yRecordsAck\022\016\n\006UserId\030\001 \002(\t\022\016\n\006Result\030\002 " +
-      "\002(\005\022\021\n\tResultMsg\030\003 \001(\t\022C\n\013UserRecords\030\004 " +
-      "\003(\0132..JoloProtobuf.AuthSvr.JoloAuth_User" +
-      "GameRecords\022G\n\014TableRecords\030\005 \001(\01321.Jolo" +
-      "Protobuf.AuthSvr.JoloAuth_TableGameParam" +
-      "eter\"I\n\024JoloCommon_FriendReq\022\020\n\010MeUserId" +
-      "\030\001 \002(\t\022\021\n\tYouUserId\030\002 \001(\t\022\014\n\004Args\030\003 \002(\005\"" +
-      "\251\001\n\024JoloCommon_FriendAck\022\016\n\006UserId\030\001 \002(\t" +
-      "\022\014\n\004Args\030\002 \002(\005\022\021\n\tYouUserId\030\003 \001(\t\022\016\n\006Res" +
-      "ult\030\004 \002(\005\022\021\n\tResultMsg\030\005 \001(\t\022=\n\tUserInfo" +
-      "s\030\006 \003(\0132*.JoloProtobuf.AuthSvr.JoloCommo" +
-      "n_UserInfos\"2\n\036JoloAuth_CreateTableRecor" +
-      "dsReq\022\020\n\010PlayerId\030\001 \002(\t\"o\n\036JoloAuth_Crea" +
-      "teTableRecordsAck\022M\n\022createTableRecords\030" +
-      "\001 \003(\01321.JoloProtobuf.AuthSvr.JoloAuth_Cr" +
-      "eateTableRecords\"p\n JoloCommon_SendAndRe" +
-      "ceiveItemReq\022\016\n\006UserId\030\001 \002(\t\022\016\n\006ItemId\030\002" +
-      " \001(\005\022\020\n\010ItemTime\030\003 \001(\005\022\014\n\004Sign\030\004 \001(\t\022\014\n\004" +
-      "IsMe\030\005 \001(\005\"r\n JoloCommon_SendAndReceiveI" +
-      "temAck\022\016\n\006UserId\030\001 \002(\t\022\r\n\005money\030\002 \002(\005\022\016\n" +
-      "\006Result\030\003 \002(\005\022\021\n\tResultMsg\030\004 \001(\t\022\014\n\004Sign" +
-      "\030\005 \001(\t\"9\n\031JoloCommon_ItemRecordsReq\022\016\n\006U" +
-      "serId\030\001 \002(\t\022\014\n\004Sign\030\002 \001(\t\"Z\n\031JoloCommon_" +
-      "ItemRecordsAck\022=\n\007Records\030\001 \003(\0132,.JoloPr" +
-      "otobuf.AuthSvr.JoloCommon_ItemRecords\"\212\001" +
-      "\n\033JoloAuth_CreateTableRecords\022\016\n\006GameId\030" +
-      "\001 \002(\005\022\017\n\007TableId\030\002 \002(\t\022\022\n\nCreateTime\030\003 \002" +
-      "(\t\022\021\n\tPlayerNum\030\004 \002(\005\022\017\n\007GameNum\030\005 \002(\005\022\022" +
-      "\n\nTableState\030\006 \001(\005\"W\n\024JoloCommon_UserInf" +
-      "os\022\016\n\006UserId\030\001 \002(\t\022\020\n\010NickName\030\002 \002(\t\022\016\n\006" +
-      "IcoUrl\030\003 \002(\t\022\r\n\005State\030\004 \002(\005\"6\n\023JoloCommo" +
-      "n_HaveItem\022\016\n\006ItemId\030\001 \002(\005\022\017\n\007DueTime\030\002 " +
-      "\001(\t\"\241\002\n\026JoloCommon_ItemRecords\022\024\n\014Create" +
-      "UserId\030\001 \002(\t\022\026\n\016CreateNickName\030\002 \002(\t\022\024\n\014" +
-      "CreateIcoUrl\030\003 \002(\t\022\022\n\nCreateTime\030\004 \002(\t\022\021" +
-      "\n\tItemToken\030\005 \002(\t\022\016\n\006ItemId\030\006 \002(\005\022\020\n\010Ite" +
-      "mTime\030\007 \002(\005\022\r\n\005State\030\010 \002(\005\022\025\n\rReceiveUse" +
-      "rId\030\t \002(\t\022\027\n\017ReceiveNickName\030\n \002(\t\022\025\n\rRe" +
-      "ceiveIcoUrl\030\013 \002(\t\022\023\n\013ReceiveTime\030\014 \002(\t\022\017" +
-      "\n\007DueTime\030\r \001(\t\"\202\002\n\032JoloCommon_RoomCardR" +
-      "ecords\022\024\n\014CreateUserId\030\001 \002(\t\022\026\n\016CreateNi" +
-      "ckName\030\002 \002(\t\022\024\n\014CreateIcoUrl\030\003 \002(\t\022\022\n\nCr" +
-      "eateTime\030\004 \002(\t\022\022\n\nMoneyToken\030\005 \002(\t\022\r\n\005Mo" +
-      "ney\030\006 \002(\005\022\r\n\005State\030\007 \002(\005\022\025\n\rReceiveUserI" +
-      "d\030\010 \002(\t\022\027\n\017ReceiveNickName\030\t \002(\t\022\025\n\rRece" +
-      "iveIcoUrl\030\n \002(\t\022\023\n\013ReceiveTime\030\013 \002(\t\"\242\001\n" +
-      "\034JoloAuth_CheckInRewardObject\022\034\n\024RewardP" +
-      "ictureAddress\030\001 \002(\t\022\032\n\022GuestCheckInRewar" +
-      "d\030\002 \002(\001\022\035\n\025FacebookCheckInReward\030\003 \002(\001\022\027" +
-      "\n\017RewardGoodsType\030\004 \001(\t\022\020\n\010ItemType\030\005 \001(" +
-      "\r\"2\n\023JoloAuth_RedDotInfo\022\014\n\004type\030\001 \002(\r\022\r" +
-      "\n\005value\030\002 \002(\r\"\243\001\n\021JoloAuth_MailItem\022\n\n\002i" +
-      "d\030\001 \002(\004\022\r\n\005title\030\002 \002(\t\022\017\n\007content\030\003 \002(\t\022" +
-      "\014\n\004time\030\004 \002(\004\022\016\n\006isRead\030\005 \002(\r\022D\n\016attachm" +
-      "entItem\030\006 \003(\0132,.JoloProtobuf.AuthSvr.Jol" +
-      "oAuth_MailAwardInfo\"^\n\026JoloAuth_MailAwar" +
-      "dInfo\022\016\n\006itemId\030\001 \002(\t\022\014\n\004type\030\002 \002(\r\022\013\n\003u" +
-      "rl\030\003 \002(\t\022\014\n\004name\030\004 \002(\t\022\013\n\003num\030\005 \002(\r\"\311\001\n\021" +
-      "JoloAuth_ItemInfo\022\016\n\006ItemId\030\001 \002(\t\022\020\n\010Ite" +
-      "mName\030\002 \002(\t\022\020\n\010ItemIcon\030\003 \002(\t\022\021\n\tItemPri" +
-      "ce\030\004 \002(\005\022\026\n\016ItemExtraPrice\030\005 \002(\005\022\020\n\010Item" +
-      "Type\030\006 \002(\005\022\020\n\010ItemDesc\030\007 \001(\t\022\017\n\007BigType\030" +
-      "\010 \001(\005\022\023\n\013UnlockPrice\030\t \001(\t\022\013\n\003pid\030\n \001(\t\"" +
-      "I\n\027JoloAuth_ItemStatusInfo\022\016\n\006ItemId\030\001 \002" +
-      "(\t\022\021\n\tCountDown\030\002 \002(\004\022\013\n\003Num\030\003 \002(\005\"q\n\030Jo" +
-      "loAuth_UserGameRecords\022\016\n\006GameId\030\001 \002(\t\022\017" +
-      "\n\007TableId\030\002 \002(\t\022\024\n\014TotalWinLose\030\003 \002(\005\022\014\n" +
-      "\004Time\030\004 \002(\t\022\020\n\010isWinner\030\005 \002(\005\"\235\002\n\033JoloAu" +
-      "th_TableGameParameter\022\017\n\007TableId\030\001 \002(\t\022\021" +
-      "\n\tPlayerNum\030\002 \002(\005\022\024\n\014BaseBetScore\030\003 \002(\005\022" +
-      "\017\n\007ReadyCd\030\004 \001(\005\022\r\n\005BetCd\030\005 \001(\005\022\022\n\nOpenC" +
-      "ardCd\030\006 \001(\005\022\023\n\013BetMaxScore\030\007 \002(\005\022\017\n\007Game" +
-      "Num\030\010 \002(\005\022\017\n\007IsWatch\030\t \001(\005\022\023\n\013BetMultipl" +
-      "e\030\n \002(\t\022D\n\013GameRecords\030\013 \003(\0132/.JoloProto" +
-      "buf.AuthSvr.JoloAuth_TableGameRecords\"\354\001" +
-      "\n\031JoloAuth_TableGameRecords\022\023\n\013CurrGameN" +
-      "um\030\001 \002(\005\022\016\n\006UserId\030\002 \002(\t\022\020\n\010NickName\030\003 \002" +
-      "(\t\022\016\n\006icoUrl\030\004 \002(\t\022\020\n\010CardType\030\005 \002(\005\022\021\n\t" +
-      "HandCards\030\006 \002(\t\022\020\n\010BetScore\030\007 \002(\005\022\024\n\014Win" +
-      "LoseScore\030\010 \002(\005\022\027\n\017PlayerCurrScore\030\t \002(\005" +
-      "\022\021\n\tStartTime\030\n \002(\t\022\017\n\007EndTime\030\013 \002(\tB\nB\010" +
-      "JoloAuth"
+      "ames\030\020 \001(\005\022\020\n\010AntiFake\030\021 \001(\t\"+\n\031JoLoComm" +
+      "on_CloseNoticeReq\022\016\n\006UserId\030\001 \002(\t\">\n\031JoL" +
+      "oCommon_CloseNoticeAck\022\016\n\006Result\030\001 \002(\005\022\021" +
+      "\n\tResultMsg\030\002 \001(\t\"A\n\025JoLoCommon_ServerIn" +
+      "fo\022\016\n\006gameId\030\001 \002(\t\022\n\n\002ip\030\002 \002(\t\022\014\n\004port\030\003" +
+      " \002(\r\"&\n\025JoLoCommon_ProductReq\022\r\n\005appId\030\001" +
+      " \002(\t\"\214\001\n\025JoLoCommon_ProductAck\022\r\n\005appId\030" +
+      "\001 \002(\t\022\016\n\006Result\030\002 \002(\005\022\021\n\tResultMsg\030\003 \001(\t" +
+      "\022A\n\014productInfos\030\004 \003(\0132+.JoloProtobuf.Au" +
+      "thSvr.JoLoCommon_ProtocInfo\"\363\001\n\025JoLoComm" +
+      "on_ProtocInfo\022\013\n\003pid\030\001 \002(\t\022\r\n\005price\030\002 \002(" +
+      "\001\022\023\n\013totalReward\030\003 \002(\r\022\022\n\nbaseReward\030\004 \002" +
+      "(\r\022\026\n\013extraReward\030\005 \001(\r:\0010\022\027\n\014extraPerce" +
+      "nt\030\006 \001(\r:\0010\022\r\n\003tag\030\007 \001(\t:\000\022\022\n\npayChannel" +
+      "\030\010 \001(\t\022\023\n\010icoCount\030\t \001(\r:\0010\022\013\n\003idx\030\n \001(\r" +
+      "\022\014\n\004type\030\013 \001(\t\022\021\n\titemTmpId\030\014 \001(\r\"A\n\023Jol" +
+      "oCommon_OrderReq\022\r\n\005appId\030\001 \002(\t\022\013\n\003pid\030\002" +
+      " \002(\t\022\016\n\006userId\030\003 \002(\t\"J\n\022JoLoCmmon_OrderA" +
+      "ck\022\021\n\tstatement\030\001 \001(\t\022\016\n\006Result\030\002 \002(\005\022\021\n" +
+      "\tResultMsg\030\003 \001(\t\"\242\001\n\032JoloCommon_GoogleVe" +
+      "rifyReq\022\027\n\017googleStatement\030\001 \002(\t\022\023\n\013pack" +
+      "ageName\030\002 \002(\t\022\021\n\tproductId\030\003 \002(\t\022\020\n\010payT" +
+      "oken\030\004 \002(\t\022\031\n\021inAppPurchaseData\030\005 \002(\t\022\026\n" +
+      "\016inAppSignature\030\006 \002(\t\"\206\001\n\032JoloCommon_Goo" +
+      "gleVerifyAck\022\016\n\006Result\030\001 \002(\005\022\021\n\tResultMs" +
+      "g\030\002 \001(\t\022\024\n\014currentMoney\030\003 \001(\001\022\014\n\004type\030\004 " +
+      "\001(\r\022\021\n\titemTmpId\030\005 \001(\r\022\016\n\006userId\030\006 \001(\t\"7" +
+      "\n\025JoloAuth_ChangeIcoReq\022\016\n\006UserId\030\001 \002(\t\022" +
+      "\016\n\006IcoUrl\030\002 \002(\t\":\n\025JoloAuth_ChangeIcoAck" +
+      "\022\016\n\006Result\030\001 \002(\005\022\021\n\tResultMsg\030\002 \001(\t\"M\n\023J" +
+      "oloAuth_VersionAck\022\016\n\006Result\030\001 \002(\005\022\021\n\tRe" +
+      "sultMsg\030\002 \001(\t\022\023\n\013DownLoadUrl\030\003 \001(\t\"j\n\027Jo" +
+      "loAuth_ItemsStatusAck\022\016\n\006UserId\030\001 \002(\t\022\016\n" +
+      "\006ItemId\030\002 \002(\t\022\021\n\tCountDown\030\003 \002(\004\022\013\n\003Num\030" +
+      "\004 \002(\005\022\017\n\007BigType\030\005 \001(\005\"&\n\024JoloAuth_HeadL" +
+      "istReq\022\016\n\006UserId\030\001 \002(\t\"\310\001\n\024JoloAuth_Head" +
+      "ListAck\022\016\n\006UserId\030\001 \002(\t\022=\n\014ItemInfoList\030" +
+      "\002 \003(\0132\'.JoloProtobuf.AuthSvr.JoloAuth_It" +
+      "emInfo\022\016\n\006Result\030\003 \002(\005\022\021\n\tResultMsg\030\004 \001(" +
+      "\t\022>\n\rLimitItemList\030\005 \003(\0132\'.JoloProtobuf." +
+      "AuthSvr.JoloAuth_ItemInfo\"?\n\033JoloAuth_It" +
+      "emsStatusListReq\022\016\n\006UserId\030\001 \002(\t\022\020\n\010Item" +
+      "Type\030\002 \002(\005\"\233\001\n\033JoloAuth_ItemsStatusListA" +
+      "ck\022\016\n\006UserId\030\001 \002(\t\022I\n\022ItemStatusInfoList" +
+      "\030\002 \003(\0132-.JoloProtobuf.AuthSvr.JoloAuth_I" +
+      "temStatusInfo\022\016\n\006Result\030\003 \002(\005\022\021\n\tResultM" +
+      "sg\030\004 \001(\t\"D\n#JoloAuth_Notice2Client_PayRe" +
+      "sultReq\022\016\n\006userId\030\001 \002(\t\022\r\n\005money\030\002 \002(\001\"D" +
+      "\n JoloAuth_Notice2Client_PayAddReq\022\016\n\006us" +
+      "erId\030\001 \002(\t\022\020\n\010addmoney\030\002 \002(\001\"A\n\034JoloComm" +
+      "on_LoginElsewhereAck\022\016\n\006Result\030\001 \002(\005\022\021\n\t" +
+      "ResultMsg\030\002 \001(\t\"\214\001\n\025JoloCommon_InTableAc" +
+      "k\022\016\n\006Result\030\001 \002(\005\022\021\n\tResultMsg\030\002 \001(\t\022\016\n\006" +
+      "UserId\030\003 \001(\t\022\016\n\006GameId\030\004 \001(\t\022\016\n\006RoomId\030\005" +
+      " \001(\t\022\017\n\007TableId\030\006 \001(\t\022\017\n\007SeatNum\030\007 \001(\r\"4" +
+      "\n\022JoloAuth_UnlockReq\022\016\n\006UserId\030\001 \002(\t\022\016\n\006" +
+      "ItemId\030\002 \002(\t\"\222\001\n\022JoloAuth_UnlockAck\022\016\n\006U" +
+      "serId\030\001 \002(\t\022I\n\022ItemStatusInfoList\030\004 \002(\0132" +
+      "-.JoloProtobuf.AuthSvr.JoloAuth_ItemStat" +
+      "usInfo\022\016\n\006Result\030\005 \002(\005\022\021\n\tResultMsg\030\006 \001(" +
+      "\t\"3\n\017JoloAuth_CMDReq\022\017\n\007CMDType\030\001 \002(\t\022\017\n" +
+      "\007CMDArgs\030\002 \002(\t\"4\n\017JoloAuth_CMDAck\022\016\n\006Res" +
+      "ult\030\001 \002(\005\022\021\n\tResultMsg\030\002 \001(\t\"$\n\022JoloAuth" +
+      "_RedDotReq\022\016\n\006UserId\030\001 \002(\t\"\203\001\n\022JoloAuth_" +
+      "RedDotAck\022\016\n\006UserId\030\001 \002(\t\022\016\n\006result\030\002 \002(" +
+      "\005\022\021\n\tresultMsg\030\003 \001(\t\022:\n\007redDots\030\004 \003(\0132)." +
+      "JoloProtobuf.AuthSvr.JoloAuth_RedDotInfo" +
+      "\">\n\024JoloAuth_MailListReq\022\016\n\006userId\030\001 \002(\t" +
+      "\022\026\n\016Forced2Refresh\030\002 \002(\r\"\204\001\n\024JoloAuth_Ma" +
+      "ilListAck\022\016\n\006UserId\030\001 \002(\t\022\016\n\006result\030\002 \002(" +
+      "\005\022\021\n\tresultMsg\030\003 \001(\t\0229\n\010mailItem\030\004 \003(\0132\'" +
+      ".JoloProtobuf.AuthSvr.JoloAuth_MailItem\"" +
+      "7\n\025JoloAuth_MailCheckReq\022\016\n\006UserId\030\001 \002(\t" +
+      "\022\016\n\006mailId\030\002 \002(\004\"j\n\025JoloAuth_MailCheckAc" +
+      "k\022\016\n\006UserId\030\001 \002(\t\022\016\n\006result\030\002 \002(\005\022\021\n\tres" +
+      "ultMsg\030\003 \001(\t\022\016\n\006mailId\030\004 \002(\004\022\016\n\006isRead\030\005" +
+      " \002(\r\"7\n\025JoloAuth_MailAwardReq\022\016\n\006UserId\030" +
+      "\001 \002(\t\022\016\n\006mailId\030\002 \003(\004\"\236\001\n\025JoloAuth_MailA" +
+      "wardAck\022\016\n\006UserId\030\001 \002(\t\022\017\n\007mailIds\030\002 \003(\004" +
+      "\022\016\n\006result\030\003 \002(\005\022\021\n\tresultMsg\030\004 \001(\t\022A\n\013m" +
+      "ailRewards\030\005 \003(\0132,.JoloProtobuf.AuthSvr." +
+      "JoloAuth_MailAwardInfo\"5\n\023JoloAuth_MailD" +
+      "elReq\022\016\n\006userId\030\001 \002(\t\022\016\n\006mailId\030\002 \003(\004\"X\n" +
+      "\023JoloAuth_MailDelAck\022\016\n\006UserId\030\001 \002(\t\022\016\n\006" +
+      "result\030\002 \002(\005\022\021\n\tresultMsg\030\003 \001(\t\022\016\n\006mailI" +
+      "d\030\004 \003(\004\":\n\020JoloAuth_MailAck\022\016\n\006UserId\030\001 " +
+      "\002(\t\022\026\n\016Forced2Refresh\030\002 \002(\r\"-\n\031JoloAuth_" +
+      "PlayerCheckInReq\022\020\n\010PlayerId\030\001 \002(\t\"\260\001\n\031J" +
+      "oloAuth_PlayerCheckInAck\022\031\n\021WhetherCheck" +
+      "InToo\030\001 \002(\r\022\032\n\022CurrentCheckInDays\030\002 \001(\r\022" +
+      "\021\n\tLoginMode\030\003 \001(\r\022I\n\rCheckInReward\030\004 \003(" +
+      "\01322.JoloProtobuf.AuthSvr.JoloAuth_CheckI" +
+      "nRewardObject\"0\n\034JoloAuth_PlayerSeeCheck" +
+      "InReq\022\020\n\010PlayerId\030\001 \002(\t\"\240\001\n\034JoloAuth_Pla" +
+      "yerSeeCheckInAck\022\031\n\021WhetherCheckInToo\030\001 " +
+      "\002(\r\022\032\n\022CurrentCheckInDays\030\002 \001(\r\022I\n\rCheck" +
+      "InReward\030\005 \003(\01322.JoloProtobuf.AuthSvr.Jo" +
+      "loAuth_CheckInRewardObject\")\n\025JoloAuth_S" +
+      "ignReachReq\022\020\n\010PlayerId\030\001 \002(\t\"\213\001\n\025JoloAu" +
+      "th_SignReachAck\022\016\n\006Result\030\001 \002(\r\022\r\n\005Money" +
+      "\030\002 \002(\001\022\021\n\tResultMsg\030\003 \001(\t\022\014\n\004Type\030\004 \001(\t\022" +
+      "\017\n\007ItemUrl\030\005 \001(\t\022\017\n\007ItemNum\030\006 \001(\r\022\020\n\010Ite" +
+      "mType\030\007 \001(\r\"P\n\032JoloCommon_onlineParamsRe" +
+      "q\022\020\n\010packName\030\001 \002(\t\022\017\n\007channel\030\002 \002(\t\022\017\n\007" +
+      "version\030\003 \002(\t\"\301\001\n\032JoloCommon_onlineParam" +
+      "sAck\022\024\n\014showActivity\030\001 \002(\005\022\020\n\010showMail\030\002" +
+      " \002(\005\022\027\n\017showAdvertising\030\003 \002(\005\022\021\n\tplayTyp" +
+      "es\030\004 \002(\t\022\017\n\007iconUrl\030\005 \001(\t\022\020\n\010jumpArgs\030\006 " +
+      "\001(\t\022\023\n\013playnowTurn\030\007 \001(\005\022\027\n\017exitAdvertis" +
+      "ing\030\010 \001(\005\"\'\n\025JoloCommon_AdCountReq\022\016\n\006us" +
+      "erid\030\001 \002(\t\"]\n\025JoloCommon_AdCountAck\022\016\n\006r" +
+      "esult\030\001 \002(\005\022\r\n\005times\030\002 \002(\005\022\022\n\nnextIntvel" +
+      "\030\003 \001(\004\022\021\n\tresultMsg\030\004 \001(\t\"C\n\024JoloCommon_" +
+      "AdInfoReq\022\016\n\006UserId\030\001 \002(\t\022\r\n\005Money\030\002 \001(\005" +
+      "\022\014\n\004Sign\030\003 \001(\t\"f\n\024JoloCommon_AdInfoAck\022\016" +
+      "\n\006UserId\030\001 \002(\t\022\r\n\005money\030\002 \002(\005\022\016\n\006Result\030" +
+      "\003 \002(\005\022\021\n\tResultMsg\030\004 \001(\t\022\014\n\004Sign\030\005 \001(\t\"=" +
+      "\n\035JoloCommon_RoomCardRecordsReq\022\016\n\006UserI" +
+      "d\030\001 \002(\t\022\014\n\004Sign\030\002 \001(\t\"b\n\035JoloCommon_Room" +
+      "CardRecordsAck\022A\n\007Records\030\001 \003(\01320.JoloPr" +
+      "otobuf.AuthSvr.JoloCommon_RoomCardRecord" +
+      "s\"L\n\031JoloCommon_PlayRecordsReq\022\016\n\006UserId" +
+      "\030\001 \002(\t\022\016\n\006GameId\030\002 \002(\t\022\017\n\007TableId\030\003 \001(\t\"" +
+      "\334\001\n\031JoloCommon_PlayRecordsAck\022\016\n\006UserId\030" +
+      "\001 \002(\t\022\016\n\006Result\030\002 \002(\005\022\021\n\tResultMsg\030\003 \001(\t" +
+      "\022C\n\013UserRecords\030\004 \003(\0132..JoloProtobuf.Aut" +
+      "hSvr.JoloAuth_UserGameRecords\022G\n\014TableRe" +
+      "cords\030\005 \001(\01321.JoloProtobuf.AuthSvr.JoloA" +
+      "uth_TableGameParameter\"h\n\024JoloCommon_Fri" +
+      "endReq\022\016\n\006UserId\030\001 \002(\t\022\016\n\006ClubId\030\002 \001(\005\022\020" +
+      "\n\010ClubName\030\003 \001(\t\022\020\n\010UserName\030\004 \001(\t\022\014\n\004Ar" +
+      "gs\030\005 \002(\005\"\224\002\n\024JoloCommon_FriendAck\022\016\n\006Use" +
+      "rId\030\001 \002(\t\022\014\n\004Args\030\003 \002(\005\022\016\n\006Result\030\005 \002(\005\022" +
+      "\021\n\tResultMsg\030\006 \001(\t\022=\n\tClubUsers\030\007 \001(\0132*." +
+      "JoloProtobuf.AuthSvr.JoloCommon_ClubUser" +
+      "s\022=\n\tRoomInfos\030\010 \003(\0132*.JoloProtobuf.Auth" +
+      "Svr.JoloCommon_RoomInfos\022=\n\tClubInfos\030\t " +
+      "\003(\0132*.JoloProtobuf.AuthSvr.JoloCommon_Cl" +
+      "ubInfos\"2\n\036JoloAuth_CreateTableRecordsRe" +
+      "q\022\020\n\010PlayerId\030\001 \002(\t\"o\n\036JoloAuth_CreateTa" +
+      "bleRecordsAck\022M\n\022createTableRecords\030\001 \003(" +
+      "\01321.JoloProtobuf.AuthSvr.JoloAuth_Create" +
+      "TableRecords\"p\n JoloCommon_SendAndReceiv" +
+      "eItemReq\022\016\n\006UserId\030\001 \002(\t\022\016\n\006ItemId\030\002 \001(\005" +
+      "\022\020\n\010ItemTime\030\003 \001(\005\022\014\n\004Sign\030\004 \001(\t\022\014\n\004IsMe" +
+      "\030\005 \001(\005\"r\n JoloCommon_SendAndReceiveItemA" +
+      "ck\022\016\n\006UserId\030\001 \002(\t\022\r\n\005money\030\002 \002(\005\022\016\n\006Res" +
+      "ult\030\003 \002(\005\022\021\n\tResultMsg\030\004 \001(\t\022\014\n\004Sign\030\005 \001" +
+      "(\t\"9\n\031JoloCommon_ItemRecordsReq\022\016\n\006UserI" +
+      "d\030\001 \002(\t\022\014\n\004Sign\030\002 \001(\t\"Z\n\031JoloCommon_Item" +
+      "RecordsAck\022=\n\007Records\030\001 \003(\0132,.JoloProtob" +
+      "uf.AuthSvr.JoloCommon_ItemRecords\"\212\001\n\033Jo" +
+      "loAuth_CreateTableRecords\022\016\n\006GameId\030\001 \002(" +
+      "\005\022\017\n\007TableId\030\002 \002(\t\022\022\n\nCreateTime\030\003 \002(\t\022\021" +
+      "\n\tPlayerNum\030\004 \002(\005\022\017\n\007GameNum\030\005 \002(\005\022\022\n\nTa" +
+      "bleState\030\006 \001(\005\"\224\001\n\024JoloCommon_ClubUsers\022" +
+      "=\n\tuserInfos\030\001 \003(\0132*.JoloProtobuf.AuthSv" +
+      "r.JoloCommon_UserInfos\022=\n\tuserNotes\030\002 \003(" +
+      "\0132*.JoloProtobuf.AuthSvr.JoloCommon_User" +
+      "Notes\"W\n\024JoloCommon_UserInfos\022\016\n\006UserId\030" +
+      "\001 \002(\t\022\020\n\010NickName\030\002 \002(\t\022\016\n\006IcoUrl\030\003 \002(\t\022" +
+      "\r\n\005State\030\004 \002(\005\"<\n\024JoloCommon_UserNotes\022\022" +
+      "\n\nNoteUserId\030\001 \002(\t\022\020\n\010NoteName\030\002 \002(\t\"\275\001\n" +
+      "\024JoloCommon_RoomInfos\022\016\n\006GameId\030\001 \002(\005\022\017\n" +
+      "\007TableId\030\002 \002(\t\022\021\n\tPlayerNum\030\004 \002(\005\022\017\n\007Gam" +
+      "eNum\030\005 \002(\005\022\016\n\006MaxBet\030\006 \001(\005\022\023\n\013CurrGameNu" +
+      "m\030\007 \002(\005\022;\n\007PlayerS\030\010 \003(\0132*.JoloProtobuf." +
+      "AuthSvr.JoloCommon_PlayInfos\"Y\n\024JoloComm" +
+      "on_PlayInfos\022\016\n\006UserId\030\001 \002(\t\022\020\n\010NickName" +
+      "\030\002 \002(\t\022\016\n\006IcoUrl\030\003 \002(\t\022\017\n\007SeatNum\030\004 \001(\021\"" +
+      "x\n\024JoloCommon_ClubInfos\022\016\n\006ClubId\030\001 \002(\005\022" +
+      "\020\n\010ClubName\030\002 \002(\t\022\016\n\006UserId\030\003 \002(\t\022\020\n\010Nic" +
+      "kName\030\004 \002(\t\022\016\n\006IcoUrl\030\005 \002(\t\022\014\n\004Time\030\006 \002(" +
+      "\t\"6\n\023JoloCommon_HaveItem\022\016\n\006ItemId\030\001 \002(\005" +
+      "\022\017\n\007DueTime\030\002 \001(\t\"\241\002\n\026JoloCommon_ItemRec" +
+      "ords\022\024\n\014CreateUserId\030\001 \002(\t\022\026\n\016CreateNick" +
+      "Name\030\002 \002(\t\022\024\n\014CreateIcoUrl\030\003 \002(\t\022\022\n\nCrea" +
+      "teTime\030\004 \002(\t\022\021\n\tItemToken\030\005 \002(\t\022\016\n\006ItemI" +
+      "d\030\006 \002(\005\022\020\n\010ItemTime\030\007 \002(\005\022\r\n\005State\030\010 \002(\005" +
+      "\022\025\n\rReceiveUserId\030\t \002(\t\022\027\n\017ReceiveNickNa" +
+      "me\030\n \002(\t\022\025\n\rReceiveIcoUrl\030\013 \002(\t\022\023\n\013Recei" +
+      "veTime\030\014 \002(\t\022\017\n\007DueTime\030\r \001(\t\"\202\002\n\032JoloCo" +
+      "mmon_RoomCardRecords\022\024\n\014CreateUserId\030\001 \002" +
+      "(\t\022\026\n\016CreateNickName\030\002 \002(\t\022\024\n\014CreateIcoU" +
+      "rl\030\003 \002(\t\022\022\n\nCreateTime\030\004 \002(\t\022\022\n\nMoneyTok" +
+      "en\030\005 \002(\t\022\r\n\005Money\030\006 \002(\005\022\r\n\005State\030\007 \002(\005\022\025" +
+      "\n\rReceiveUserId\030\010 \002(\t\022\027\n\017ReceiveNickName" +
+      "\030\t \002(\t\022\025\n\rReceiveIcoUrl\030\n \002(\t\022\023\n\013Receive" +
+      "Time\030\013 \002(\t\"\242\001\n\034JoloAuth_CheckInRewardObj" +
+      "ect\022\034\n\024RewardPictureAddress\030\001 \002(\t\022\032\n\022Gue" +
+      "stCheckInReward\030\002 \002(\001\022\035\n\025FacebookCheckIn" +
+      "Reward\030\003 \002(\001\022\027\n\017RewardGoodsType\030\004 \001(\t\022\020\n" +
+      "\010ItemType\030\005 \001(\r\"2\n\023JoloAuth_RedDotInfo\022\014" +
+      "\n\004type\030\001 \002(\r\022\r\n\005value\030\002 \002(\r\"\243\001\n\021JoloAuth" +
+      "_MailItem\022\n\n\002id\030\001 \002(\004\022\r\n\005title\030\002 \002(\t\022\017\n\007" +
+      "content\030\003 \002(\t\022\014\n\004time\030\004 \002(\004\022\016\n\006isRead\030\005 " +
+      "\002(\r\022D\n\016attachmentItem\030\006 \003(\0132,.JoloProtob" +
+      "uf.AuthSvr.JoloAuth_MailAwardInfo\"^\n\026Jol" +
+      "oAuth_MailAwardInfo\022\016\n\006itemId\030\001 \002(\t\022\014\n\004t" +
+      "ype\030\002 \002(\r\022\013\n\003url\030\003 \002(\t\022\014\n\004name\030\004 \002(\t\022\013\n\003" +
+      "num\030\005 \002(\r\"\311\001\n\021JoloAuth_ItemInfo\022\016\n\006ItemI" +
+      "d\030\001 \002(\t\022\020\n\010ItemName\030\002 \002(\t\022\020\n\010ItemIcon\030\003 " +
+      "\002(\t\022\021\n\tItemPrice\030\004 \002(\005\022\026\n\016ItemExtraPrice" +
+      "\030\005 \002(\005\022\020\n\010ItemType\030\006 \002(\005\022\020\n\010ItemDesc\030\007 \001" +
+      "(\t\022\017\n\007BigType\030\010 \001(\005\022\023\n\013UnlockPrice\030\t \001(\t" +
+      "\022\013\n\003pid\030\n \001(\t\"I\n\027JoloAuth_ItemStatusInfo" +
+      "\022\016\n\006ItemId\030\001 \002(\t\022\021\n\tCountDown\030\002 \002(\004\022\013\n\003N" +
+      "um\030\003 \002(\005\"q\n\030JoloAuth_UserGameRecords\022\016\n\006" +
+      "GameId\030\001 \002(\t\022\017\n\007TableId\030\002 \002(\t\022\024\n\014TotalWi" +
+      "nLose\030\003 \002(\005\022\014\n\004Time\030\004 \002(\t\022\020\n\010isWinner\030\005 " +
+      "\002(\005\"\235\002\n\033JoloAuth_TableGameParameter\022\017\n\007T" +
+      "ableId\030\001 \002(\t\022\021\n\tPlayerNum\030\002 \002(\005\022\024\n\014BaseB" +
+      "etScore\030\003 \002(\005\022\017\n\007ReadyCd\030\004 \001(\005\022\r\n\005BetCd\030" +
+      "\005 \001(\005\022\022\n\nOpenCardCd\030\006 \001(\005\022\023\n\013BetMaxScore" +
+      "\030\007 \002(\005\022\017\n\007GameNum\030\010 \002(\005\022\017\n\007IsWatch\030\t \001(\005" +
+      "\022\023\n\013BetMultiple\030\n \002(\t\022D\n\013GameRecords\030\013 \003" +
+      "(\0132/.JoloProtobuf.AuthSvr.JoloAuth_Table" +
+      "GameRecords\"\354\001\n\031JoloAuth_TableGameRecord" +
+      "s\022\023\n\013CurrGameNum\030\001 \002(\005\022\016\n\006UserId\030\002 \002(\t\022\020" +
+      "\n\010NickName\030\003 \002(\t\022\016\n\006icoUrl\030\004 \002(\t\022\020\n\010Card" +
+      "Type\030\005 \002(\005\022\021\n\tHandCards\030\006 \002(\t\022\020\n\010BetScor" +
+      "e\030\007 \002(\005\022\024\n\014WinLoseScore\030\010 \002(\005\022\027\n\017PlayerC" +
+      "urrScore\030\t \002(\005\022\021\n\tStartTime\030\n \002(\t\022\017\n\007End" +
+      "Time\030\013 \002(\tB\nB\010JoloAuth"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -92828,7 +100404,7 @@ public final class JoloAuth {
     internal_static_JoloProtobuf_AuthSvr_JoloCommon_LoginAck_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloCommon_LoginAck_descriptor,
-        new java.lang.String[] { "UserId", "DefaultIco", "NickName", "IcoUrl", "Money", "Result", "Verify", "ResultMsg", "IsNew", "FirstLanding", "ChannelId", "Serverinfo", "FriendFunction", "SpecialFunction", "HaveItem", "NumberOfGames", });
+        new java.lang.String[] { "UserId", "DefaultIco", "NickName", "IcoUrl", "Money", "Result", "Verify", "ResultMsg", "IsNew", "FirstLanding", "ChannelId", "Serverinfo", "FriendFunction", "SpecialFunction", "HaveItem", "NumberOfGames", "AntiFake", });
     internal_static_JoloProtobuf_AuthSvr_JoLoCommon_CloseNoticeReq_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_JoloProtobuf_AuthSvr_JoLoCommon_CloseNoticeReq_fieldAccessorTable = new
@@ -93152,13 +100728,13 @@ public final class JoloAuth {
     internal_static_JoloProtobuf_AuthSvr_JoloCommon_FriendReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloCommon_FriendReq_descriptor,
-        new java.lang.String[] { "MeUserId", "YouUserId", "Args", });
+        new java.lang.String[] { "UserId", "ClubId", "ClubName", "UserName", "Args", });
     internal_static_JoloProtobuf_AuthSvr_JoloCommon_FriendAck_descriptor =
       getDescriptor().getMessageTypes().get(56);
     internal_static_JoloProtobuf_AuthSvr_JoloCommon_FriendAck_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloCommon_FriendAck_descriptor,
-        new java.lang.String[] { "UserId", "Args", "YouUserId", "Result", "ResultMsg", "UserInfos", });
+        new java.lang.String[] { "UserId", "Args", "Result", "ResultMsg", "ClubUsers", "RoomInfos", "ClubInfos", });
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_CreateTableRecordsReq_descriptor =
       getDescriptor().getMessageTypes().get(57);
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_CreateTableRecordsReq_fieldAccessorTable = new
@@ -93201,80 +100777,110 @@ public final class JoloAuth {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloAuth_CreateTableRecords_descriptor,
         new java.lang.String[] { "GameId", "TableId", "CreateTime", "PlayerNum", "GameNum", "TableState", });
-    internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserInfos_descriptor =
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubUsers_descriptor =
       getDescriptor().getMessageTypes().get(64);
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubUsers_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubUsers_descriptor,
+        new java.lang.String[] { "UserInfos", "UserNotes", });
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserInfos_descriptor =
+      getDescriptor().getMessageTypes().get(65);
     internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserInfos_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserInfos_descriptor,
         new java.lang.String[] { "UserId", "NickName", "IcoUrl", "State", });
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserNotes_descriptor =
+      getDescriptor().getMessageTypes().get(66);
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserNotes_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_JoloProtobuf_AuthSvr_JoloCommon_UserNotes_descriptor,
+        new java.lang.String[] { "NoteUserId", "NoteName", });
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_RoomInfos_descriptor =
+      getDescriptor().getMessageTypes().get(67);
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_RoomInfos_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_JoloProtobuf_AuthSvr_JoloCommon_RoomInfos_descriptor,
+        new java.lang.String[] { "GameId", "TableId", "PlayerNum", "GameNum", "MaxBet", "CurrGameNum", "PlayerS", });
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_PlayInfos_descriptor =
+      getDescriptor().getMessageTypes().get(68);
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_PlayInfos_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_JoloProtobuf_AuthSvr_JoloCommon_PlayInfos_descriptor,
+        new java.lang.String[] { "UserId", "NickName", "IcoUrl", "SeatNum", });
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubInfos_descriptor =
+      getDescriptor().getMessageTypes().get(69);
+    internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubInfos_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_JoloProtobuf_AuthSvr_JoloCommon_ClubInfos_descriptor,
+        new java.lang.String[] { "ClubId", "ClubName", "UserId", "NickName", "IcoUrl", "Time", });
     internal_static_JoloProtobuf_AuthSvr_JoloCommon_HaveItem_descriptor =
-      getDescriptor().getMessageTypes().get(65);
+      getDescriptor().getMessageTypes().get(70);
     internal_static_JoloProtobuf_AuthSvr_JoloCommon_HaveItem_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloCommon_HaveItem_descriptor,
         new java.lang.String[] { "ItemId", "DueTime", });
     internal_static_JoloProtobuf_AuthSvr_JoloCommon_ItemRecords_descriptor =
-      getDescriptor().getMessageTypes().get(66);
+      getDescriptor().getMessageTypes().get(71);
     internal_static_JoloProtobuf_AuthSvr_JoloCommon_ItemRecords_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloCommon_ItemRecords_descriptor,
         new java.lang.String[] { "CreateUserId", "CreateNickName", "CreateIcoUrl", "CreateTime", "ItemToken", "ItemId", "ItemTime", "State", "ReceiveUserId", "ReceiveNickName", "ReceiveIcoUrl", "ReceiveTime", "DueTime", });
     internal_static_JoloProtobuf_AuthSvr_JoloCommon_RoomCardRecords_descriptor =
-      getDescriptor().getMessageTypes().get(67);
+      getDescriptor().getMessageTypes().get(72);
     internal_static_JoloProtobuf_AuthSvr_JoloCommon_RoomCardRecords_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloCommon_RoomCardRecords_descriptor,
         new java.lang.String[] { "CreateUserId", "CreateNickName", "CreateIcoUrl", "CreateTime", "MoneyToken", "Money", "State", "ReceiveUserId", "ReceiveNickName", "ReceiveIcoUrl", "ReceiveTime", });
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_CheckInRewardObject_descriptor =
-      getDescriptor().getMessageTypes().get(68);
+      getDescriptor().getMessageTypes().get(73);
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_CheckInRewardObject_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloAuth_CheckInRewardObject_descriptor,
         new java.lang.String[] { "RewardPictureAddress", "GuestCheckInReward", "FacebookCheckInReward", "RewardGoodsType", "ItemType", });
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_RedDotInfo_descriptor =
-      getDescriptor().getMessageTypes().get(69);
+      getDescriptor().getMessageTypes().get(74);
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_RedDotInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloAuth_RedDotInfo_descriptor,
         new java.lang.String[] { "Type", "Value", });
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_MailItem_descriptor =
-      getDescriptor().getMessageTypes().get(70);
+      getDescriptor().getMessageTypes().get(75);
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_MailItem_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloAuth_MailItem_descriptor,
         new java.lang.String[] { "Id", "Title", "Content", "Time", "IsRead", "AttachmentItem", });
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_MailAwardInfo_descriptor =
-      getDescriptor().getMessageTypes().get(71);
+      getDescriptor().getMessageTypes().get(76);
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_MailAwardInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloAuth_MailAwardInfo_descriptor,
         new java.lang.String[] { "ItemId", "Type", "Url", "Name", "Num", });
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_ItemInfo_descriptor =
-      getDescriptor().getMessageTypes().get(72);
+      getDescriptor().getMessageTypes().get(77);
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_ItemInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloAuth_ItemInfo_descriptor,
         new java.lang.String[] { "ItemId", "ItemName", "ItemIcon", "ItemPrice", "ItemExtraPrice", "ItemType", "ItemDesc", "BigType", "UnlockPrice", "Pid", });
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_ItemStatusInfo_descriptor =
-      getDescriptor().getMessageTypes().get(73);
+      getDescriptor().getMessageTypes().get(78);
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_ItemStatusInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloAuth_ItemStatusInfo_descriptor,
         new java.lang.String[] { "ItemId", "CountDown", "Num", });
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_UserGameRecords_descriptor =
-      getDescriptor().getMessageTypes().get(74);
+      getDescriptor().getMessageTypes().get(79);
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_UserGameRecords_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloAuth_UserGameRecords_descriptor,
         new java.lang.String[] { "GameId", "TableId", "TotalWinLose", "Time", "IsWinner", });
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_TableGameParameter_descriptor =
-      getDescriptor().getMessageTypes().get(75);
+      getDescriptor().getMessageTypes().get(80);
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_TableGameParameter_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloAuth_TableGameParameter_descriptor,
         new java.lang.String[] { "TableId", "PlayerNum", "BaseBetScore", "ReadyCd", "BetCd", "OpenCardCd", "BetMaxScore", "GameNum", "IsWatch", "BetMultiple", "GameRecords", });
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_TableGameRecords_descriptor =
-      getDescriptor().getMessageTypes().get(76);
+      getDescriptor().getMessageTypes().get(81);
     internal_static_JoloProtobuf_AuthSvr_JoloAuth_TableGameRecords_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoloProtobuf_AuthSvr_JoloAuth_TableGameRecords_descriptor,

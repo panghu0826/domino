@@ -71,7 +71,7 @@ public class GameLogic {
 //            CardOfTableHolder.PutCardOperationObj(table.getCurrGameOrderId(),
 //                    new DealCardForTable(new RoomTableRelationModel(table.getPlayType() + "", table.getRoomId(), table.getTableId(), table.getTableStateEnum().getValue()),
 //                            table.getCurrGameOrderId()));
-            CardOfTableHolder.PutCardOperationObj(table.getCurrGameOrderId(),new DealCardForTable(table.getPlayType()));
+            CardOfTableHolder.PutCardOperationObj(table.getCurrGameOrderId(),new DealCardForTable(table.getGameType()));
             table.getInGamePlayers().forEach((k, player) -> {//所有人下底注
                 int betScore = (int) table.getCurrBaseBetScore();//桌子目前的底注
                 player.setState(PlayerStateEnum.beting);//设置桌子玩家的状态都为下注中
@@ -120,6 +120,7 @@ public class GameLogic {
                     public void processImpl() throws Exception {
                         //记录桌子最后操作时间
                         table.setLastActionTime(System.currentTimeMillis());
+
                         //玩家超时弃牌
                         PlayerInfo currBetPlayer = table.getInGamePlayers().get(table.getCurrActionSeatNum());
                         if (currBetPlayer != null) {
@@ -159,7 +160,11 @@ public class GameLogic {
                             }
                         }
                         log.info("开牌倒计时结束，进入结算：{}",table.toString());
-                        settleAnimation(table); //调用计时器，倒计时结算动画
+                        if(table.getTableStateEnum() == TableStateEnum.OPEN_CARD){
+                            settleAnimation(table); //调用计时器，倒计时结算动画
+                        }else {
+                            log.error("开牌倒计时结束！桌子状态出错：{}",table.getTableStateEnum());
+                        }
                     }
                 }
         );

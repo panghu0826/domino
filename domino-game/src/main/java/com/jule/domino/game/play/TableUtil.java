@@ -219,13 +219,21 @@ public class TableUtil {
                         .setCurrActionSurplusTime(table.getBetCd())
                         .setIsDealer(0)
                         .setState(player.getState().getValue())
-                        .setIsBlind(0)
-                        .addAllHandCards(Ints.asList(player.getHandCards()));
-                if (table.getSeeHandCardsPlayerId() == null || !currPlayerId.equals(table.getSeeHandCardsPlayerId())) {
-                    //广播里自己的手牌齐全，其他人的前两张张为0
-                    if (!player.getPlayerId().equals(currPlayerId)) {
-                        tablePlay.setHandCards(0, 0);
-                        tablePlay.setHandCards(1, 0);
+                        .setIsBlind(0);
+                if(table.getGameType() == 1){
+                    tablePlay.addAllHandCards(Ints.asList(player.getHandCards()));
+                    if (table.getSeeHandCardsPlayerId() == null || !currPlayerId.equals(table.getSeeHandCardsPlayerId())) {
+                        //广播里自己的手牌齐全，其他人的前两张张为0
+                        if (!player.getPlayerId().equals(currPlayerId)) {
+                            tablePlay.setHandCards(0, 0);
+                            tablePlay.setHandCards(1, 0);
+                        }
+                    }
+                }else if(table.getGameType() == 2){
+                    if (player.getPlayerId().equals(currPlayerId)) {
+                        tablePlay.addAllHandCards(Ints.asList(player.getHandCards()));
+                    }else {
+                        tablePlay.addAllHandCards(Ints.asList(new int[player.getHandCards().length]));//用0占位
                     }
                 }
                 list.add(tablePlay.build());

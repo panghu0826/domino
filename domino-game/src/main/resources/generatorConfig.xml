@@ -46,7 +46,7 @@
         <!--<property name="useActualColumnNames" value="true"/>-->
         <!--</table>-->
         <!--需要修改：schema：数据库名(oracle需要去掉该值) tableName：表名 domainObjectName：entity名-->
-        <table schema="domino" tableName="user_item" domainObjectName="UserItemModel"
+        <table schema="domino" tableName="club_note" domainObjectName="ClubNoteModel"
                enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true"
                selectByExampleQueryId="false">

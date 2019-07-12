@@ -30,12 +30,12 @@ public class RoomStateService {
      * @param tableId
      * @return RoomTableRelationModel
      */
-    public RoomTableRelationModel getExistTable( String tableId) {
+    public RoomTableRelationModel getExistTable(String gameId, String roomId, String tableId) {
         RoomTableRelationModel ret = StoredObjManager.getStoredObjInMap(RoomTableRelationModel.class,
-                RedisConst.TABLE_INSTANCE.getProfix(),
+                RedisConst.TABLE_INSTANCE.getProfix() + gameId + roomId,
                 RedisConst.TABLE_INSTANCE.getField() + tableId);
 
-        log.info("getExistTable() tableId ->"+tableId+(ret!=null?" "+ret.toString():" ret is null"));
+        log.info("getExistTable() gameId->"+gameId+" roomId->"+roomId+",tableId ->"+tableId+(ret!=null?" "+ret.toString():" ret is null"));
         if (ret != null) {
             return ret;
         }

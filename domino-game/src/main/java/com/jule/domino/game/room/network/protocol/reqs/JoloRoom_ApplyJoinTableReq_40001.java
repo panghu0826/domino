@@ -64,7 +64,7 @@ public class JoloRoom_ApplyJoinTableReq_40001 extends ClientReq {
         int playerNum = req.getTableInfo().getPlayerNum();
         AbstractTable table = null;
 
-        ack.setUserId(userId).setGameId(gameId).setRoomId(roomId).setTableId(tableId);
+        ack.setUserId(userId).setGameId("").setRoomId(roomId).setTableId(tableId);
         try {
             //用户信息：从缓存获取
             User user = StoredObjManager.hget(RedisConst.USER_INFO.getProfix(), RedisConst.USER_INFO.getField() + userId, User.class);
@@ -102,7 +102,8 @@ public class JoloRoom_ApplyJoinTableReq_40001 extends ClientReq {
                             .setBaseBetScore(0)
                             .setBetMaxScore(0)
                             .setGameNum(0)
-                            .setCurrGameNum(0).build());
+                            .setCurrGameNum(0)
+                            .build());
                     ctx.writeAndFlush(new JoloRoom_ApplyJoinTableAck_40001(ack.build(), header));
                     return;
                 }
@@ -150,34 +151,34 @@ public class JoloRoom_ApplyJoinTableReq_40001 extends ClientReq {
                 ctx.writeAndFlush(new JoloRoom_ApplyJoinTableAck_40001(ack.setResult(-2).build(), header));
                 return;
             }
-
-            if (req.hasTableId() && !table.isEveryoneCanJoinIn() && !userId.equals(table.getCreateTableUserId())) {
-                //桌子不是所有人可加入，判断是好友否
-                List<FriendTableModel> friends = DBUtil.selectFriendByUserId(table.getCreateTableUserId());
-                boolean isFriend = false;
-                if (friends != null) {
-                    for (FriendTableModel ftm : friends) {
-                        if (userId.equals(ftm.getFriendUserId()) && ftm.getState() == 3) {
-                            isFriend = true;
-                        }
-                    }
-                }
-                if (!isFriend) {
-                    ack.setTableId("").setBetMultiple("").addAllPlayerInfoList(new ArrayList<>()).setResultMsg("该桌子开启了好友验证，你还不是他的好友");
-                    ack.setTableInfo(JoloRoom.JoloGame_Table_Info.newBuilder()
-                            .setTableId("")
-                            .setPlayerNum(0)
-                            .setBaseBetScore(0)
-                            .setGameNum(0)
-                            .setCurrGameNum(0)
-                            .setBetMaxScore(0).build());
-                    ctx.writeAndFlush(new JoloRoom_ApplyJoinTableAck_40001(ack.setResult(-3).build(), header));
-                    return;
-                }
-            }
+            ack.setGameId(table.getGameType() + "");
+//            if (req.hasTableId() && !table.isEveryoneCanJoinIn() && !userId.equals(table.getCreateTableUserId())) {
+//                //桌子不是所有人可加入，判断是好友否
+//                List<FriendTableModel> friends = DBUtil.selectFriendByUserId(table.getCreateTableUserId());
+//                boolean isFriend = false;
+//                if (friends != null) {
+//                    for (FriendTableModel ftm : friends) {
+//                        if (userId.equals(ftm.getFriendUserId()) && ftm.getState() == 3) {
+//                            isFriend = true;
+//                        }
+//                    }
+//                }
+//                if (!isFriend) {
+//                    ack.setTableId("").setBetMultiple("").addAllPlayerInfoList(new ArrayList<>()).setResultMsg("该桌子开启了好友验证，你还不是他的好友");
+//                    ack.setTableInfo(JoloRoom.JoloGame_Table_Info.newBuilder()
+//                            .setTableId("")
+//                            .setPlayerNum(0)
+//                            .setBaseBetScore(0)
+//                            .setGameNum(0)
+//                            .setCurrGameNum(0)
+//                            .setBetMaxScore(0).build());
+//                    ctx.writeAndFlush(new JoloRoom_ApplyJoinTableAck_40001(ack.setResult(-3).build(), header));
+//                    return;
+//                }
+//            }
 
             //从redis获取桌子的信息
-            RoomTableRelationModel roomTable = RoomStateService.getInstance().getExistTable(tableId);
+            RoomTableRelationModel roomTable = RoomStateService.getInstance().getExistTable("1", roomId, tableId);
 //            String icon = StringUtils.isEmpty(user.getUser_defined_head()) ? user.getIco_url() : user.getUser_defined_head();
             String icon = user.getIco_url();
             PlayerInfo player = table.getPlayer(userId);
@@ -196,11 +197,11 @@ public class JoloRoom_ApplyJoinTableReq_40001 extends ClientReq {
             //如果玩家不在游戏中 将玩家加入房间
             if (gameRoomTableSeatRelationModel == null) {
                 table.joinRoom(player);
-            }else {
-                if(!tableId.equals(gameRoomTableSeatRelationModel.getTableId())){
+            } else {
+                if (!tableId.equals(gameRoomTableSeatRelationModel.getTableId())) {
                     table.joinRoom(player);
-                }else {
-                    log.debug("玩家回到自己原来的桌子不做加入游戏：{}",table.getAllPlayers().containsKey(player.getPlayerId()));
+                } else {
+                    log.debug("玩家回到自己原来的桌子不做加入游戏：{}", table.getAllPlayers().containsKey(player.getPlayerId()));
                 }
             }
             log.info("房间总人数：{}，座位上人数：{}，游戏中人数：{}", table.getAllPlayers().size(), table.getInGamePlayersBySeatNum().size(), table.getInGamePlayers().size());
@@ -217,8 +218,8 @@ public class JoloRoom_ApplyJoinTableReq_40001 extends ClientReq {
             JedisPoolWrap.getInstance().set(GameConst.CACHE_PLAY_TYPE + userId, gameId, -1);
             ctx.writeAndFlush(new JoloRoom_ApplyJoinTableAck_40001(ack.setResult(1).build(), header));
             //通知有玩家入桌
-            NoticeBroadcastMessages.playerJoinTable(table,player);
-            NoticeBroadcastMessages.useItem(table,req.getUserId(),req.getHeadSculpture(),req.getCardSkin());
+            NoticeBroadcastMessages.playerJoinTable(table, player);
+            NoticeBroadcastMessages.useItem(table, req.getUserId(), req.getHeadSculpture(), req.getCardSkin());
             log.info("40001 builder ack 成功->: {}", ack.toString());
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -228,7 +229,8 @@ public class JoloRoom_ApplyJoinTableReq_40001 extends ClientReq {
     //初始化桌子参数
     private void initTable(AbstractTable table, String createTableUserId) {
         JoloRoom.JoloGame_Table_Info tableInfo = req.getTableInfo();
-        if(table.getPlayType() == 1) {
+        table.setClubId(tableInfo.getClubId());
+        if (table.getGameType() == 1) {
             table.setPlayerNum(tableInfo.getPlayerNum());
             table.setCurrBaseBetScore(tableInfo.getBaseBetScore());
             table.setReadyCd(tableInfo.hasReadyCd() ? tableInfo.getReadyCd() : 8);
@@ -239,7 +241,7 @@ public class JoloRoom_ApplyJoinTableReq_40001 extends ClientReq {
             table.setGameNum(tableInfo.getGameNum());
             table.setBetMultiple(req.getBetMultiple());
             table.setCreateTableUserId(createTableUserId);
-        }else if(table.getPlayType() == 2){
+        } else if (table.getGameType() == 2) {
             table.setBankerType(tableInfo.getBankerType());
             table.setPlayerNum(tableInfo.getPlayerNum());
             table.setWildCard(tableInfo.getWildCard());
@@ -275,8 +277,8 @@ public class JoloRoom_ApplyJoinTableReq_40001 extends ClientReq {
     }
 
     private JoloRoom.JoloGame_Table_Info getCurrTableInfo(AbstractTable table) {
-        return JoloRoom.JoloGame_Table_Info.newBuilder()
-                .setTableId(table.getTableId())
+        JoloRoom.JoloGame_Table_Info.Builder tableInfo = JoloRoom.JoloGame_Table_Info.newBuilder();
+        tableInfo.setTableId(table.getTableId())
                 .setPlayerNum(table.getPlayerNum())
                 .setBaseBetScore((int) table.getCurrBaseBetScore())
                 .setBetMaxScore(table.getBetMaxScore())
@@ -287,8 +289,16 @@ public class JoloRoom_ApplyJoinTableReq_40001 extends ClientReq {
                 .setOpenCardCd(table.getOpenCardCd())
                 .setIsWatch(table.isWatch() ? 1 : 0)
                 .setTotalAlreadyBet(table.getTableAlreadyBetScore())
-                .setTableState(table.getTableStateEnum().getValue())
-                .build();
+                .setTableState(table.getTableStateEnum().getValue());
+        if (table.getGameType() == 1) {
+            return tableInfo.build();
+        } else if (table.getGameType() == 2) {
+            return tableInfo.setBankerType(table.getBankerType())
+                    .setWildCard(table.getWildCard())
+                    .setDoubleRule(table.getDoubleRule())
+                    .addAllSpecialCardType(table.getSpecialCardType()).build();
+        }
+        return null;
     }
 
     public static List<JoloRoom.JoloRoom_TablePlay_PlayerInfo> getPlayersInTable(AbstractTable table, String currPlayerId) {

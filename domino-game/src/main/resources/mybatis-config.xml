@@ -18,5 +18,7 @@
         <mapper resource="com/jule/domino/game/dao/mapper/FriendTableModelMapper.xml"/>
         <mapper resource="com/jule/domino/game/dao/mapper/ItemRecordsModelMapper.xml"/>
         <mapper resource="com/jule/domino/game/dao/mapper/UserItemModelMapper.xml"/>
+        <mapper resource="com/jule/domino/game/dao/mapper/ClubModelMapper.xml"/>
+        <mapper resource="com/jule/domino/game/dao/mapper/ClubNoteModelMapper.xml"/>
     </mappers>
 </configuration>

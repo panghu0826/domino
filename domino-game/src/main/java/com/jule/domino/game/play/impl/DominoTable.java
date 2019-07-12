@@ -27,7 +27,8 @@ public class DominoTable extends AbstractTable {
     }
 
     public DominoTable(String gameId, String roomId, String tableId,int playerNum) {
-        setPlayType(Integer.parseInt(gameId));
+        setPlayType(1);
+        setGameType(Integer.parseInt(gameId));
         setRoomId(roomId);
         setTableId(tableId);
         roomTableRelation = new RoomTableRelationModel(gameId, roomId, tableId, TableStateEnum.IDEL.getValue());
@@ -185,6 +186,7 @@ public class DominoTable extends AbstractTable {
                 ", isWatch=" + isWatch +
                 ", allPlayers=" + allPlayers.size() +
                 ", createTableUserId=" + createTableUserId +
+                ", clubId=" + clubId +
                 '}';
     }
 }

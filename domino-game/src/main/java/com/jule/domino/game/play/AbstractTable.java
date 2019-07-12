@@ -1,8 +1,5 @@
 package com.jule.domino.game.play;
 
-import JoloProtobuf.GameSvr.JoloGame;
-import com.alibaba.fastjson.JSONObject;
-import com.google.common.primitives.Ints;
 import com.google.protobuf.MessageLite;
 import com.jule.core.common.log.LoggerUtils;
 import com.jule.core.jedis.StoredObjManager;
@@ -10,14 +7,8 @@ import com.jule.core.utils.fifo.FIFORunnableQueue;
 import com.jule.domino.base.enums.*;
 import com.jule.domino.game.log.producer.RabbitMqSender;
 import com.jule.domino.game.model.CardConstent;
-import com.jule.domino.game.model.CardValueModel;
 import com.jule.domino.game.model.PlayerInfo;
-import com.jule.domino.game.model.TexasPoker;
-import com.jule.domino.game.network.protocol.TableInnerReq;
-import com.jule.domino.game.room.service.RoomOprService;
 import com.jule.domino.game.service.holder.*;
-import com.jule.domino.game.utils.CardComparator;
-import com.jule.domino.game.utils.NumUtils;
 import com.jule.domino.game.utils.log.TableLogUtil;
 import com.jule.domino.game.vavle.notice.NoticeBroadcastMessages;
 import com.jule.domino.game.vavle.notice.NoticeRPCUtil;
@@ -30,7 +21,6 @@ import com.jule.domino.game.dao.bean.CommonConfigModel;
 import com.jule.domino.game.dao.bean.RoomConfigModel;
 import com.jule.domino.game.network.protocol.ClientReq;
 import com.jule.domino.game.network.protocol.logic.LeaveTableLogic;
-import com.jule.domino.game.network.protocol.protoutil.JoloGame_tablePlay_OtherPlayerInfoBuilder;
 import com.jule.domino.game.service.*;
 import com.jule.domino.log.service.LogReasons;
 import lombok.Getter;
@@ -53,7 +43,8 @@ public class AbstractTable implements ITable {
     /**
      * 玩法类型
      */
-    private int playType;
+    private int playType;//此处用的是头里面的数据 定死 不能随便改
+    private int gameType;//此处才是正确的游戏id
     protected String tableId;
     private String roomId;
     protected RoomTableRelationModel roomTableRelation;
@@ -126,6 +117,7 @@ public class AbstractTable implements ITable {
     protected int bankerCd;//抢庄cd
     protected String currDealerPlayerId;  //当前庄家id
     //公用
+    protected int clubId;//当前桌子所属的俱乐部id
     protected int playerNum;//人数（房间座位数）
     protected String betMultiple;//桌子下注倍数
     protected int gameNum;//游戏局数
@@ -142,7 +134,7 @@ public class AbstractTable implements ITable {
     }
 
     public AbstractTable(String gameId, String roomId, String tableId) {
-        setPlayType(Integer.parseInt(gameId));
+        setPlayType(1);
         setRoomId(roomId);
         setTableId(tableId);
         roomTableRelation = new RoomTableRelationModel(gameId, roomId, tableId, TableStateEnum.IDEL.getValue());
@@ -565,8 +557,7 @@ public class AbstractTable implements ITable {
         }
 
         log.debug("message functionId:" + functionId + "push player:" + list + ",getPlayType:" + getPlayType() + ", functionId: " + functionId);
-//        NoticeRPCUtil.senMuliMsg(getPlayType(), tableId, list, functionId, messageLite);
-        NoticeRPCUtil.senMuliMsg(1, tableId, list, functionId, messageLite);
+        NoticeRPCUtil.senMuliMsg(getPlayType(), tableId, list, functionId, messageLite);
 //        RabbitMqSender.me.producer(functionId, messageLite.toString());
     }
 

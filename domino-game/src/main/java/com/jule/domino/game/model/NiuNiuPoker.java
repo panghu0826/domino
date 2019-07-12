@@ -1,164 +1,129 @@
 package com.jule.domino.game.model;
 
 import com.google.common.primitives.Ints;
-import com.jule.domino.base.enums.GameConst;
-import com.jule.domino.game.gameUtil.DealCardForTable;
-import com.jule.domino.game.play.AbstractTable;
-import com.jule.domino.game.service.holder.CardOfTableHolder;
-import com.jule.domino.game.service.holder.CardValueHolder;
 import com.jule.domino.game.utils.CombineUtil;
 import com.jule.domino.game.utils.FindNode;
 import com.jule.domino.game.utils.NumUtils;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Setter@Getter
+@Setter
+@Getter
+@Slf4j
 public class NiuNiuPoker {
-//    public final static String SHUN_JIN = "顺金";
-//    public final static String WU_XIAO = "五小";
-//    public final static String ZHA_DAN = "炸弹";
-//    public final static String HU_LU = "葫芦";
-//    public final static String TONG_HUA = "同花";
-//    public final static String WU_HUA = "五花";
-//    public final static String SHUN_ZI = "顺子";
-//    public final static String DUI_ZI_NIU = "一对";
-//    public final static String NIU_NIU = "牛牛";
-//    public final static String NIU_JIU = "牛九";
-//    public final static String NIU_BA = "牛八";
-//    public final static String NIU_QI = "牛七";
-//    public final static String NIU_LIU = "牛六";
-//    public final static String NIU_WU = "牛五";
-//    public final static String NIU_SI = "牛四";
-//    public final static String NIU_SAN = "牛三";
-//    public final static String NIU_ER = "牛二";
-//    public final static String NIU_YI = "牛一";
-//    public final static String WU_NIU = "无牛";
-
     private String typeName; //牌型类型名
     private int typeCompareValue; //牌型比较大小时所用的int值。（值越大代表牌型越大）
     private boolean haveSpecialCard;//玩家有无癞子牌
     private List<Integer> handCard;//去除掉癞子牌的手牌
     private List<Integer> cards;//计算完癞子的牌
 
-    private static byte changeableCard = 8;//demo
-
-//    public static void main(String[] args) {
-//        for (int k = 0; k < 1000; k++) {
-//            AbstractTable table = new AbstractTable();
-//            CardOfTableHolder.PutCardOperationObj("123",new DealCardForTable(2));
-//            List<Byte> cards = new ArrayList<>();
-//            changeableCard = (byte) (1 + Math.random() * (52));
-//            int ina = (int) (1 + Math.random() * (4));
-//            int[] c = CardOfTableHolder.TakeCardOperationObj("123").hair_card(5 - ina);
-//            for (int j = 0; j < c.length; j++) {
-//                cards.add((byte) (1 + Math.random() * (52)));
-//            }
-//            for (int i = 0; i < ina; i++) {
-//                cards.add(changeableCard);
-//            }
-//            List<Byte> cardB = new ArrayList<>();
-//            int ins = (int) (1 + Math.random() * (4));
-//            int[] d = CardOfTableHolder.TakeCardOperationObj("123").hair_card(5 - ins);
-//            for (int j = 0; j < d.length; j++) {
-//                cardB.add((byte) (1 + Math.random() * (52)));
-//            }
-//            for (int i = 0; i < ins; i++) {
-//                cardB.add(changeableCard);
-//            }
-//            List<String> wanFa = GameConst.wanFa;
-//            System.out.println("本局癞子牌为：-------------------------" + CardValueHolder.getCardValue((int)changeableCard));
-//            System.out.println("-----------------------------玩家手牌-------------------------");
-//            pointln("玩家A：", cards);
-//            pointln("玩家B：", cardB);
-//            NiuNiuPoker niuA = new NiuNiuPoker(cards, wanFa);
-//            NiuNiuPoker niuB = new NiuNiuPoker(cardB, wanFa);
-//            System.out.println("-----------------------------计算之后-------------------------");
-//            point("玩家 A 牌型 -> " + niuA.typeName + ", 手牌：", niuA.cards);
-//            point("玩家 B 牌型 -> " + niuB.typeName + ", 手牌：", niuB.cards);
-//            System.out.println("-----------------------------对比结果-------------------------");
-//            int in = niuA.compare(niuB);
-//            if (in == 1) System.out.println("玩家 A 赢了！");
-//            if (in == -1) System.out.println("玩家 B 赢了！");
-//            if (in == 0) System.out.println("平局！不可能。(bug)");
-//            System.out.println();
-//        }
-//    }
-
-//    public static void main(String[] args) {
-//        List<Byte> cards = new ArrayList<>();
-//        changeableCard = (byte) 9;
-//        cards.add((byte)3);
-//        cards.add((byte)3);
-//        cards.add((byte)8);
-//        cards.add((byte)9);
-//        cards.add((byte)9);
-//        List<Byte> cardB = new ArrayList<>();
-//        cardB.add((byte)7);
-//        cardB.add((byte)5);
-//        cardB.add((byte)9);
-//        cardB.add((byte)9);
-//        cardB.add((byte)9);
-//        List<String> wanFa = GameConst.wanFa;
-//        System.out.println("本局癞子牌为：-------------------------"+changeableCard);
-//        System.out.println("-----------------------------玩家手牌-------------------------");
-//        pointln("玩家A：", cards);
-//        pointln("玩家B：", cardB);
-//        NiuNiuPoker niuA = new NiuNiuPoker(cards, wanFa);
-//        NiuNiuPoker niuB = new NiuNiuPoker(cardB, wanFa);
-//        System.out.println("-----------------------------计算之后-------------------------");
-//        point("玩家 A 牌型 -> " + niuA.typeName + ", 手牌：", niuA.cards);
-//        point("玩家 B 牌型 -> " + niuB.typeName + ", 手牌：", niuB.cards);
-//        System.out.println("-----------------------------对比结果-------------------------");
-//        int in = niuA.compare(niuB);
-//        if (in == 1) System.out.println("玩家 A 赢了！");
-//        if (in == -1) System.out.println("玩家 B 赢了！");
-//        if (in == 0) System.out.println("平局！不可能。(bug)");
-//        System.out.println();
-//    }
-//
-//    private static void pointln(String str, List<Byte> cards) {
-//        System.out.print(str);
-//        for (int card : cards) {
-//            System.out.print(CardValueHolder.getCardValueString(card) + ", ");
-//        }
-//        System.out.println();
-//    }
-//
-//    private static void point(String str, List<Integer> cards) {
-//        System.out.print(str);
-//        for (int card : cards) {
-//            System.out.print(CardValueHolder.getCardValueString(card) + ", ");
-//        }
-//        System.out.println();
-//    }
+    private static byte changeableCard = -1;//demo
 
     public NiuNiuPoker(List<Byte> cards, List<Integer> wanfa) {
-        List<Integer> array = new ArrayList<>();
-        Iterator<Byte> iter = cards.iterator();
-        int specialCards = 0;
-        while (iter.hasNext()) {
-            byte card = iter.next();
-            if (getCardValue(card) == changeableCard || card == 53 || card == 54) {
-                iter.remove();
-                specialCards++;
-            } else {
-                array.add((int) card);
+        synchronized (this) {
+            List<Integer> array = new ArrayList<>();
+            Iterator<Byte> iter = cards.iterator();
+            int specialCards = 0;
+            while (iter.hasNext()) {
+                byte card = iter.next();
+                if (getCardValue(card) == getCardValue(changeableCard) || card == 53 || card == 54) {
+                    iter.remove();
+                    specialCards++;
+                } else {
+                    array.add((int) card);
+                }
             }
+            handCard = array;
+            haveSpecialCard = (specialCards != 0);
+//        log.info("玩家原来的牌：{}", cards.toString());
+//        log.info("去掉癞子之后的牌：{}，  癞子：{}", array.toString(), specialCards);
+            if (wanfa.contains(8) && shunJin(cards, specialCards)) {
+                this.cards = setCardColor(this.cards, handCard);
+                return;
+            }
+            if (wanfa.contains(7) && wuXiao(cards, specialCards)) {
+                this.cards = setCardColor(this.cards, handCard);
+                return;
+            }
+            if (wanfa.contains(6) && zhaDan(cards, specialCards)) {
+                this.cards = setCardColor(this.cards, handCard);
+                return;
+            }
+            if (wanfa.contains(5) && huLu(cards, specialCards)) {
+                this.cards = setCardColor(this.cards, handCard);
+                return;
+            }
+            if (wanfa.contains(4) && tongHua(cards, specialCards)) {
+                this.cards = setCardColor(this.cards, handCard);
+                return;
+            }
+            if (wanfa.contains(3) && wuHua(cards, specialCards)) {
+                this.cards = setCardColor(this.cards, handCard);
+                return;
+            }
+            if (wanfa.contains(2) && shunZi(cards, specialCards)) {
+                this.cards = setCardColor(this.cards, handCard);
+                return;
+            }
+            if (wanfa.contains(1) && duiZi(cards, specialCards)) {
+                this.cards = setCardColor(this.cards, handCard);
+                return;
+            }
+            //计算牛牛牌型
+            niuNiu(cards, specialCards);
         }
-        handCard = array;
-        haveSpecialCard = (specialCards != 0);
-        if (wanfa.contains(8) && shunJin(cards, specialCards)) return;
-        if (wanfa.contains(7) && wuXiao(cards, specialCards)) return;
-        if (wanfa.contains(6) && zhaDan(cards, specialCards)) return;
-        if (wanfa.contains(5) && huLu(cards, specialCards)) return;
-        if (wanfa.contains(4) && tongHua(cards, specialCards)) return;
-        if (wanfa.contains(3) && wuHua(cards, specialCards)) return;
-        if (wanfa.contains(2) && shunZi(cards, specialCards)) return;
-        if (wanfa.contains(1) && duiZi(cards, specialCards)) return;
-        //计算牛牛牌型
+        return;
+    }
+
+    //计算癞子牛牛牌型
+    private void niuNiu(List<Byte> cards, int specialCards) {
+        List<Integer> listA = new ArrayList<>();
+        cards.forEach(c -> listA.add((int) c));
+        if (specialCards == 0) {
+            niuNiu(cards);
+        } else if (specialCards == 1) {
+            Map<Integer, CardType> map = new HashMap<>();
+            for (int i = 1; i <= 13; i++) {
+                List<Byte> array = new ArrayList<>(cards);
+                List<Integer> listB = new ArrayList<>(Ints.asList(i, i + 13, i + 26, i + 39));
+                listB.removeAll(listA);
+                int card = listB.get(0);
+                array.add((byte) card);
+                CardType cardType = niuNiu(array);
+                map.put(cardType.getType(), cardType);
+            }
+            int maxCardType = Collections.max(map.keySet());
+            setData(map.get(maxCardType));
+        } else if (specialCards == 2) {
+            Map<Integer, CardType> map = new HashMap<>();
+            for (int i = 1; i <= 13; i++) {
+                for (int j = 1; j <= 13; j++) {
+                    List<Byte> array = new ArrayList<>(cards);
+                    List<Integer> listB = new ArrayList<>(Ints.asList(i, i + 13, i + 26, i + 39));
+                    List<Integer> listC = new ArrayList<>(Ints.asList(j, j + 13, j + 26, j + 39));
+                    listB.removeAll(listA);
+                    listC.removeAll(listA);
+                    int cardB = listB.get(0);
+                    int cardC = listC.get(0);
+                    array.add((byte) cardB);
+                    array.add((byte) cardC);
+                    CardType cardType = niuNiu(array);
+                    map.put(cardType.getType(), cardType);
+                }
+            }
+            int maxCardType = Collections.max(map.keySet());
+            setData(map.get(maxCardType));
+        } else {
+            log.error("玩家拥有 {} 张癞子牌，并且没有选特殊牌型");
+        }
+    }
+
+    //计算牛牛牌型
+    private CardType niuNiu(List<Byte> cards) {
         List<List<Byte>> find = CombineUtil.combine(cards, 3);
         Collections.sort(find, new Comparator<List<Byte>>() {
             @Override
@@ -174,8 +139,9 @@ public class NiuNiuPoker {
                 return total2 - total1;
             }
         });
-        setData(getNomalCardType(find, cards).setHandCard(array));
-        return;
+        CardType cardType = getNomalCardType(find, cards);
+        setData(cardType);
+        return cardType;
     }
 
     @Override
@@ -212,6 +178,15 @@ public class NiuNiuPoker {
                         return 0;
                     }
                 } else if (typeCompareValue == 11) { //对子
+//                  本局癞子牌为：-------------------------48
+//                  -----------------------------玩家手牌-------------------------
+//                  玩家A：[43, 49, 21, 9, 48]--♦4, ♦T, ♥8, ♠9, ♦9,
+//                  玩家B：[19, 23, 1, 48, 48]--♥6, ♥T, ♠A, ♦9, ♦9,
+//                  -----------------------------计算之后-------------------------
+//                  玩家 A 牌型 -> 对子牛, 手牌：[43, 49, 21, 8, 10]--♦4, ♦T, ♥8, ♠8, ♠T,
+//                  玩家 B 牌型 -> 对子牛, 手牌：[19, 23, 1, 3, 10]--♥6, ♥T, ♠A, ♠3, ♠T,
+//                  -----------------------------对比结果-------------------------
+//                  玩家 B 赢了！ 对子牌先比值，再比这对中的最大花色，再来就是比手上最大单牌
                     int pairA = getPairMaxCard(this);
                     int pairB = getPairMaxCard(niuPoker);
                     if (getCardValue(pairA) > getCardValue(pairB)) {
@@ -224,6 +199,25 @@ public class NiuNiuPoker {
                         } else if (getCardColor(pairA) < getCardColor(pairB)) {
                             return -1;
                         } else {
+                            List<Integer> cardA = getSortCard(this);
+                            List<Integer> cardB = getSortCard(niuPoker);
+                            for (int i = cardA.size() - 1; i >= 0; i--) {
+                                int a = getCardValue(cardA.get(i));
+                                int b = getCardValue(cardB.get(i));
+                                if (a > b) {
+                                    return 1;
+                                } else if (a < b) {
+                                    return -1;
+                                } else {
+                                    int c = getCardColor(cardA.get(i));
+                                    int d = getCardColor(cardB.get(i));
+                                    if (c < d) {
+                                        return 1;
+                                    } else if (c > d) {
+                                        return -1;
+                                    }
+                                }
+                            }
                             System.out.println("----------" + this.cards.toString());
                             System.out.println("----------" + niuPoker.cards.toString());
                             System.out.println("对子：一样牌型，一样的最大牌");
@@ -232,26 +226,33 @@ public class NiuNiuPoker {
                 } else {
                     List<Integer> cardA = getSortCard(this);
                     List<Integer> cardB = getSortCard(niuPoker);
-                    for (int i = 0; i < cardA.size(); i++) {
-                        int a = getCardValue(cardA.get(i));
-                        int b = getCardValue(cardB.get(i));
-                        if (a > b) {
-                            return 1;
-                        } else if (a < b) {
-                            return -1;
-                        } else {
-                            int c = getCardColor(cardA.get(i));
-                            int d = getCardColor(cardB.get(i));
-                            if (c < d) {
+                    List<Integer> maxShunZi = Ints.asList(1, 10, 11, 12, 13);
+                    if (cardA.containsAll(maxShunZi) && !cardB.containsAll(maxShunZi)) {
+                        return 1;
+                    } else if (!cardA.containsAll(maxShunZi) && cardB.containsAll(maxShunZi)) {
+                        return -1;
+                    } else {
+                        for (int i = cardA.size() - 1; i >= 0; i--) {
+                            int a = getCardValue(cardA.get(i));
+                            int b = getCardValue(cardB.get(i));
+                            if (a > b) {
                                 return 1;
-                            } else if (c > d) {
+                            } else if (a < b) {
                                 return -1;
+                            } else {
+                                int c = getCardColor(cardA.get(i));
+                                int d = getCardColor(cardB.get(i));
+                                if (c < d) {
+                                    return 1;
+                                } else if (c > d) {
+                                    return -1;
+                                }
                             }
                         }
+                        System.out.println("----------" + this.cards.toString());
+                        System.out.println("----------" + niuPoker.cards.toString());
+                        System.out.println("对比完所有牌：一样牌型，一样的最大牌");
                     }
-                    System.out.println("----------" + this.cards.toString());
-                    System.out.println("----------" + niuPoker.cards.toString());
-                    System.out.println("对比完所有牌：一样牌型，一样的最大牌");
                 }
             }
         }
@@ -286,7 +287,8 @@ public class NiuNiuPoker {
 
     //找出对子牌中花色较大的那张牌
     private static int getPairMaxCard(NiuNiuPoker niuPoker) {
-        List<Integer> array = niuPoker.cards;
+        List<Integer> array = new ArrayList<>();
+        niuPoker.cards.forEach(card -> array.add(getCardValue(card)));
         List<Integer> list = array.stream() // list 对应的 Stream
                 .collect(Collectors.toMap(e -> e, e -> 1, (a, b) -> a + b)) // 获得元素出现频率的 Map，键为元素，值为元素出现的次数
                 .entrySet().stream() // 所有 entry 对应的 Stream
@@ -309,31 +311,53 @@ public class NiuNiuPoker {
     }
 
     //前面的list为计算癞子之后的牌  后面的为去除完癞子玩家的手牌(可能不足五张)
-    private static List<Integer> setCardColor(List<Integer> list, List<Integer> cards) {
-        List<Integer> array = new ArrayList<>();
-//        List<Integer> list = new ArrayList<>();
-//        handCards.forEach(e -> list.add((int) e));
-        for (int card : list) {
-            List<Integer> color = new ArrayList<>(Ints.asList(card + 13, card + 26, card + 39));
-            if (!cards.contains(color.get(0)) && !array.contains(color.get(0))) {
-                array.add(color.get(0));
-            } else if (!cards.contains(color.get(1)) && !array.contains(color.get(1))) {
-                array.add(color.get(1));
-            } else if (!cards.contains(color.get(2)) && !array.contains(color.get(2))) {
-                array.add(color.get(2));
-            } else {
-                array.add(card);
+    private List<Integer> setCardColor(List<Integer> list, List<Integer> cards) {
+        if (cards.size() == 5) return cards;//五张癞子牌时不需要改变花色
+        //五小和炸弹在判断牌型时已经设置过花色了
+        if (cards.size() == 0 || typeCompareValue == CardType.wuxiao.getType() || typeCompareValue == CardType.zhadan.getType())
+            return list;
+        for (int card : cards) { //去掉相同的牌
+            int cardValue = getCardValue(card);
+            for (int i = 0; i < list.size(); i++) { //删除相同的元素 一次只删除一个
+                if (cardValue == list.get(i)) {
+                    list.remove(i);
+                    break;
+                }
             }
         }
-        return array;
-    }
-
-    private static int getCardValue(int card) {
-        return card % 13 == 0 ? 13 : card % 13;
-    }
-
-    private static int getCardColor(int card) {
-        return card / 13;
+        List<Integer> array = new ArrayList<>(list);
+        log.info("当前玩家有 {} 张牌需要改变花色", array.size());
+        for (int card : array) { //计算完癞子牌后 所有牌都是最大花色 需要改变
+            if (typeCompareValue == CardType.shunjin.getType()) {
+                int color = getCardColor(cards.get(0));
+                cards.add(card + (color * 13));
+            } else if (typeCompareValue == CardType.hulu.getType()) {
+                List<Integer> color = new ArrayList<>(Ints.asList(card, card + 13, card + 26, card + 39));
+                color.removeAll(cards);
+                cards.add(color.get(0));
+            } else if (typeCompareValue == CardType.tonghua.getType()) {
+                int color = getCardColor(cards.get(0));
+                cards.add(card + (color * 13));
+            } else if (typeCompareValue == CardType.wuhua.getType()) {
+                List<Integer> color = new ArrayList<>(Ints.asList(card, card + 13, card + 26, card + 39));
+                color.removeAll(cards);
+                cards.add(color.get(0));
+            } else if (typeCompareValue == CardType.shunzi.getType()) {
+                List<Integer> color = new ArrayList<>(Ints.asList(card, card + 13, card + 26, card + 39));
+                color.removeAll(cards);
+                cards.add(color.get(0));
+            } else if (typeCompareValue == CardType.duiziniu.getType()) {
+                List<Integer> color = new ArrayList<>(Ints.asList(card, card + 13, card + 26, card + 39));
+                color.removeAll(cards);
+                cards.add(color.get(0));
+            }
+//            else {
+//                List<Integer> color = new ArrayList<>(Ints.asList(card, card + 13, card + 26, card + 39));
+//                color.removeAll(cards);
+//                cards.add(color.get(0));
+//            }
+        }
+        return cards;
     }
 
     private boolean setData(CardType cardType) {
@@ -355,7 +379,11 @@ public class NiuNiuPoker {
 
     private boolean shunZi(List<Byte> cards, int specialCards) {
         List<Integer> array = new ArrayList<>();
-        cards.forEach(e -> array.add(getCardValue(e)));
+        List<Integer> list = new ArrayList<>();
+        cards.forEach(e -> {
+            array.add(getCardValue(e));
+            list.add((int) e);
+        });
         Collections.sort(array);
         List<Integer> cardsA = new ArrayList<>(Ints.asList(1, 10, 11, 12, 13));//10,J,Q,K,A  A是1
         cardsA.removeAll(array);
@@ -367,70 +395,114 @@ public class NiuNiuPoker {
         List<Integer> cardsB = new ArrayList<>(Ints.asList(minCard, minCard + 1, minCard + 2, minCard + 3, minCard + 4));
         cardsB.removeAll(array);
         if (cardsB.size() == specialCards) {
-            cardsB.addAll(array);
-            return setData(CardType.shunzi.setHandCard(cardsB));
+            if (specialCards > 0) {
+                cardsB.addAll(array);
+                return setData(CardType.shunzi.setHandCard(cardsB));
+            } else {
+                return setData(CardType.shunzi.setHandCard(list));
+            }
         }
         return false;
     }
 
     private boolean tongHua(List<Byte> cards, int specialCards) {
         List<Integer> array = new ArrayList<>();
-        cards.forEach(e -> array.add(getCardValue(e)));
+        List<Integer> list = new ArrayList<>();
+        cards.forEach(e -> {
+            array.add(getCardValue(e));
+            list.add((int) e);
+        });
         Collections.sort(array);
         if (cards.size() != 0) {
-            int cardColor = cards.get(0) / 14;
+            int color = getCardColor(cards.get(0));
             for (byte card : cards) {
-                if (card / 14 != cardColor) {
+                if (getCardColor(card) != color) {
                     return false;
                 }
             }
         }
-        if (specialCards > 0) {
+        int in = specialCards;
+        if (in > 0) {
             for (int i = 13; i > 0; i--) {
                 if (!array.contains(i)) {
                     array.add(i);
-                    specialCards--;
+                    in--;
                 } else {
                     continue;
                 }
-                if (specialCards == 0) {
+                if (in == 0) {
                     break;
                 }
                 Collections.sort(array);
             }
         }
-        return setData(CardType.tonghua.setHandCard(array));
+        if (specialCards > 0) {
+            return setData(CardType.tonghua.setHandCard(array));
+        } else {
+            return setData(CardType.tonghua.setHandCard(list));
+        }
     }
 
     private boolean wuXiao(List<Byte> cards, int specialCards) {
         List<Integer> array = new ArrayList<>();
-        cards.forEach(e -> array.add(getCardValue(e)));
+        List<Integer> listA = new ArrayList<>();
+        cards.forEach(e -> {
+            array.add(getCardValue(e));
+            listA.add((int) e);
+        });
         int sum = 0;
         for (int card : cards) {
-            sum += card % 13;
+            sum += getCardPoint(card);
         }
         if ((array.size() != 0 && Collections.max(array) >= 5) || sum >= 10) {
             return false;
         }
-        //所有的五小组成
-        List<Integer> cardsA = new ArrayList<>(Ints.asList(1, 1, 1, 2, 4));
-        if (cardsA.containsAll(array)) {
-            return setData(CardType.wuxiao.setHandCard(cardsA));
+        int count = 9 - sum;
+        List<Integer> listB = new ArrayList<>(Ints.asList(1, 14, 27, 40));
+        List<Integer> listC = new ArrayList<>(Ints.asList(2, 15, 28, 41));
+        listB.removeAll(listA);
+        listC.removeAll(listA);
+        if (specialCards == 5) {
+            return setData(CardType.wuxiao.setHandCard(new ArrayList<>(Ints.asList(1, 14, 27, 2, 4))));
+        } else if (specialCards == 4 || specialCards == 3) {
+            if (array.contains(3)) {
+                return setData(CardType.wuxiao.setHandCard(new ArrayList<>(Ints.asList(1, 14, 2, 15, cards.get(0)))));
+            } else {
+                return setData(CardType.wuxiao.setHandCard(new ArrayList<>(Ints.asList(1, 14, 27, 2, cards.get(0)))));
+            }
+        } else if (specialCards == 2) {
+            if (!array.contains(4) && count > 5) {
+                listA.add(4);
+                listA.add(listB.get(0));
+            } else if (!array.contains(3) && count > 4) {
+                listA.add(3);
+                listA.add(listB.get(0));
+            } else {
+                listA.add(listB.get(0));
+                listA.add(listB.get(1));
+            }
+            return setData(CardType.wuxiao.setHandCard(listA));
+        } else if (specialCards == 1) {
+            if (count >= 4) {
+                listA.add(4);
+            } else if (count >= 3) {
+                listA.add(3);
+            } else if (count == 2) {
+                listA.add(listC.get(0));
+            } else {
+                listA.add(listB.get(0));
+            }
         }
-        List<Integer> cardsB = new ArrayList<>(Ints.asList(1, 1, 2, 2, 3));
-        if (cardsB.containsAll(array)) {
-            return setData(CardType.wuxiao.setHandCard(cardsB));
-        }
-        List<Integer> cardsC = new ArrayList<>(Ints.asList(1, 2, 2, 2, 2));
-        if (cardsC.containsAll(array)) {
-            return setData(CardType.wuxiao.setHandCard(cardsC));
-        }
-        return false;
+        return setData(CardType.wuxiao.setHandCard(listA));
     }
 
     private boolean zhaDan(List<Byte> cards, int specialCards) {
         List<Integer> array = new ArrayList<>();
-        cards.forEach(e -> array.add(getCardValue(e)));
+        List<Integer> list = new ArrayList<>();
+        cards.forEach(e -> {
+            array.add(getCardValue(e));
+            list.add((int) e);
+        });
         Collections.sort(array);
         int count = 0;
         int template = 0;
@@ -448,54 +520,75 @@ public class NiuNiuPoker {
         if (count + specialCards < 4) {
             return false;
         }
-        if (specialCards >= 4) {
-            if (array.size() == 0 || array.get(0) >= 12) {
-                return setData(CardType.zhadan.setHandCard(new ArrayList<>(Ints.asList(12, 13, 13, 13, 13))));
+        if (specialCards >= 1) {
+            if (specialCards >= 4) {
+                if (array.size() == 0 || array.get(0) >= 12) {
+                    return setData(CardType.zhadan.setHandCard(new ArrayList<>(Ints.asList(12, 13, 26, 39, 52))));
+                } else {
+                    return setData(CardType.zhadan.setHandCard(new ArrayList<>(Ints.asList(array.get(0), 13, 26, 39, 52))));
+                }
             } else {
-                return setData(CardType.zhadan.setHandCard(new ArrayList<>(Ints.asList(array.get(0), 13, 13, 13, 13))));
+                if (array.get(0) != array.get(array.size() - 1)) {
+                    int card = Collections.max(array) == template ? array.get(0) : Collections.max(array);
+                    return setData(CardType.zhadan.setHandCard(new ArrayList<>(Ints.asList(card, template, template + 13, template + 26, template + 39))));
+                } else {
+                    int card = array.get(0);
+                    return setData(CardType.zhadan.setHandCard(new ArrayList<>(Ints.asList(card, card + 13, card + 26, card + 39, 13))));
+                }
             }
-        } else {
-            int card = Collections.max(array) == template ? array.get(0) : Collections.max(array);
-            return setData(CardType.zhadan.setHandCard(new ArrayList<>(Ints.asList(card, template, template, template, template))));
+        } else { //没有癞子牌
+            return setData(CardType.zhadan.setHandCard(list));
         }
     }
 
     private boolean huLu(List<Byte> cards, int specialCards) {
         List<Integer> array = new ArrayList<>();
-        cards.forEach(e -> array.add(getCardValue(e)));
+        List<Integer> list = new ArrayList<>();
+        cards.forEach(e -> {
+            array.add(getCardValue(e));
+            list.add((int) e);
+        });
         Collections.sort(array);
         Set<Integer> set = new HashSet<>(array);
         if (set.size() > 2 || (cards.size() >= 4 && set.size() != 2)) {//后面的条件是防止玩家拥有4张一样的牌
             return false;
         }
-        if (specialCards >= 3) { //
-            if (array.size() == 0 || Collections.min(set) >= 12) {
-                return setData(CardType.hulu.setHandCard(new ArrayList<>(Ints.asList(12, 12, 13, 13, 13))));
+        if (specialCards >= 1) {
+            if (specialCards >= 3) { //
+                if (array.size() == 0 || Collections.min(set) >= 12) {
+                    return setData(CardType.hulu.setHandCard(new ArrayList<>(Ints.asList(12, 12, 13, 13, 13))));
+                } else {
+                    int min = Collections.min(set);
+                    int max = Collections.max(set) == min ? 13 : Collections.max(set);
+                    return setData(CardType.hulu.setHandCard(new ArrayList<>(Ints.asList(min, min, max, max, max))));
+                }
             } else {
                 int min = Collections.min(set);
-                int max = Collections.max(set) == min ? 13 : Collections.max(set);
-                return setData(CardType.hulu.setHandCard(new ArrayList<>(Ints.asList(min, min, max, max, max))));
-            }
-        } else {
-            int min = Collections.min(set);
-            int max = Collections.max(set);
-            if (set.size() == 1) {
-                return setData(CardType.hulu.setHandCard(new ArrayList<>(Ints.asList(min, min, min, 13, 13))));
-            } else {
-                List<Integer> cardA = new ArrayList<>(Ints.asList(min, min, max, max, max));
-                List<Integer> cardB = new ArrayList<>(Ints.asList(min, min, min, max, max));
-                if (cardA.get(2) == array.get(2)) {
-                    return setData(CardType.hulu.setHandCard(cardA));
+                int max = Collections.max(set);
+                if (set.size() == 1) {
+                    return setData(CardType.hulu.setHandCard(new ArrayList<>(Ints.asList(min, min, min, 13, 13))));
                 } else {
-                    return setData(CardType.hulu.setHandCard(cardB));
+                    List<Integer> cardA = new ArrayList<>(Ints.asList(min, min, max, max, max));
+                    List<Integer> cardB = new ArrayList<>(Ints.asList(min, min, min, max, max));
+                    if (cardA.get(2) == array.get(2)) {
+                        return setData(CardType.hulu.setHandCard(cardA));
+                    } else {
+                        return setData(CardType.hulu.setHandCard(cardB));
+                    }
                 }
             }
+        } else {
+            return setData(CardType.hulu.setHandCard(list));
         }
     }
 
     private boolean wuHua(List<Byte> cards, int specialCards) {
         List<Integer> array = new ArrayList<>();
-        cards.forEach(e -> array.add(getCardValue(e)));
+        List<Integer> list = new ArrayList<>();
+        cards.forEach(e -> {
+            array.add(getCardValue(e));
+            list.add((int) e);
+        });
         Collections.sort(array);
         int k = 0;
         for (int card : array) {
@@ -513,12 +606,20 @@ public class NiuNiuPoker {
                 array.add(12);
             }
         }
-        return setData(CardType.wuhua.setHandCard(array));
+        if (specialCards >= 1) {
+            return setData(CardType.wuhua.setHandCard(array));
+        } else {
+            return setData(CardType.wuhua.setHandCard(list));
+        }
     }
 
     private boolean duiZi(List<Byte> cards, int specialCards) {
         List<Integer> array = new ArrayList<>();
-        cards.forEach(e -> array.add(getCardValue(e)));
+        List<Integer> listA = new ArrayList<>();
+        cards.forEach(e -> {
+            array.add(getCardValue(e));
+            listA.add((int) e);
+        });
         Collections.sort(array);
         if (specialCards == 5) {
             return setData(CardType.duiziniu.setHandCard(new ArrayList<>(Ints.asList(12, 13, 13, 13, 13))));
@@ -549,26 +650,23 @@ public class NiuNiuPoker {
         } else if (specialCards == 2) {
             int cardA = getCardPoint(array.get(0));
             int cardB = getCardPoint(array.get(1));
-            int cardC = getCardPoint(array.get(2));
-            int point = 10 - ((cardA + cardB + cardC) % 10);
+            int point = 10 - ((cardA + cardB) % 10);
             if (point == 0) {
                 return setData(CardType.duiziniu.setHandCard(new ArrayList<>(Ints.asList(array.get(0), array.get(1), array.get(2), 13, 13))));
             } else {
                 return setData(CardType.duiziniu.setHandCard(new ArrayList<>(Ints.asList(array.get(0), array.get(1), point, array.get(2), array.get(2)))));
             }
+        } else if (specialCards == 1) {
+            for (int i = 13; i > 0; i--) {
+                List<Integer> list = new ArrayList<>(array);
+                list.add(i);
+                if (checkDuiZi(list)) {
+                    return setData(CardType.duiziniu.setHandCard(list));
+                }
+            }
         } else {
-            if (specialCards == 1) {
-                for (int i = 13; i > 0; i--) {
-                    List<Integer> list = new ArrayList<>(array);
-                    list.add(i);
-                    if (checkDuiZi(list)) {
-                        return setData(CardType.duiziniu.setHandCard(list));
-                    }
-                }
-            } else {
-                if (checkDuiZi(array)) {
-                    return setData(CardType.duiziniu.setHandCard(array));
-                }
+            if (checkDuiZi(array)) {
+                return setData(CardType.duiziniu.setHandCard(listA));
             }
         }
         return false;
@@ -599,8 +697,28 @@ public class NiuNiuPoker {
     }
 
 
+    private static int getCardValue(int card) {
+        return card % 13 == 0 ? 13 : card % 13;
+    }
+
     private static int getCardValue(byte card) {
         return card % 13 == 0 ? 13 : card % 13;
+    }
+
+    private static int getCardColor(int card) {
+        if (card == 13) return 0;
+        if (card == 26) return 1;
+        if (card == 39) return 2;
+        if (card == 52) return 3;
+        return card / 13;
+    }
+
+    private static int getCardColor(byte card) {
+        if (card == 13) return 0;
+        if (card == 26) return 1;
+        if (card == 39) return 2;
+        if (card == 52) return 3;
+        return card / 13;
     }
 
     private static int getCardPoint(int card) {
@@ -613,7 +731,10 @@ public class NiuNiuPoker {
      * @param all 手中的五张牌
      * @return
      */
-    private static CardType getNomalCardType(List<List<Byte>> list, List<Byte> all) {
+    private CardType getNomalCardType(List<List<Byte>> list, List<Byte> all) {
+        List<Integer> array = new ArrayList<>();
+        all.forEach(c -> array.add((int) c));
+        Collections.sort(array);
         for (List<Byte> l : list) {
             int sum = 0;
             for (Byte b : l) {
@@ -633,34 +754,39 @@ public class NiuNiuPoker {
                     int value = getCardPoint(getCardValue(b));
                     ct += value;
                 }
+                array.clear();//有牛时为手牌排序，组成牛牛的三张牌在前面
+                Collections.sort(l);
+                Collections.sort(temp);
+                l.forEach(c -> array.add((int) c));
+                temp.forEach(c -> array.add((int) c));
                 int result = ct % 10;
                 switch (result) {
                     case 0:
-                        return CardType.niuniu;
+                        return CardType.niuniu.setHandCard(array);
                     case 1:
-                        return CardType.niuyi;
+                        return CardType.niuyi.setHandCard(array);
                     case 2:
-                        return CardType.niuer;
+                        return CardType.niuer.setHandCard(array);
                     case 3:
-                        return CardType.niusan;
+                        return CardType.niusan.setHandCard(array);
                     case 4:
-                        return CardType.niusi;
+                        return CardType.niusi.setHandCard(array);
                     case 5:
-                        return CardType.niuwu;
+                        return CardType.niuwu.setHandCard(array);
                     case 6:
-                        return CardType.niuliu;
+                        return CardType.niuliu.setHandCard(array);
                     case 7:
-                        return CardType.niuqi;
+                        return CardType.niuqi.setHandCard(array);
                     case 8:
-                        return CardType.niuba;
+                        return CardType.niuba.setHandCard(array);
                     case 9:
-                        return CardType.niujiu;
+                        return CardType.niujiu.setHandCard(array);
                     default:
-                        return CardType.wuniu;
+                        return CardType.wuniu.setHandCard(array);
                 }
             }
         }
-        return CardType.wuniu;
+        return CardType.wuniu.setHandCard(array);
     }
 
     private static void findOnce(FindNode parent, List<List<Byte>> all) {

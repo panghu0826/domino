@@ -8,6 +8,8 @@ import java.util.List;
 public interface FriendTableModelMapper {
     int deleteFriend(@Param("userId") String userId,@Param("friendUserId") String friendUserId);
 
+    int deleteByClubId(@Param("clubId") String clubId);
+
     int insert(FriendTableModel record);
 
     FriendTableModel selectByPrimaryKey(Integer id);

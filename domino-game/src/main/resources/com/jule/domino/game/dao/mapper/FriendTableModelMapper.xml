@@ -14,6 +14,10 @@
     delete from friend_table
     where userId = #{userId,jdbcType=VARCHAR} and friendUserId = #{friendUserId,jdbcType=VARCHAR}
   </delete>
+  <delete id="deleteByClubId" parameterType="java.lang.String">
+    delete from friend_table
+    where userId = #{clubId,jdbcType=VARCHAR}
+  </delete>
   <insert id="insert" parameterType="com.jule.domino.game.dao.bean.FriendTableModel">
     insert into friend_table (id, userId, friendUserId, friendNickName,friendIcoUrl,addTime,
       state)

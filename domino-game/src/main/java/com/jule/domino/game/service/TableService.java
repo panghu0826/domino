@@ -18,7 +18,9 @@ import com.jule.domino.base.model.RoomTableRelationModel;
 import com.jule.domino.game.vavle.notice.NoticeBroadcastMessages;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -215,6 +217,13 @@ public class TableService {
         return null;
     }
 
+    public Collection<AbstractTable> getTableList(String gameId, String roomId){
+        if (!ROOM_TABLE_MAP.containsKey(gameId + roomId)) {
+            return null;
+        }
+        return ROOM_TABLE_MAP.get(gameId + roomId).values();
+    }
+
     private boolean removeTableFromAllTableMap(String gameId, String roomId, String tableId) {
         if (ROOM_TABLE_MAP.containsKey(gameId + roomId)) {
             Map<String, AbstractTable> tableMap = ROOM_TABLE_MAP.get(gameId + roomId);
@@ -361,9 +370,9 @@ public class TableService {
         Class[] pars = new Class[]{String.class, String.class, String.class,int.class};
         AbstractTable tableInfo = (AbstractTable) clazz.getConstructor(pars).newInstance(gameId, roomId, tableId, playerNum);
 //        AbstractTable tableInfo = new AbstractTable(gameId, roomId, tableId, playerNum);
-        addTableInAllTableMap(gameId, roomId, tableInfo);
-        addCanJoinTable(gameId, roomId, tableId);
-        addRedis(gameId, roomId, tableId);//存入Redis
+        addTableInAllTableMap("1", roomId, tableInfo);
+        addCanJoinTable("1", roomId, tableId);
+        addRedis("1", roomId, tableId);//存入Redis
 //        RoomOprService.OBJ.createTableHandler(gameId, roomId, tableId);
         tableInfo.setLastActionTime(System.currentTimeMillis());
         GameLogic.timeOutRemoveTable(tableInfo);
@@ -372,9 +381,9 @@ public class TableService {
 
     private void addRedis(String gameId, String roomId, String tableId) {
         RoomTableRelationModel rt = new RoomTableRelationModel(gameId, roomId, tableId, TableStateEnum.IDEL.getValue());
-        StoredObjManager.hset(RedisConst.TABLE_INSTANCE.getProfix() + gameId + roomId,
+        StoredObjManager.hset(RedisConst.TABLE_INSTANCE.getProfix()+gameId+roomId,
                 RedisConst.TABLE_INSTANCE.getField() + tableId, rt);
-        log.debug("添加桌子信息到redis：--key: {}, --field: {}", RedisConst.TABLE_INSTANCE.getProfix() + gameId + roomId, RedisConst.TABLE_INSTANCE.getField() + tableId);
+        log.debug("添加桌子信息到redis：--key: {}, --field: {}", RedisConst.TABLE_INSTANCE.getProfix(), RedisConst.TABLE_INSTANCE.getField() + tableId);
     }
 
     /**

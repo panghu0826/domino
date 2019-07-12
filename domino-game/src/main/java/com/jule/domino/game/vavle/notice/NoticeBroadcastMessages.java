@@ -249,6 +249,7 @@ public class NoticeBroadcastMessages {
                             .setRoomId(table.getRoomId())
                             .setTableId(table.getTableId())
                             .setNickName(player.getNickName())
+                            .setIcon(player.getIcon())
                             .setPlayScore(player.getPlayScoreStore())
                             .setSeatNum(player.getSeatNum())
                             .setSpecialFunction(player.getSpecialFunction())
@@ -436,9 +437,19 @@ public class NoticeBroadcastMessages {
                         .setTableId(table.getTableId())
                         .setGameOrderId(table.getCurrGameOrderId())
                         .setCountDownSec(time).build(),
-                FunctionIdHolder.Game_Notice_GiveCardCd);
+                FunctionIdHolder.Game_Notice_BetCd);
     }
 
+    //倒计时广播 51036
+    public static void  robDealerCd(AbstractTable table) {
+        table.boardcastMessage(table.getTableId(),
+                JoloGame.JoloGame_Notice2Client_BetInfoReq.newBuilder()
+                        .setRoomId(table.getRoomId())
+                        .setTableId(table.getTableId())
+                        .setGameOrderId(table.getCurrGameOrderId())
+                        .setCountDownSec(table.getBankerCd()).build(),
+                FunctionIdHolder.Game_Notice_RobDealerCd);
+    }
     /**
      * 广播所有玩家下注结果
      *
@@ -488,35 +499,33 @@ public class NoticeBroadcastMessages {
             notice.setRoomId(table.getRoomId())
                     .setTableId(table.getTableId())
                     .setGameOrderId(table.getCurrGameOrderId())
-                    .setCountDownSec(table.getCommonConfig().getBetCountDownSec());
+                    .setCountDownSec(table.getBetCd());
             table.boardcastMessage(table.getTableId(), notice.build(), FunctionIdHolder.Game_Notice2Client_BetInfoType);
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
         }
     }
 
-    /**
-     * 广播下注倍数
-     *
-     * @param table
-     */
-    public static void betMultiple(AbstractTable table) {
-        JoloGame.JoloGame_Notice2Client_BetMultipleInfoReq.Builder betMultipleInfo =
-                JoloGame.JoloGame_Notice2Client_BetMultipleInfoReq.newBuilder();
-        betMultipleInfo.setGameOrderId(table.getCurrGameOrderId())
-                .setRoomId(table.getRoomId())
-                .setTableId(table.getTableId())
-                .addAllBtnsMultiple(table.getRoomConfig().getDoubleList());
-
-        Iterator<PlayerInfo> iter = table.getInGamePlayers().values().iterator();
-        while (iter.hasNext()) {
-            PlayerInfo playerInfo = iter.next();
-
-            table.boardcastMessageSingle(playerInfo.getPlayerId(), betMultipleInfo.build(),
-                    FunctionIdHolder.Game_Notice2Client_BetMultipleInfoType);
-        }
-
-    }
+//    /**
+//     * 广播下注倍数
+//     *
+//     * @param table
+//     */
+//    public static void betMultiple(AbstractTable table) {
+//        JoloGame.JoloGame_Notice2Client_BetMultipleInfoReq.Builder betMultipleInfo =
+//                JoloGame.JoloGame_Notice2Client_BetMultipleInfoReq.newBuilder();
+//        betMultipleInfo.setGameOrderId(table.getCurrGameOrderId())
+//                .setRoomId(table.getRoomId())
+//                .setTableId(table.getTableId())
+//                .addAllBtnsMultiple();
+//        Iterator<PlayerInfo> iter = table.getInGamePlayers().values().iterator();
+//        while (iter.hasNext()) {
+//            PlayerInfo playerInfo = iter.next();
+//            table.boardcastMessageSingle(playerInfo.getPlayerId(), betMultipleInfo.build(),
+//                    FunctionIdHolder.Game_Notice2Client_BetMultipleInfoType);
+//        }
+//
+//    }
     /**
      * 发牌
      *
@@ -694,7 +703,7 @@ public class NoticeBroadcastMessages {
                         .setTableId(table.getTableId())
                         .setGameOrderId(table.getCurrGameOrderId())
                         .setMultiple(player.getMultiple()).build(),
-                FunctionIdHolder.Game_Notice2Client_FixDealerType);
+                FunctionIdHolder.Game_Notice2Client_RobDealerType);
     }
 
     //广播庄家是谁 51082

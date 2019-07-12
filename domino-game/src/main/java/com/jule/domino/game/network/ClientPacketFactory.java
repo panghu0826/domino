@@ -43,6 +43,8 @@ public class ClientPacketFactory {
         CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_GiveGiftsReq_50051(FunctionIdHolder.Game_REQ_ChatMesgSend));
         CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_PlayRecordsReq_50063(FunctionIdHolder.Game_REQ_GameRecords));
         CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_UnlockReq_50055(FunctionIdHolder.Game_REQ_Item));
+        CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_Anti_FakeReq_50066(FunctionIdHolder.Game_REQ_AntiFake));
+        CLIENT_PACKET_HOLDER.addPacketPrototype(new JoloGame_Rob_DealerReq_50019(FunctionIdHolder.Game_REQ_RobDealer));
 
         //新加room消息要放到这里
         CLIENT_PACKET_HOLDER.addPacketPrototype(new DummyReq_01(01));

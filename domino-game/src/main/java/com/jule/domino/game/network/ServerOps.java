@@ -18,8 +18,7 @@ public class ServerOps {
         opcodes.put(JoloGame_ApplyBetAck_50005.class, FunctionIdHolder.Game_ACK_ApplyBet);
         opcodes.put(JoloGame_ApplyFoldAck_50012.class, FunctionIdHolder.Game_Ack_ApplyFold);
         opcodes.put(JoloGame_ReadyAck_50018.class, FunctionIdHolder.Game_ACK_ReadyType);
-        opcodes.put(JoloGame_Rob_DealerAck_50019.class, FunctionIdHolder.Game_ACK_ReadyType);
-
+        opcodes.put(JoloGame_Rob_DealerAck_50019.class, FunctionIdHolder.Game_ACK_RobDealer);
 
         opcodes.put(JoloGame_ApplyJoinTableAck_50000.class, FunctionIdHolder.Game_ACK_ApplyJoinTable);
         opcodes.put(JoloGame_ApplyLeaveAck_50003.class, FunctionIdHolder.Game_ACK_ApplyLeave);
@@ -29,6 +28,7 @@ public class ServerOps {
         opcodes.put(JoloGame_PlayRecordsAck_50063.class,FunctionIdHolder.Game_ACK_GameRecords);
         opcodes.put(JoloGame_GiftsListAck_50051.class,FunctionIdHolder.Game_ACK_ChatMesgSend);
         opcodes.put(JoloGame_UnlockAck_50055.class,FunctionIdHolder.Game_ACK_Item);
+        opcodes.put(JoloGame_Anti_FakeAck_50066.class,FunctionIdHolder.Game_ACK_AntiFake);
 
     }
 

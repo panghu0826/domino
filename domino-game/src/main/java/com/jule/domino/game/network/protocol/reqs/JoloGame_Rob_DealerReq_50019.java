@@ -4,15 +4,18 @@ import JoloProtobuf.GameSvr.JoloGame;
 import com.jule.domino.base.enums.PlayerStateEnum;
 import com.jule.domino.base.enums.TableStateEnum;
 import com.jule.domino.game.gameUtil.NNGameLogic;
-import com.jule.domino.game.log.producer.RabbitMqSender;
 import com.jule.domino.game.model.PlayerInfo;
 import com.jule.domino.game.network.protocol.ClientReq;
 import com.jule.domino.game.network.protocol.acks.JoloGame_Rob_DealerAck_50019;
 import com.jule.domino.game.play.AbstractTable;
-import com.jule.domino.game.room.service.TableService;
+import com.jule.domino.game.service.TableService;
 import com.jule.domino.game.vavle.notice.NoticeBroadcastMessages;
 import io.netty.buffer.ByteBuf;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 抢庄
@@ -92,6 +95,8 @@ public class JoloGame_Rob_DealerReq_50019 extends ClientReq {
 //            ack.setResult(10);
 //            ctx.writeAndFlush(new JoloGame_Rob_DealerAck_50019(ack.build(), header));
 //            log.error(ex.getMessage(), ex);
+        }finally {
+            log.info("50019 ack 玩家抢庄->: {}", ack.toString());
         }
     }
 }

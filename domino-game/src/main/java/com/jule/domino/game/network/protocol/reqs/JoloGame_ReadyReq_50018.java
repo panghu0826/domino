@@ -77,7 +77,7 @@ public class JoloGame_ReadyReq_50018 extends ClientReq {
                     NoticeBroadcastMessages.readyStatus(table, playerInfo);
                 }
                 log.info("桌子目前得状态：{}，是否全部准备{}", table.getTableStateEnum(), (table.getInGamePlayers().size() >= table.getInGamePlayersBySeatNum().size()));
-                if(table.getPlayType() == 1) { //港式五张
+                if(table.getGameType() == 1) { //港式五张
                     if (flags) {
                         GameLogic.gameStart(table);
                     } else if (table.getTableStateEnum() == TableStateEnum.IDEL && table.getInGamePlayers().size() >= 2) {
@@ -86,10 +86,14 @@ public class JoloGame_ReadyReq_50018 extends ClientReq {
                         //游戏准备cd
                         GameLogic.gameReady(table);
                     }
-                }else if(table.getPlayType() == 2){ //牛牛
-                    boolean start = table.getInGamePlayers().size() >= table.getInGamePlayersBySeatNum().size();
-                    if(start){
+                }else if(table.getGameType() == 2){ //牛牛
+                    if (flags) {
                         NNGameLogic.gameStart(table);
+                    } else if (table.getTableStateEnum() == TableStateEnum.IDEL && table.getInGamePlayers().size() >= 2) {
+                        //游戏准备cd广播
+                        NoticeBroadcastMessages.gameStart(table);
+                        //游戏准备cd
+                        NNGameLogic.gameReady(table);
                     }
                 }
                 //判断游戏是否能开始

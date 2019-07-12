@@ -3,6 +3,7 @@ package com.jule.domino.game.network.protocol.reqs;
 import JoloProtobuf.GameSvr.JoloGame;
 import com.jule.core.common.log.LoggerUtils;
 import com.jule.domino.game.gameUtil.GameLogic;
+import com.jule.domino.game.gameUtil.NNGameLogic;
 import com.jule.domino.game.log.producer.RabbitMqSender;
 import com.jule.domino.game.model.PlayerInfo;
 import com.jule.domino.base.enums.PlayerStateEnum;
@@ -133,97 +134,118 @@ public class JoloGame_ApplyBetReq_50005 extends ClientReq {
 //                ctx.writeAndFlush(new JoloGame_ApplyBetAck_50005(ack.build(), header));
 //                return;
 //            }
+            if(betMode == 2 && table.getRoundTableScore() == 0){ //如果当前桌子没人下注，但是有人点跟注(正常情况是不能点)
+                return;//不让跟(容错)
+            }
 
-            if (betMode == 1) {//加注
-                int roundBasisBet = table.getRoundTableScore();
-                betScore += roundBasisBet - player.getRoundScore();
-                if(player.getWinLoseScore4Hand() + betScore > table.getBetMaxScore()){
-                    ack.setBetScore(0);
-                    ack.setTotalBetScore((int) player.getWinLoseScore4Hand());
-                    ack.setResult(-4).setResultMsg("玩家下注额已超过桌子上限");
-                    ctx.writeAndFlush(new JoloGame_ApplyBetAck_50005(ack.build(), header));
-                    return;
+            if(table.getGameType() == 1) {
+                if (betMode == 1) {//加注
+                    int roundBasisBet = table.getRoundTableScore();
+                    betScore += roundBasisBet - player.getRoundScore();
+                    if (player.getWinLoseScore4Hand() + betScore > table.getBetMaxScore()) {
+                        ack.setBetScore(0);
+                        ack.setTotalBetScore((int) player.getWinLoseScore4Hand());
+                        ack.setResult(-4).setResultMsg("玩家下注额已超过桌子上限");
+                        ctx.writeAndFlush(new JoloGame_ApplyBetAck_50005(ack.build(), header));
+                        return;
+                    }
+                    player.setRoundScore(player.getRoundScore() + betScore);
+                    table.setRoundTableScore(player.getRoundScore());
+                } else if (betMode == 2) {//跟注
+                    int maxBetScore = Collections.max(table.getEqualScore());
+                    betScore = maxBetScore - (int) player.getWinLoseScore4Hand();
+                } else {//梭哈
+                    betScore = table.getBetMaxScore() - (int) player.getWinLoseScore4Hand();
+                    table.setRoundTableScore(betScore);
                 }
-                player.setRoundScore(player.getRoundScore() + betScore);
-                table.setRoundTableScore(player.getRoundScore());
-            } else if (betMode == 2) {//跟注
-                int maxBetScore = Collections.max(table.getEqualScore());
-                betScore = maxBetScore - (int) player.getWinLoseScore4Hand();
-            } else {//梭哈
-                betScore = table.getBetMaxScore() - (int) player.getWinLoseScore4Hand();
-                table.setRoundTableScore(betScore);
-            }
-            log.info("玩家下注的方式（1/加注，2/跟注，3/梭哈）：{}， --下注的积分：{}", betMode, betScore);
+                log.info("玩家下注的方式（1/加注，2/跟注，3/梭哈）：{}， --下注的积分：{}", betMode, betScore);
 
-            player.setState(PlayerStateEnum.already_bet);
-            player.setIsCurrActive(0);
-            player.setBetMode(betMode);
-            player.setBetScore(betScore);
-            //当前一局玩家的总下注额
-            player.setWinLoseScore4Hand(player.getWinLoseScore4Hand() + betScore);
-            //当前桌子玩家的总下注额
-            player.setTotalAlreadyBetScore4Hand(player.getTotalAlreadyBetScore4Hand() + betScore);
-            //当前一局所有玩家的总下注额
-            table.setTableAlreadyBetScore(table.getTableAlreadyBetScore() + betScore);
-            //当前桌子所有玩家的总下注额
-            table.setTableTotalAlreadyBetScore(table.getTableTotalAlreadyBetScore() + betScore);
-            //下注积分放入集合里
-            table.getEqualScore().clear();
-            table.getInGamePlayers().values().forEach(e -> table.getEqualScore().add((int) e.getWinLoseScore4Hand()));
-            log.info("桌子目前的信息：{}",table.toString());
-            log.info("玩家的信息：{}",player.toSitDownString());
-            //回复ack消息
-            ack.setBetScore(betScore);
-            ack.setTotalBetScore((int) player.getWinLoseScore4Hand());
-            ctx.writeAndFlush(new JoloGame_ApplyBetAck_50005(ack.setResult(1).build(), header));
-            //寻找下一个操作者
-            PlayerInfo nextActionPlayer = null;
-            if (table.getEqualScore().size() != 1) {
-                nextActionPlayer = table.getNextBetPlayer(player.getSeatNum());
-            }
-            //广播玩家下注
-            try {
-                NoticeBroadcastMessages.betRoundDoBet(table, player, nextActionPlayer, betScore, betMode);
-            } catch (Exception ex) {
-                log.error("SendNotice ERROR：", ex);
-            }
+                player.setState(PlayerStateEnum.already_bet);
+                player.setIsCurrActive(0);
+                player.setBetMode(betMode);
+                player.setBetScore(betScore);
+                //当前一局玩家的总下注额
+                player.setWinLoseScore4Hand(player.getWinLoseScore4Hand() + betScore);
+                //当前桌子玩家的总下注额
+                player.setTotalAlreadyBetScore4Hand(player.getTotalAlreadyBetScore4Hand() + betScore);
+                //当前一局所有玩家的总下注额
+                table.setTableAlreadyBetScore(table.getTableAlreadyBetScore() + betScore);
+                //当前桌子所有玩家的总下注额
+                table.setTableTotalAlreadyBetScore(table.getTableTotalAlreadyBetScore() + betScore);
+                //下注积分放入集合里
+                table.getEqualScore().clear();
+                table.getInGamePlayers().values().forEach(e -> table.getEqualScore().add((int) e.getWinLoseScore4Hand()));
+                log.info("桌子目前的信息：{}", table.toString());
+                log.info("玩家的信息：{}", player.toSitDownString());
+                //回复ack消息
+                ack.setBetScore(betScore);
+                ack.setTotalBetScore((int) player.getWinLoseScore4Hand());
+                ctx.writeAndFlush(new JoloGame_ApplyBetAck_50005(ack.setResult(1).build(), header));
+                //寻找下一个操作者
+                PlayerInfo nextActionPlayer = null;
+                if (table.getEqualScore().size() != 1) {
+                    nextActionPlayer = table.getNextBetPlayer(player.getSeatNum());
+                }
+                //广播玩家下注
+                try {
+                    NoticeBroadcastMessages.betRoundDoBet(table, player, nextActionPlayer, betScore, betMode);
+                } catch (Exception ex) {
+                    log.error("SendNotice ERROR：", ex);
+                }
 
-            log.info("当前桌子下注积分是否相等：{},  equalScore数据: {}", (table.getEqualScore().size() == 1), table.getEqualScore().toString());
-            log.info("当前桌子上的手牌数：{}", player.getHandCards().length);
-            if (table.getEqualScore().size() == 1) {
-                if (player.getWinLoseScore4Hand() == table.getBetMaxScore()) {
-                    log.info("发完剩余 {} 张牌，并进入开牌阶段：{}",(5 - player.getHandCards().length),table.toString());
-                    //每个人每张牌0.4秒，四舍五入
-                    double cards = (5 - player.getHandCards().length) * 0.4;
-                    int time = (int)Math.round(cards * table.getInGamePlayers().size());
-                    table.pressCard(false, true);//发出所有牌
-                    int firstGiveCard = table.getFirstGiveCardSeatNum();
-                    //广播发牌51005
-                    NoticeBroadcastMessages.giveCardBoardcast(table, false, firstGiveCard);
-                    GameLogic.commonTimer(table,2,time);
-                } else if (player.getHandCards().length == 5) {
-                    log.info("桌子进入开牌阶段：{}",table.toString());
-                    NoticeBroadcastMessages.openCardCd(table);//广播开牌倒计时
-                    GameLogic.openCards(table);//启动开牌倒计时
+                log.info("当前桌子下注积分是否相等：{},  equalScore数据: {}", (table.getEqualScore().size() == 1), table.getEqualScore().toString());
+                log.info("当前桌子上的手牌数：{}", player.getHandCards().length);
+                if (table.getEqualScore().size() == 1) {
+                    if (player.getWinLoseScore4Hand() == table.getBetMaxScore()) {
+                        log.info("发完剩余 {} 张牌，并进入开牌阶段：{}", (5 - player.getHandCards().length), table.toString());
+                        //每个人每张牌0.4秒，四舍五入
+                        double cards = (5 - player.getHandCards().length) * 0.4;
+                        int time = (int) Math.round(cards * table.getInGamePlayers().size());
+                        table.pressCard(false, true);//发出所有牌
+                        int firstGiveCard = table.getFirstGiveCardSeatNum();
+                        //广播发牌51005
+                        NoticeBroadcastMessages.giveCardBoardcast(table, false, firstGiveCard);
+                        GameLogic.commonTimer(table, 2, time);
+                    } else if (player.getHandCards().length == 5) {
+                        log.info("桌子进入开牌阶段：{}", table.toString());
+                        NoticeBroadcastMessages.openCardCd(table);//广播开牌倒计时
+                        GameLogic.openCards(table);//启动开牌倒计时
+                    } else {
+                        log.info("桌子进入开牌阶段：{}", table.toString());
+                        //设置玩家手牌
+                        table.pressCard(false, false);
+                        int firstGiveCard = table.getFirstGiveCardSeatNum();
+                        //寻找第一个下注玩家
+                        table.lookForFirstBetPlayer();
+                        table.setFirstGiveCardSeatNum(table.getCurrActionSeatNum());
+                        //广播发牌51005
+                        NoticeBroadcastMessages.giveCardBoardcast(table, false, firstGiveCard);
+                        table.setRoundTableScore(0);//重置本轮次玩家下注额
+                        int time = (int) Math.round(table.getInGamePlayers().size() * 0.4);
+                        GameLogic.commonTimer(table, 1, time);
+                    }
                 } else {
-                    log.info("桌子进入开牌阶段：{}",table.toString());
-                    //设置玩家手牌
-                    table.pressCard(false, false);
-                    int firstGiveCard = table.getFirstGiveCardSeatNum();
-                    //寻找第一个下注玩家
-                    table.lookForFirstBetPlayer();
-                    table.setFirstGiveCardSeatNum(table.getCurrActionSeatNum());
-                    //广播发牌51005
-                    NoticeBroadcastMessages.giveCardBoardcast(table, false, firstGiveCard);
-                    table.setRoundTableScore(0);//重置本轮次玩家下注额
-                    int time = (int)Math.round(table.getInGamePlayers().size() * 0.4);
-                    GameLogic.commonTimer(table,1,time);
+                    log.info("普通下注或跟注：{}", table.toString());
+                    //启动下一个行动玩家的bet倒计时
+                    NoticeBroadcastMessages.countdownBroadcast(table, table.getBetCd());//广播倒计时
+                    GameLogic.betTimer(table);
                 }
-            } else {
-                log.info("普通下注或跟注：{}",table.toString());
-                //启动下一个行动玩家的bet倒计时
-                NoticeBroadcastMessages.countdownBroadcast(table,table.getBetCd());//广播倒计时
-                GameLogic.betTimer(table);
+            }else if(table.getGameType() == 2){
+                betScore = req.getBetScore();
+                player.setState(PlayerStateEnum.already_bet);
+                player.setBetMultiple(betScore);
+                ctx.writeAndFlush(new JoloGame_ApplyBetAck_50005(ack.setResult(1).build(), header));
+                NoticeBroadcastMessages.betRoundDoBet(table, player, null, betScore, betMode);
+                boolean flags = true;
+                for (PlayerInfo playerInfo : table.getInGamePlayers().values()) {
+                    if(playerInfo.getPlayerId().equals(table.getCurrDealerPlayerId()))continue;
+                    if (!playerInfo.getState().equals(PlayerStateEnum.already_bet)) {
+                        flags = false;
+                    }
+                }
+                if(flags){
+                    NNGameLogic.openCards(table);
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();

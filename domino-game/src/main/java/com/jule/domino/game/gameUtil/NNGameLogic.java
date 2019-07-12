@@ -19,10 +19,7 @@ import com.jule.domino.game.service.holder.CardOfTableHolder;
 import com.jule.domino.game.vavle.notice.NoticeBroadcastMessages;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 public class NNGameLogic {
@@ -44,10 +41,10 @@ public class NNGameLogic {
                     @Override
                     public void processImpl() throws Exception {
                         //倒计时结束将所有在桌子上的人放入游戏集合里
-                        table.getInGamePlayersBySeatNum().forEach((k,v)->{
-                            if(!table.getInGamePlayers().containsKey(k)){
+                        table.getInGamePlayersBySeatNum().forEach((k, v) -> {
+                            if (!table.getInGamePlayers().containsKey(k)) {
                                 v.setState(PlayerStateEnum.game_ready);
-                                table.getInGamePlayers().put(k,v);
+                                table.getInGamePlayers().put(k, v);
                             }
                         });
                         gameStart(table);
@@ -64,7 +61,7 @@ public class NNGameLogic {
             table.setCurrGameOrderId(GameOrderIdGenerator.generate());//游戏此回合唯一订单号
             log.debug("此局游戏的orderId:" + table.getCurrGameOrderId());
             //获取本桌使用的手牌
-            CardOfTableHolder.PutCardOperationObj(table.getCurrGameOrderId(), new DealCardForTable(table.getPlayType()));
+            CardOfTableHolder.PutCardOperationObj(table.getCurrGameOrderId(), new DealCardForTable(table.getGameType()));
             table.setCurrGameNum(table.getCurrGameNum() + 1);//局数加1
             //修改桌面状态为下注中
             table.setTableStateEnum(TableStateEnum.BET);
@@ -75,19 +72,23 @@ public class NNGameLogic {
 //            table.lookForFirstBetPlayer();//寻找第一个下注玩家
 //            table.setFirstGiveCardSeatNum(table.getCurrActionSeatNum());
 //            table.getInGamePlayers().forEach((k,v)->v.se);
-            if (table.getBankerCd() == 1) {   //明牌抢庄
+            log.info("当前庄家模式：{}", table.getBankerType());
+            if (table.getBankerType() == 1) {   //明牌抢庄
                 table.pressCard(true, false);//第一次发牌发四张
                 NoticeBroadcastMessages.giveCardBoardcast(table, true, -1);//广播发牌51005
 //                commonTimer(table, 1, table.getInGamePlayers().size());//留给前段发牌动画的倒计时
+                NoticeBroadcastMessages.robDealerCd(table);
                 robDealerBefor(table);//抢庄倒计时
-            } else if (table.getBankerCd() == 2) { //自由抢庄
+            } else if (table.getBankerType() == 2) { //自由抢庄
+                NoticeBroadcastMessages.robDealerCd(table);
                 robDealerBefor(table);//抢庄倒计时
-            } else if (table.getBankerCd() == 3) { //轮流庄
+            } else if (table.getBankerType() == 3) { //轮流庄
                 PlayerInfo player = table.getNextBetPlayer(table.getPlayer(table.getCurrDealerPlayerId()).getSeatNum());
                 player.setState(PlayerStateEnum.already_rob);
                 player.setMultiple(1);
+                table.setCurrDealerPlayerId(player.getPlayerId());
                 RobDealerAnimation(table);
-            } else if (table.getBankerCd() == 4) { //固定庄
+            } else if (table.getBankerType() == 4) { //固定庄
                 if (table.getCurrDealerPlayerId() == null) {
                     PlayerInfo player = table.getPlayer(table.getFirstReadyPlayer());
                     table.setCurrDealerPlayerId(player.getPlayerId());
@@ -100,7 +101,7 @@ public class NNGameLogic {
                     player.setMultiple(1);
                 }
                 RobDealerAnimation(table);
-            } else if (table.getBankerCd() == 5) { //牛牛上庄（第一局为点开始的人，如果没人牌型大于牛牛，则上局当庄的人继续）
+            } else if (table.getBankerType() == 5) { //牛牛上庄（第一局为点开始的人，如果没人牌型大于牛牛，则上局当庄的人继续）
                 //此处每局找出最大牌型的人之后 都赋值给了firstReadyPlayer字段
                 PlayerInfo player = table.getPlayer(table.getFirstReadyPlayer());
                 table.setCurrDealerPlayerId(player.getPlayerId());
@@ -120,7 +121,7 @@ public class NNGameLogic {
      * @param table
      */
     public static void robDealerBefor(final AbstractTable table) {
-        log.info(table.getCurrGameNum()+"-----------------------------抢庄cd-----------------------------" + table.getTableId());
+        log.info(table.getCurrGameNum() + "-----------------------------抢庄cd-----------------------------" + table.getTableId());
         table.setTableStateEnum(TableStateEnum.PLAYER_ROB);//设置桌子状态为抢庄中
         //停止牌桌内正在进行的倒计时
         TimerService.getInstance().delTimerTask(table.getRoomTableRelation());
@@ -144,12 +145,35 @@ public class NNGameLogic {
                 playerInfo.setMultiple(0);
             }
         }
+        if (table.getCurrDealerPlayerId() == null) {
+            List<Integer> list = new ArrayList<>();
+            table.getInGamePlayers().values().forEach(e -> list.add(e.getMultiple()));
+            List<String> playerIds = new ArrayList<>();
+            int maxMultiple = Collections.max(list);
+            table.getInGamePlayers().values().forEach(e -> {
+                if (e.getMultiple() == maxMultiple) {
+                    playerIds.add(e.getPlayerId());
+                }
+            });
+            int in = (int) (Math.random() * (playerIds.size()));
+            table.setCurrDealerPlayerId(playerIds.get(in));
+        }
         NoticeBroadcastMessages.dealerFinish(table);//广播抢庄的结果
-        if (table.getBankerCd() != 1) { //不是明牌抢庄时 定庄后才发牌
+        if (table.getBankerType() != 1) { //不是明牌抢庄时 定庄后才发牌
             table.pressCard(true, false);//第一次发牌发四张
             NoticeBroadcastMessages.giveCardBoardcast(table, true, -1);//广播发牌51005
         }
+        timer(table);//此定时器是为了消息顺序
         betTimer(table);//下注倒计时
+    }
+
+    public static void timer(AbstractTable table) {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            public void run() {
+                NoticeBroadcastMessages.countdownBroadcast(table, table.getBetCd());//广播下注时间 51032
+            }
+        }, 10);// 设定指定的时间time
     }
 
     /**
@@ -158,34 +182,35 @@ public class NNGameLogic {
      * @param table
      */
     public static void betTimer(final AbstractTable table) {
-        log.info(table.getCurrGameNum()+"-----------------------------下注cd-----------------------------" + table.getTableId());
-
+        log.info(table.getCurrGameNum() + "-----------------------------下注cd-----------------------------" + table.getTableId());
         table.setTableStateEnum(TableStateEnum.BET); //修改桌面状态为下注中
         //停止牌桌内正在进行的倒计时
         TimerService.getInstance().delTimerTask(table.getRoomTableRelation());
+        table.getInGamePlayers().values().forEach(e -> e.setState(PlayerStateEnum.beting));//设置所有玩家状态为下注中
         //下注前前端需要的信息
-        TableUtil.calculateBetMultiple(table);
-        NoticeBroadcastMessages.betBeforeBroadcast(table);
-        NoticeBroadcastMessages.betMultiple(table);
+//        TableUtil.calculateBetMultiple(table);
+//        NoticeBroadcastMessages.betMultiple(table);
         log.debug("下注计时器开始计时, 倒计时秒数->" + table.getCommonConfig().getBetCountDownSec());
-        TimerService.getInstance().addTimerTask(table.getCommonConfig().getBetCountDownSec(), table.getRoomTableRelation(), new TableInnerReq(table.getPlayType() + "", table.getRoomId(), table.getTableId()) {
-            @Override
-            public void processImpl() throws Exception {
-                table.setLastActionTime(System.currentTimeMillis());
-                //当没有其它程序触发提前终止计时器时，那么计时器倒计时完成后，将执行下面的自动下注
-                Iterator<PlayerInfo> iter = table.getInGamePlayers().values().iterator();
-                while (iter.hasNext()) {
-                    PlayerInfo playerInfo = iter.next();
-                    if (!playerInfo.getState().equals(PlayerStateEnum.already_bet)) {
-                        playerInfo.setState(PlayerStateEnum.already_bet);
-                        playerInfo.setBetMultiple(1);
+        TimerService.getInstance().addTimerTask(
+                table.getBetCd(),
+                table.getRoomTableRelation(), new TableInnerReq(table.getPlayType() + "", table.getRoomId(), table.getTableId()) {
+                    @Override
+                    public void processImpl() throws Exception {
+                        table.setLastActionTime(System.currentTimeMillis());
+                        //当没有其它程序触发提前终止计时器时，那么计时器倒计时完成后，将执行下面的自动下注
+                        Iterator<PlayerInfo> iter = table.getInGamePlayers().values().iterator();
+                        while (iter.hasNext()) {
+                            PlayerInfo playerInfo = iter.next();
+                            if (!playerInfo.getState().equals(PlayerStateEnum.already_bet)) {
+                                playerInfo.setState(PlayerStateEnum.already_bet);
+                                playerInfo.setBetMultiple(1);
+                            }
+                        }
+//                table.pressCard(true, true);//发出所有牌
+//                NoticeBroadcastMessages.giveCardBoardcast(table, false, -1);//广播发牌51005
+                        openCards(table);
                     }
-                }
-                table.pressCard(true, true);//发出所有牌
-                NoticeBroadcastMessages.giveCardBoardcast(table, false, -1);//广播发牌51005
-                openCards(table);
-            }
-        });
+                });
     }
 
 
@@ -195,7 +220,10 @@ public class NNGameLogic {
      * @param table
      */
     public static synchronized void openCards(AbstractTable table) {
-        log.info(table.getCurrGameNum()+"-----------------------------亮牌cd-----------------------------" + table.getTableId());
+        log.info(table.getCurrGameNum() + "-----------------------------亮牌cd-----------------------------" + table.getTableId());
+        table.pressCard(false, true);//发出所有牌
+        NoticeBroadcastMessages.openCardCd(table);
+        NoticeBroadcastMessages.giveCardBoardcast(table, false, -1);//广播发牌51005
         //停止牌桌内正在进行的倒计时
         TimerService.getInstance().delTimerTask(table.getRoomTableRelation());
 //        //广播所有人的下注信息
@@ -256,7 +284,7 @@ public class NNGameLogic {
                 });
                 log.info("删除的桌子信息：{}", table.toString());
                 TableService.getInstance().directDestroyTable(String.valueOf(table.getPlayType()), table.getRoomId(), table.getTableId());
-            }else {
+            } else {
                 NoticeBroadcastMessages.gameStart(table);//游戏准备cd广播
                 gameReady(table);//游戏准备cd
             }
