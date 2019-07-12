@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jule.domino.game.dao.mapper.ClubNoteModelMapper">
+  <resultMap id="BaseResultMap" type="com.jule.domino.game.dao.bean.ClubNoteModel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="clubId" jdbcType="INTEGER" property="clubId" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="noteUserId" jdbcType="VARCHAR" property="noteUserId" />
+    <result column="noteName" jdbcType="VARCHAR" property="noteName" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from club_note
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jule.domino.game.dao.bean.ClubNoteModel">
+    insert into club_note (id, clubId, userId, 
+      noteUserId, noteName)
+    values (#{id,jdbcType=INTEGER}, #{clubId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
+      #{noteUserId,jdbcType=VARCHAR}, #{noteName,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.jule.domino.game.dao.bean.ClubNoteModel">
+    update club_note
+    set noteName = #{noteName,jdbcType=VARCHAR}
+    where clubId = #{clubId,jdbcType=INTEGER} and userId = #{userId,jdbcType=VARCHAR} and noteUserId = #{noteUserId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select id, clubId, userId, noteUserId, noteName
+    from club_note
+    where clubId = #{clubId,jdbcType=INTEGER} and userId = #{userA,jdbcType=VARCHAR} and noteUserId = #{userB,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByClubIdAndUserId" parameterType="map" resultMap="BaseResultMap">
+    select id, clubId, userId, noteUserId, noteName
+    from club_note
+    where clubId = #{clubId,jdbcType=INTEGER} and userId = #{userId,jdbcType=VARCHAR}
+  </select>
+</mapper>
