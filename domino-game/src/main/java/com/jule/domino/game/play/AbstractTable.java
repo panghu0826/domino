@@ -112,7 +112,7 @@ public class AbstractTable implements ITable {
     protected boolean everyoneCanJoinIn;//桌子是否所有人可加入(玩家是否开启了好友功能)
     protected String createTableUserId;//创建桌子的userId
     protected String controlCardTypePlayerId;//控制牌型的玩家id
-    protected String seeHandCardsPlayerId;//可看全部人底牌的玩家id
+    protected List<String> seeHandCardsPlayerId = new ArrayList<>();//可看全部人底牌的玩家id
     protected Set<Integer> equalScore = new HashSet<>();//判断房间所有人下注积分是否相等
     protected int roundTableScore;//当前轮次桌内下注额(根据下注最大的人变化)
     protected int playerNum;//人数（房间座位数）

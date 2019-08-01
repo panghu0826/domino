@@ -223,7 +223,8 @@ public class TableUtil {
                         .setState(player.getState().getValue())
                         .setIsBlind(0)
                         .addAllHandCards(Ints.asList(player.getHandCards()));
-                if (table.getSeeHandCardsPlayerId() == null || !currPlayerId.equals(table.getSeeHandCardsPlayerId())) {
+//                if (table.getSeeHandCardsPlayerId() == null || !currPlayerId.equals(table.getSeeHandCardsPlayerId())) {
+                if (table.getSeeHandCardsPlayerId() == null || !table.getSeeHandCardsPlayerId().contains(currPlayerId)) {
                     //广播里自己的手牌齐全，其他人的前两张张为0
                     if (!player.getPlayerId().equals(currPlayerId)) {
                         tablePlay.setHandCards(0, 0);
